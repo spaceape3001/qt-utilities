@@ -1,4 +1,3 @@
-#   Simple cmake to configure boost UT as an "interface" library
 if(NOT TARGET BoostUT)
     set(ut_dir ${CMAKE_CURRENT_LIST_DIR}/ut)
     add_library(BoostUT INTERFACE)
