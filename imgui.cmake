@@ -30,6 +30,9 @@ if(NOT TARGET imgui)
         PRIVATE
             GLFW_INCLUDE_VULKAN=1
     )
+    target_compile_options(imgui PRIVATE 
+        -w
+    )
     target_link_libraries(imgui 
         PUBLIC 
             ${Vulkan_LIBRARIES} 
