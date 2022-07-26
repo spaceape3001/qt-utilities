@@ -4,7 +4,10 @@ if(NOT TARGET imgui)
     find_package(Vulkan REQUIRED)
 
     find_package(Freetype REQUIRED)
+    set(widgets_dir ${CMAKE_CURRENT_LIST_DIR}/DearWidgets/src/api)
     set(imgui_dir ${CMAKE_CURRENT_LIST_DIR}/imgui)
+    set(editor_dir ${CMAKE_CURRENT_LIST_DIR}/ImGuiColorTextEdit)
+    set(filedlg_dir ${CMAKE_CURRENT_LIST_DIR}/ImGuiFileDialog)
     add_library(imgui SHARED
         ${imgui_dir}/imgui.cpp
         ${imgui_dir}/imgui.h
@@ -16,10 +19,15 @@ if(NOT TARGET imgui)
         ${imgui_dir}/backends/imgui_impl_glfw.cpp
         ${imgui_dir}/misc/cpp/imgui_stdlib.cpp
         ${imgui_dir}/misc/freetype/imgui_freetype.cpp
+#        ${widgets_dir}/dear_widgets.cpp
+        ${editor_dir}/TextEditor.cpp
+        ${filedlg_dir}/ImGuiFileDialog.cpp
     )
     target_include_directories(imgui 
         PUBLIC 
             ${imgui_dir}
+            ${widgets_dir}
+            ${editor_dir}
         PRIVATE 
             ${FREETYPE_INCLUDE_DIRS}
     )
@@ -29,6 +37,8 @@ if(NOT TARGET imgui)
             IMGUI_ENABLE_FREETYPE=1
         PRIVATE
             GLFW_INCLUDE_VULKAN=1
+            DONT_DEFINE_AGAIN__STB_IMAGE_IMPLEMENTATION=1
+            DONT_DEFINE_AGAIN__STB_IMAGE_RESIZE_IMPLEMENTATION=1
     )
     target_compile_options(imgui PRIVATE 
         -w
