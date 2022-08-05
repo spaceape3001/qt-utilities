@@ -28,6 +28,7 @@ if(NOT TARGET imgui)
             ${imgui_dir}
             ${widgets_dir}
             ${editor_dir}
+            ${filedlg_dir}
         PRIVATE 
             ${FREETYPE_INCLUDE_DIRS}
     )
