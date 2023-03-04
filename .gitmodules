@@ -4,18 +4,12 @@
 [submodule "vma"]
 	path = vma
 	url = https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
-[submodule "asio"]
-	path = asio
-	url = https://github.com/chriskohlhoff/asio.git
 [submodule "imgui"]
 	path = imgui
 	url = https://github.com/ocornut/imgui.git
 [submodule "ImGuiColorTextEdit"]
 	path = ImGuiColorTextEdit
 	url = https://github.com/BalazsJako/ImGuiColorTextEdit.git
-[submodule "DearWidgets"]
-	path = DearWidgets
-	url = https://github.com/soufianekhiat/DearWidgets.git
 [submodule "ImGuiFileDialog"]
 	path = ImGuiFileDialog
 	url = https://github.com/aiekick/ImGuiFileDialog.git
