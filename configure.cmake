@@ -19,6 +19,9 @@ if(NOT YOUR_QUILL_QTUTIL)
         set(CMAKE_GENERATOR "Unix Makefiles")
         get_filename_component(CMAKE_BUILD_TYPE ${CMAKE_BINARY_DIR} NAME)
     endif()
+    
+    set(CMAKE_AUTOMOC ON)
+    set(CMAKE_AUTORCC ON)
 
     set(CMAKE_CONFIGURATION_TYPES Debug;Release)
     set(CMAKE_CXX_STANDARD 23)                  # C++23 is the standard (may be bumped in the future)
