@@ -55,6 +55,8 @@ add_library(${PROJECT_NAME} SHARED
 
     qu/io/ZipFile.cpp
     
+    qu/layout/BorderLayout.cpp
+    qu/layout/BorderLayout.hpp
     qu/layout/FlowLayout.cpp
     qu/layout/FlowLayout.hpp
     
