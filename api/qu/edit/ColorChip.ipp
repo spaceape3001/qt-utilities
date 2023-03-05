@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <qu/undo/ColorChip.hpp>
+#include <qu/edit/ColorChip.hpp>
 #include <QColorDialog>
 
 #include <QPainter>
@@ -15,7 +15,7 @@ namespace qu {
     ColorChip::ColorChip(QWidget* parent) : 
         QWidget(parent), m_chooser(true), m_readOnly(false)
     {
-        connect(this, &ColorChip::doubleClicked, [this](){
+        connect(this, &ColorChip::clicked, [this](){
             if(m_chooser)
                 executeChooser();
         });
@@ -23,6 +23,12 @@ namespace qu {
 
     ColorChip::~ColorChip()
     {
+    }
+
+    void ColorChip::enterEvent(QEvent* event) 
+    {
+        m_pressed = false;
+        QWidget::enterEvent(event);
     }
 
     void    ColorChip::executeChooser(QWidget*parent)
@@ -38,16 +44,37 @@ namespace qu {
         }
     }
 
-    void    ColorChip::paintEvent ( QPaintEvent * event )
+    void ColorChip::leaveEvent(QEvent *event) 
     {
-        QPainter painter(this);
-        painter.fillRect(geometry(), m_color);
-        event->accept();
+        m_pressed = false;
+        QWidget::leaveEvent(event);
     }
 
     void    ColorChip::mouseDoubleClickEvent ( QMouseEvent * event )
     {
         emit doubleClicked();
+        event->accept();
+    }
+
+    void ColorChip:: mousePressEvent ( QMouseEvent * event ) 
+    {
+        m_pressed = true;
+        event->accept();
+    }
+    
+    void ColorChip:: mouseReleaseEvent ( QMouseEvent * event ) 
+    {
+        if(m_pressed){
+            event->accept();
+            m_pressed = false;
+            emit clicked();
+        }
+    }
+
+    void    ColorChip::paintEvent ( QPaintEvent * event )
+    {
+        QPainter painter(this);
+        painter.fillRect(geometry(), m_color);
         event->accept();
     }
 
@@ -80,7 +107,3 @@ namespace qu {
         emit colorChanged(c);
     }
 }
-
-#ifdef YQ_QMAKE
-    #include "moc_ColorChip.cpp"
-#endif

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <qu/undo/ComboBox.hpp>
+#include <qu/edit/ComboBox.hpp>
 
 class QColor;
 

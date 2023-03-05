@@ -12,6 +12,10 @@
 
 namespace qu {
 
+    /*! \brief Color chip
+    
+        A chip of color, double click to change colors.
+    */
     class ColorChip : public QWidget, public UndoBase {
         Q_OBJECT
     public:
@@ -33,6 +37,7 @@ namespace qu {
         void        executeChooser(QWidget*parent=nullptr);
         
     signals:
+        void        clicked();
         void        doubleClicked();
         void        colorChanged(const QColor&);
 
@@ -41,14 +46,19 @@ namespace qu {
 
     protected:    
         
-        virtual void paintEvent ( QPaintEvent * event );
-        virtual void mouseDoubleClickEvent ( QMouseEvent * event );
+        virtual void enterEvent(QEvent* event) override;
+        virtual void leaveEvent(QEvent *event) override;
+        virtual void mouseDoubleClickEvent ( QMouseEvent * event ) override;
+        virtual void mousePressEvent ( QMouseEvent * event ) override;
+        virtual void mouseReleaseEvent ( QMouseEvent * event ) override;
+        virtual void paintEvent ( QPaintEvent * event ) override;
 
     private:
         QColor      m_color;
         bool        m_alpha;
         bool        m_chooser;
         bool        m_readOnly;
+        bool        m_pressed       = false;
     };
 
 }

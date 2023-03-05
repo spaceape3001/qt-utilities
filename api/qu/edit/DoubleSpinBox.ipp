@@ -4,23 +4,23 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <qu/undo/ComboBox.hpp>
+#pragma once
+
+#include <qu/edit/DoubleSpinBox.hpp>
 
 namespace qu {
-    ComboBox::ComboBox(QWidget* parent) : QComboBox(parent)
+    DoubleSpinBox::DoubleSpinBox(QWidget*parent) : QDoubleSpinBox(parent)
     {
     }
 
-    ComboBox::~ComboBox()
+    DoubleSpinBox::~DoubleSpinBox()
     {
     }
 
-    void    ComboBox::reset()
+    void    DoubleSpinBox::reset()
     {
-        setCurrentIndex(-1);
+        setValue(0);
     }
 }
 
-#ifdef YQ_QMAKE
-    #include "moc_ComboBox.cpp"
-#endif
+

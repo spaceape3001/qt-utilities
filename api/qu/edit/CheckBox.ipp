@@ -4,7 +4,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <qu/undo/CheckBox.hpp>
+#pragma once
+
+#include <qu/edit/CheckBox.hpp>
 
 namespace qu {
     CheckBox::CheckBox(QWidget* parent) : QCheckBox(parent)
@@ -30,6 +32,3 @@ namespace qu {
     }
 }
 
-#ifdef YQ_QMAKE
-    #include "moc_CheckBox.cpp"
-#endif

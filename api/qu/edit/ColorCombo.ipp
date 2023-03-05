@@ -4,7 +4,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <qu/undo/ColorCombo.hpp>
+#pragma once
+
+#include <qu/edit/ColorCombo.hpp>
 
 namespace qu {
     ColorCombo::ColorCombo(QWidget* parent) : ComboBox(parent)
@@ -40,6 +42,3 @@ namespace qu {
     }
 }
 
-#ifdef YQ_QMAKE
-    #include "moc_ColorCombo.cpp"
-#endif
