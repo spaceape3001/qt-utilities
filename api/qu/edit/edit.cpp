@@ -16,6 +16,9 @@
 #include "LineEdit.ipp"
 #include "NullableDateEdit.ipp"
 #include "NullableDateTimeEdit.ipp"
+#include "SpinBox.ipp"
+#include "StringSetCheck.ipp"
+#include "TextEdit.ipp"
 #include "TimeEdit.ipp"
 
 #include "moc_CheckBox.cpp"
@@ -30,5 +33,8 @@
 #include "moc_LineEdit.cpp"
 #include "moc_NullableDateEdit.cpp"
 #include "moc_NullableDateTimeEdit.cpp"
+#include "moc_SpinBox.cpp"
+#include "moc_StringSetCheck.cpp"
+#include "moc_TextEdit.cpp"
 #include "moc_TimeEdit.cpp"
  

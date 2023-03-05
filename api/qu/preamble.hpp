@@ -1,0 +1,15 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  YOUR QUILL
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+#include <basic/preamble.hpp>
+
+namespace qu {
+    struct IgCase;
+    using StringMap             = yq::Map<QString,QString,IgCase>;
+    using StringSet             = yq::Set<QString,IgCase>;
+}

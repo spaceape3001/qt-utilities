@@ -9,6 +9,10 @@ project(qutil)
 find_package(Qt5 REQUIRED Core Gui Widgets)
 
 add_library(${PROJECT_NAME} SHARED 
+    qu/core/IgCase.hpp
+    qu/core/IgCase.ipp
+    qu/core/core.cpp
+
     qu/edit/CheckBox.ipp
     qu/edit/CheckBox.hpp
     qu/edit/ColorChip.ipp
@@ -33,11 +37,21 @@ add_library(${PROJECT_NAME} SHARED
     qu/edit/NullableDateTimeEdit.hpp
     qu/edit/LineEdit.ipp
     qu/edit/LineEdit.hpp
+    qu/edit/SpinBox.ipp
+    qu/edit/SpinBox.hpp
+    qu/edit/StringSetCheck.ipp
+    qu/edit/StringSetCheck.hpp
+    qu/edit/TextEdit.ipp
+    qu/edit/TextEdit.hpp
     qu/edit/TimeEdit.ipp
     qu/edit/TimeEdit.hpp
     qu/edit/edit.cpp
 
     qu/io/ZipFile.cpp
+    
+    qu/layout/FlowLayout.cpp
+    qu/layout/FlowLayout.hpp
+    
     qu/undo/UndoBase.cpp
     qu/undo/UndoBase.hpp
 )
@@ -56,6 +70,7 @@ target_compile_definitions(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
+        yqtoolbox
         Qt5::Core
         Qt5::Gui
         Qt5::Widgets
