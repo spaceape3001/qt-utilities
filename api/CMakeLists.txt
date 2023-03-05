@@ -71,6 +71,9 @@ add_library(${PROJECT_NAME} SHARED
     
     qu/widget/Button.cpp
     qu/widget/Button.hpp
+    qu/widget/DrawRuler.hpp
+    qu/widget/DrawRuler.ipp
+    qu/widget/widget.cpp
 )
 
 target_include_directories(${PROJECT_NAME} 

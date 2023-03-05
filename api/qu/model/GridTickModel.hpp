@@ -9,6 +9,7 @@
 #include <QObject>
 #include <QColor>
 #include <vector>
+#include <qu/core/RefQ.hpp>
 
 namespace qu {
 
@@ -22,7 +23,7 @@ namespace qu {
         100% for this grid, but maybe 1% so that way, a zoom in will 
         produce reasonable gridding down to some reaonsable resolution.)
     */
-    class GridTickModel : public QObject {
+    class GridTickModel : public QObject, public RefQ {
         Q_OBJECT
     public:
         GridTickModel(QObject* parent=nullptr);

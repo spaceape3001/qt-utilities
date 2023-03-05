@@ -4,6 +4,6 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "IgCase.ipp"
-#include "RefQ.ipp"
-#include "Utilities.ipp"
+#include "DrawRuler.ipp"
+
+#include "moc_DrawRuler.cpp"
