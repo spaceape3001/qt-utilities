@@ -22,5 +22,6 @@ namespace qu {
     {
         return a.compare(b,Qt::CaseInsensitive) < 0;
     }
+
 }
 

@@ -17,4 +17,5 @@ namespace qu {
         bool    operator()(const QString&, const QString&) const;
         bool    operator()(const QByteArray&, const QByteArray&) const;
     };
+    
 }

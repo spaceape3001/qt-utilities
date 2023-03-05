@@ -29,6 +29,8 @@ add_library(${PROJECT_NAME} SHARED
     qu/edit/DirBox.hpp
     qu/edit/DoubleSpinBox.ipp
     qu/edit/DoubleSpinBox.hpp
+    qu/edit/DropListComboBox.ipp
+    qu/edit/DropListComboBox.hpp
     qu/edit/FileBox.ipp
     qu/edit/FileBox.hpp
     qu/edit/NullableDateEdit.ipp
@@ -39,6 +41,10 @@ add_library(${PROJECT_NAME} SHARED
     qu/edit/LineEdit.hpp
     qu/edit/SpinBox.ipp
     qu/edit/SpinBox.hpp
+    qu/edit/StringMapEdit.ipp
+    qu/edit/StringMapEdit.hpp
+    qu/edit/StringMapEditModel.hpp
+    qu/edit/StringMapEditView.hpp
     qu/edit/StringSetCheck.ipp
     qu/edit/StringSetCheck.hpp
     qu/edit/TextEdit.ipp
