@@ -60,6 +60,12 @@ add_library(${PROJECT_NAME} SHARED
     qu/layout/FlowLayout.cpp
     qu/layout/FlowLayout.hpp
     
+    qu/model/GridTickModel.hpp
+    qu/model/GridTickModel.ipp
+    qu/model/StandardGridTickModel.hpp
+    qu/model/StandardGridTickModel.ipp
+    qu/model/model.cpp
+    
     qu/undo/UndoBase.cpp
     qu/undo/UndoBase.hpp
     
