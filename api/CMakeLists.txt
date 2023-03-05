@@ -62,6 +62,9 @@ add_library(${PROJECT_NAME} SHARED
     
     qu/undo/UndoBase.cpp
     qu/undo/UndoBase.hpp
+    
+    qu/widget/Button.cpp
+    qu/widget/Button.hpp
 )
 
 target_include_directories(${PROJECT_NAME} 
