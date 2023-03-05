@@ -6,7 +6,7 @@
 
 #include "CheckBox.ipp"
 #include "ColorChip.ipp"
-#include "ColorCombo.ipp"
+#include "ColorComboBox.ipp"
 #include "ComboBox.ipp"
 #include "DateEdit.ipp"
 #include "DateTimeEdit.ipp"
@@ -26,7 +26,7 @@
 
 #include "moc_CheckBox.cpp"
 #include "moc_ColorChip.cpp"
-#include "moc_ColorCombo.cpp"
+#include "moc_ColorComboBox.cpp"
 #include "moc_ComboBox.cpp"
 #include "moc_DateEdit.cpp"
 #include "moc_DateTimeEdit.cpp"

@@ -6,30 +6,30 @@
 
 #pragma once
 
-#include <qu/edit/ColorCombo.hpp>
+#include <qu/edit/ColorComboBox.hpp>
 
 namespace qu {
-    ColorCombo::ColorCombo(QWidget* parent) : ComboBox(parent)
+    ColorComboBox::ColorComboBox(QWidget* parent) : ComboBox(parent)
     {
         populate();
     }
 
-    ColorCombo::~ColorCombo()
+    ColorComboBox::~ColorComboBox()
     {
     }
 
-    QColor  ColorCombo::color() const
+    QColor  ColorComboBox::color() const
     {
         return itemData(currentIndex(), Qt::DecorationRole).value<QColor>();
     }
 
-    void    ColorCombo::setColor(QColor clr)
+    void    ColorComboBox::setColor(QColor clr)
     {
         setCurrentIndex(findData(clr, (int) Qt::DecorationRole));
     }
         
 
-    void    ColorCombo::populate()
+    void    ColorComboBox::populate()
     {
         insertItem(0, "(no color)");
         setItemData(0, QColor(), Qt::DecorationRole);

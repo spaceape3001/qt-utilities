@@ -17,8 +17,8 @@ add_library(${PROJECT_NAME} SHARED
     qu/edit/CheckBox.hpp
     qu/edit/ColorChip.ipp
     qu/edit/ColorChip.hpp
-    qu/edit/ColorCombo.ipp
-    qu/edit/ColorCombo.hpp
+    qu/edit/ColorComboBox.ipp
+    qu/edit/ColorComboBox.hpp
     qu/edit/ComboBox.ipp
     qu/edit/ComboBox.hpp
     qu/edit/DateEdit.ipp
