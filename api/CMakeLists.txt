@@ -31,6 +31,8 @@ add_library(${PROJECT_NAME} SHARED
     qu/edit/DoubleSpinBox.hpp
     qu/edit/DropListComboBox.ipp
     qu/edit/DropListComboBox.hpp
+    qu/edit/EnumComboBox.hpp
+    qu/edit/EnumComboBox.ipp
     qu/edit/FileBox.ipp
     qu/edit/FileBox.hpp
     qu/edit/NullableDateEdit.ipp

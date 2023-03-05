@@ -14,6 +14,8 @@ namespace qu {
     bool    is_similar(const QString&, const QString&);
     bool    is_similar(const QByteArray&, const QByteArray&);
 
+    QString qString(std::string_view);
+
 
     /*! Joins a collection into a separator (no separator)
     
