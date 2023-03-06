@@ -27,8 +27,8 @@ namespace qu {
         
     private:
         const yq::EnumDef* const    m_enum;
-        Map<int,int>                m_val2idx;
-        Map<int,int>                m_idx2val;
+        yq::Map<int,int>            m_val2idx;
+        yq::Map<int,int>            m_idx2val;
     };
 
     template <typename E>
