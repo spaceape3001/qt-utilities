@@ -19,6 +19,8 @@ add_library(${PROJECT_NAME} SHARED
     qu/delegate/ColorDelegate.ipp
     qu/delegate/Delegate.ipp
     qu/delegate/Delegate.hpp
+    qu/delegate/NullableDateDelegate.hpp
+    qu/delegate/NullableDateDelegate.ipp
     qu/delegate/delegate.cpp
 
     qu/edit/CheckBox.ipp
