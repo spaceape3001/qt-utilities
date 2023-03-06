@@ -12,6 +12,14 @@ add_library(${PROJECT_NAME} SHARED
     qu/core/IgCase.hpp
     qu/core/IgCase.ipp
     qu/core/core.cpp
+    
+    qu/delegate/ColorComboBoxDelegate.hpp
+    qu/delegate/ColorComboBoxDelegate.ipp
+    qu/delegate/ColorDelegate.hpp
+    qu/delegate/ColorDelegate.ipp
+    qu/delegate/Delegate.ipp
+    qu/delegate/Delegate.hpp
+    qu/delegate/delegate.cpp
 
     qu/edit/CheckBox.ipp
     qu/edit/CheckBox.hpp
