@@ -9,6 +9,27 @@
 #include <qu/core/Utilities.hpp>
 
 namespace qu {
+
+    yq::Compare compare_igCase(const QString& a, const QString& b)
+    {
+        int r   = QString::compare(a,b,Qt::CaseInsensitive);
+        if(r<0)
+            return yq::Compare::LESSER;
+        if(r>0)
+            return yq::Compare::GREATER;
+        return yq::Compare::EQUAL;
+    }
+
+    yq::Compare compare_igCase(const QByteArray& a, const QByteArray& b)
+    {
+        int r	= a.compare(b,Qt::CaseInsensitive);
+        if(r<0)
+            return yq::Compare::LESSER;
+        if(r>0)
+            return yq::Compare::GREATER;
+        return yq::Compare::EQUAL;
+    }
+
     bool    is_similar(const QString&a, const QString&b)
     {
         return QString::compare(a,b,Qt::CaseInsensitive) == 0;

@@ -7,10 +7,14 @@
 #pragma once
 
 #include <qu/preamble.hpp>
+#include <basic/Compare.hpp>
 #include <QString>
 #include <basic/trait/always_false.hpp>
 
 namespace qu {
+    yq::Compare     compare_igCase(const QByteArray& a, const QByteArray& b);
+    yq::Compare     compare_igCase(const QString& a, const QString& b);
+
     bool    is_similar(const QString&, const QString&);
     bool    is_similar(const QByteArray&, const QByteArray&);
 

@@ -8,6 +8,8 @@
 
 #include <QStyledItemDelegate>
 #include <basic/Compare.hpp>
+#include <source_location>
+#include <qu/preamble.hpp>
 
 namespace qu {
 
@@ -16,16 +18,18 @@ namespace qu {
     class Delegate : public QStyledItemDelegate {
         Q_OBJECT
     public:
+    
+        using data_t    = yq::disabled;
 
         //  Bringing in the dynamic in (later) via a registration system....
-        #if 0
         class Info;
         template <typename D>  class TypedInfo;
         
         static const Vector<const Info*>&   allInfo();
-        
         static Delegate*    make(int dataType, QObject* parent=nullptr);
-        #endif
+        
+        //template <typename>
+        //static TypedInfo<D>&
         
         //  ------------------------------------------------------------------------
         //  These are what the derived class are expected to extend....
@@ -73,14 +77,12 @@ namespace qu {
         virtual ~Delegate();
 
     private:
-    #if 0
         struct Repo;
         static Repo&    repo();
-    #endif
+        static void         reg(const QMetaObject*, int, const std::source_location&);
     };
 
-    #if 0
-
+#if 0
     class Delegate::Info : public DelayInit {
     public:
         virtual Delegate*       create(QObject* parent=nullptr) const = 0;
@@ -95,13 +97,14 @@ namespace qu {
         QString         m_name;
         QString         m_sourceFile;
     };
+#endif
 
     #define YQ_DELEGATE(cls, ... )                                                  \
         template <> void Delegate::TypedInfo<cls>::doInit() { __VA_ARGS__ }         \
         template <> Delegate::TypedInfo<cls>* Delegate::TypedInfo<cls>::s_meta =    \
             new Delegate::TypedInfo<cls>(#cls, __FILE__ );                          \
 
-
+#if 0
     template <typename D>
     class Delegate::TypedInfo : public Info {
     public:
@@ -127,5 +130,5 @@ namespace qu {
         static TypedInfo*       s_meta;
         
     };
-    #endif
+#endif
 }

@@ -23,6 +23,12 @@ add_library(${PROJECT_NAME} SHARED
     qu/delegate/DirBoxDelegate.ipp
     qu/delegate/FileBoxDelegate.hpp
     qu/delegate/FileBoxDelegate.ipp
+    qu/delegate/IconBarDelegate.hpp
+    qu/delegate/IconBarDelegate.ipp
+    qu/delegate/ImageDelegate.hpp
+    qu/delegate/ImageDelegate.ipp
+    qu/delegate/IntegerDelegate.hpp
+    qu/delegate/IntegerDelegate.ipp
     qu/delegate/NullableDateDelegate.hpp
     qu/delegate/NullableDateDelegate.ipp
     qu/delegate/NullableDateTimeDelegate.hpp
