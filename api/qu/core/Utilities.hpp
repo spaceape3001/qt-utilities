@@ -9,7 +9,7 @@
 #include <qu/preamble.hpp>
 #include <basic/Compare.hpp>
 #include <QString>
-#include <basic/trait/always_false.hpp>
+#include <trait/always_false.hpp>
 
 namespace qu {
     yq::Compare     compare_igCase(const QByteArray& a, const QByteArray& b);
