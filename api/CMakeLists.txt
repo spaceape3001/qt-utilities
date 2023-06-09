@@ -4,7 +4,7 @@
 ##
 ################################################################################
 
-project(qutil)
+project(gluon)
 
 find_package(Qt5 REQUIRED Core Gui Widgets)
 
