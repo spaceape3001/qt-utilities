@@ -6,7 +6,11 @@
 
 #pragma once
 
+#include <basic/ThreadId.hpp>
 #include <gluon/core/Utilities.hpp>
+
+#include <QFileInfo>
+#include <QIcon>
 
 namespace yq::gluon {
 
@@ -29,6 +33,25 @@ namespace yq::gluon {
             return yq::Compare::GREATER;
         return yq::Compare::EQUAL;
     }
+
+    QIcon                fetchIcon(const QString&file)
+    {
+        if(is_main_thread()){
+            static const char *sizes[] = { "16", "016", "24", "024", "32", "032", "48",
+                                           "048", "64", "064", "96", "096", "128", 
+                                           "144", "192", "256" };
+            QIcon   res;
+            for(const char* z : sizes){
+                QString name    = file.arg(z);
+                if(QFileInfo(name).exists())
+                    res.addFile(name);
+            }
+            
+            return res;
+        } else
+            return QIcon();
+    }
+
 
     bool    is_similar(const QString&a, const QString&b)
     {

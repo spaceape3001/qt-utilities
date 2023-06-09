@@ -7,7 +7,7 @@
 #pragma once
 
 #include <gluon/preamble.hpp>
-#include <gluon/core/IgCase.hpp>
+#include <gluon/core/IgCaseQ.hpp>
 #include <gluon/undo/UndoBase.hpp>
 #include <basic/Map.hpp>
 #include <QWidget>

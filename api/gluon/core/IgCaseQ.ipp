@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <gluon/core/IgCase.hpp>
+#include <gluon/core/IgCaseQ.hpp>
 
 #include <QByteArray>
 #include <QString>

@@ -11,6 +11,8 @@
 #include <QString>
 #include <trait/always_false.hpp>
 
+class QIcon;
+
 namespace yq::gluon {
     Compare     compare_igCase(const QByteArray& a, const QByteArray& b);
     Compare     compare_igCase(const QString& a, const QString& b);
@@ -20,6 +22,15 @@ namespace yq::gluon {
 
     QString qString(std::string_view);
 
+
+    /*!
+        Gets an icon from a filename.  Any %1 notation will be replaced by 
+        common icon sizes and tested.
+        
+        \note Qt restriction requires this to run on the MAIN THREAD.  Any
+        other thread will simply return an empty icon
+    */
+    QIcon       fetchIcon(const QString&);
 
     /*! Joins a collection into a separator (no separator)
     

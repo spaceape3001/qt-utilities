@@ -7,7 +7,7 @@
 #pragma once
 
 #include <gluon/edit/DropListComboBox.hpp>
-#include <gluon/core/IgCase.hpp>
+#include <gluon/core/IgCaseQ.hpp>
 #include <gluon/core/Utilities.hpp>
 #include <basic/Set.hpp>
 

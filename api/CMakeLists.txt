@@ -10,8 +10,22 @@ find_package(Qt5 REQUIRED Core Gui Widgets)
 
 add_library(${PROJECT_NAME} SHARED 
 
-    gluon/core/IgCase.hpp
-    gluon/core/IgCase.ipp
+    gluon/app/MainWindow.hpp
+    gluon/app/MainWindow.ipp
+    gluon/app/SimpleEditor.hpp
+    gluon/app/SimpleEditor.ipp
+    gluon/app/SubWindow.hpp
+    gluon/app/SubWindow.ipp
+    gluon/app/UndoSubWindow.hpp
+    gluon/app/UndoSubWindow.ipp
+    gluon/app/app.cpp
+
+    gluon/core/IgCaseQ.hpp
+    gluon/core/IgCaseQ.ipp
+    gluon/core/RefQ.hpp
+    gluon/core/RefQ.ipp
+    gluon/core/Utilities.hpp
+    gluon/core/Utilities.ipp
     gluon/core/core.cpp
 
     gluon/delegate/ColorComboBoxDelegate.hpp
@@ -100,6 +114,12 @@ add_library(${PROJECT_NAME} SHARED
     gluon/widget/Button.hpp
     gluon/widget/DrawRuler.hpp
     gluon/widget/DrawRuler.ipp
+    gluon/widget/FormWidget.hpp
+    gluon/widget/FormWidget.ipp
+    gluon/widget/WidgetTabBar.hpp
+    gluon/widget/WidgetTabBar.ipp
+    gluon/widget/WidgetTabWidget.hpp
+    gluon/widget/WidgetTabWidget.ipp
     gluon/widget/widget.cpp
 )    
 
