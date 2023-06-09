@@ -1,0 +1,20 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  YOUR QUILL
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+#include "GridTickModel.hpp"
+
+namespace yq::gluon {
+    GridTickModel::GridTickModel(QObject* parent) : 
+            QObject(parent)
+    {
+    }
+
+    GridTickModel::~GridTickModel()
+    {
+    }
+}

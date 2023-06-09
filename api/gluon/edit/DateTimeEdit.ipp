@@ -1,0 +1,20 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  YOUR QUILL
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+#include "DateTimeEdit.hpp"
+
+namespace yq::gluon {
+    DateTimeEdit::DateTimeEdit(QWidget* parent) : QDateTimeEdit(parent)
+    {
+    }
+
+    DateTimeEdit::~DateTimeEdit()
+    {
+    }
+}
+
