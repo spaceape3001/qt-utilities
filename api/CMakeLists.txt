@@ -6,10 +6,12 @@
 
 project(gluon)
 
-find_package(Qt5 REQUIRED Core Gui Widgets)
+find_package(Qt5 REQUIRED Core Gui Widgets )
 
 add_library(${PROJECT_NAME} SHARED 
 
+    gluon/app/Application.hpp
+    gluon/app/Application.ipp
     gluon/app/MainWindow.hpp
     gluon/app/MainWindow.ipp
     gluon/app/SimpleEditor.hpp
