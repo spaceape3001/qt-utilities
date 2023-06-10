@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "Logging.hpp"
+#include "Logging.ipp"
 #include "FileName.ipp"
 #include "IgCaseQ.ipp"
 #include "RefQ.ipp"

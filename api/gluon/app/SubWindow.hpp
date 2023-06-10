@@ -25,6 +25,7 @@ namespace yq::gluon {
         void    threadSync_status(const QString&, unsigned int);
     protected:
         void    status(const QString& msg=QString(), unsigned int kTimeout=0);
+        
     private slots:
         void    clearStatus();
     private:

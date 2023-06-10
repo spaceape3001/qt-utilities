@@ -67,6 +67,7 @@ namespace yq::gluon {
         void                    addWindow(QWidget*);
 
     public slots:
+
         /*! \brief Thread-safe status
         
             This will set the status of the main window.  If the caller is *not*

@@ -41,7 +41,7 @@ namespace yq::gluon {
         SubWindow::connectNotify(mm);
             
             //  Given that we don't actually need to connect the signals to the 
-            //  unto stack until the client explicitly connected to our signals, 
+            //  undo stack until the client explicitly connected to our signals, 
             //  we defer this until here... just one way, don't bother with
             //  the disconnect.
         

@@ -41,7 +41,7 @@ namespace yq::gluon {
         UndoSubWindow(QWidget*parent=nullptr);
         virtual ~UndoSubWindow();
         
-        virtual void    connectNotify(const QMetaMethod&);
+        virtual void    connectNotify(const QMetaMethod&) override;
         void                setClean();
         void                clearUndo();
 

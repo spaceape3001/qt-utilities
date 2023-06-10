@@ -8,6 +8,16 @@
 
 #include <basic/Logging.hpp>
 
+#define qtAlert             yAlert("qt")
+#define qtCritical          yCritical("qt")
+#define qtDebug             yDebug("qt")
+#define qtError             yError("qt")
+#define qtEmergency         yEmergency("qt")
+#define qtFatal             yFatal("qt")
+#define qtInfo              yInfo("qt")
+#define qtNotice            yNotice("qt")
+#define qtWarning           yWarning("qt")
+
 class QByteArray;
 class QDate;
 class QDateTime;
