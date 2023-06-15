@@ -6,7 +6,8 @@
 
 project(gluon)
 
-find_package(Qt5 REQUIRED Core Gui Widgets )
+find_package(Qt6 REQUIRED Core Gui Widgets )
+set(CMAKE_AUTOMOC ON)
 
 add_library(${PROJECT_NAME} SHARED 
 
@@ -132,7 +133,7 @@ target_include_directories(${PROJECT_NAME}
 
 target_compile_definitions(${PROJECT_NAME}
     PUBLIC
-        YQ_USE_QT5=1
+        YQ_USE_QT6=1
     PRIVATE
         YQ_QMAKE
 )
@@ -140,9 +141,9 @@ target_compile_definitions(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
         yqtoolbox
-        Qt5::Core
-        Qt5::Gui
-        Qt5::Widgets
+        Qt6::Core
+        Qt6::Gui
+        Qt6::Widgets
 )
 
 LinkTest(${PROJECT_NAME})

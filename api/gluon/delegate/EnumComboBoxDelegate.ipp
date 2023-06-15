@@ -9,7 +9,7 @@
 #include <gluon/core/Utilities.hpp>
 
 namespace yq::gluon {
-    GenericEnumComboBoxDelegate::GenericEnumComboBoxDelegate(const yq::EnumDef*def, int type, QObject *parent) : 
+    GenericEnumComboBoxDelegate::GenericEnumComboBoxDelegate(const yq::EnumDef*def, QMetaType type, QObject *parent) : 
         Delegate(parent), m_enum(def), m_type(type)
     {
     }
@@ -41,7 +41,7 @@ namespace yq::gluon {
 
     QVariant    GenericEnumComboBoxDelegate::render(const QVariant&var) const 
     {
-        if((var.userType() == m_type ) || var.userType() == QMetaType::Int){
+        if((var.metaType() == m_type ) || var.typeId() == QMetaType::Int){
             int i   = *((const int*) var.constData());
             QString txt = qString(m_enum -> key_of(i));
             return txt;
@@ -51,7 +51,7 @@ namespace yq::gluon {
 
     bool        GenericEnumComboBoxDelegate::setEditorData(QWidget*wid, const QVariant&val) const
     {
-        if((val.userType() == m_type ) || val.userType() == QMetaType::Int){
+        if((val.metaType() == m_type ) || val.typeId() == QMetaType::Int){
             static_cast<GenericEnumComboBox*>(wid) -> setIntValue(*((const int*) val.constData()));
             return true;
         } else if(val.userType() == QMetaType::QString){

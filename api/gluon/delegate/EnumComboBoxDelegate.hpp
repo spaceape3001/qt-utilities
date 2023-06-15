@@ -8,6 +8,7 @@
 
 #include <gluon/delegate/Delegate.hpp>
 #include <basic/Enum.hpp>
+#include <QMetaType>
 
 namespace yq::gluon {
     /*! \brief Enumeration Delegate
@@ -18,7 +19,7 @@ namespace yq::gluon {
     class GenericEnumComboBoxDelegate : public Delegate {
         Q_OBJECT
     public:
-        GenericEnumComboBoxDelegate(const yq::EnumDef*, int type, QObject *parent=nullptr);
+        GenericEnumComboBoxDelegate(const EnumDef*, QMetaType type, QObject *parent=nullptr);
         ~GenericEnumComboBoxDelegate();
         
         virtual QVariant    render(const QVariant&) const override;
@@ -30,8 +31,8 @@ namespace yq::gluon {
         virtual QString 	displayText(const QVariant &value, const QLocale &locale) const override;    
 
     private:
-        const yq::EnumDef*  m_enum = nullptr;
-        int                 m_type = 0;
+        const EnumDef*      m_enum = nullptr;
+        QMetaType           m_type;
     };
 
     template <typename E>

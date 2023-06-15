@@ -8,6 +8,7 @@
 
 #include <QAction>
 #include <QMainWindow>
+#include <QStringList>
 
 #include <basic/Hash.hpp>
 #include <basic/Map.hpp>
@@ -16,9 +17,6 @@
 #include <gluon/core/IgCaseQ.hpp>
 
 class QMenu;
-class QMenuBar;
-class QString;
-class QStringList;
 
 namespace yq::gluon {
 

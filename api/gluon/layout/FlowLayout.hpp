@@ -66,7 +66,7 @@ namespace yq::gluon {
         bool                        hasHeightForWidth() const;
         int                         heightForWidth(int) const;
         int                         horizontalSpacing() const;
-        virtual int                 indexOf(QWidget*) const override;
+        virtual int                 indexOf(const QWidget*) const override;
         virtual QLayoutItem *       itemAt(int index) const override;
         QSize                       minimumSize() const;
         void                        setGeometry(const QRect &rect);

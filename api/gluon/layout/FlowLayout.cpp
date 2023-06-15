@@ -153,7 +153,7 @@ namespace yq::gluon {
         }
     }
 
-    int          FlowLayout::indexOf(QWidget* widget) const 
+    int          FlowLayout::indexOf(const QWidget* widget) const 
     {
         for(size_t i =0;i<m_items.size(); ++i)
             if(m_items[i] && m_items[i]->widget() == widget)
@@ -170,11 +170,14 @@ namespace yq::gluon {
 
     QSize FlowLayout::minimumSize() const
     {
+        int left, top, right, bottom;
+        getContentsMargins(&left, &top, &right, &bottom);
+
         QSize size;
         for(QLayoutItem *item : m_items)
             size = size.expandedTo(item->minimumSize());
 
-        size += QSize(2*margin(), 2*margin());
+        size += QSize(left+right, top+bottom);
         return size;
     }
 

@@ -25,7 +25,7 @@ namespace yq::gluon {
     {
     }
 
-    void ColorChip::enterEvent(QEvent* event) 
+    void ColorChip::enterEvent(QEnterEvent* event) 
     {
         m_pressed = false;
         QWidget::enterEvent(event);
