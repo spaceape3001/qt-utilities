@@ -20,8 +20,6 @@ namespace yq::gluon {
     bool    is_similar(const QString&, const QString&);
     bool    is_similar(const QByteArray&, const QByteArray&);
 
-    QString qString(std::string_view);
-
 
     /*!
         Gets an icon from a filename.  Any %1 notation will be replaced by 

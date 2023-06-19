@@ -12,6 +12,7 @@ namespace yq::gluon {
 
     class DirBoxDelegate : public Delegate {
         Q_OBJECT
+        YQ_OBJECT_DECLARE(DirBoxDelegate, Delegate)
     public:
         DirBoxDelegate(QObject*parent =nullptr);
         ~DirBoxDelegate();

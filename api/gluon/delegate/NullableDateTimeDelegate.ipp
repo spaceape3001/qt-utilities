@@ -55,5 +55,4 @@ namespace yq::gluon {
     }
 }
 
-//YQ_DELEGATE(NullableDateTimeDelegate)
 

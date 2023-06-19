@@ -12,51 +12,86 @@
 
 namespace yq::gluon {
 
-    #if 0
-    struct Delegate::Repo {
-        Vector<const Info*>   all;
-        Map<int, const Info*>  byType;
+    struct DelegateRepo {
+        std::vector<const DelegateInfo*>            all;
+        std::unordered_map<int,const DelegateInfo*> byQtType;
+        tbb::spin_rw_mutex                          mutex;
     };
-
-    Delegate::Repo& Delegate::repo()
-    {
-        static Repo*    _r  = new Repo;
-        return *_r;
+    
+    namespace {
+        DelegateRepo&   delegateRepo()
+        {
+            static DelegateRepo s_ret;
+            return s_ret;
+        }
     }
 
-    const Vector<const Delegate::Info*>&   Delegate::allInfo()
+    #define LOCK                                                    \
+        DelegateRepo& _r = delegateRepo();                          \
+        tbb::spin_rw_mutex::scoped_lock _lock(_r.mutex, false);
+
+    #define WLOCK                                                   \
+        DelegateRepo& _r = delegateRepo();                          \
+        tbb::spin_rw_mutex::scoped_lock _lock(_r.mutex, true);
+
+        
+
+    //  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    std::vector<const DelegateInfo*>   DelegateInfo::all()
     {
-        return repo().all;
+        LOCK
+        return _r.all;
     }
 
-    Delegate*    Delegate::make(int dataType, QObject* parent)
+    const DelegateInfo*              DelegateInfo::byQtType(int t)
     {
-        const Info* i = repo().byType.get(dataType);
-        if(!i)
+        LOCK
+        auto i = _r.byQtType.find(t);
+        if(i != _r.byQtType.end())
+            return i->second;
+        return nullptr;
+    }
+
+    DelegateInfo::DelegateInfo(std::string_view name, const ObjectInfo&par, const std::source_location& sl ) : 
+        ObjectInfo(name, par, sl)
+    {
+        WLOCK
+        _r.all.push_back(this);
+    }
+    
+    void    DelegateInfo::registerQtMapping()
+    {
+        if(m_qtType.isValid()){
+            WLOCK
+            _r.byQtType[m_qtType.id()] = this;
+        }
+    }
+    
+
+    //  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+    Ref<Delegate>    Delegate::make(int dataType, QObject* parent)
+    {
+    
+        const DelegateInfo* info    = nullptr;
+        {
+            LOCK
+            auto i = _r.byQtType.find(dataType);
+            if(i!=_r.byQtType.end())
+                info    = i->second;
+        }
+        
+        if(!info)
             return nullptr;
-        return i->create(parent);
+        
+        Delegate*   d   = static_cast<Delegate*>(info->create());
+        if(!d)
+            return d;
+        if(parent)
+            d -> setParent(parent);
+        return d;
     }
-    #endif
-
-
-    //  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-    #if 0
-    Delegate::Info::Info(int type, const char* name, const char* file) : 
-        m_dataType(type), m_name(name), m_sourceFile(file)
-    {
-        Repo &  r   = repo();
-        r.all << this;
-        assert(!r.byType.get(type) && "Duplicate registration for type!");
-        r.byType[type]  = this;
-    }
-
-    Delegate::Info::~Info()
-    {
-    }
-    #endif
-
-    //  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
     Delegate::Delegate(QObject*parent) : QStyledItemDelegate(parent)
     {

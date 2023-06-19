@@ -24,6 +24,7 @@ namespace yq::gluon {
     */
     class IconBarDelegate : public Delegate {
         Q_OBJECT
+        YQ_OBJECT_DECLARE(IconBarDelegate, Delegate)
     public:
         IconBarDelegate(QObject* parent=nullptr);
         ~IconBarDelegate();

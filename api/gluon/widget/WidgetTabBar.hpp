@@ -66,7 +66,7 @@ namespace yq::gluon {
     //    friend class TDIWidget;
         
         QString     m_dragMimeType;
-        QPoint      m_start;
+        QPointF     m_start;
         int         m_height;
         int         m_tab;
         bool        m_inDrag;

@@ -10,7 +10,6 @@ find_package(Qt6 REQUIRED Core Gui Widgets )
 set(CMAKE_AUTOMOC ON)
 
 add_library(${PROJECT_NAME} SHARED 
-
     gluon/app/Application.hpp
     gluon/app/Application.ipp
     gluon/app/MainWindow.hpp
@@ -25,6 +24,8 @@ add_library(${PROJECT_NAME} SHARED
 
     gluon/core/IgCaseQ.hpp
     gluon/core/IgCaseQ.ipp
+    gluon/core/QtTypes.hpp
+    gluon/core/QtTypes.ipp
     gluon/core/RefQ.hpp
     gluon/core/RefQ.ipp
     gluon/core/Utilities.hpp
@@ -51,6 +52,12 @@ add_library(${PROJECT_NAME} SHARED
     gluon/delegate/NullableDateDelegate.ipp
     gluon/delegate/NullableDateTimeDelegate.hpp
     gluon/delegate/NullableDateTimeDelegate.ipp
+    gluon/delegate/StringComboDelegate.hpp
+    gluon/delegate/StringComboDelegate.ipp
+    gluon/delegate/StringDelegate.hpp
+    gluon/delegate/StringDelegate.ipp
+    gluon/delegate/UIntegerDelegate.hpp
+    gluon/delegate/UIntegerDelegate.ipp
     gluon/delegate/delegate.cpp
 
     gluon/edit/CheckBox.hpp

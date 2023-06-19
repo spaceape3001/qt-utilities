@@ -11,6 +11,7 @@ namespace yq::gluon {
 
     class StringComboDelegate : public Delegate {
         Q_OBJECT
+        YQ_OBJECT_DECLARE(StringComboDelegate, Delegate)
     public:
 
         StringComboDelegate(QObject* parent=nullptr);

@@ -56,7 +56,7 @@ namespace yq::gluon {
         connect(editor, SIGNAL(currentTextChanged(int)), other, slot);
         connect(editor, SIGNAL(currentIndexChanged(int)), other, slot);
     }
+    
 }
 
-//YQ_DELEGATE(ColorComboBoxDelegate)
 

@@ -82,4 +82,3 @@ namespace yq::gluon {
     }
 }
 
-//YQ_DELEGATE(UIntegerDelegate)

@@ -11,6 +11,7 @@
 namespace yq::gluon {
     class StringDelegate : public Delegate {
         Q_OBJECT
+        YQ_OBJECT_DECLARE(StringDelegate, Delegate)
     public:
         using DataType      = QString;
 

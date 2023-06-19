@@ -118,10 +118,10 @@ namespace yq::gluon {
         m_inDrag    = false;
         if(m_dragEnable){
             if(evt->button() == Qt::LeftButton){
-                QPoint      p   = evt->pos();
-                QPoint      gp  = evt->globalPos();
+                QPointF     p   = evt->position();
+                QPointF     gp  = evt->globalPosition();
                 m_start         = gp;
-                m_tab           = tabAt(p);
+                m_tab           = tabAt(p.toPoint());
                 if(m_tab >= 0)
                     m_height     = tabRect(m_tab).height();
                 //qDebug() << "Mouse Press, " << p.x() << p.y() << " [global " << gp.x() << gp.y() << "] tab " << m_tab;
@@ -141,7 +141,7 @@ namespace yq::gluon {
             QSize       sz  = size();
             if(m_tab >= 0){
                 //QPoint      p   = evt->pos();
-                QPoint      gp  = evt->globalPos();
+                QPointF     gp  = evt->globalPosition();
                 if(abs(m_start.y() - gp.y()) >= sz.height()){
                     int     tab = m_tab;
                     m_tab       = -1;

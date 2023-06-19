@@ -4,8 +4,11 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <tbb/spin_rw_mutex.h>
+
 #include "Logging.ipp"
 #include "FileName.ipp"
 #include "IgCaseQ.ipp"
+#include "QtTypes.ipp"
 #include "RefQ.ipp"
 #include "Utilities.ipp"

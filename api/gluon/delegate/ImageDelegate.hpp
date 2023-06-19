@@ -14,6 +14,7 @@ namespace yq::gluon {
 
     class ImageDelegate : public Delegate {
         Q_OBJECT
+        YQ_OBJECT_DECLARE(ImageDelegate, Delegate)
     public:
         using DataType = QImage;
         ImageDelegate(QObject* parent=nullptr);

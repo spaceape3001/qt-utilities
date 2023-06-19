@@ -130,9 +130,9 @@ namespace yq::gluon {
             m_press	= true;
             setCursor(Qt::ClosedHandCursor);
             if(horz())
-                m_mouse	= event -> x();
+                m_mouse	= event -> position().x();
             else
-                m_mouse = event -> y();
+                m_mouse = event -> position().y();
         }
         event -> accept();
     }
@@ -148,7 +148,7 @@ namespace yq::gluon {
 
     void    DrawRuler::mouseMoveEvent(QMouseEvent* event)
     {
-        int     mouse       = (horz()?event->x():event->y());
+        int     mouse       = (horz()?event->position().x():event->position().y());
         if(m_press){
             int         delta       = mouse - m_mouse;
             int64_t dc  = (int64_t) ( delta / m_zoom + 0.5 );

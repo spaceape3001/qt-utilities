@@ -11,6 +11,7 @@
 namespace yq::gluon {
     class FileBoxDelegate : public Delegate {
         Q_OBJECT
+        YQ_OBJECT_DECLARE(FileBoxDelegate, Delegate)
     public:
         FileBoxDelegate(QObject*parent =nullptr);
         ~FileBoxDelegate();

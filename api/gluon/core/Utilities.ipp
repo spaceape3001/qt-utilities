@@ -62,11 +62,4 @@ namespace yq::gluon {
     {
         return a.compare(b,Qt::CaseInsensitive) == 0;
     }
-    
-    QString qString(std::string_view v)
-    {
-        if(v.empty())
-            return QString();
-        return QString::fromUtf8(v.data(), v.size());
-    }
 }

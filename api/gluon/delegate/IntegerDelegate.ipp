@@ -81,5 +81,3 @@ namespace yq::gluon {
     }
 }
 
-//YQ_DELEGATE(IntegerDelegate)
-

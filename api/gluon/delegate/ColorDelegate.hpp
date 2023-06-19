@@ -12,6 +12,7 @@ namespace yq::gluon {
 
     class  ColorDelegate : public Delegate {
         Q_OBJECT
+        YQ_OBJECT_DECLARE(ColorDelegate, Delegate)
     public:
 
 

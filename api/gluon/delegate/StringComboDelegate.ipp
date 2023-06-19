@@ -7,7 +7,8 @@
 #pragma once
 
 #include "StringComboDelegate.hpp"
-#include "ComboBox.hpp"
+#include <gluon/edit/ComboBox.hpp>
+#include <gluon/core/Utilities.hpp>
 
 namespace yq::gluon {
     StringComboDelegate::StringComboDelegate(QObject* parent) : Delegate(parent), m_freeEdit(true)
@@ -20,7 +21,7 @@ namespace yq::gluon {
 
     Compare     StringComboDelegate::compare(const QVariant&a, const QVariant&b) const 
     {
-        return compareIgCase(a.toString(), b.toString());
+        return compare_igCase(a.toString(), b.toString());
     }
 
     QWidget*    StringComboDelegate::createEditor(QWidget* parent) const 
@@ -58,7 +59,3 @@ namespace yq::gluon {
         m_suggest.sort(Qt::CaseInsensitive);
     }
 }
-
-#ifdef YQ_QMAKE
-    #include "moc_StringComboDelegate.cpp"
-#endif

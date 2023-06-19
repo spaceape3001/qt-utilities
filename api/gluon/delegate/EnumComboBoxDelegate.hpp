@@ -18,6 +18,7 @@ namespace yq::gluon {
     */
     class GenericEnumComboBoxDelegate : public Delegate {
         Q_OBJECT
+        YQ_OBJECT_DECLARE(GenericEnumComboBoxDelegate, Delegate)
     public:
         GenericEnumComboBoxDelegate(const EnumDef*, QMetaType type, QObject *parent=nullptr);
         ~GenericEnumComboBoxDelegate();

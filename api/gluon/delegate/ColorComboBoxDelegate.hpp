@@ -12,6 +12,7 @@ namespace yq::gluon {
 
     class  ColorComboBoxDelegate : public Delegate {
         Q_OBJECT
+        YQ_OBJECT_DECLARE(ColorComboBoxDelegate, Delegate)
     public:
 
         using DataType = QColor;

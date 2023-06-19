@@ -12,6 +12,7 @@ namespace yq::gluon {
 
     class NullableDateTimeDelegate : public Delegate {
         Q_OBJECT
+        YQ_OBJECT_DECLARE(NullableDateTimeDelegate, Delegate)
     public:
 
         using DataType  = QDateTime;

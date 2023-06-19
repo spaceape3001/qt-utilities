@@ -8,25 +8,51 @@
 
 #include <QStyledItemDelegate>
 #include <basic/Compare.hpp>
+#include <basic/DelayInit.hpp>
+#include <basic/Object.hpp>
 #include <source_location>
 #include <gluon/preamble.hpp>
+#include <gluon/core/RefQ.hpp>
+#include <QMetaType>
 
 namespace yq::gluon {
 
+    class DelegateInfo : public ObjectInfo {
+    public:
+        template <typename C> class Writer;
+        
+        const TypeInfo*     dataType() const { return m_yqType; }
+        QMetaType           metaType() const { return m_qtType; }
+        
+        static std::vector<const DelegateInfo*>  all();
+        
+        static const DelegateInfo*              byQtType(int);
+
+    protected:
+        DelegateInfo(std::string_view, const ObjectInfo&, const std::source_location& sl = std::source_location::current());
+        
+    private:
+        const TypeInfo*     m_yqType    = nullptr;
+        QMetaType           m_qtType;
+        
+        void            registerQtMapping();
+    };
+
     /*! \brief Generic delegate to wrapper the idiosyncracies of the Qt's delegate
     */
-    class Delegate : public QStyledItemDelegate {
+    class Delegate : public QStyledItemDelegate, public Object, public RefQ {
         Q_OBJECT
+        
+        YQ_OBJECT_INFO(DelegateInfo)
+        YQ_OBJECT_DECLARE(Delegate, Object)
+        
     public:
     
         using data_t    = yq::disabled;
 
         //  Bringing in the dynamic in (later) via a registration system....
-        class Info;
-        template <typename D>  class TypedInfo;
         
-        static const Vector<const Info*>&   allInfo();
-        static Delegate*    make(int dataType, QObject* parent=nullptr);
+        static Ref<Delegate>    make(int dataType, QObject* parent=nullptr);
         
         //template <typename>
         //static TypedInfo<D>&
@@ -77,58 +103,10 @@ namespace yq::gluon {
         virtual ~Delegate();
 
     private:
+        friend class DelegateInfo;
+        
         struct Repo;
         static Repo&    repo();
         static void         reg(const QMetaObject*, int, const std::source_location&);
     };
-
-#if 0
-    class Delegate::Info : public DelayInit {
-    public:
-        virtual Delegate*       create(QObject* parent=nullptr) const = 0;
-        int                     dataType() const { return m_dataType; }
-        QString                 name() const { return m_name; }
-        QString                 sourceFile() const { return m_sourceFile; }
-    protected:
-        Info(int, const char* name, const char* file);
-        ~Info();
-    private:
-        int             m_dataType;
-        QString         m_name;
-        QString         m_sourceFile;
-    };
-#endif
-
-    #define YQ_DELEGATE(cls, ... )                                                  \
-        template <> void Delegate::TypedInfo<cls>::doInit() { __VA_ARGS__ }         \
-        template <> Delegate::TypedInfo<cls>* Delegate::TypedInfo<cls>::s_meta =    \
-            new Delegate::TypedInfo<cls>(#cls, __FILE__ );                          \
-
-#if 0
-    template <typename D>
-    class Delegate::TypedInfo : public Info {
-    public:
-
-        Delegate* create(QObject* parent) const 
-            { return new D(parent); }
-        
-
-    private:
-        TypedInfo(const char*cls, const char* file) :
-            Info(qMetaTypeId<typename D::DataType>(), cls, file)
-        {
-        }
-        
-        void        initialize()
-        {
-            doInit();
-        }
-        
-        void            doInit();
-        
-        
-        static TypedInfo*       s_meta;
-        
-    };
-#endif
 }

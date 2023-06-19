@@ -11,6 +11,7 @@
 namespace yq::gluon {
     class IntegerDelegate : public Delegate {
         Q_OBJECT
+        YQ_OBJECT_DECLARE(IntegerDelegate, Delegate)
     public:
         using DataType      = int;
         IntegerDelegate(QObject* parent=nullptr);
