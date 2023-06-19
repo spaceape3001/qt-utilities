@@ -71,7 +71,7 @@ namespace yq::gluon {
 
     //  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-    Ref<Delegate>    Delegate::make(int dataType, QObject* parent)
+    Delegate*    Delegate::make(int dataType, QObject* parent)
     {
     
         const DelegateInfo* info    = nullptr;
@@ -86,9 +86,7 @@ namespace yq::gluon {
             return nullptr;
         
         Delegate*   d   = static_cast<Delegate*>(info->create());
-        if(!d)
-            return d;
-        if(parent)
+        if(d && parent)
             d -> setParent(parent);
         return d;
     }

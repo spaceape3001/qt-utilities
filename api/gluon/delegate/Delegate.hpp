@@ -40,7 +40,7 @@ namespace yq::gluon {
 
     /*! \brief Generic delegate to wrapper the idiosyncracies of the Qt's delegate
     */
-    class Delegate : public QStyledItemDelegate, public Object, public RefQ {
+    class Delegate : public QStyledItemDelegate, public Object{
         Q_OBJECT
         
         YQ_OBJECT_INFO(DelegateInfo)
@@ -52,7 +52,7 @@ namespace yq::gluon {
 
         //  Bringing in the dynamic in (later) via a registration system....
         
-        static Ref<Delegate>    make(int dataType, QObject* parent=nullptr);
+        static Delegate*    make(int dataType, QObject* parent=nullptr);
         
         //template <typename>
         //static TypedInfo<D>&
