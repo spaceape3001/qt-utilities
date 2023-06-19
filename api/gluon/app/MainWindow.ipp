@@ -374,6 +374,7 @@ namespace yq::gluon {
 
     void            MainWindow::reconnect(QWidget*w)
     {
+        connect(w, &QObject::destroyed, this, &MainWindow::widgetDeleted);
         WinInfo*    wi  = repo().info(w,true);
         if(wi -> subwin)
             connect(wi -> subwin, &SubWindow::statusMessage, this, &MainWindow::mapStatus);
@@ -454,6 +455,12 @@ namespace yq::gluon {
         if(!m_tdi)
             return nullptr;
         return repo().info(m_tdi -> currentWidget());
+    }
+
+    void            MainWindow::widgetDeleted(QObject* obj)
+    {
+        if(m_tdi)
+            m_tdi -> removeTab(static_cast<QWidget*>(obj));
     }
 
     //  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

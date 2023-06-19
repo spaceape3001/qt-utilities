@@ -140,6 +140,7 @@ namespace yq::gluon {
         void                    mapStatus(const QString&);
         void                    tabChanged();
         void                    tabDragStarted(int);
+        void                    widgetDeleted(QObject*);
 
     private:    
 

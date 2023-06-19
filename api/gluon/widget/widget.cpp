@@ -6,6 +6,7 @@
 
 #include <QWidget>
 #include <QVariant>
+#include <gluon/core/Logging.hpp>
 
 Q_DECLARE_METATYPE(QWidget*)
 

@@ -14,7 +14,7 @@ namespace yq::gluon {
     SubWindow::SubWindow(QWidget*parent) : QWidget(parent), m_statusTimer(nullptr)
     {
         connect(this, &SubWindow::threadSync_status, this, &SubWindow::status);
-        setAttribute(Qt::WA_DeleteOnClose);
+        //setAttribute(Qt::WA_DeleteOnClose);
     }
 
     SubWindow::~SubWindow()

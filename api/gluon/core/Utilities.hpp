@@ -9,9 +9,11 @@
 #include <gluon/preamble.hpp>
 #include <basic/Compare.hpp>
 #include <QString>
+#include <QList>
 #include <trait/always_false.hpp>
 
 class QIcon;
+class QObject;
 
 namespace yq::gluon {
     Compare     compare_igCase(const QByteArray& a, const QByteArray& b);
@@ -20,6 +22,7 @@ namespace yq::gluon {
     bool    is_similar(const QString&, const QString&);
     bool    is_similar(const QByteArray&, const QByteArray&);
 
+    std::vector<const QObject*>   qobjectLineage(const QObject*, bool fIncSelf=false);
 
     /*!
         Gets an icon from a filename.  Any %1 notation will be replaced by 
@@ -63,6 +66,18 @@ namespace yq::gluon {
             }
         }
         return ret;
+    }
+    
+    template <typename T>
+    std::vector<const T*>  toCVector(const QList<T*>& list)
+    {
+        return std::vector<const T*>(list.begin(), list.end());
+    }
+
+    template <typename T>
+    std::vector<T>  toVector(const QList<T>& list)
+    {
+        return std::vector<T>(list.begin(), list.end());
     }
 
     /*! Joins a collection into a separator

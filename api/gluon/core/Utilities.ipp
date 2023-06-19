@@ -11,6 +11,7 @@
 
 #include <QFileInfo>
 #include <QIcon>
+#include <QObject>
 
 namespace yq::gluon {
 
@@ -61,5 +62,17 @@ namespace yq::gluon {
     bool    is_similar(const QByteArray&a, const QByteArray&b)
     {
         return a.compare(b,Qt::CaseInsensitive) == 0;
+    }
+
+    std::vector<const QObject*>   qobjectLineage(const QObject* obj, bool fIncSelf)
+    {
+        std::vector<const QObject*>   ret;
+        if(obj){
+            if(fIncSelf)
+                ret.push_back(obj);
+            for(QObject*p   = obj->parent(); p; p=p->parent())
+                ret.push_back(p);
+        }
+        return std::vector<const QObject*>(ret.rbegin(), ret.rend());
     }
 }
