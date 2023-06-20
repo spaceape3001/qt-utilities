@@ -119,6 +119,14 @@ add_library(${PROJECT_NAME} SHARED
     
     gluon/undo/UndoBase.cpp
     gluon/undo/UndoBase.hpp
+    
+    gluon/validator/IdentifierValidator.hpp
+    gluon/validator/IdentifierValidator.ipp
+    gluon/validator/NoSpacesValidator.hpp
+    gluon/validator/NoSpacesValidator.ipp
+    gluon/validator/XmlIdentifierValidator.hpp
+    gluon/validator/XmlIdentifierValidator.ipp
+    gluon/validator/validator.cpp
 
     gluon/widget/Button.cpp
     gluon/widget/Button.hpp

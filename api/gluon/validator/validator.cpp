@@ -1,0 +1,13 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  YOUR QUILL
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#include "IdentifierValidator.ipp"
+#include "NoSpacesValidator.ipp"
+#include "XmlIdentifierValidator.ipp"
+
+#include "moc_IdentifierValidator.cpp"
+#include "moc_NoSpacesValidator.cpp"
+#include "moc_XmlIdentifierValidator.cpp"
