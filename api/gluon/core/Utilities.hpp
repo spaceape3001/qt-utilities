@@ -15,6 +15,8 @@
 class QIcon;
 class QObject;
 
+namespace log4cpp { class CategoryStream; }
+
 namespace yq::gluon {
     Compare     compare_igCase(const QByteArray& a, const QByteArray& b);
     Compare     compare_igCase(const QString& a, const QString& b);
@@ -164,5 +166,8 @@ namespace yq::gluon {
         return ret;
     }
     
+
+    void    logAllResources();
+    void    logAllResources(log4cpp::CategoryStream&&);
 }
 

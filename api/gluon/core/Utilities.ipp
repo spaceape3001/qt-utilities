@@ -8,10 +8,12 @@
 
 #include <basic/ThreadId.hpp>
 #include <gluon/core/Utilities.hpp>
+#include <gluon/core/Logging.hpp>
 
 #include <QFileInfo>
 #include <QIcon>
 #include <QObject>
+#include <QDirIterator>
 
 namespace yq::gluon {
 
@@ -74,5 +76,22 @@ namespace yq::gluon {
                 ret.push_back(p);
         }
         return std::vector<const QObject*>(ret.rbegin(), ret.rend());
+    }
+
+    void    logAllResources()
+    {
+        logAllResources(qtInfo);
+    }
+    
+    void    logAllResources(log4cpp::CategoryStream&&log)
+    {
+        log << "All Registered Qt Resources:\n";
+        size_t n    = 0;
+        QDirIterator it(":", QDirIterator::Subdirectories);
+        while (it.hasNext()){
+            log << "+ " << it.next() << '\n';
+            ++n;
+        }
+        log << "Found " << n << " items.";
     }
 }
