@@ -22,8 +22,10 @@ namespace yq::gluon {
     signals:
         void        mapped(uint64_t);
 
-    private slots:
+    public slots:
         void        map();
+
+    private slots:
         void        remove();
 
     private:
