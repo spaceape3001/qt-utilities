@@ -335,6 +335,8 @@ namespace yq::gluon {
         if(m_tdi && m_tdi -> bar())
             m_tdi -> bar() -> setMovable(true);
     }
+    
+    
 
     QMenu*          MainWindow::makeMenu(const QString&name, const QString&label, const QStringList&cmds, bool fAddToMenuBar)
     {
@@ -370,6 +372,11 @@ namespace yq::gluon {
         if(wi != activeWinInfo())
             return ;
         status(msg);
+    }
+
+    QMenu*          MainWindow::menu(const QString&name)
+    {
+        return m_menus.get(name, nullptr);
     }
 
     void            MainWindow::reconnect(QWidget*w)

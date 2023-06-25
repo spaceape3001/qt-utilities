@@ -121,6 +121,9 @@ namespace yq::gluon {
         void                    enableMoveableTabs();
         bool                    isAutoEnableCmdsEnabled() const { return m_autoEnableCmds; }
 
+        //! Gets the specified menu by key
+        QMenu*                  menu(const QString&);
+
         QMenu*                  makeMenu(const QString&, const QString&, const QStringList&, bool fAddToMenuBar=true);
         QMenu*                  makeMenu(const QString&, const QString&, bool fAddToMenuBar=true);
 
