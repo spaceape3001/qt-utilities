@@ -56,7 +56,7 @@ namespace yq::gluon {
         
             Use sparingly....
         */
-        QDockWidget*            addDock(Qt::DockWidgetArea, QWidget*);
+        virtual QDockWidget*    addDock(Qt::DockWidgetArea, QWidget*);
         
         /*! \brief Adds a widget to the main window
         
