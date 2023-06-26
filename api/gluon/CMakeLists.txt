@@ -139,6 +139,8 @@ add_library(${PROJECT_NAME} SHARED
     widget/DrawRuler.ipp
     widget/FormWidget.hpp
     widget/FormWidget.ipp
+    widget/GraphicsView.hpp
+    widget/GraphicsView.ipp
     widget/WidgetTabBar.hpp
     widget/WidgetTabBar.ipp
     widget/WidgetTabWidget.hpp

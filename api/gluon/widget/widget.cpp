@@ -4,6 +4,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include "GraphicsView.ipp"
+#include "moc_GraphicsView.cpp"
+
 #include <QWidget>
 #include <QVariant>
 #include <gluon/core/Logging.hpp>
