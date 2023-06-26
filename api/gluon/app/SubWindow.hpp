@@ -9,6 +9,7 @@
 #include <QWidget>
 
 class QTimer;
+class QLayout;
 
 namespace yq::gluon {
 
@@ -26,10 +27,14 @@ namespace yq::gluon {
     protected:
         void    status(const QString& msg=QString(), unsigned int kTimeout=0);
         
+        //! Helper, equiv to QVBoxLayout* wrapped
+        void    setWidget(QWidget*);
+        
     private slots:
         void    clearStatus();
     private:
-        QString m_status;
-        QTimer* m_statusTimer;
+        QString         m_status;
+        QTimer*         m_statusTimer = nullptr;
+        QLayout*        m_layout    = nullptr;
     };
 }

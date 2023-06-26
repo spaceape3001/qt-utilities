@@ -9,6 +9,7 @@
 #include <gluon/app/SubWindow.hpp>
 #include <basic/ThreadId.hpp>
 #include <QTimer>
+#include <QVBoxLayout>
 
 namespace yq::gluon {
     SubWindow::SubWindow(QWidget*parent) : QWidget(parent), m_statusTimer(nullptr)
@@ -48,5 +49,24 @@ namespace yq::gluon {
             statusMessage(txt);
         } else
             threadSync_status(txt, kTimeout);
+    }
+
+    void    SubWindow::setWidget(QWidget* w)
+    {
+        if(!m_layout){
+            m_layout    = new QVBoxLayout;
+            setLayout(m_layout);
+        } else {
+            //  clear out the old widget
+            QLayoutItem*    child;
+            while((child = m_layout->takeAt(0)) != nullptr){
+                QWidget*    w   = child -> widget();
+                if(w)
+                    w -> deleteLater();
+                delete child;
+            }
+        }
+        
+        m_layout -> addWidget(w);
     }
 }
