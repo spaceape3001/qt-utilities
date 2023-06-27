@@ -142,54 +142,6 @@ namespace yq::gluon {
     }
 
 
-    //bool            MainWindow::activateMdi()
-    //{
-        //if(m_tdi)
-            //return false;
-        //if(m_mdi)   // already there
-            //return true;
-            
-        //m_mdi       = new QMdiArea;
-        //connect(m_mdi, &QMdiArea::subWindowActivated, this, &MainWindow::subActivated);
-        //setCentralWidget(m_mdi);
-        //return true;
-    //}
-
-    //void            MainWindow::activateTdi()
-    //{
-        ////if(m_mdi)
-            ////return false;
-        ////if(m_tdi)
-            ////return true;
-        
-        //m_tdi   = new Area;
-        //connect(m_tdi, &MainWindow::Area::dragStarted, this, &MainWindow::dragStarted);
-        //setCentralWidget(m_tdi);
-        ////return true;
-    //}
-
-    //QWidget*        MainWindow::activeWindow()
-    //{
-        //WinInfo*    wi  = activeWinInfo();
-        //if(wi)
-            //return wi -> widget;
-        //return nullptr;
-    //}
-
-    //MainWindow::WinInfo*  MainWindow::activeWinInfo()
-    //{
-        //QWidget*    sub = nullptr;
-        ////if(m_mdi)
-            ////sub = m_mdi -> activeSubWindowdow();
-        ////else 
-        //if(m_tdi)
-            //sub = m_tdi -> activeSubWindowdow();
-
-        //if(!sub)
-            //return nullptr;
-        //return m_winInfo.get(sub, nullptr);
-    //}
-
     void     MainWindow::activateTabs()
     {
         if(m_tdi)   // already activated
