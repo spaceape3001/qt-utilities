@@ -18,8 +18,14 @@ class QObject;
 namespace log4cpp { class CategoryStream; }
 
 namespace yq::gluon {
+    Compare     compare(const QByteArray&, const QByteArray&);
+    Compare     compare(const QString&, const QString&);
+    Compare     compare(const QVariant&, const QVariant&);
+
     Compare     compare_igCase(const QByteArray& a, const QByteArray& b);
     Compare     compare_igCase(const QString& a, const QString& b);
+    
+    Compare     compare_igCase(const QVariant&, const QVariant&);
 
     bool    is_similar(const QString&, const QString&);
     bool    is_similar(const QByteArray&, const QByteArray&);
