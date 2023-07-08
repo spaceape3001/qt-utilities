@@ -102,6 +102,21 @@ add_library(${PROJECT_NAME} SHARED
     edit/TimeEdit.ipp
     edit/edit.cpp
 
+    graph/graph.cpp
+
+    graph/data/GraphBase.hpp
+    graph/data/GraphBase.ipp
+    graph/data/GraphName.hpp
+    graph/data/GraphName.ipp
+    graph/data/GraphNode.hpp
+    graph/data/GraphNode.ipp
+    graph/data/GraphPin.hpp
+    graph/data/GraphPin.ipp
+    graph/data/GraphPinned.hpp
+    graph/data/GraphPinned.ipp
+    graph/data/GraphProperty.hpp
+    graph/data/GraphProperty.ipp
+
     io/ZipFile.cpp
     io/ZipReader.hpp
     io/ZipWriter.hpp

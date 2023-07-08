@@ -4,16 +4,16 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "GraphNode.ipp"
-#include "GraphBase.ipp"
-#include "GraphName.ipp"
-#include "GraphPin.ipp"
-#include "GraphPinned.ipp"
-#include "GraphProperty.ipp"
+#include "data/GraphBase.ipp"
+#include "data/GraphName.ipp"
+#include "data/GraphNode.ipp"
+#include "data/GraphPin.ipp"
+#include "data/GraphPinned.ipp"
+#include "data/GraphProperty.ipp"
 
-#include "moc_GraphNode.cpp"
-#include "moc_GraphBase.cpp"
-#include "moc_GraphName.cpp"
-#include "moc_GraphPin.cpp"
-#include "moc_GraphPinned.cpp"
-#include "moc_GraphProperty.cpp"
+#include "data/moc_GraphBase.cpp"
+#include "data/moc_GraphName.cpp"
+#include "data/moc_GraphNode.cpp"
+#include "data/moc_GraphPin.cpp"
+#include "data/moc_GraphPinned.cpp"
+#include "data/moc_GraphProperty.cpp"
