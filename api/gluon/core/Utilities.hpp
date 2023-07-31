@@ -31,6 +31,11 @@ namespace yq::gluon {
     bool    is_similar(const QByteArray&, const QByteArray&);
 
     std::vector<const QObject*>   qobjectLineage(const QObject*, bool fIncSelf=false);
+    
+    QStringList         qStringList(std::span<const std::string>);
+    QStringList         qStringList(std::span<const std::string_view>);
+    
+    std::vector<std::string>    yStringVector(const QStringList&);
 
     /*!
         Gets an icon from a filename.  Any %1 notation will be replaced by 

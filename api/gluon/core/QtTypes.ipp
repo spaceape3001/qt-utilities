@@ -99,6 +99,10 @@ namespace yq::gluon {
         QtTypeRepo& _r = qtTypeRepo();                              \
         tbb::spin_rw_mutex::scoped_lock _lock(_r.mutex, true);
 
+    std::string yString(const QString&s)
+    {
+        return s.toStdString();
+    }
 
     QString     qString(std::string_view sv)
     {
@@ -126,6 +130,25 @@ namespace yq::gluon {
         return qString(sv);
     }
     
+    QStringList         qStringList(std::span<const std::string> sp)
+    {
+        QStringList ret;
+        ret.reserve(sp.size());
+        for(const std::string& s : sp)
+            ret << qString(s);
+        return ret;
+    }
+
+    QStringList         qStringList(std::span<const std::string_view>sp)
+    {
+        QStringList ret;
+        ret.reserve(sp.size());
+        for(const std::string_view& s : sp)
+            ret << qString(s);
+        return ret;
+    }
+    
+
     Any         yAny(const QVariant&v)
     {
         QVariantToAnyFN     conv = nullptr;
@@ -138,5 +161,14 @@ namespace yq::gluon {
         if(!conv)
             return Any();
         return conv(v);
+    }
+
+    std::vector<std::string>    yStringVector(const QStringList&sl)
+    {
+        std::vector<std::string>    ret;
+        ret.reserve(sl.size());
+        for(const QString& s : sl)
+            ret.push_back(yString(s));
+        return ret;
     }
 }

@@ -22,6 +22,7 @@ namespace yq::gluon {
     using QStringSet            = Set<QString,IgCaseQ>;
 
     QString     qString(std::string_view);
+    std::string yString(const QString&);
     
     QVariant    qVariant(const Any&);
     QVariant    qVariant(std::string_view);
