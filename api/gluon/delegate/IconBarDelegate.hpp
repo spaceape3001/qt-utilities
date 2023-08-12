@@ -26,7 +26,14 @@ namespace yq::gluon {
         Q_OBJECT
         YQ_OBJECT_DECLARE(IconBarDelegate, Delegate)
     public:
+    
+        //! Maximum number of panels
+        static constexpr const unsigned int kMaxPanel      = 32;
+
+        //! Constructor
         IconBarDelegate(QObject* parent=nullptr);
+        
+        //! Destructor
         ~IconBarDelegate();
         
         /*! Adds a panel.
@@ -37,12 +44,19 @@ namespace yq::gluon {
             clicked notifications will be restricted to "on-state" only.
         */
         uint8_t     addPanel(const QString& on, const QString& off=QString());
+        
+        //! Size hint of item
         QSize       sizeHint(const QStyleOptionViewItem&, const QModelIndex&) const override;
         
+        //! Count of panels
         uint8_t     count() const;
         
     protected:
+    
+        //! Editor event
         bool    editorEvent(QEvent*, QAbstractItemModel*, const QStyleOptionViewItem&, const QModelIndex&) override;
+        
+        //! Paint
         bool    paint(QPainter*, const QStyleOptionViewItem&, const QVariant&) const override;
 
     signals:
@@ -55,6 +69,5 @@ namespace yq::gluon {
         Vector<Panel>   m_panels;
         QSize           m_size;
 
-        static constexpr const unsigned int kMaxPanel      = 32;
     };
 }
