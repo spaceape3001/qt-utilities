@@ -16,8 +16,11 @@ namespace yq::gluon {
     class ComboBox : public QComboBox, public UndoBase {
         Q_OBJECT
     public:
-
+    
+        //! Constructor
         ComboBox(QWidget* parent=nullptr);
+        
+        //! Destructor
         virtual ~ComboBox();
         
     public slots:
