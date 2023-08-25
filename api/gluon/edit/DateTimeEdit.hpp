@@ -18,7 +18,11 @@ namespace yq::gluon {
     class DateTimeEdit : public QDateTimeEdit, public UndoBase {
         Q_OBJECT
     public:
+    
+        //! Constructor
         DateTimeEdit(QWidget* parent = nullptr);
+        
+        //! Destructor
         ~DateTimeEdit();
         //  TODO: Currently, the *ACTUAL* undo tie in is not yet implemented
     };
