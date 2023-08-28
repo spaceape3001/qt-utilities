@@ -15,22 +15,37 @@ class QStandardItemModel;
 
 namespace yq::gluon {
 
+    /*! \brief Combo Box where Items are check boxes
+    
+        This is a combo box where all the items are check boxes
+    */
     class DropListComboBox : public ComboBox {
         Q_OBJECT
     public:
 
+        //! Constructor
         DropListComboBox(QWidget* parent=nullptr);
+        
+        //! Destructor
         ~DropListComboBox();
         
+        //! Sets the items
         void        setItems(const QStringSet&);
 
-        QString     separator() const { return QString(); }
+        //! Separator for items in the text
+        const QString&  separator() const { return m_separator; }
+        
+        //! Sets the separator
         void        setSeparator(const QString&);
 
+        //! List of checked strings
         QStringSet  checked() const;
         
     public slots:
+        //! Sets the checked strings
         void        setChecked(const QStringSet&);
+        
+        //! Updates
         void        update();
     private slots:
         void        handlePressed(const QModelIndex&);
