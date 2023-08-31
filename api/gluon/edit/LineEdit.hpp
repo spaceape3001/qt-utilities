@@ -17,11 +17,17 @@ namespace yq::gluon {
     class LineEdit : public QLineEdit, public UndoBase {
         Q_OBJECT
     public:
+    
+        //! Constructor
         LineEdit(QWidget* parent=nullptr);
+        
+        //! Destructor
         ~LineEdit();
         
-            //  returns an unset optional if the line edit is blank
+        //! Returns an unset optional if the line edit is blank
         std::optional<QString>  get() const;
+        
+        //! Sets the contents (unset will be blank)
         void                    set(const std::optional<QString>&);
 
     private slots:
