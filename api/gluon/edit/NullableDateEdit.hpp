@@ -15,16 +15,27 @@ namespace yq::gluon {
     class CheckBox;
     class DateEdit;
     
+    /*! \brief Data Edit Allowigng for Null
+    
+        This is a date edit that allows for a null (non-set) date
+    */
     class NullableDateEdit : public QWidget, public UndoBase {
         Q_OBJECT
     public:
 
+        //! Constructor
         NullableDateEdit(QWidget*parent=nullptr);
+        
+        //! Destructor
         ~NullableDateEdit();
         
+        //! Current date
         QDate       date() const;
+        
+        //! Sets the date
         void        setDate(const QDate&);
-
+    
+        //! Sets the Display format
         void        setDisplayFormat(const QString&);
 
         //  TODO: Currently, the *ACTUAL* undo tie in is not yet implemented
@@ -33,6 +44,7 @@ namespace yq::gluon {
         void        stateChanged(int);
 
     signals:
+        //! Triggered when editing is finished
         void        editingFinished();
     private:
 
