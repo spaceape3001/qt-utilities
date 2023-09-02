@@ -35,7 +35,7 @@ namespace yq::gluon {
         //! Sets the date
         void        setDate(const QDate&);
     
-        //! Sets the Display format
+        //! Sets the Display format (defaults to ISO)
         void        setDisplayFormat(const QString&);
 
         //  TODO: Currently, the *ACTUAL* undo tie in is not yet implemented
