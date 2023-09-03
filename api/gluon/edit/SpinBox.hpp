@@ -21,7 +21,11 @@ namespace yq::gluon {
     class SpinBox : public QSpinBox, public UndoBase {
         Q_OBJECT
     public:
+    
+        //! Spin box constructor
         SpinBox(QWidget*parent=nullptr);
+        
+        //! Destructor
         ~SpinBox();
         
         //  TODO: Currently, the *ACTUAL* undo tie in is not yet implemented
