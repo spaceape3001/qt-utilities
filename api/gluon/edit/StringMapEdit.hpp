@@ -18,20 +18,34 @@ namespace yq::gluon {
         Q_OBJECT
     public:
 
+        //! Validator function
         using Validator  = std::function<bool(const QString&)>;
         
+        //! Constructor
         StringMapEdit(QWidget* parent=nullptr);
+        
+        //! Destructor
         ~StringMapEdit();
         
+        //! Get the map
         QStringMap	get() const;
+        
+        //! Set the map
         void		set(const QStringMap&);
         
         class View;
         class Model;
         
+        //! Get the model for this edit
         Model*		    model() { return m_model; }
+
+        //! Get the model for this edit
         const Model* 	model() const { return m_model; }
+
+        //! Get the view for this edit
         View*			view() { return m_view; }
+
+        //! Get the view for this edit
         const View* 	view() const { return m_view; }
 
     private slots:
