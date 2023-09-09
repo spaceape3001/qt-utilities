@@ -15,7 +15,11 @@ namespace yq::gluon {
     class TextEdit : public QTextEdit, public UndoBase {
         Q_OBJECT
     public:
+    
+        //! Constructor
         TextEdit(QWidget*parent=nullptr);
+        
+        //! Destructor
         ~TextEdit();
 
         //  TODO: Currently, the *ACTUAL* tie in is not yet implemented
