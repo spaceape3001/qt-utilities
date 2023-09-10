@@ -18,7 +18,10 @@ namespace yq::gluon {
     class TimeEdit : public QTimeEdit, public UndoBase {
         Q_OBJECT
     public:
+        //! Constructor
         TimeEdit(QWidget* parent = nullptr);
+        
+        //! Destructor
         ~TimeEdit();
         //  TODO: Currently, the *ACTUAL* undo tie in is not yet implemented
     };
