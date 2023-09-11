@@ -31,10 +31,20 @@ namespace yq::gluon {
         
         /*! TRUE if this index is a grid stop */
         virtual bool				    hasStop(int64_t) const = 0;
+        
+        //! List of stops between points
         virtual std::vector<int64_t>    stops  (int64_t from, int64_t to, uint64_t minPitch) const = 0;
+        
+        //! Pitch (in units) of specified point... 
         virtual uint64_t		        pitch  (int64_t) const = 0;
+        
+        //! Label at specified point
         virtual QString				    label  (int64_t) const = 0;
+        
+        //! Color at specified point
         virtual QColor				    color  (int64_t) const = 0;
+        
+        //! Tick to unit ratio
         virtual double                  tickToUnitPitchRatio() const = 0;
 
     signals:
