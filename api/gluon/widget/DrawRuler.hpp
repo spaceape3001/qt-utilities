@@ -18,6 +18,8 @@ namespace yq::gluon {
 
     class GridTickModel;
 
+    /*! \brief Ruler for ticking off pixels
+    */
     class DrawRuler : public QWidget {
         Q_OBJECT
     //    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor )
@@ -30,39 +32,81 @@ namespace yq::gluon {
         
         /*! \brief	Specifies the CENTER position of the ruler */
         int64_t			    center() const 		{ return m_center; }
+        
+        //! Background color
         QColor          	background() const 	{ return m_bkgndColor; }
+        
+        //! Zoom factor
         double				zoom() const   		{ return m_zoom; }
+        
+        //! Mouse position (either x or y depending on orientation)
         int					mouse() const 		{ return m_mouse; }
+        
+        //! Ruler orientation
         Qt::Orientation     orientation() const { return m_orientation; }
         /*! minimum number of pixels for ruler to consider a tick */
         int                 tickThreshold() const  { return m_tick; }
         /*! minimum number of pixels for ruler to consider a label */
         int                 labelThreshold() const { return m_label; }
 
+        //! Sets the tick model
         void                setModel(Ref<const GridTickModel>);
+        
+        //! Sets the background
         void                setBackground(const QColor&);
+        
+        //! Sets the orientation
         void                setOrientation(Qt::Orientation);
+        
+        //! Sets the tick threshhold
         void                setTickThreshold(int);
+        
+        //! Sets the label threshhold
         void                setLabelThreshold(int);
         
     public slots:
+    
+        //! Sets the mouse position (ie, moves the marker)
         void                setMouse(int);
+        
+        //! Sets the center tick
         void                setCenter(int64_t);
+        
+        //! Sets the zoom
         void                setZoom(double);
 
     signals:
+    
+        //! Mouse changed
         void                mouse(int);
+        
+        //! Center changed
         void                center(int64_t);
 
     protected:
+        //! Size hint
         QSize               sizeHint() const;
-        virtual void        paintEvent(QPaintEvent*);
-        virtual void        resizeEvent(QResizeEvent*);
-        virtual void        mousePressEvent(QMouseEvent*);
-        virtual void        mouseReleaseEvent(QMouseEvent*);
-        virtual void        mouseMoveEvent(QMouseEvent*);
-        virtual void        wheelEvent(QWheelEvent*);
-        virtual void        leaveEvent(QEvent*);
+        
+        //! Paint event
+        virtual void        paintEvent(QPaintEvent*) override;
+        
+        //! Resize event
+        virtual void        resizeEvent(QResizeEvent*) override;
+        
+        //! Mouse pressed
+        virtual void        mousePressEvent(QMouseEvent*) override;
+        
+        //! Mouse released
+        virtual void        mouseReleaseEvent(QMouseEvent*) override;
+        
+        //! Mouse moved
+        virtual void        mouseMoveEvent(QMouseEvent*) override;
+        
+        //! Mouse wheel spun
+        virtual void        wheelEvent(QWheelEvent*) override;
+        
+        //! Left the widget
+        virtual void        leaveEvent(QEvent*) override;
 
     private:
         Ref<const GridTickModel>    m_model;
