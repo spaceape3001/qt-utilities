@@ -7,7 +7,7 @@
 #pragma once
 
 #include <QWidget>
-#include <basic/Hash.hpp>
+#include <0/basic/Hash.hpp>
 
 class QAction;
 class QBoxLayout;

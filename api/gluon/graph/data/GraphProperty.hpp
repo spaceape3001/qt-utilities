@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <graph/Graph.hpp>
+#include <0/graph/Graph.hpp>
 #include <gluon/graph/data/GraphName.hpp>
 #include <QVariant>
 

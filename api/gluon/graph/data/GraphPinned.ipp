@@ -23,6 +23,11 @@ namespace yq::gluon {
     {
     }
     
+    bool        GraphPinned::operator==(const GraphPinned&v) const
+    {
+        return GraphBase::operator==(v) && sameChildrenAs<GraphPin>(v);
+    }
+    
     g::Pinned           GraphPinned::get() const
     {
         g::Pinned ret;
@@ -41,10 +46,6 @@ namespace yq::gluon {
     
     std::vector<GraphPin*>   GraphPinned::pins() const
     {
-        std::vector<GraphPin*>   ret;
-        foreachPin([&](GraphPin* p){
-            ret.push_back(p);
-        });
-        return ret;
+        return childrenAs<GraphPin>();
     }
 }

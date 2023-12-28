@@ -102,10 +102,20 @@ add_library(${PROJECT_NAME} SHARED
     edit/TimeEdit.ipp
     edit/edit.cpp
 
+    filter/filter.cpp
+
+    graph/GraphModel.hpp
+    graph/GraphModel.ipp
     graph/graph.cpp
 
     graph/data/GraphBase.hpp
     graph/data/GraphBase.ipp
+    graph/data/GraphDocument.hpp
+    graph/data/GraphDocument.ipp
+    graph/data/GraphEdge.hpp
+    graph/data/GraphEdge.ipp
+    graph/data/GraphGraph.hpp
+    graph/data/GraphGraph.ipp
     graph/data/GraphName.hpp
     graph/data/GraphName.ipp
     graph/data/GraphNode.hpp
@@ -116,6 +126,8 @@ add_library(${PROJECT_NAME} SHARED
     graph/data/GraphPinned.ipp
     graph/data/GraphProperty.hpp
     graph/data/GraphProperty.ipp
+    graph/data/GraphSocket.hpp
+    graph/data/GraphSocket.ipp
 
     io/ZipFile.cpp
     io/ZipReader.hpp

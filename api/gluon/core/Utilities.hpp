@@ -7,10 +7,10 @@
 #pragma once
 
 #include <gluon/preamble.hpp>
-#include <basic/Compare.hpp>
+#include <0/basic/Compare.hpp>
 #include <QString>
 #include <QList>
-#include <trait/always_false.hpp>
+#include <0/trait/always_false.hpp>
 
 class QIcon;
 class QObject;

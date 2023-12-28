@@ -36,7 +36,7 @@
 #include "moc_StringDelegate.cpp"
 #include "moc_UIntegerDelegate.cpp"
 
-#include <meta/Init.hpp>
+#include <0/meta/Init.hpp>
 #include "DelegateInfoWriter.hpp"
 
 

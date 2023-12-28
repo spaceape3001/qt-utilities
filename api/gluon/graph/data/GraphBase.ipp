@@ -25,28 +25,12 @@ namespace yq::gluon {
 
     bool    GraphBase::operator==(const GraphBase&other) const
     {
-        if(!GraphName::operator==(other))
-            return false;
-        
-        std::vector<GraphProperty*>     us      = properties();
-        std::vector<GraphProperty*>     them    = other.properties();
-        
-        if(us.size() != them.size())
-            return false;
-        for(size_t n=0;n<us.size();++n){
-            if(!(us[n]->operator==(*them[n])))
-                return false;
-        }
-        return true;
+        return GraphName::operator==(other) && sameChildrenAs<GraphProperty>(other);
     }
 
     std::vector<GraphProperty*> GraphBase::properties() const
     {
-        std::vector<GraphProperty*>     ret;
-        foreachProperty([&](GraphProperty* p){
-            ret.push_back(p);
-        });
-        return ret;
+        return childrenAs<GraphProperty>();
     }
 
     g::Base GraphBase::get() const

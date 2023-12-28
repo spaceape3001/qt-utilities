@@ -10,10 +10,10 @@
 #include <QMainWindow>
 #include <QStringList>
 
-#include <basic/Hash.hpp>
-#include <basic/Map.hpp>
-#include <basic/Set.hpp>
-#include <basic/Vector.hpp>
+#include <0/basic/Hash.hpp>
+#include <0/basic/Map.hpp>
+#include <0/basic/Set.hpp>
+#include <0/basic/Vector.hpp>
 #include <gluon/core/IgCaseQ.hpp>
 
 class QMenu;

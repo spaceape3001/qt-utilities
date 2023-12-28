@@ -17,15 +17,12 @@ namespace yq::gluon {
         GraphPinned(const g::Pinned&, QObject* parent=nullptr);
         ~GraphPinned();
         
+        bool        operator==(const GraphPinned&) const;
+        
         template <typename Pred>
         void foreachPin(Pred p) const
         {
-            for(QObject* obj : children()){
-                GraphPin*   pin = qobject_cast<GraphPin*>(obj);
-                if(pin){
-                    p(pin);
-                }
-            }
+            foreachChildAs<GraphPin, Pred>(std::move(p));
         }
         
         g::Pinned               get() const;

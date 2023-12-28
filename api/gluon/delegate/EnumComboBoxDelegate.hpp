@@ -7,7 +7,7 @@
 #pragma once
 
 #include <gluon/delegate/Delegate.hpp>
-#include <basic/Enum.hpp>
+#include <0/basic/Enum.hpp>
 #include <QMetaType>
 
 namespace yq::gluon {
