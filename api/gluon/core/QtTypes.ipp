@@ -163,9 +163,9 @@ namespace yq::gluon {
         return conv(v);
     }
 
-    std::vector<std::string>    yStringVector(const QStringList&sl)
+    string_vector_t    yStringVector(const QStringList&sl)
     {
-        std::vector<std::string>    ret;
+        string_vector_t    ret;
         ret.reserve(sl.size());
         for(const QString& s : sl)
             ret.push_back(yString(s));
