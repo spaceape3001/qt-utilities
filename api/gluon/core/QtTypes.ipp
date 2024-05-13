@@ -111,6 +111,12 @@ namespace yq::gluon {
         return QString::fromUtf8(sv.data(), sv.size());
     }
     
+    QString     qFilePath(const std::filesystem::path&fp)
+    {
+        std::string s   = fp.string();
+        return qString(s);
+    }
+
     QVariant    qVariant(const Any& v)
     {
         AnyToQVariantFN conv = nullptr;
@@ -161,6 +167,11 @@ namespace yq::gluon {
         if(!conv)
             return Any();
         return conv(v);
+    }
+
+    std::filesystem::path   yFilePath(const QString&s)
+    {
+        return std::filesystem::path(s.toStdString());
     }
 
     string_vector_t    yStringVector(const QStringList&sl)
