@@ -8,7 +8,7 @@
 
 #include <QStyledItemDelegate>
 #include <0/basic/Compare.hpp>
-#include <0/basic/DelayInit.hpp>
+#include <yq/basic/DelayInit.hpp>
 #include <0/basic/Object.hpp>
 #include <source_location>
 #include <gluon/preamble.hpp>
