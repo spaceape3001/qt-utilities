@@ -9,8 +9,8 @@
 #include "StringMapEdit.hpp"
 #include "StringMapEditModel.hpp"
 #include "StringMapEditView.hpp"
-#include <0/basic/Vector.hpp>
-#include <0/basic/Map.hpp>
+#include <yq/container/Vector.hpp>
+#include <yq/container/Map.hpp>
 
 #include <QHeaderView>
 #include <QHBoxLayout>

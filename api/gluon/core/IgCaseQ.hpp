@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <0/basic/IgCase.hpp>
+#include <yq/text/IgCase.hpp>
 
 class QString;
 class QByteArray;

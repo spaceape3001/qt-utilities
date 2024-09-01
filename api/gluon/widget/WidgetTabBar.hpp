@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <0/basic/Hash.hpp>
-#include <0/basic/Vector.hpp>
+#include <yq/container/Hash.hpp>
+#include <yq/container/Vector.hpp>
 
 #include <QPoint>
 #include <QTabBar>
