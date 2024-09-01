@@ -7,7 +7,7 @@
 #pragma once
 
 #include <gluon/preamble.hpp>
-#include <0/basic/Compare.hpp>
+#include <yq/basic/Compare.hpp>
 #include <QString>
 #include <QList>
 #include <yq/trait/always_false.hpp>
