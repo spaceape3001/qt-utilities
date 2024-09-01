@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <0/basic/Logging.hpp>
+#include <yq/basic/Logging.hpp>
 
 #define qtAlert             yAlert("qt")
 #define qtCritical          yCritical("qt")
