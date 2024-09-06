@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <yq/basic/BasicApp.hpp>
+#include <yq-toolbox/basic/BasicApp.hpp>
 #include <QApplication>
 
 namespace yq::gluon {

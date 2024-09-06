@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <yq/basic/ThreadId.hpp>
+#include <yq-toolbox/basic/ThreadId.hpp>
 #include <gluon/core/Utilities.hpp>
 #include <gluon/core/Logging.hpp>
 

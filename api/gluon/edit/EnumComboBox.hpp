@@ -7,8 +7,8 @@
 #pragma once
 
 #include <gluon/edit/ComboBox.hpp>
-#include <yq/basic/Enum.hpp>
-#include <yq/container/Map.hpp>
+#include <yq-toolbox/basic/Enum.hpp>
+#include <yq-toolbox/container/Map.hpp>
 #include <optional>
 
 namespace yq::gluon {

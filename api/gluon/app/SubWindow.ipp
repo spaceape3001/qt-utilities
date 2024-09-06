@@ -7,7 +7,7 @@
 #pragma once
 
 #include <gluon/app/SubWindow.hpp>
-#include <yq/basic/ThreadId.hpp>
+#include <yq-toolbox/basic/ThreadId.hpp>
 #include <QTimer>
 #include <QVBoxLayout>
 

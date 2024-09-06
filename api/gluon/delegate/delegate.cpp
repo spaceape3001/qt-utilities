@@ -36,7 +36,7 @@
 #include "moc_StringDelegate.cpp"
 #include "moc_UIntegerDelegate.cpp"
 
-#include <yq/meta/Init.hpp>
+#include <yq-toolbox/meta/Init.hpp>
 #include "DelegateInfoWriter.hpp"
 
 

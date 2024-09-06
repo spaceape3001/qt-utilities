@@ -9,7 +9,7 @@
 #include <gluon/edit/DropListComboBox.hpp>
 #include <gluon/core/IgCaseQ.hpp>
 #include <gluon/core/Utilities.hpp>
-#include <yq/container/Set.hpp>
+#include <yq-toolbox/container/Set.hpp>
 
 #include <QAbstractItemView>
 #include <QStandardItemModel>

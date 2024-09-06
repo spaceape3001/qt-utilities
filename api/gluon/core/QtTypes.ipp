@@ -10,8 +10,8 @@
 #include <gluon/core/QtTypes.hpp>
 #include <QMetaType>
 #include <QVariant>
-#include <yq/basic/Any.hpp>
-#include <yq/meta/TypeInfo.hpp>
+#include <yq-toolbox/basic/Any.hpp>
+#include <yq-toolbox/meta/TypeInfo.hpp>
 
 namespace yq::gluon {
     namespace {
