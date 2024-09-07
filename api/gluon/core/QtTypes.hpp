@@ -7,8 +7,9 @@
 #pragma once
 
 #include <functional>
-#include <0/basic/preamble.hpp>
 #include <QStringList>
+
+#include <yq-toolbox/typedef/string_vectors.hpp>
 
 class QMetaType;
 class QVariant;

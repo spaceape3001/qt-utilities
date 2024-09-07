@@ -6,13 +6,17 @@
 
 #pragma once
 
-#include <0/basic/preamble.hpp>
+//
+#include <string>
+#include <string_view>
 
 class QString;
 class QVariant;
 
 namespace yq {
     class Any;
+    template <typename,typename,typename> class Map;
+    template <typename,typename> class Set;
 }
 
 namespace yq::gluon {

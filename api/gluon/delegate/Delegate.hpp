@@ -7,6 +7,7 @@
 #pragma once
 
 #include <QStyledItemDelegate>
+#include <yq-toolbox/keywords.hpp>
 #include <yq-toolbox/basic/Compare.hpp>
 #include <yq-toolbox/basic/DelayInit.hpp>
 #include <yq-toolbox/basic/Object.hpp>
@@ -48,7 +49,8 @@ namespace yq::gluon {
         
     public:
     
-        using data_t    = yq::disabled;
+        // override in the derived classes...
+        using data_t    = yq::disabled_t;
 
         //  Bringing in the dynamic in (later) via a registration system....
         
