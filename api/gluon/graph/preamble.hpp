@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <yq-toolbox/graph/Graph.hpp>
+#include <yq/graph/Graph.hpp>
 #include <QObject>
 
 namespace yq::gluon {

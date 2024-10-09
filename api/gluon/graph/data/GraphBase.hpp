@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <yq-toolbox/graph/Graph.hpp>
+#include <yq/graph/Graph.hpp>
 #include <gluon/graph/data/GraphName.hpp>
 #include <gluon/graph/data/GraphProperty.hpp>
 #include <QList>
