@@ -9,7 +9,7 @@
 #include <functional>
 #include <QStringList>
 
-#include <yq-toolbox/typedef/string_vectors.hpp>
+#include <yq/typedef/string_vectors.hpp>
 
 class QMetaType;
 class QVariant;

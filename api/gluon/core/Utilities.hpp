@@ -10,7 +10,7 @@
 #include <yq-toolbox/basic/Compare.hpp>
 #include <QString>
 #include <QList>
-#include <yq-toolbox/trait/always_false.hpp>
+#include <yq/trait/always_false.hpp>
 
 class QIcon;
 class QObject;
