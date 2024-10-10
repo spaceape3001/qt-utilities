@@ -46,7 +46,7 @@
 #include <QStyle>
 #include <QWidget>
 
-#include <yq-toolbox/container/Vector.hpp>
+#include <yq/container/Vector.hpp>
 
 class QLayoutItem;
 class QRect;

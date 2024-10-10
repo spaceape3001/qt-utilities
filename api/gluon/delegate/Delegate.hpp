@@ -7,10 +7,10 @@
 #pragma once
 
 #include <QStyledItemDelegate>
-#include <yq-toolbox/keywords.hpp>
-#include <yq-toolbox/basic/Compare.hpp>
-#include <yq-toolbox/basic/DelayInit.hpp>
-#include <yq-toolbox/basic/Object.hpp>
+#include <yq/keywords.hpp>
+#include <yq/core/Compare.hpp>
+#include <yq/core/DelayInit.hpp>
+#include <yq/core/Object.hpp>
 #include <source_location>
 #include <gluon/preamble.hpp>
 #include <gluon/core/RefQ.hpp>

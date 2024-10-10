@@ -11,7 +11,7 @@
 //#include <QList>
 //#include <QSize>
 #include <QtGlobal>
-#include <yq-toolbox/basic/Ref.hpp>
+#include <yq/core/Ref.hpp>
 #include <gluon/preamble.hpp>
 
 namespace yq::gluon {

@@ -7,7 +7,7 @@
 #pragma once
 
 #include <QWidget>
-#include <yq-toolbox/container/Hash.hpp>
+#include <yq/container/Hash.hpp>
 
 class QAction;
 class QBoxLayout;

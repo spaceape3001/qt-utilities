@@ -7,7 +7,7 @@
 #pragma once
 
 #include <gluon/undo/UndoBase.hpp>
-#include <yq-toolbox/container/Vector.hpp>
+#include <yq/container/Vector.hpp>
 #include <QWidget>
 #include <QFrame>
 

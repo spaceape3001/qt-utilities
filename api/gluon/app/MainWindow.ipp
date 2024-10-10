@@ -8,7 +8,7 @@
 
 #include "MainWindow.hpp"
 
-#include <yq-toolbox/basic/ThreadId.hpp>
+#include <yq/core/ThreadId.hpp>
 #include <gluon/app/SubWindow.hpp>
 #include <gluon/core/Utilities.hpp>
 #include <gluon/widget/WidgetTabBar.hpp>

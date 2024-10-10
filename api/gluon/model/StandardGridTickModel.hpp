@@ -8,7 +8,7 @@
 
 #include <gluon/model/GridTickModel.hpp>
 #include <gluon/preamble.hpp>
-#include <yq-toolbox/container/Map.hpp>
+#include <yq/container/Map.hpp>
 
 namespace yq::gluon {
     /*! \brief Standard "grid" tick model

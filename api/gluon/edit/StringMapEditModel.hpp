@@ -9,7 +9,7 @@
 #include <gluon/edit/StringMapEdit.hpp>
 #include <QAbstractTableModel>
 #include <vector>
-#include <yq-toolbox/container/Vector.hpp>
+#include <yq/container/Vector.hpp>
 
 namespace yq::gluon {
     /*! \brief String Map's Model

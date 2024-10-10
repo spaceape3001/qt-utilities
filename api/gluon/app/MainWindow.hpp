@@ -10,10 +10,10 @@
 #include <QMainWindow>
 #include <QStringList>
 
-#include <yq-toolbox/container/Hash.hpp>
-#include <yq-toolbox/container/Map.hpp>
-#include <yq-toolbox/container/Set.hpp>
-#include <yq-toolbox/container/Vector.hpp>
+#include <yq/container/Hash.hpp>
+#include <yq/container/Map.hpp>
+#include <yq/container/Set.hpp>
+#include <yq/container/Vector.hpp>
 #include <gluon/core/IgCaseQ.hpp>
 
 class QMenu;

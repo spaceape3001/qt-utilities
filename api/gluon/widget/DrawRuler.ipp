@@ -17,7 +17,7 @@
 #include <QPen>
 #include <QDebug>
 
-#include <yq-toolbox/container/Map.hpp>
+#include <yq/container/Map.hpp>
 
 namespace yq::gluon {
 

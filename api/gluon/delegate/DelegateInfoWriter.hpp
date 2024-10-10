@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <gluon/delegate/Delegate.hpp>
-#include <yq-toolbox/meta/ObjectInfoWriter.hpp>
+#include <yq/meta/ObjectInfoWriter.hpp>
 
 namespace yq::gluon {
     template <typename C>

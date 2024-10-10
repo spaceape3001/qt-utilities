@@ -8,7 +8,7 @@
 
 #include <gluon/preamble.hpp>
 #include <gluon/edit/ComboBox.hpp>
-#include <yq-toolbox/container/Vector.hpp>
+#include <yq/container/Vector.hpp>
 
 class QStandardItem;
 class QStandardItemModel;
