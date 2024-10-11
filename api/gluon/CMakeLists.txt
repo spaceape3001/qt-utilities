@@ -4,7 +4,7 @@
 ##
 ################################################################################
 
-project(gluon)
+project(yq_gluon)
 
 find_package(Qt6 REQUIRED Core Gui Widgets )
 set(CMAKE_AUTOMOC ON)
