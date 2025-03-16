@@ -1,0 +1,19 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  YOUR QUILL
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#include <gluon/edit/TextEdit.hpp>
+
+namespace yq::gluon {
+    TextEdit::TextEdit(QWidget*parent) : QTextEdit(parent)
+    {
+    }
+
+    TextEdit::~TextEdit()
+    {
+    }
+}
+
+#include "moc_TextEdit.cpp"

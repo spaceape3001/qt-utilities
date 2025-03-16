@@ -1,3 +1,9 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  YOUR QUILL
+//
+////////////////////////////////////////////////////////////////////////////////
+
 #pragma once
 
 #include <QAbstractTableModel>
@@ -6,78 +12,81 @@
 #include "core/Array2.hpp"
 #include "core/Vector.hpp"
 
+namespace yq::gluon {
 
-/*! \brief Simple Qt table
 
-    Meant for a fast view of data
-*/
-class  SimpleTable : public QTableView {
-    Q_OBJECT
-public:
+    /*! \brief Simple Qt table
 
-    //! Constructor
-    SimpleTable(QWidget*parent=nullptr);
+        Meant for a fast view of data
+    */
+    class  SimpleTable : public QTableView {
+        Q_OBJECT
+    public:
 
-    //! Sets the specified data
-    bool    set(int,int,const QVariant&);
-    
-    //! Sets the header (also primes the array to the right column width)
-    void    setHeader(const Vector<QString>&);
+        //! Constructor
+        SimpleTable(QWidget*parent=nullptr);
 
-    class Model;
-    
-    //! Model
-    Model*  model() { return m_model; }
-    
-    //! Model
-    const Model* model() const { return m_model; }
+        //! Sets the specified data
+        bool    set(int,int,const QVariant&);
+        
+        //! Sets the header (also primes the array to the right column width)
+        void    setHeader(const Vector<QString>&);
 
-public slots:
+        class Model;
+        
+        //! Model
+        Model*  model() { return m_model; }
+        
+        //! Model
+        const Model* model() const { return m_model; }
 
-    //! Clears the data
-    void        clear();
-//    void        fit();
+    public slots:
 
-private:
-    Model*      m_model;
-};
+        //! Clears the data
+        void        clear();
+    //    void        fit();
 
-/*! \brief Simple Table Model
-*/
-class SimpleTable::Model : public QAbstractTableModel {
-    Q_OBJECT
-public:
+    private:
+        Model*      m_model;
+    };
 
-    //! Constructor
-    Model(QObject* parent=nullptr);
-    
-    //! Destructor
-    ~Model();
+    /*! \brief Simple Table Model
+    */
+    class SimpleTable::Model : public QAbstractTableModel {
+        Q_OBJECT
+    public:
 
-    //! Sets the header
-    void        setHeader(const Vector<QString>&);
-    
-    //! Current row count
-    int         rowCount(const QModelIndex&) const override { return m_data.rowCount(); }
-    
-    //! Column count
-    int         columnCount(const QModelIndex&) const override { return m_data.columnCount(); }
-    
-    //! Data
-    QVariant    data(const QModelIndex&, int) const override;
-    
-    //! Gets header data
-    QVariant    headerData(int, Qt::Orientation, int) const override;
+        //! Constructor
+        Model(QObject* parent=nullptr);
+        
+        //! Destructor
+        ~Model();
 
-    //! Sets data
-    bool        set(int,int,const QVariant&);
+        //! Sets the header
+        void        setHeader(const Vector<QString>&);
+        
+        //! Current row count
+        int         rowCount(const QModelIndex&) const override { return m_data.rowCount(); }
+        
+        //! Column count
+        int         columnCount(const QModelIndex&) const override { return m_data.columnCount(); }
+        
+        //! Data
+        QVariant    data(const QModelIndex&, int) const override;
+        
+        //! Gets header data
+        QVariant    headerData(int, Qt::Orientation, int) const override;
 
-public slots:
+        //! Sets data
+        bool        set(int,int,const QVariant&);
 
-    //! Clears the data
-    void        clear();
+    public slots:
 
-private:
-    Vector<QString>     m_headers;
-    Array2<QVariant>    m_data;
-};
+        //! Clears the data
+        void        clear();
+
+    private:
+        Vector<QString>     m_headers;
+        Array2<QVariant>    m_data;
+    };
+}

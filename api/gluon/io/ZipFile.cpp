@@ -39,6 +39,10 @@
 **
 ****************************************************************************/
 
+#ifdef __GNUC__
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
 #include <qglobal.h>
 
 #include "ZipReader.hpp"

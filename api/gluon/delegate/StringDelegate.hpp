@@ -44,6 +44,8 @@ namespace yq::gluon {
         
         //! Destructor
         virtual ~StringDelegate();
+
+        static void init_info();
     private:
         QValidator*         m_validator;
     };

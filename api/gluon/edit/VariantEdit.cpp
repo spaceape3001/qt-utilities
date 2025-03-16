@@ -8,7 +8,6 @@
 #include "VariantEdit.hpp"
 #include "ColorCombo.hpp"
 
-
 //  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -37,6 +36,4 @@ void            VariantEdit::showTypeSelector(bool)
 {
 }
 
-#ifdef YQ_QMAKE
-    #include "moc_VariantEdit.cpp"
-#endif
+#include "moc_VariantEdit.cpp"

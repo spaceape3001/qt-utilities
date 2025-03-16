@@ -45,6 +45,9 @@ namespace yq::gluon {
         
         //! If TRUE allows for free-form entry by the user (otherwise it's a restricted list)
         bool                freeEdit() const { return m_freeEdit; }
+
+        static void init_info();
+
     public slots:
     
         //! Sets the free-edit option

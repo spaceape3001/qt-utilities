@@ -37,5 +37,7 @@ namespace yq::gluon {
         
         //! Destructor
         virtual ~ColorDelegate();
+
+        static void init_info();
     };
 }

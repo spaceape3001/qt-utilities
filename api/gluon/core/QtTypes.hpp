@@ -8,6 +8,7 @@
 
 #include <functional>
 #include <QStringList>
+#include <filesystem>
 
 #include <yq/typedef/string_vectors.hpp>
 

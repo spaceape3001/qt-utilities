@@ -55,6 +55,8 @@ namespace yq::gluon {
         
         //! If true, ZERO is interpreted as null rather than zero
         bool                zeroNull() const { return m_zeroNull; }
+
+        static void init_info();
         
     public slots:
     

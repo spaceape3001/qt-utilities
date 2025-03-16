@@ -40,6 +40,8 @@ namespace yq::gluon {
         //virtual bool        paint(QPainter*, const QStyleOptionViewItem& option, const QVariant&) const;
         //! Connects the given the slot to the editor's edited signal
         virtual void        connectEditedSignal(QWidget*, QObject*, const char*) const;
+
+        static void init_info();
     };
 
 }

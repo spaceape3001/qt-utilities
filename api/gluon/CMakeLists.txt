@@ -11,123 +11,124 @@ set(CMAKE_AUTOMOC ON)
 
 add_library(${PROJECT_NAME} SHARED 
     app/Application.hpp
-    app/Application.ipp
+    app/Application.cpp
     app/MainWindow.hpp
-    app/MainWindow.ipp
+    app/MainWindow.cpp
     app/SimpleEditor.hpp
-    app/SimpleEditor.ipp
+    app/SimpleEditor.cpp
     app/SubWindow.hpp
-    app/SubWindow.ipp
+    app/SubWindow.cpp
+    app/UndoMainWindow.hpp
+    app/UndoMainWindow.cpp
     app/UndoSubWindow.hpp
-    app/UndoSubWindow.ipp
-    app/app.cpp
+    app/UndoSubWindow.cpp
 
+    core/FileName.hpp
+    core/FileName.cpp
     core/IgCaseQ.hpp
-    core/IgCaseQ.ipp
+    core/IgCaseQ.cpp
+    core/Logging.hpp
+    core/Logging.cpp
     core/QtTypes.hpp
-    core/QtTypes.ipp
+    core/QtTypes.cpp
     core/RefQ.hpp
-    core/RefQ.ipp
+    core/RefQ.cpp
     core/Utilities.hpp
-    core/Utilities.ipp
-    core/core.cpp
+    core/Utilities.cpp
 
     delegate/ColorComboBoxDelegate.hpp
-    delegate/ColorComboBoxDelegate.ipp
+    delegate/ColorComboBoxDelegate.cpp
     delegate/ColorDelegate.hpp
-    delegate/ColorDelegate.ipp
+    delegate/ColorDelegate.cpp
     delegate/Delegate.hpp
-    delegate/Delegate.ipp
+    delegate/Delegate.cpp
     delegate/DirBoxDelegate.hpp
-    delegate/DirBoxDelegate.ipp
+    delegate/DirBoxDelegate.cpp
     delegate/FileBoxDelegate.hpp
-    delegate/FileBoxDelegate.ipp
+    delegate/FileBoxDelegate.cpp
     delegate/IconBarDelegate.hpp
-    delegate/IconBarDelegate.ipp
+    delegate/IconBarDelegate.cpp
     delegate/ImageDelegate.hpp
-    delegate/ImageDelegate.ipp
+    delegate/ImageDelegate.cpp
     delegate/IntegerDelegate.hpp
-    delegate/IntegerDelegate.ipp
+    delegate/IntegerDelegate.cpp
     delegate/NullableDateDelegate.hpp
-    delegate/NullableDateDelegate.ipp
+    delegate/NullableDateDelegate.cpp
     delegate/NullableDateTimeDelegate.hpp
-    delegate/NullableDateTimeDelegate.ipp
+    delegate/NullableDateTimeDelegate.cpp
     delegate/StringComboDelegate.hpp
-    delegate/StringComboDelegate.ipp
+    delegate/StringComboDelegate.cpp
     delegate/StringDelegate.hpp
-    delegate/StringDelegate.ipp
+    delegate/StringDelegate.cpp
     delegate/UIntegerDelegate.hpp
-    delegate/UIntegerDelegate.ipp
-    delegate/delegate.cpp
+    delegate/UIntegerDelegate.cpp
 
     edit/CheckBox.hpp
-    edit/CheckBox.ipp
+    edit/CheckBox.cpp
     edit/ColorChip.hpp
-    edit/ColorChip.ipp
+    edit/ColorChip.cpp
     edit/ColorComboBox.hpp
-    edit/ColorComboBox.ipp
+    edit/ColorComboBox.cpp
     edit/ComboBox.hpp
-    edit/ComboBox.ipp
+    edit/ComboBox.cpp
     edit/DateEdit.hpp
-    edit/DateEdit.ipp
+    edit/DateEdit.cpp
     edit/DateTimeEdit.hpp
-    edit/DateTimeEdit.ipp
+    edit/DateTimeEdit.cpp
     edit/DirBox.hpp
-    edit/DirBox.ipp
+    edit/DirBox.cpp
     edit/DoubleSpinBox.hpp
-    edit/DoubleSpinBox.ipp
+    edit/DoubleSpinBox.cpp
     edit/DropListComboBox.hpp
-    edit/DropListComboBox.ipp
+    edit/DropListComboBox.cpp
     edit/EnumComboBox.hpp
-    edit/EnumComboBox.ipp
+    edit/EnumComboBox.cpp
     edit/FileBox.hpp
-    edit/FileBox.ipp
+    edit/FileBox.cpp
     edit/NullableDateEdit.hpp
-    edit/NullableDateEdit.ipp
+    edit/NullableDateEdit.cpp
     edit/NullableDateTimeEdit.hpp
-    edit/NullableDateTimeEdit.ipp
+    edit/NullableDateTimeEdit.cpp
     edit/LineEdit.hpp
-    edit/LineEdit.ipp
+    edit/LineEdit.cpp
     edit/SpinBox.hpp
-    edit/SpinBox.ipp
+    edit/SpinBox.cpp
     edit/StringMapEdit.hpp
-    edit/StringMapEdit.ipp
+    edit/StringMapEdit.cpp
     edit/StringMapEditModel.hpp
     edit/StringMapEditView.hpp
     edit/StringSetCheck.hpp
-    edit/StringSetCheck.ipp
+    edit/StringSetCheck.cpp
     edit/TextEdit.hpp
-    edit/TextEdit.ipp
+    edit/TextEdit.cpp
     edit/TimeEdit.hpp
-    edit/TimeEdit.ipp
-    edit/edit.cpp
+    edit/TimeEdit.cpp
 
     filter/filter.cpp
 
     graph/GraphModel.hpp
-    graph/GraphModel.ipp
-    graph/graph.cpp
+    graph/GraphModel.cpp
 
     graph/data/GraphBase.hpp
-    graph/data/GraphBase.ipp
+    graph/data/GraphBase.cpp
     graph/data/GraphDocument.hpp
-    graph/data/GraphDocument.ipp
+    graph/data/GraphDocument.cpp
     graph/data/GraphEdge.hpp
-    graph/data/GraphEdge.ipp
+    graph/data/GraphEdge.cpp
     graph/data/GraphGraph.hpp
-    graph/data/GraphGraph.ipp
+    graph/data/GraphGraph.cpp
     graph/data/GraphName.hpp
-    graph/data/GraphName.ipp
+    graph/data/GraphName.cpp
     graph/data/GraphNode.hpp
-    graph/data/GraphNode.ipp
+    graph/data/GraphNode.cpp
     graph/data/GraphPin.hpp
-    graph/data/GraphPin.ipp
+    graph/data/GraphPin.cpp
     graph/data/GraphPinned.hpp
-    graph/data/GraphPinned.ipp
+    graph/data/GraphPinned.cpp
     graph/data/GraphProperty.hpp
-    graph/data/GraphProperty.ipp
+    graph/data/GraphProperty.cpp
     graph/data/GraphSocket.hpp
-    graph/data/GraphSocket.ipp
+    graph/data/GraphSocket.cpp
 
     io/ZipFile.cpp
     io/ZipReader.hpp
@@ -139,10 +140,9 @@ add_library(${PROJECT_NAME} SHARED
     layout/FlowLayout.hpp
 
     model/GridTickModel.hpp
-    model/GridTickModel.ipp
+    model/GridTickModel.cpp
     model/StandardGridTickModel.hpp
-    model/StandardGridTickModel.ipp
-    model/model.cpp
+    model/StandardGridTickModel.cpp
     
     undo/UndoBase.cpp
     undo/UndoBase.hpp
@@ -153,26 +153,24 @@ add_library(${PROJECT_NAME} SHARED
     util/UInt64SignalMapper.cpp
     
     validator/IdentifierValidator.hpp
-    validator/IdentifierValidator.ipp
+    validator/IdentifierValidator.cpp
     validator/NoSpacesValidator.hpp
-    validator/NoSpacesValidator.ipp
+    validator/NoSpacesValidator.cpp
     validator/XmlIdentifierValidator.hpp
-    validator/XmlIdentifierValidator.ipp
-    validator/validator.cpp
+    validator/XmlIdentifierValidator.cpp
 
     widget/Button.cpp
     widget/Button.hpp
     widget/DrawRuler.hpp
-    widget/DrawRuler.ipp
+    widget/DrawRuler.cpp
     widget/FormWidget.hpp
-    widget/FormWidget.ipp
+    widget/FormWidget.cpp
     widget/GraphicsView.hpp
-    widget/GraphicsView.ipp
+    widget/GraphicsView.cpp
     widget/WidgetTabBar.hpp
-    widget/WidgetTabBar.ipp
+    widget/WidgetTabBar.cpp
     widget/WidgetTabWidget.hpp
-    widget/WidgetTabWidget.ipp
-    widget/widget.cpp
+    widget/WidgetTabWidget.cpp
 )    
 
 target_include_directories(${PROJECT_NAME} 

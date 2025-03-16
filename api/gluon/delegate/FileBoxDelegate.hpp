@@ -45,6 +45,8 @@ namespace yq::gluon {
         //  TODO: File Name Filter (propagated into file box itself)
         //  TODO: File Dialog Title
         //  TODO: Consistent Directory location
+
+        static void init_info();
     };
 }
 

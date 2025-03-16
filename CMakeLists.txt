@@ -5,7 +5,12 @@ if("${PROJECT_NAME}" STREQUAL "")
 endif()
 
 if(NOT YOUR_QUILL_TOOLBOX)
-    message(FATAL_ERROR "Currently this must be a submodule to the project, and the toolbox already added!")
+    if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/yq-toolbox)
+        include(yq-toolbox/configure.cmake)
+        add_subdirectory(yq-toolbox)
+    else()
+        message(FATAL_ERROR "Currently this must be a submodule to the project, and the toolbox already added!")
+    endif()
 endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake ${CMAKE_MODULE_PATH})

@@ -30,7 +30,7 @@ namespace yq::gluon {
         static const DelegateInfo*              byQtType(int);
 
     protected:
-        DelegateInfo(std::string_view, const ObjectInfo&, const std::source_location& sl = std::source_location::current());
+        DelegateInfo(std::string_view, ObjectInfo&, const std::source_location& sl = std::source_location::current());
         
     private:
         const TypeInfo*     m_yqType    = nullptr;
@@ -50,7 +50,7 @@ namespace yq::gluon {
     public:
     
         // override in the derived classes...
-        using data_t    = yq::disabled_t;
+        using data_t    = yq::disabled_k;
 
         //  Bringing in the dynamic in (later) via a registration system....
         
@@ -100,6 +100,8 @@ namespace yq::gluon {
         virtual bool 	    editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;
         virtual bool 	    helpEvent(QHelpEvent *event, QAbstractItemView *view, const QStyleOptionViewItem &option, const QModelIndex &index) override;
         
+        static void init_info();
+
     protected:
         Delegate(QObject* parent=nullptr);
         virtual ~Delegate();

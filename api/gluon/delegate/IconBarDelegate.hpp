@@ -50,6 +50,8 @@ namespace yq::gluon {
         
         //! Count of panels
         uint8_t     count() const;
+
+        static void init_info();
         
     protected:
     
