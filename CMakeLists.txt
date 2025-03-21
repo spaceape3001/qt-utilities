@@ -1,8 +1,11 @@
-cmake_minimum_required(VERSION 3.23.0)
+################################################################################
+##
+##  YOUR QUILL
+##
+################################################################################
 
-if("${PROJECT_NAME}" STREQUAL "")
-    project(YourQuill VERSION 0.0.0.3)
-endif()
+cmake_minimum_required(VERSION 3.23.0)
+project(QtUtilities VERSION 0.0.0.3)
 
 if(NOT YOUR_QUILL_TOOLBOX)
     if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/yq-toolbox)
