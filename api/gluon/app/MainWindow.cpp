@@ -7,6 +7,7 @@
 #include "MainWindow.hpp"
 
 #include <yq/core/ThreadId.hpp>
+#include <gluon/app/Dock.hpp>
 #include <gluon/app/SubWindow.hpp>
 #include <gluon/core/Utilities.hpp>
 #include <gluon/widget/WidgetTabBar.hpp>
@@ -179,8 +180,17 @@ namespace yq::gluon {
         return Action(this, act, name);
     }
 
+    void        MainWindow::addDock(Dock* dock)
+    {
+        if(!dock)
+            return ;
+        addDock(dock->metaInfo().start_area(), dock);
+    }
+
     QDockWidget*    MainWindow::addDock(Qt::DockWidgetArea a, QWidget*w)
     {
+        if(!w)
+            return nullptr;
         QDockWidget*    dw  = qobject_cast<QDockWidget*>(w);
         if(dw){
             addDockWidget(a, dw);

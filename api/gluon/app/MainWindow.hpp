@@ -21,6 +21,7 @@ class QMenu;
 namespace yq::gluon {
 
     class WidgetTabWidget;
+    class Dock;
 
     /*! \brief Main Window Class
 
@@ -57,6 +58,8 @@ namespace yq::gluon {
             Use sparingly....
         */
         virtual QDockWidget*    addDock(Qt::DockWidgetArea, QWidget*);
+        
+        void        addDock(Dock*);
         
         /*! \brief Adds a widget to the main window
         
