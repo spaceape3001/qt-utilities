@@ -12,6 +12,8 @@ set(CMAKE_AUTOMOC ON)
 add_library(${PROJECT_NAME} SHARED 
     app/Application.hpp
     app/Application.cpp
+    app/Dock.hpp
+    app/Dock.cpp
     app/MainWindow.hpp
     app/MainWindow.cpp
     app/SimpleEditor.hpp
@@ -23,6 +25,8 @@ add_library(${PROJECT_NAME} SHARED
     app/UndoSubWindow.hpp
     app/UndoSubWindow.cpp
 
+    core/Action.hpp
+    core/Action.cpp
     core/FileName.hpp
     core/FileName.cpp
     core/IgCaseQ.hpp
