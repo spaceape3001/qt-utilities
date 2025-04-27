@@ -5,20 +5,14 @@
 ################################################################################
 
 cmake_minimum_required(VERSION 3.23.0)
-project(QtUtilities VERSION 0.0.0.3)
+project(QtUtilities VERSION 0.0.0.3 LANGUAGES CXX)
 
-if(NOT YOUR_QUILL_TOOLBOX)
-    if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/yq-toolbox)
-        include(yq-toolbox/configure.cmake)
-        add_subdirectory(yq-toolbox)
-    else()
-        message(FATAL_ERROR "Currently this must be a submodule to the project, and the toolbox already added!")
-    endif()
+if(NOT EXISTS ${CMAKE_CURRENT_LIST_DIR}/yq-toolbox)
+    message(FATAL_ERROR "YQ toolbox must be present! (use a symbolic link or junction)")
 endif()
 
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake ${CMAKE_MODULE_PATH})
-
+include(local.cmake OPTIONAL)
 include(configure.cmake)
-
-add_subdirectory(api)
+include(yq-toolbox/standard.cmake)
+YQRepo()
 
