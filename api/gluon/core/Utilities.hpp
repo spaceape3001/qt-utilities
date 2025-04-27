@@ -11,6 +11,7 @@
 #include <QString>
 #include <QList>
 #include <yq/trait/always_false.hpp>
+#include <span>
 
 class QIcon;
 class QObject;

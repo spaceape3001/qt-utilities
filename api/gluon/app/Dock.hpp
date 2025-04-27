@@ -37,6 +37,15 @@ namespace yq::gluon {
         static const std::vector<const DockInfo*>& all();
     
     protected:
+
+#if 0    
+        enum class DFlag {
+            HAS_ACTION  = (int) Flag::NEXT_DEFINED_FLAG
+        };
+        
+        static constexpr Flag   FlagHasAction   = (Flag) DFlag::HAS_ACTION;
+#endif        
+    
         ActionInfo          m_action;
         Qt::DockWidgetArea  m_startArea       = Qt::LeftDockWidgetArea;
         Qt::DockWidgetAreas m_allowedAreas    = Qt::AllDockWidgetAreas;

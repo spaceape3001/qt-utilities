@@ -28,7 +28,7 @@ namespace yq::gluon {
         lay->addWidget(m_good, 0);
         lay->addWidget(m_date, 1);
         setLayout(lay);
-        connect(m_good, &CheckBox::stateChanged, this, &NullableDateEdit::stateChanged);
+        connect(m_good, &CheckBox::checkStateChanged, this, &NullableDateEdit::stateChanged);
         connect(m_date, &QDateEdit::editingFinished, this, &NullableDateEdit::editingFinished);
     }
 

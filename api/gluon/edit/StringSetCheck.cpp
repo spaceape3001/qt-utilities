@@ -30,7 +30,7 @@ namespace yq::gluon {
                 CheckBox*   cb  = new CheckBox(i);
                 m_checks[i] = cb;
                 m_layout -> addWidget(cb);
-                connect(cb, &QCheckBox::stateChanged, this, &StringSetCheck::changed);
+                connect(cb, &QCheckBox::checkStateChanged, this, &StringSetCheck::changed);
             }
         } else {
             for(auto& i : m_checks)

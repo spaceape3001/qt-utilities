@@ -29,7 +29,7 @@ namespace yq::gluon {
         lay->addWidget(m_good, 0);
         lay->addWidget(m_date, 1);
         setLayout(lay);
-        connect(m_good, &CheckBox::stateChanged, this, &NullableDateTimeEdit::stateChanged);
+        connect(m_good, &CheckBox::checkStateChanged, this, &NullableDateTimeEdit::stateChanged);
         connect(m_date, &QDateTimeEdit::editingFinished, this, &NullableDateTimeEdit::editingFinished);
 
         m_date->setDisplayFormat("yyyy-MM-dd HH:mm:ss");

@@ -49,6 +49,13 @@ namespace yq::gluon {
             return *this;
         }
         
+        Writer& label(const QString& s)
+        {
+            if(m_meta)
+                m_meta -> m_action.label    = s;
+            return *this;
+        }
+        
         Writer& shortcut(const QKeySequence& ks)
         {
             if(m_meta)
