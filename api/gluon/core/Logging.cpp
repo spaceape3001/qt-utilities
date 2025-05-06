@@ -10,9 +10,11 @@
 #include <QDate>
 #include <QDateTime>
 #include <QDir>
-#include <QUrl>
-#include <QObject>
 #include <QMetaObject>
+#include <QObject>
+#include <QRect>
+#include <QSize>
+#include <QUrl>
 
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QByteArray&v)
 {
@@ -33,6 +35,16 @@ log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QDateTime&
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QDir& v)
 {
     return cs << v.absolutePath();
+}
+
+log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QRect&v)
+{
+    return cs << "{" << v.width() << " x " << v.height() << " @ " << v.x() << ", " << v.y() << "}";
+}
+
+log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QSize& v)
+{
+    return cs << "{" << v.width() << " x " << v.height() << "}";
 }
 
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QString&v)

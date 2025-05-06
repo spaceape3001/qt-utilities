@@ -22,6 +22,8 @@ class QByteArray;
 class QDate;
 class QDateTime;
 class QDir;
+class QRect;
+class QSize;
 class QString;
 class QObject;
 class QUrl;
@@ -30,6 +32,8 @@ log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&, const QByteArray&)
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&, const QDate&);
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&, const QDateTime&);
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&, const QDir&);
+log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&, const QRect&);
+log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&, const QSize&);
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&, const QString&);
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&, const QUrl&);
 
