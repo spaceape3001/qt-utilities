@@ -45,81 +45,34 @@ namespace yq::gluon {
 
     }
 
-    ///////////////////////////////
-    ///// INFORMATION SETTERS /////
-    ///////////////////////////////
-
-    void                DrawRuler::setModel(Ref<const GridTickModel> model)
+    void    DrawRuler::leaveEvent(QEvent* event)
     {
-        if(m_model == model)
-            return;
-        if(m_model)
-            disconnect(m_model);
-        m_model     = model;
-        connect(m_model, &GridTickModel::modelChanged, [this]() { this->update(); });
-        update();
+        m_press	= false;
+        setCursor(Qt::OpenHandCursor);
+        QWidget::leaveEvent(event);
     }
 
-    void                DrawRuler::setBackground(const QColor& clr)
+    QSize   DrawRuler::minimumSizeHint() const
     {
-        m_bkgndColor        = clr;
-        update();
+        return QSize(m_width, m_width);
     }
 
-    void                DrawRuler::setOrientation(Qt::Orientation o)
-    {
-        m_orientation   = o;
-        if(horz())
-            setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
-        else
-            setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
-        update();
-    }
 
-    void                DrawRuler::setTickThreshold(int n)
+    void    DrawRuler::mouseMoveEvent(QMouseEvent* event)
     {
-        m_tick      = n;
+        int     mouse       = (horz()?event->position().x():event->position().y());
+        if(m_press){
+            int         delta       = mouse - m_mouse;
+            int64_t dc  = (int64_t) ( delta / m_zoom + 0.5 );
+            /* TODO vet this */
+            if(m_zoom >= 0.0)
+                m_center       -= dc;
+            else
+                m_center       += dc;
+        }
+        m_mouse     = mouse;
         update();
-    }
-
-    void                DrawRuler::setLabelThreshold(int n)
-    {
-        m_label     = n;
-        update();
-    }
-
-    void                DrawRuler::setMouse(int n)
-    {
-        m_mouse     = n;
-        update();
-        emit mouse(n);
-    }
-
-    void                DrawRuler::setCenter(int64_t c)
-    {
-        m_center        = c;
-        update();
-        emit center(c);
-    }
-
-    void                DrawRuler::setZoom(double f)
-    {
-        m_zoom      = f;
-        update();
-    }
-
-    QSize   DrawRuler::sizeHint() const
-    {
-        if(horz())
-            return QSize(500, m_width);
-        else
-            return QSize(m_width, 500);
-    }
-
-    void    DrawRuler::resizeEvent(QResizeEvent* event)
-    {
-        QWidget::resizeEvent(event);
-        update();
+        event -> accept();
     }
 
     void    DrawRuler::mousePressEvent(QMouseEvent* event)
@@ -142,43 +95,6 @@ namespace yq::gluon {
             setCursor(Qt::OpenHandCursor);
         }
         event -> accept();
-    }
-
-    void    DrawRuler::mouseMoveEvent(QMouseEvent* event)
-    {
-        int     mouse       = (horz()?event->position().x():event->position().y());
-        if(m_press){
-            int         delta       = mouse - m_mouse;
-            int64_t dc  = (int64_t) ( delta / m_zoom + 0.5 );
-            /* TODO vet this */
-            if(m_zoom >= 0.0)
-                m_center       -= dc;
-            else
-                m_center       += dc;
-        }
-        m_mouse     = mouse;
-        update();
-        event -> accept();
-    }
-
-    void    DrawRuler::wheelEvent(QWheelEvent* event)
-    {
-        int64_t     delta       = (int64_t) ((event->angleDelta().y() *  m_tick * kDefWheel) / m_zoom + 0.5);
-            /* TODO vet this */
-        if(m_zoom >= 0.0)
-            m_center -= delta;
-        else
-            m_center += delta;
-        
-        event -> accept();
-        update();
-    }
-
-    void    DrawRuler::leaveEvent(QEvent* event)
-    {
-        m_press	= false;
-        setCursor(Qt::OpenHandCursor);
-        QWidget::leaveEvent(event);
     }
 
     void    DrawRuler::paintEvent(QPaintEvent* event)
@@ -261,6 +177,94 @@ namespace yq::gluon {
         
         event -> accept();
     }
+    
+    void    DrawRuler::resizeEvent(QResizeEvent* event)
+    {
+        QWidget::resizeEvent(event);
+        update();
+    }
+
+    void                DrawRuler::setBackground(const QColor& clr)
+    {
+        m_bkgndColor        = clr;
+        update();
+    }
+
+    void                DrawRuler::setCenter(int64_t c)
+    {
+        m_center        = c;
+        update();
+        emit center(c);
+    }
+
+    void                DrawRuler::setLabelThreshold(int n)
+    {
+        m_label     = n;
+        update();
+    }
+
+    void                DrawRuler::setModel(Ref<const GridTickModel> model)
+    {
+        if(m_model == model)
+            return;
+        if(m_model)
+            disconnect(m_model);
+        m_model     = model;
+        connect(m_model, &GridTickModel::modelChanged, [this]() { this->update(); });
+        update();
+    }
+
+    void                DrawRuler::setMouse(int n)
+    {
+        m_mouse     = n;
+        update();
+        emit mouse(n);
+    }
+
+    void                DrawRuler::setOrientation(Qt::Orientation o)
+    {
+        m_orientation   = o;
+        if(horz())
+            setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
+        else
+            setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
+        update();
+    }
+
+    void                DrawRuler::setTickThreshold(int n)
+    {
+        m_tick      = n;
+        update();
+    }
+
+    void                DrawRuler::setZoom(double f)
+    {
+        m_zoom      = f;
+        update();
+    }
+
+    QSize   DrawRuler::sizeHint() const
+    {
+        if(horz())
+            return QSize(500, m_width);
+        else
+            return QSize(m_width, 500);
+    }
+
+    void    DrawRuler::wheelEvent(QWheelEvent* event)
+    {
+        int64_t     delta       = (int64_t) ((event->angleDelta().y() *  m_tick * kDefWheel) / m_zoom + 0.5);
+            /* TODO vet this */
+        if(m_zoom >= 0.0)
+            m_center -= delta;
+        else
+            m_center += delta;
+        
+        event -> accept();
+        update();
+    }
+
+
 }
 
 #include "moc_DrawRuler.cpp"

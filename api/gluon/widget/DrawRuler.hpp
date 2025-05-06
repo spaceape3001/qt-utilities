@@ -64,6 +64,12 @@ namespace yq::gluon {
         //! Sets the label threshhold
         void                setLabelThreshold(int);
         
+        //! Size hint
+        QSize               sizeHint() const;
+        
+        //! Minimum Size Hint
+        QSize               minimumSizeHint() const;
+
     public slots:
     
         //! Sets the mouse position (ie, moves the marker)
@@ -84,8 +90,6 @@ namespace yq::gluon {
         void                center(int64_t);
 
     protected:
-        //! Size hint
-        QSize               sizeHint() const;
         
         //! Paint event
         virtual void        paintEvent(QPaintEvent*) override;
