@@ -22,6 +22,7 @@ class QByteArray;
 class QDate;
 class QDateTime;
 class QDir;
+class QLayoutItem;
 class QRect;
 class QSize;
 class QString;
@@ -36,6 +37,9 @@ log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&, const QRect&);
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&, const QSize&);
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&, const QString&);
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&, const QUrl&);
+
+const char*     className(const QObject*);
+const char*     className(const QLayoutItem*);
 
 template <typename T>
 struct AsList {

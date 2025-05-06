@@ -10,11 +10,14 @@
 #include <QDate>
 #include <QDateTime>
 #include <QDir>
+#include <QLayout>
+#include <QLayoutItem>
 #include <QMetaObject>
 #include <QObject>
 #include <QRect>
 #include <QSize>
 #include <QUrl>
+#include <QWidget>
 
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QByteArray&v)
 {
@@ -64,5 +67,23 @@ log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const AsList<std
     for(const QObject* obj : list.value)
         cs << (const void*) obj << ": " << obj->metaObject()->className() << '\n';
     return cs;
+}
+
+const char*     className(const QObject* obj)
+{
+    if(!obj)
+        return "null object";
+    return obj -> metaObject() -> className();
+}
+
+const char*     className(const QLayoutItem* lay)
+{
+    if(!lay)
+        return "null layout item";
+    if(const QWidget* w = lay->widget())
+        return w->metaObject()->className();
+    if(const QLayout* l = const_cast<QLayoutItem*>(lay)->layout())
+        return l->metaObject()->className();
+    return "empty layout item";
 }
 
