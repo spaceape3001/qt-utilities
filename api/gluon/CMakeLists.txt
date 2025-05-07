@@ -138,11 +138,11 @@ add_library(${PROJECT_NAME} SHARED
     io/ZipReader.hpp
     io/ZipWriter.hpp
 
-    layout/BorderLayout.cpp
-    layout/BorderLayout.hpp
     layout/FlowLayout.cpp
     layout/FlowLayout.hpp
 
+    model/GraphicsScene.hpp
+    model/GraphicsScene.cpp
     model/GridTickModel.hpp
     model/GridTickModel.cpp
     model/StandardGridTickModel.hpp
@@ -171,6 +171,8 @@ add_library(${PROJECT_NAME} SHARED
     widget/FormWidget.cpp
     widget/GraphicsView.hpp
     widget/GraphicsView.cpp
+    widget/GraphicsWidget.hpp
+    widget/GraphicsWidget.cpp
     widget/WidgetTabBar.hpp
     widget/WidgetTabBar.cpp
     widget/WidgetTabWidget.hpp

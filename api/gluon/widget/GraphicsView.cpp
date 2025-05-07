@@ -14,6 +14,7 @@ namespace yq::gluon {
     {
         assert(scene);
         setMouseTracking(true);
+        setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     }
     
     GraphicsView::~GraphicsView()
@@ -41,8 +42,8 @@ namespace yq::gluon {
         z           = fabs(z);
         double  old = zoomFactor();
         scale(z/old, z/old);
+        emit zoomChanged(zoomFactor());
     }
-
     
     void    GraphicsView::wheelEvent(QWheelEvent *evt)
     {
@@ -50,6 +51,7 @@ namespace yq::gluon {
         if(mods & Qt::ControlModifier){
             double  factor  = pow(2.0, evt->angleDelta().y() / (120.0 * kDOUBLE));
             scale(factor, factor);
+            emit zoomChanged(zoomFactor());
             evt->accept();
         } else 
             QGraphicsView::wheelEvent(evt);
@@ -61,17 +63,18 @@ namespace yq::gluon {
         return sqrt(fabs(t.m11()*t.m22()-t.m12()*t.m21()));
     }
     
-    
     void    GraphicsView::zoomIn()
     {
         static double   kFactorIn    = pow(2.0, 1.0/kDOUBLE);
         scale(kFactorIn, kFactorIn);
+        emit zoomChanged(zoomFactor());
     }
     
     void    GraphicsView::zoomOut()
     {
         static double   kFactorOut    = pow(2.0, 1.0/kDOUBLE);
         scale(kFactorOut, kFactorOut);
+        emit zoomChanged(zoomFactor());
     }
 }
 

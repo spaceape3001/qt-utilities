@@ -16,6 +16,7 @@
 #include <QDebug>
 
 #include <yq/container/Map.hpp>
+#include <gluon/logging.hpp>
 
 namespace yq::gluon {
 
@@ -56,7 +57,6 @@ namespace yq::gluon {
     {
         return QSize(m_width, m_width);
     }
-
 
     void    DrawRuler::mouseMoveEvent(QMouseEvent* event)
     {

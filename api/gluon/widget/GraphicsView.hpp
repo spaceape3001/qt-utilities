@@ -43,6 +43,8 @@ namespace yq::gluon {
     signals:
         //! Advertises the current mouse position in the view
         void    mouseAt(double, double);
+        
+        void    zoomChanged(double);
     
     protected:
     

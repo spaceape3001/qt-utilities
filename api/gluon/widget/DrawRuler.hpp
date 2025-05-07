@@ -8,8 +8,6 @@
 
 #include <QWidget>
 #include <QColor>
-//#include <QList>
-//#include <QSize>
 #include <QtGlobal>
 #include <yq/core/Ref.hpp>
 #include <gluon/preamble.hpp>
@@ -65,10 +63,10 @@ namespace yq::gluon {
         void                setLabelThreshold(int);
         
         //! Size hint
-        QSize               sizeHint() const;
+        virtual QSize       sizeHint() const override;
         
         //! Minimum Size Hint
-        QSize               minimumSizeHint() const;
+        virtual QSize       minimumSizeHint() const override;
 
     public slots:
     
