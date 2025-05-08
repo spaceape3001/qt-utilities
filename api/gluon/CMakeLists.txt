@@ -173,6 +173,8 @@ add_library(${PROJECT_NAME} SHARED
     widget/GraphicsView.cpp
     widget/GraphicsWidget.hpp
     widget/GraphicsWidget.cpp
+    widget/ScrollBar.hpp
+    widget/ScrollBar.cpp
     widget/WidgetTabBar.hpp
     widget/WidgetTabBar.cpp
     widget/WidgetTabWidget.hpp

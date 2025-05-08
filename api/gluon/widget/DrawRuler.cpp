@@ -10,10 +10,12 @@
 #include <cstring>
 #include <cmath>
 
+#include <QDebug>
+#include <QGuiApplication>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPen>
-#include <QDebug>
+#include <QScreen>
 
 #include <yq/container/Map.hpp>
 #include <gluon/logging.hpp>
@@ -245,10 +247,11 @@ namespace yq::gluon {
 
     QSize   DrawRuler::sizeHint() const
     {
+        QSize   vs  = QGuiApplication::primaryScreen()->virtualSize();
         if(horz())
-            return QSize(500, m_width);
+            return QSize(vs.width(), m_width);
         else
-            return QSize(m_width, 500);
+            return QSize(m_width, vs.height());
     }
 
     void    DrawRuler::wheelEvent(QWheelEvent* event)

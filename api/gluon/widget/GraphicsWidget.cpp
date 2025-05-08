@@ -4,14 +4,15 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "GraphicsView.hpp"
 #include "GraphicsWidget.hpp"
-#include "DrawRuler.hpp"
+
+#include <gluon/widget/GraphicsView.hpp>
+#include <gluon/widget/DrawRuler.hpp>
+#include <gluon/widget/ScrollBar.hpp>
 #include <gluon/model/GraphicsScene.hpp>
 #include <gluon/model/StandardGridTickModel.hpp>
+
 #include <QGridLayout>
-#include <QGraphicsScene>
-#include <QScrollBar>
 
 namespace yq::gluon {
     GraphicsWidget::GraphicsWidget(const Config&cfg, QWidget* parent) : QFrame(parent)
@@ -68,13 +69,13 @@ namespace yq::gluon {
         if(cfg.horzScroll){
             m_horz.scroll   = cfg.horzScroll;
         } else {
-            m_horz.scroll   = new QScrollBar(Qt::Horizontal);
+            m_horz.scroll   = new ScrollBar(Qt::Horizontal);
         }
         
         if(cfg.vertScroll){
             m_vert.scroll   = cfg.vertScroll;
         } else {
-            m_vert.scroll   = new QScrollBar(Qt::Vertical);
+            m_vert.scroll   = new ScrollBar(Qt::Vertical);
         }
         
         ///////////////////////
@@ -120,6 +121,7 @@ namespace yq::gluon {
         layout -> setHorizontalSpacing(0);
         layout -> setVerticalSpacing(0);
         layout -> setContentsMargins(0,0,0,0);
+        layout -> setSizeConstraint(QLayout::SetMaximumSize);
         
         ///////////////////////
         //  SIGNALS/SLOTS
