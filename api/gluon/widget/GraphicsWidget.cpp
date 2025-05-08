@@ -79,10 +79,10 @@ namespace yq::gluon {
         
         ///////////////////////
         //  SIZING
-        m_horz.ruler  -> setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
-        m_horz.scroll -> setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed);
-        m_vert.ruler  -> setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
-        m_vert.scroll -> setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Ignored);
+        m_horz.ruler  -> setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        m_horz.scroll -> setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        m_vert.ruler  -> setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+        m_vert.scroll -> setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
         m_view -> setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         
         ///////////////////////

@@ -5,12 +5,24 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "GraphicsView.hpp"
-#include <QGraphicsScene>
+
+#include <QGuiApplication>
 #include <QMouseEvent>
+#include <QPainter>
+#include <QRect>
+#include <QResizeEvent>
+#include <QScreen>
 #include <QWheelEvent>
 
+#include <gluon/logging.hpp>
+#include <gluon/model/GraphicsScene.hpp>
+
+#include <yq/shape/AxBox2.hpp>
+#include <yq/shape/Size2.hpp>
+#include <yq/shape/AxBox2.hxx>
+
 namespace yq::gluon {
-    GraphicsView::GraphicsView(QGraphicsScene*scene, QWidget*parent) : QGraphicsView(scene, parent)
+    GraphicsView::GraphicsView(GraphicsScene*scene, QWidget*parent) : QGraphicsView(scene, parent), m_scene(scene)
     {
         assert(scene);
         setMouseTracking(true);
@@ -20,8 +32,87 @@ namespace yq::gluon {
     GraphicsView::~GraphicsView()
     {
     }
-        
+
+    Flags<GraphicsView::AutoDraw> GraphicsView::autoDraw() const
+    {   
+        return m_autoDraw;
+    }
+
+    bool    GraphicsView::autoDraw(AutoDraw ad) const
+    {
+        return m_autoDraw(ad);
+    }
+
+    void    GraphicsView::autoDrawDisable(AutoDraw ad)
+    {
+        m_autoDraw.clear(ad);
+    }
     
+    void    GraphicsView::autoDrawEnable(AutoDraw ad)
+    {
+        m_autoDraw.set(ad);
+    }
+        
+    void    GraphicsView::drawBackground(QPainter *painter, const QRectF &rect) 
+    {
+        QGraphicsView::drawBackground(painter, rect);
+        if(m_autoDraw(AutoDraw_SceneRect))
+            drawSceneRect(painter, rect);
+    }
+    
+    void            GraphicsView::drawSceneRect(QPainter *painter, const QRectF &rect)
+    {
+        if(!painter)
+            return;
+        painter->save();
+        QRectF      qsr  = m_scene->sceneRect();
+        AxBox2D     sr(qsr);
+        AxBox2D     fill(rect);
+        
+        if(rect.isNull() || fill.eclipses(sr)){
+            painter->setPen(m_sceneRectPen);
+            painter->setBrush(m_sceneRectBrush);
+            painter->drawRect(qsr);
+        } else if(sr.eclipses(fill)){
+            painter->fillRect(qsr, m_sceneRectBrush);
+        } else {
+            painter->setPen(m_sceneRectPen);
+            painter->fillRect(rect.intersected(qsr), m_sceneRectBrush);
+            
+            //  And now, the edges
+            auto in = sr & fill;
+            if(fill.lo.y <= sr.lo.y)    //  top edge
+                painter->drawLine(in.lo.x, in.lo.y, in.hi.x, in.lo.y);
+            if(fill.hi.y >= sr.hi.y)    //  bottom edge
+                painter->drawLine(in.lo.x, in.hi.y, in.hi.x, in.hi.y);
+            if(fill.lo.x <= sr.lo.x)    //  left edge
+                painter->drawLine(in.lo.x, in.lo.y, in.lo.x, in.hi.y);
+            if(fill.hi.x >= sr.hi.x)    //  right edge
+                painter->drawLine(in.hi.x, in.lo.y, in.hi.x, in.hi.y);
+        }
+        painter->restore();
+    }
+
+    bool            GraphicsView::feature(Feature v) const
+    {
+        return m_features;
+    }
+    
+    void            GraphicsView::featureDisable(Feature v)
+    {
+        m_features.clear(v);
+    }
+    
+    void            GraphicsView::featureEnable(Feature v)
+    {
+        m_features.set(v);
+    }
+    
+    Flags<GraphicsView::Feature> GraphicsView::features() const
+    {
+        return m_features;
+    }
+
     void    GraphicsView::fitToScene()
     {
         QGraphicsScene* sc  = scene();
@@ -37,6 +128,37 @@ namespace yq::gluon {
         QGraphicsView::mouseMoveEvent(evt);
     }
 
+    QBrush  GraphicsView::sceneRectBrush() const
+    {
+        return m_sceneRectBrush;
+    }
+
+    QPen    GraphicsView::sceneRectPen() const
+    {
+        return m_sceneRectPen;
+    }
+    
+    void    GraphicsView::setSceneRectBrush(QBrush v)
+    {
+        m_sceneRectBrush = v;
+    }
+
+    void    GraphicsView::setSceneRectPen(QPen v)
+    {
+        m_sceneRectPen  = v;
+    }
+    
+    void    GraphicsView::resizeEvent(QResizeEvent*evt) 
+    {
+        gluonInfo << "QGraphicsView::resizeEvent(" << evt->size() << ")";
+        QWidget::resizeEvent(evt);
+    }
+
+    void    GraphicsView::setMouseWheelZoomModifiers(Qt::KeyboardModifiers v)
+    {
+        m_mouseWheelZoomModifiers   = v;
+    }
+    
     void    GraphicsView::setZoomFactor(double z)
     {
         z           = fabs(z);
@@ -45,10 +167,18 @@ namespace yq::gluon {
         emit zoomChanged(zoomFactor());
     }
     
+    QSize   GraphicsView::sizeHint() const
+    {
+        if(m_features(Feature_MaxViewport)){
+            return QGuiApplication::primaryScreen()->virtualSize();
+        } else {
+            return QGraphicsView::sizeHint();
+        }
+    }
+
     void    GraphicsView::wheelEvent(QWheelEvent *evt)
     {
-        Qt::KeyboardModifiers   mods = evt->modifiers();
-        if(mods & Qt::ControlModifier){
+        if(feature(Feature_MouseWheelZoom) && (evt->modifiers()  == m_mouseWheelZoomModifiers)){
             double  factor  = pow(2.0, evt->angleDelta().y() / (120.0 * kDOUBLE));
             scale(factor, factor);
             emit zoomChanged(zoomFactor());
