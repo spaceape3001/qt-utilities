@@ -1,0 +1,19 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  YOUR QUILL
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#include "GraphicsLayer.hpp"
+
+namespace yq::gluon {
+    GraphicsLayer::GraphicsLayer(QObject*parent) : QObject(parent)
+    {
+    }
+    
+    GraphicsLayer::~GraphicsLayer()
+    {
+    }
+}
+
+#include "moc_GraphicsLayer.cpp"

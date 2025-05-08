@@ -141,6 +141,8 @@ add_library(${PROJECT_NAME} SHARED
     layout/FlowLayout.cpp
     layout/FlowLayout.hpp
 
+    model/GraphicsLayer.hpp
+    model/GraphicsLayer.cpp
     model/GraphicsScene.hpp
     model/GraphicsScene.cpp
     model/GridTickModel.hpp
