@@ -33,12 +33,14 @@ add_library(${PROJECT_NAME} SHARED
     core/IgCaseQ.cpp
     core/Logging.hpp
     core/Logging.cpp
+    core/ObjectQ.cpp
     core/QtTypes.hpp
     core/QtTypes.cpp
     core/RefQ.hpp
     core/RefQ.cpp
     core/Utilities.hpp
     core/Utilities.cpp
+    core/WidgetQ.cpp
 
     delegate/ColorComboBoxDelegate.hpp
     delegate/ColorComboBoxDelegate.cpp
@@ -134,15 +136,14 @@ add_library(${PROJECT_NAME} SHARED
     graph/data/GraphSocket.hpp
     graph/data/GraphSocket.cpp
 
-    graphics/GraphicsItem.hpp
-    graphics/GraphicsItem.cpp
+    #graphics/GraphicsItem.hpp
+    #graphics/GraphicsItem.cpp
     graphics/GraphicsLayer.hpp
     graphics/GraphicsLayer.cpp
     graphics/GraphicsScene.hpp
     graphics/GraphicsScene.cpp
     graphics/GraphicsView.hpp
     graphics/GraphicsView.cpp
-    graphics/GraphicsVisibility.hpp
     graphics/GraphicsVisibility.cpp
     graphics/GraphicsWidget.hpp
     graphics/GraphicsWidget.cpp

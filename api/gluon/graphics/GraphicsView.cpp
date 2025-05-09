@@ -17,6 +17,7 @@
 
 #include <gluon/logging.hpp>
 #include <gluon/graphics/GraphicsScene.hpp>
+#include <gluon/graphics/GraphicsTool.hpp>
 
 #include <yq/shape/AxBox2.hpp>
 #include <yq/shape/Size2.hpp>
@@ -179,6 +180,13 @@ namespace yq::gluon {
         m_mouseWheelZoomModifiers   = v;
     }
     
+    void    GraphicsView::setTool(Ref<GraphicsTool> tool)
+    {
+        m_tool  = tool;
+        //  cursor may change....
+        //  state may reset
+    }
+
     void    GraphicsView::setZoomFactor(double z)
     {
         z           = fabs(z);
@@ -194,6 +202,11 @@ namespace yq::gluon {
         } else {
             return QGraphicsView::sizeHint();
         }
+    }
+
+    GraphicsTool*   GraphicsView::tool() const
+    {
+        return const_cast<GraphicsTool*>(m_tool.ptr());
     }
 
     void    GraphicsView::wheelEvent(QWheelEvent *evt)

@@ -7,21 +7,21 @@
 #pragma once
 
 #include <QGraphicsScene>
-#include <yq/core/Object.hpp>
+#include <gluon/core/ObjectQ.hpp>
 
 namespace yq::gluon {
-    class GraphicsSceneInfo : public ObjectInfo {
+    class GraphicsSceneInfo : public ObjectQInfo {
     public:
         template <typename> class Writer;
-        GraphicsSceneInfo(std::string_view zName, ObjectInfo& base, const std::source_location& sl=std::source_location::current());
+        GraphicsSceneInfo(std::string_view zName, ObjectQInfo& base, const std::source_location& sl=std::source_location::current());
     protected:
         ~GraphicsSceneInfo();
     };
 
     //! More of a stub for now so common functionality can be added
-    class GraphicsScene : public QGraphicsScene, public Object {
+    class GraphicsScene : public QGraphicsScene, public ObjectQ {
         YQ_OBJECT_INFO(GraphicsSceneInfo)
-        YQ_OBJECT_DECLARE(GraphicsScene, Object)
+        YQ_OBJECTQ_DECLARE_ABSTRACT(GraphicsScene, ObjectQ)
         Q_OBJECT
     public:
         GraphicsScene(QObject *parent = nullptr);

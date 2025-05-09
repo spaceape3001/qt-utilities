@@ -11,8 +11,8 @@ YQ_OBJECT_IMPLEMENT(yq::gluon::GraphicsScene)
 
 namespace yq::gluon {
 
-    GraphicsSceneInfo::GraphicsSceneInfo(std::string_view zName, ObjectInfo& base, const std::source_location& sl) :
-        ObjectInfo(zName, base, sl)
+    GraphicsSceneInfo::GraphicsSceneInfo(std::string_view zName, ObjectQInfo& base, const std::source_location& sl) :
+        ObjectQInfo(zName, base, sl)
     {
     }
     

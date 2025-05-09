@@ -6,13 +6,15 @@
 
 #include "GraphicsTool.hpp"
 #include "GraphicsToolWriter.hpp"
+#include <QCursor>
+#include <QIcon>
 
 YQ_OBJECT_IMPLEMENT(yq::gluon::GraphicsTool)
 
 namespace yq::gluon {
 
-    GraphicsToolInfo::GraphicsToolInfo(std::string_view zName, ObjectInfo& base, const std::source_location& sl) :
-        ObjectInfo(zName, base, sl)
+    GraphicsToolInfo::GraphicsToolInfo(std::string_view zName, ObjectQInfo& base, const std::source_location& sl) :
+        ObjectQInfo(zName, base, sl)
     {
     }
     
@@ -34,6 +36,16 @@ namespace yq::gluon {
     
     GraphicsTool::~GraphicsTool()
     {
+    }
+
+    QCursor GraphicsTool::cursor() const
+    {
+        return QCursor();
+    }
+    
+    QIcon   GraphicsTool::icon() const
+    {
+        return QIcon();
     }
 }
 

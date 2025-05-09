@@ -12,9 +12,11 @@
 
 #include <yq/core/Flags.hpp>
 #include <yq/core/Object.hpp>
+#include <yq/core/Ref.hpp>
 
 namespace yq::gluon {
     class GraphicsScene;
+    class GraphicsTool;
     
     class GraphicsViewInfo : public ObjectInfo {
     public:
@@ -78,10 +80,14 @@ namespace yq::gluon {
         void            setSceneRectPen(QPen);
         void            setSceneRectBrush(QBrush);
         
+        void            setTool(Ref<GraphicsTool>);
+        
         QSize           sizeHint() const override;
 
         //! Zoom factor
         double          zoomFactor() const;
+        
+        GraphicsTool*   tool() const;
 
     public slots:
         //! Adjusts the zoom to fit the scene
@@ -126,5 +132,6 @@ namespace yq::gluon {
         QBrush                  m_sceneRectBrush;
         QPen                    m_sceneRectPen;
         Qt::KeyboardModifiers   m_mouseWheelZoomModifiers = {};
+        Ref<GraphicsTool>       m_tool;
     };
 }
