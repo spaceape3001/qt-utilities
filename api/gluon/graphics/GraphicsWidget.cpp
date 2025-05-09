@@ -6,13 +6,20 @@
 
 #include "GraphicsWidget.hpp"
 
-#include <gluon/widget/GraphicsView.hpp>
+#include <gluon/graphics/GraphicsView.hpp>
+#include <gluon/graphics/GraphicsScene.hpp>
+
 #include <gluon/widget/DrawRuler.hpp>
 #include <gluon/widget/ScrollBar.hpp>
-#include <gluon/model/GraphicsScene.hpp>
 #include <gluon/model/StandardGridTickModel.hpp>
 
 #include <QGridLayout>
+
+#include <yq/shape/AxBox2.hpp>
+#include <yq/shape/Size2.hpp>
+#include <yq/shape/AxBox2.hxx>
+#include <yq/shape/Size2.hxx>
+
 
 namespace yq::gluon {
     GraphicsWidget::GraphicsWidget(const Config&cfg, QWidget* parent) : QFrame(parent)
@@ -125,9 +132,22 @@ namespace yq::gluon {
         
         ///////////////////////
         //  SIGNALS/SLOTS
+        
+        connect(m_scene, &GraphicsScene::sceneRectChanged, m_view, &GraphicsView::updateSceneRect);
+        connect(m_scene, &GraphicsScene::sceneRectChanged, this, &GraphicsWidget::updateGeometry);
+        connect(m_view, &GraphicsView::zoomChanged, this, &GraphicsWidget::updateGeometry);
     }
     
     GraphicsWidget::~GraphicsWidget()
+    {
+    }
+
+    void    GraphicsWidget::resizeEvent(QResizeEvent*)
+    {
+        updateGeometry();
+    }
+
+    void    GraphicsWidget::updateGeometry()
     {
     }
 }

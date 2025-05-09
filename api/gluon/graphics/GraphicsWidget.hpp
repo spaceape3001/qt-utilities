@@ -51,6 +51,12 @@ namespace yq::gluon {
     signals:
         //! Advertises the current mouse position in the view
         void    mouseAt(double, double);
+        
+    protected:
+        void    resizeEvent(QResizeEvent*);
+        
+    private slots:
+        void    updateGeometry();
 
     private:
         struct {

@@ -4,16 +4,14 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "GraphicsLayer.hpp"
+#include "GraphicsItem.hpp"
 
 namespace yq::gluon {
-    GraphicsLayer::GraphicsLayer(QObject*parent) : QObject(parent)
+    GraphicsItem::GraphicsItem(uint64_t theId) : m_id(theId)
     {
     }
     
-    GraphicsLayer::~GraphicsLayer()
+    GraphicsItem::~GraphicsItem()
     {
     }
 }
-
-#include "moc_GraphicsLayer.cpp"

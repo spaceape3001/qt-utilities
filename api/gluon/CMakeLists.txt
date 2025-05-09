@@ -134,6 +134,19 @@ add_library(${PROJECT_NAME} SHARED
     graph/data/GraphSocket.hpp
     graph/data/GraphSocket.cpp
 
+    graphics/GraphicsItem.hpp
+    graphics/GraphicsItem.cpp
+    graphics/GraphicsLayer.hpp
+    graphics/GraphicsLayer.cpp
+    graphics/GraphicsScene.hpp
+    graphics/GraphicsScene.cpp
+    graphics/GraphicsView.hpp
+    graphics/GraphicsView.cpp
+    graphics/GraphicsVisibility.hpp
+    graphics/GraphicsVisibility.cpp
+    graphics/GraphicsWidget.hpp
+    graphics/GraphicsWidget.cpp
+
     io/ZipFile.cpp
     io/ZipReader.hpp
     io/ZipWriter.hpp
@@ -141,10 +154,6 @@ add_library(${PROJECT_NAME} SHARED
     layout/FlowLayout.cpp
     layout/FlowLayout.hpp
 
-    model/GraphicsLayer.hpp
-    model/GraphicsLayer.cpp
-    model/GraphicsScene.hpp
-    model/GraphicsScene.cpp
     model/GridTickModel.hpp
     model/GridTickModel.cpp
     model/StandardGridTickModel.hpp
@@ -171,10 +180,6 @@ add_library(${PROJECT_NAME} SHARED
     widget/DrawRuler.cpp
     widget/FormWidget.hpp
     widget/FormWidget.cpp
-    widget/GraphicsView.hpp
-    widget/GraphicsView.cpp
-    widget/GraphicsWidget.hpp
-    widget/GraphicsWidget.cpp
     widget/ScrollBar.hpp
     widget/ScrollBar.cpp
     widget/WidgetTabBar.hpp

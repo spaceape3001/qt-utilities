@@ -11,13 +11,24 @@
 #include <QPen>
 
 #include <yq/core/Flags.hpp>
+#include <yq/core/Object.hpp>
 
 namespace yq::gluon {
     class GraphicsScene;
     
+    class GraphicsViewInfo : public ObjectInfo {
+    public:
+        template <typename> class Writer;
+        GraphicsViewInfo(std::string_view zName, ObjectInfo& base, const std::source_location& sl=std::source_location::current());
+    protected:
+        virtual ~GraphicsViewInfo();
+    };
+    
     /*! \brief Enhanced GraphicsView
     */
-    class GraphicsView : public QGraphicsView {
+    class GraphicsView : public QGraphicsView, public Object {
+        YQ_OBJECT_INFO(GraphicsViewInfo)
+        YQ_OBJECT_DECLARE(GraphicsView, Object)
         Q_OBJECT
     public:
     
@@ -40,6 +51,8 @@ namespace yq::gluon {
     
         //! Steps to double zoom
         static constexpr const unsigned kDOUBLE = 8;    // eight steps to double
+        
+        static void init_info();
     
         //! Constructor
         GraphicsView(GraphicsScene*, QWidget*parent=nullptr);

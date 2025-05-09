@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "GraphicsView.hpp"
+#include "GraphicsViewInfoWriter.hpp"
 
 #include <QGuiApplication>
 #include <QMouseEvent>
@@ -15,13 +16,32 @@
 #include <QWheelEvent>
 
 #include <gluon/logging.hpp>
-#include <gluon/model/GraphicsScene.hpp>
+#include <gluon/graphics/GraphicsScene.hpp>
 
 #include <yq/shape/AxBox2.hpp>
 #include <yq/shape/Size2.hpp>
 #include <yq/shape/AxBox2.hxx>
 
+YQ_OBJECT_IMPLEMENT(yq::gluon::GraphicsView)
+
 namespace yq::gluon {
+    GraphicsViewInfo::GraphicsViewInfo(std::string_view zName, ObjectInfo& base, const std::source_location& sl) :
+        ObjectInfo(zName, base, sl)
+    {
+    }
+    
+    GraphicsViewInfo::~GraphicsViewInfo()
+    {
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+
+    void GraphicsView::init_info()
+    {
+        auto w = writer<GraphicsView>();
+        w.description("Graphics View");
+    }
+
     GraphicsView::GraphicsView(GraphicsScene*scene, QWidget*parent) : QGraphicsView(scene, parent), m_scene(scene)
     {
         assert(scene);
