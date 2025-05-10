@@ -11,7 +11,6 @@
 #include <QPen>
 
 #include <yq/core/Flags.hpp>
-#include <yq/core/Object.hpp>
 #include <gluon/core/WidgetQ.hpp>
 
 namespace yq::gluon {
@@ -34,13 +33,6 @@ namespace yq::gluon {
         Q_OBJECT
     public:
     
-        enum class AutoDraw : uint8_t {
-            SceneRect,
-            USER            //! Use this for extending....
-        };
-        
-        static constexpr const AutoDraw     AutoDraw_SceneRect              = AutoDraw::SceneRect;
-        
         enum class Feature : uint8_t {
             MaxViewport,        //! Use the max primary monitor for viewport size hint
             MouseWheelRotate,
@@ -65,24 +57,13 @@ namespace yq::gluon {
         //! Destructor
         ~GraphicsView();
         
-        Flags<AutoDraw> autoDraw() const;
-        bool            autoDraw(AutoDraw) const;
-
-        void            autoDrawEnable(AutoDraw);
-        void            autoDrawDisable(AutoDraw);
-        
         Flags<Feature>  features() const;
         bool            feature(Feature) const;
         void            featureEnable(Feature);
         void            featureDisable(Feature);
-        
-        QPen            sceneRectPen() const;
-        QBrush          sceneRectBrush() const;
 
         void            setMouseWheelZoomModifiers(Qt::KeyboardModifiers);
         void            setMouseWheelRotateModifiers(Qt::KeyboardModifiers);
-        void            setSceneRectPen(QPen);
-        void            setSceneRectBrush(QBrush);
         
         void            setTool(GraphicsTool*);
         
@@ -124,10 +105,6 @@ namespace yq::gluon {
         void            resized();
     
     protected:
-    
-        void            drawBackground(QPainter*, const QRectF&) override;
-        void            drawSceneRect(QPainter*, const QRectF&rect={});
-
 
         void 	        contextMenuEvent(QContextMenuEvent*) override;
         void 	        dragEnterEvent(QDragEnterEvent*) override;
@@ -154,10 +131,7 @@ namespace yq::gluon {
 
         GraphicsScene* const    m_scene;
     
-        Flags<AutoDraw>         m_autoDraw;
         Flags<Feature>          m_features;
-        QBrush                  m_sceneRectBrush;
-        QPen                    m_sceneRectPen;
         Qt::KeyboardModifiers   m_mouseWheelZoomModifiers = {};
         Qt::KeyboardModifiers   m_mouseWheelRotateModifiers = {};
         GraphicsTool*           m_tool          = nullptr;

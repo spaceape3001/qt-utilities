@@ -8,6 +8,7 @@
 
 #include <QGraphicsScene>
 #include <gluon/core/ObjectQ.hpp>
+#include <yq/core/Flags.hpp>
 
 namespace yq::gluon {
     class GraphicsSceneInfo : public ObjectQInfo {
@@ -24,6 +25,13 @@ namespace yq::gluon {
         YQ_OBJECTQ_DECLARE_ABSTRACT(GraphicsScene, ObjectQ)
         Q_OBJECT
     public:
+
+        enum class AutoDraw : uint8_t {
+            SceneRect,
+            USER            //! Use this for extending....
+        };
+        
+        static constexpr const AutoDraw     AutoDraw_SceneRect              = AutoDraw::SceneRect;
     
         //! Test for printing to paper... (might be useful during rendering)
         static bool isPrinting();
@@ -35,7 +43,35 @@ namespace yq::gluon {
         
         static void init_info();
         
+        Flags<AutoDraw> autoDraw() const;
+        bool            autoDraw(AutoDraw) const;
+
+        void            autoDrawEnable(AutoDraw);
+        void            autoDrawDisable(AutoDraw);
+        
+        //  Generic draw
+        void            draw(QPainter*, const QRectF& rect={});
+        
+        QPen            sceneRectPen() const;
+        QBrush          sceneRectBrush() const;
+
+        void            setSceneRectPen(QPen);
+        void            setSceneRectBrush(QBrush);
+
+        void            print(QPainter*, const QRectF& rect={});
+
+    protected:
+        void            drawBackground(QPainter*, const QRectF&rect={}) override;
+        void            drawItems(QPainter*, const QRectF&rect={});
+        void            drawForeground(QPainter*, const QRectF&rect={}) override;
+        void            drawSceneRect(QPainter*, const QRectF&rect={});
+
     private:
         static thread_local bool    s_printing;
+
+        Flags<AutoDraw>         m_autoDraw;
+        QBrush                  m_sceneRectBrush;
+        QPen                    m_sceneRectPen;
+
     };
 }

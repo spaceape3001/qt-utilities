@@ -9,6 +9,7 @@
 
 #include <gluon/graphics/GraphicsScene.hpp>
 #include <QGraphicsItem>
+#include <QStyleOptionGraphicsItem>
 
 YQ_OBJECT_IMPLEMENT(yq::gluon::GraphicsLayer)
 
@@ -88,9 +89,19 @@ namespace yq::gluon {
         // TODO
     }
 
-    void    GraphicsLayer::draw(QPainter*, const QRectF&)
+    void    GraphicsLayer::draw(QPainter* painter, const QRectF& area)
     {
-        // TODO
+        if(!painter)
+            return ;
+            
+        QStyleOptionGraphicsItem options;
+        options.exposedRect = area;
+
+        for(auto& itr : m_items){
+            if(!itr.second)
+                continue;
+            itr.second->paint(painter, &options, nullptr);
+        }
     }
 
     GraphicsVisibility GraphicsLayer::effectiveVisibility() const
