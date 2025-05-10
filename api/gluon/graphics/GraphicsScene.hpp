@@ -24,11 +24,18 @@ namespace yq::gluon {
         YQ_OBJECTQ_DECLARE_ABSTRACT(GraphicsScene, ObjectQ)
         Q_OBJECT
     public:
+    
+        //! Test for printing to paper... (might be useful during rendering)
+        static bool isPrinting();
+    
         GraphicsScene(QObject *parent = nullptr);
         GraphicsScene(const QRectF &sceneRect, QObject *parent = nullptr);
         GraphicsScene(qreal x, qreal y, qreal width, qreal height, QObject *parent = nullptr);
         ~GraphicsScene();
         
         static void init_info();
+        
+    private:
+        static thread_local bool    s_printing;
     };
 }

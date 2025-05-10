@@ -22,10 +22,17 @@ namespace yq::gluon {
     
     ///////////////////////////////////////////////////////////////////////////
     
+    thread_local bool    GraphicsScene::s_printing = false;
+
     void GraphicsScene::init_info()
     {
         auto w = writer<GraphicsScene>();
         w.description("Graphics Scene");
+    }
+
+    bool GraphicsScene::isPrinting()
+    {
+        return s_printing;
     }
 
     GraphicsScene::GraphicsScene(QObject *parent) : QGraphicsScene(parent)

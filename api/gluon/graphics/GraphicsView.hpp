@@ -43,16 +43,19 @@ namespace yq::gluon {
         
         enum class Feature : uint8_t {
             MaxViewport,        //! Use the max primary monitor for viewport size hint
+            MouseWheelRotate,
             MouseWheelZoom,     //! Enable mouse wheel for zooming
             USER                //! Use this for extending...
         };
         
         static constexpr const Feature      Feature_MaxViewport             = Feature::MaxViewport;
+        static constexpr const Feature      Feature_MouseWheelRotate        = Feature::MouseWheelRotate;
         static constexpr const Feature      Feature_MouseWheelZoom          = Feature::MouseWheelZoom;
     
     
         //! Steps to double zoom
         static constexpr const unsigned kDOUBLE = 8;    // eight steps to double
+        static constexpr const double   kROTATE = 2.5;
         
         static void init_info();
     
@@ -77,6 +80,7 @@ namespace yq::gluon {
         QBrush          sceneRectBrush() const;
 
         void            setMouseWheelZoomModifiers(Qt::KeyboardModifiers);
+        void            setMouseWheelRotateModifiers(Qt::KeyboardModifiers);
         void            setSceneRectPen(QPen);
         void            setSceneRectBrush(QBrush);
         
@@ -89,6 +93,12 @@ namespace yq::gluon {
         
         GraphicsTool*   tool() const;
 
+
+        // tool helpers....
+
+        void            thWheelRotate(QWheelEvent*);
+        void            thWheelZoom(QWheelEvent*);
+
     public slots:
         //! Adjusts the zoom to fit the scene
         void            fitToScene();
@@ -98,6 +108,8 @@ namespace yq::gluon {
 
         //! Zooms out one step
         void            zoomOut();
+        
+        void            zoomBy(double);
         
         //! Sets the zoom factor
         void            setZoomFactor(double);
@@ -113,20 +125,31 @@ namespace yq::gluon {
     
     protected:
     
-        //! Scroll wheel event handler (override)
-        void            wheelEvent(QWheelEvent *event) override;
-        
-        //! Mouse move event handler (override)
-        void            mouseMoveEvent(QMouseEvent*) override;
-        
-        void            resizeEvent(QResizeEvent*) override;
+        void            drawBackground(QPainter*, const QRectF&) override;
+        void            drawSceneRect(QPainter*, const QRectF&rect={});
 
-        void            drawBackground(QPainter *painter, const QRectF &rect) override;
-        
-        void            drawSceneRect(QPainter *painter, const QRectF &rect={});
-        
+
+        void 	        contextMenuEvent(QContextMenuEvent*) override;
+        void 	        dragEnterEvent(QDragEnterEvent*) override;
+        void 	        dragLeaveEvent(QDragLeaveEvent*) override;
+        void 	        dragMoveEvent(QDragMoveEvent*) override;
+        void 	        dropEvent(QDropEvent*) override;
+        void 	        enterEvent(QEnterEvent*) override;
+        void 	        focusInEvent(QFocusEvent*) override;
+        void 	        focusOutEvent(QFocusEvent*) override;
+        void 	        keyPressEvent(QKeyEvent*) override;
+        void 	        keyReleaseEvent(QKeyEvent*) override;
+        void 	        leaveEvent(QEvent*) override;
+        void            mouseDoubleClickEvent(QMouseEvent*) override;
+        void            mouseMoveEvent(QMouseEvent*) override;
+        void            mousePressEvent(QMouseEvent*) override;
+        void            mouseReleaseEvent(QMouseEvent*) override;
+        void            resizeEvent(QResizeEvent*) override;
+        void 	        tabletEvent(QTabletEvent*) override;
         bool            viewportEvent(QEvent*) override;
+        void            wheelEvent(QWheelEvent*) override;
         
+
     private:
 
         GraphicsScene* const    m_scene;
@@ -136,6 +159,7 @@ namespace yq::gluon {
         QBrush                  m_sceneRectBrush;
         QPen                    m_sceneRectPen;
         Qt::KeyboardModifiers   m_mouseWheelZoomModifiers = {};
+        Qt::KeyboardModifiers   m_mouseWheelRotateModifiers = {};
         GraphicsTool*           m_tool          = nullptr;
     };
 }
