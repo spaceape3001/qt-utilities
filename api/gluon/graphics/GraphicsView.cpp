@@ -26,8 +26,8 @@
 YQ_OBJECT_IMPLEMENT(yq::gluon::GraphicsView)
 
 namespace yq::gluon {
-    GraphicsViewInfo::GraphicsViewInfo(std::string_view zName, ObjectInfo& base, const std::source_location& sl) :
-        ObjectInfo(zName, base, sl)
+    GraphicsViewInfo::GraphicsViewInfo(std::string_view zName, WidgetQInfo& base, const std::source_location& sl) :
+        WidgetQInfo(zName, base, sl)
     {
     }
     
@@ -171,8 +171,9 @@ namespace yq::gluon {
     
     void    GraphicsView::resizeEvent(QResizeEvent*evt) 
     {
+        QGraphicsView::resizeEvent(evt);
         gluonInfo << "QGraphicsView::resizeEvent(" << evt->size() << ")";
-        QWidget::resizeEvent(evt);
+        resized();
     }
 
     void    GraphicsView::setMouseWheelZoomModifiers(Qt::KeyboardModifiers v)
@@ -180,7 +181,7 @@ namespace yq::gluon {
         m_mouseWheelZoomModifiers   = v;
     }
     
-    void    GraphicsView::setTool(Ref<GraphicsTool> tool)
+    void    GraphicsView::setTool(GraphicsTool* tool)
     {
         m_tool  = tool;
         //  cursor may change....
@@ -206,7 +207,15 @@ namespace yq::gluon {
 
     GraphicsTool*   GraphicsView::tool() const
     {
-        return const_cast<GraphicsTool*>(m_tool.ptr());
+        return const_cast<GraphicsTool*>(m_tool);
+    }
+
+    bool    GraphicsView::viewportEvent(QEvent*evt) 
+    {
+        bool ret = QGraphicsView::viewportEvent(evt);
+        if(evt->type() == QEvent::Resize)
+            viewportResized();
+        return ret;
     }
 
     void    GraphicsView::wheelEvent(QWheelEvent *evt)

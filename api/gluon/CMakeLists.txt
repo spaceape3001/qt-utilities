@@ -136,8 +136,6 @@ add_library(${PROJECT_NAME} SHARED
     graph/data/GraphSocket.hpp
     graph/data/GraphSocket.cpp
 
-    #graphics/GraphicsItem.hpp
-    #graphics/GraphicsItem.cpp
     graphics/GraphicsLayer.hpp
     graphics/GraphicsLayer.cpp
     graphics/GraphicsScene.hpp
@@ -145,8 +143,6 @@ add_library(${PROJECT_NAME} SHARED
     graphics/GraphicsView.hpp
     graphics/GraphicsView.cpp
     graphics/GraphicsVisibility.cpp
-    graphics/GraphicsWidget.hpp
-    graphics/GraphicsWidget.cpp
 
     io/ZipFile.cpp
     io/ZipReader.hpp

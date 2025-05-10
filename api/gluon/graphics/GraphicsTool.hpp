@@ -7,7 +7,7 @@
 #pragma once
 
 #include <QObject>
-#include <gluon/core/RefQ.hpp>
+#include <yq/core/UniqueID.hpp>
 #include <gluon/core/ObjectQ.hpp>
 
 class QIcon;
@@ -22,7 +22,7 @@ namespace yq::gluon {
         ~GraphicsToolInfo();
     };
 
-    class GraphicsTool : public QObject, public ObjectQ, public RefQ {
+    class GraphicsTool : public QObject, public ObjectQ, public UniqueID {
         YQ_OBJECT_INFO(GraphicsToolInfo)
         YQ_OBJECTQ_DECLARE_ABSTRACT(GraphicsTool, ObjectQ)
         Q_OBJECT

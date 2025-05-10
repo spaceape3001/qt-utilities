@@ -12,25 +12,25 @@
 
 #include <yq/core/Flags.hpp>
 #include <yq/core/Object.hpp>
-#include <yq/core/Ref.hpp>
+#include <gluon/core/WidgetQ.hpp>
 
 namespace yq::gluon {
     class GraphicsScene;
     class GraphicsTool;
     
-    class GraphicsViewInfo : public ObjectInfo {
+    class GraphicsViewInfo : public WidgetQInfo {
     public:
         template <typename> class Writer;
-        GraphicsViewInfo(std::string_view zName, ObjectInfo& base, const std::source_location& sl=std::source_location::current());
+        GraphicsViewInfo(std::string_view zName, WidgetQInfo& base, const std::source_location& sl=std::source_location::current());
     protected:
         virtual ~GraphicsViewInfo();
     };
     
     /*! \brief Enhanced GraphicsView
     */
-    class GraphicsView : public QGraphicsView, public Object {
+    class GraphicsView : public QGraphicsView, public WidgetQ {
         YQ_OBJECT_INFO(GraphicsViewInfo)
-        YQ_OBJECT_DECLARE(GraphicsView, Object)
+        YQ_WIDGETQ_DECLARE_ABSTRACT(GraphicsView, WidgetQ)
         Q_OBJECT
     public:
     
@@ -80,7 +80,7 @@ namespace yq::gluon {
         void            setSceneRectPen(QPen);
         void            setSceneRectBrush(QBrush);
         
-        void            setTool(Ref<GraphicsTool>);
+        void            setTool(GraphicsTool*);
         
         QSize           sizeHint() const override;
 
@@ -107,6 +107,9 @@ namespace yq::gluon {
         void            mouseAt(double, double);
         
         void            zoomChanged(double);
+        
+        void            viewportResized();
+        void            resized();
     
     protected:
     
@@ -122,6 +125,7 @@ namespace yq::gluon {
         
         void            drawSceneRect(QPainter *painter, const QRectF &rect={});
         
+        bool            viewportEvent(QEvent*) override;
         
     private:
 
@@ -132,6 +136,6 @@ namespace yq::gluon {
         QBrush                  m_sceneRectBrush;
         QPen                    m_sceneRectPen;
         Qt::KeyboardModifiers   m_mouseWheelZoomModifiers = {};
-        Ref<GraphicsTool>       m_tool;
+        GraphicsTool*           m_tool          = nullptr;
     };
 }

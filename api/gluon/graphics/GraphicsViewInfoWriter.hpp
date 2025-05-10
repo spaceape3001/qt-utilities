@@ -7,17 +7,17 @@
 #pragma once
 
 #include <gluon/graphics/GraphicsView.hpp>
-#include <yq/meta/ObjectInfoWriter.hpp>
+#include <gluon/core/WidgetQInfoWriter.hpp>
 
 namespace yq::gluon {
     
     /*! \brief Writer of trigger information
     */
     template <typename C>
-    class GraphicsViewInfo::Writer : public ObjectInfo::Writer<C> {
+    class GraphicsViewInfo::Writer : public WidgetQInfo::Writer<C> {
     public:
     
-        Writer(GraphicsViewInfo* pInfo) : ObjectInfo::Writer<C>(pInfo), m_meta(pInfo)
+        Writer(GraphicsViewInfo* pInfo) : WidgetQInfo::Writer<C>(pInfo), m_meta(pInfo)
         {
         }
         
