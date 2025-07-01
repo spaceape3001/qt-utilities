@@ -10,7 +10,7 @@
 #include <QMetaType>
 #include <QVariant>
 #include <yq/core/Any.hpp>
-#include <yq/meta/TypeInfo.hpp>
+#include <yq/meta/TypeMeta.hpp>
 
 namespace yq::gluon {
     namespace {

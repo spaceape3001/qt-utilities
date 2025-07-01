@@ -22,7 +22,7 @@ namespace yq::gluon {
     public:
         template <typename C> class Writer;
         
-        const TypeInfo*     dataType() const { return m_yqType; }
+        const TypeMeta*     dataType() const { return m_yqType; }
         QMetaType           metaType() const { return m_qtType; }
         
         static std::vector<const DelegateInfo*>  all();
@@ -33,7 +33,7 @@ namespace yq::gluon {
         DelegateInfo(std::string_view, ObjectInfo&, const std::source_location& sl = std::source_location::current());
         
     private:
-        const TypeInfo*     m_yqType    = nullptr;
+        const TypeMeta*     m_yqType    = nullptr;
         QMetaType           m_qtType;
         
         void            registerQtMapping();
