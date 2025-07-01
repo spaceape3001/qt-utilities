@@ -20,11 +20,11 @@ namespace yq::gluon {
 
     template <typename Obj> class DockFixer;
 
-    class DockInfo : public ObjectInfo {
+    class DockInfo : public ObjectMeta {
     public:
         template <typename C> class Writer;
         
-        DockInfo(std::string_view, ObjectInfo&, const std::source_location& sl);
+        DockInfo(std::string_view, ObjectMeta&, const std::source_location& sl);
         
         const ActionInfo&   action_info() const { return m_action; }
         

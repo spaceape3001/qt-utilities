@@ -15,14 +15,14 @@ namespace yq::gluon {
 
     template <typename> class WidgetQFixer;
 
-    class WidgetQInfo : public ObjectInfo {
+    class WidgetQInfo : public ObjectMeta {
     public:
         template <typename> class Writer;
         
-        using ObjectInfo::create;
+        using ObjectMeta::create;
         virtual WidgetQ*    create(QWidget*) const = 0;
 
-        WidgetQInfo(std::string_view zName, ObjectInfo& base, const std::source_location& sl=std::source_location::current());
+        WidgetQInfo(std::string_view zName, ObjectMeta& base, const std::source_location& sl=std::source_location::current());
     protected:
         ~WidgetQInfo();
     };

@@ -53,8 +53,8 @@ namespace yq::gluon {
         return nullptr;
     }
 
-    DelegateInfo::DelegateInfo(std::string_view name, ObjectInfo&par, const std::source_location& sl ) : 
-        ObjectInfo(name, par, sl)
+    DelegateInfo::DelegateInfo(std::string_view name, ObjectMeta&par, const std::source_location& sl ) : 
+        ObjectMeta(name, par, sl)
     {
         WLOCK
         _r.all.push_back(this);

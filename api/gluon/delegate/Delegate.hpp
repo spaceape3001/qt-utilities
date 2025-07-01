@@ -18,7 +18,7 @@
 
 namespace yq::gluon {
 
-    class DelegateInfo : public ObjectInfo {
+    class DelegateInfo : public ObjectMeta {
     public:
         template <typename C> class Writer;
         
@@ -30,7 +30,7 @@ namespace yq::gluon {
         static const DelegateInfo*              byQtType(int);
 
     protected:
-        DelegateInfo(std::string_view, ObjectInfo&, const std::source_location& sl = std::source_location::current());
+        DelegateInfo(std::string_view, ObjectMeta&, const std::source_location& sl = std::source_location::current());
         
     private:
         const TypeMeta*     m_yqType    = nullptr;

@@ -18,8 +18,8 @@ namespace yq::gluon {
         return Dock::repo().docks.all;
     }
 
-    DockInfo::DockInfo(std::string_view zName, ObjectInfo& pMeta, const std::source_location& sl) : 
-        ObjectInfo(zName, pMeta, sl)
+    DockInfo::DockInfo(std::string_view zName, ObjectMeta& pMeta, const std::source_location& sl) : 
+        ObjectMeta(zName, pMeta, sl)
     {
         Dock::repo().docks << this;
     }

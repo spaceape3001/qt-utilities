@@ -7,16 +7,16 @@
 #pragma once
 
 #include <gluon/core/WidgetQ.hpp>
-#include <yq/meta/ObjectInfoWriter.hpp>
+#include <yq/meta/ObjectMetaWriter.hpp>
 
 namespace yq::gluon {
     /*! \brief Writer of trigger information
     */
     template <typename C>
-    class WidgetQInfo::Writer : public ObjectInfo::Writer<C> {
+    class WidgetQInfo::Writer : public ObjectMeta::Writer<C> {
     public:
     
-        Writer(WidgetQInfo* pInfo) : ObjectInfo::Writer<C>(pInfo), m_meta(pInfo)
+        Writer(WidgetQInfo* pInfo) : ObjectMeta::Writer<C>(pInfo), m_meta(pInfo)
         {
         }
         
@@ -51,7 +51,7 @@ namespace yq::gluon {
             //  PUBLIC constructors & destructors, which we do *NOT* want here.  Instead, we 
             //  have to do the macro trick with abstract, and mark appropriately.
             if constexpr (!C::kAbstract && !std::is_abstract_v<C>) {
-                if(ObjectInfo::is_abstract()){
+                if(ObjectMeta::is_abstract()){
                     return nullptr;
                 }
                 return new C(parent);

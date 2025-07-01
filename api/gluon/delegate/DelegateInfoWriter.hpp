@@ -5,14 +5,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <gluon/delegate/Delegate.hpp>
-#include <yq/meta/ObjectInfoWriter.hpp>
+#include <yq/meta/ObjectMetaWriter.hpp>
 
 namespace yq::gluon {
     template <typename C>
-    class DelegateInfo::Writer : public ObjectInfo::Writer<C> {
+    class DelegateInfo::Writer : public ObjectMeta::Writer<C> {
     public:
         
-        Writer(DelegateInfo* obj) : ObjectInfo::Writer<C>(obj) 
+        Writer(DelegateInfo* obj) : ObjectMeta::Writer<C>(obj) 
         {
             assert(obj);
         }

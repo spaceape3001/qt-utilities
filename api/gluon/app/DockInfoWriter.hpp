@@ -7,13 +7,13 @@
 #pragma once
 
 #include <gluon/app/Dock.hpp>
-#include <yq/meta/ObjectInfoWriter.hpp>
+#include <yq/meta/ObjectMetaWriter.hpp>
 
 namespace yq::gluon {
     template <typename C>
-    class DockInfo::Writer : public ObjectInfo::Writer<C> {
+    class DockInfo::Writer : public ObjectMeta::Writer<C> {
     public:
-        Writer(DockInfo* dInfo) : ObjectInfo::Writer<C>(dInfo), m_meta(dInfo)
+        Writer(DockInfo* dInfo) : ObjectMeta::Writer<C>(dInfo), m_meta(dInfo)
         {
         }
         
@@ -87,7 +87,7 @@ namespace yq::gluon {
         Dock*       create(QWidget*parent) const override
         {
             if constexpr (std::is_constructible_v<Obj, QWidget*> && !std::is_abstract_v<Obj>) {
-                if(ObjectInfo::is_abstract())
+                if(ObjectMeta::is_abstract())
                     return nullptr;
                 Dock*   ret = new Obj(parent);
                 ret->startup();

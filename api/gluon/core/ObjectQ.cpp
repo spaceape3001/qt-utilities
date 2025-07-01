@@ -11,8 +11,8 @@
 YQ_OBJECT_IMPLEMENT(yq::gluon::ObjectQ)
 
 namespace yq::gluon {
-    ObjectQInfo::ObjectQInfo(std::string_view zName, ObjectInfo& base, const std::source_location& sl) : 
-        ObjectInfo(zName, base, sl)
+    ObjectQInfo::ObjectQInfo(std::string_view zName, ObjectMeta& base, const std::source_location& sl) : 
+        ObjectMeta(zName, base, sl)
     {
     }
     
