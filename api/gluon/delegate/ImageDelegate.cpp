@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <gluon/delegate/ImageDelegate.hpp>
-#include <gluon/delegate/DelegateInfoWriter.hpp>
+#include <gluon/delegate/DelegateMetaWriter.hpp>
 #include <QPainter>
 
 namespace yq::gluon {

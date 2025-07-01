@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <gluon/delegate/DirBoxDelegate.hpp>
-#include <gluon/delegate/DelegateInfoWriter.hpp>
+#include <gluon/delegate/DelegateMetaWriter.hpp>
 #include <gluon/edit/DirBox.hpp>
 
 namespace yq::gluon {

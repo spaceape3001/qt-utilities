@@ -24,18 +24,18 @@ class QRectF;
 namespace yq::gluon {
     class GraphicsScene;
     
-    class GraphicsLayerInfo : public ObjectQInfo {
+    class GraphicsLayerMeta : public ObjectQMeta {
     public:
         template <typename> class Writer;
-        GraphicsLayerInfo(std::string_view zName, ObjectQInfo& base, const std::source_location& sl=std::source_location::current());
+        GraphicsLayerMeta(std::string_view zName, ObjectQMeta& base, const std::source_location& sl=std::source_location::current());
     protected:
-        ~GraphicsLayerInfo();
+        ~GraphicsLayerMeta();
     };
     
     /*! \brief Collection of graphics items
     */
     class GraphicsLayer : public QObject, public ObjectQ, public UniqueID {
-        YQ_OBJECT_INFO(GraphicsLayerInfo)
+        YQ_OBJECT_META(GraphicsLayerMeta)
         YQ_OBJECTQ_DECLARE_ABSTRACT(GraphicsLayer, ObjectQ)
         Q_OBJECT
         Q_PROPERTY(GraphicsVisibility visibility MEMBER m_visibility WRITE setVisibility)

@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <gluon/delegate/NullableDateDelegate.hpp>
-#include <gluon/delegate/DelegateInfoWriter.hpp>
+#include <gluon/delegate/DelegateMetaWriter.hpp>
 #include <gluon/edit/NullableDateEdit.hpp>
 
 #include <QDate>

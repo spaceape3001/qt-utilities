@@ -13,17 +13,17 @@
 class DataFilter;
 
 namespace data_filters {
-    class AbstractDataFilterInfo;
+    class AbstractDataFilterMeta;
 }
 
 
 
-class DataFilterInfo : public DelayInit {
+class DataFilterMeta : public DelayInit {
 public:
 
-    static Vector<const DataFilterInfo*>&   all();
-    static Vector<const DataFilterInfo*>    lookupForType(int);
-    static const DataFilterInfo*            lookup(const QString&);
+    static Vector<const DataFilterMeta*>&   all();
+    static Vector<const DataFilterMeta*>    lookupForType(int);
+    static const DataFilterMeta*            lookup(const QString&);
     
     struct Arg {
         QString name;
@@ -49,12 +49,12 @@ public:
 
 protected:
 
-    DataFilterInfo(const QString&, int);
+    DataFilterMeta(const QString&, int);
     
     virtual const DataFilter* createImpl(const Vector<QVariant>& args) const = 0;
 
 private:
-    friend class data_filters::AbstractDataFilterInfo;
+    friend class data_filters::AbstractDataFilterMeta;
 
     Vector<Arg> m_args;
     QString     m_description;

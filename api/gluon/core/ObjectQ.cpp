@@ -5,18 +5,18 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "ObjectQ.hpp"
-#include "ObjectQInfoWriter.hpp"
+#include "ObjectQMetaWriter.hpp"
 #include <QObject>
 
 YQ_OBJECT_IMPLEMENT(yq::gluon::ObjectQ)
 
 namespace yq::gluon {
-    ObjectQInfo::ObjectQInfo(std::string_view zName, ObjectMeta& base, const std::source_location& sl) : 
+    ObjectQMeta::ObjectQMeta(std::string_view zName, ObjectMeta& base, const std::source_location& sl) : 
         ObjectMeta(zName, base, sl)
     {
     }
     
-    ObjectQInfo::~ObjectQInfo()
+    ObjectQMeta::~ObjectQMeta()
     {
     }
 

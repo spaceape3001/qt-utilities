@@ -15,16 +15,16 @@ namespace yq::gluon {
 
     template <typename> class WidgetQFixer;
 
-    class WidgetQInfo : public ObjectMeta {
+    class WidgetQMeta : public ObjectMeta {
     public:
         template <typename> class Writer;
         
         using ObjectMeta::create;
         virtual WidgetQ*    create(QWidget*) const = 0;
 
-        WidgetQInfo(std::string_view zName, ObjectMeta& base, const std::source_location& sl=std::source_location::current());
+        WidgetQMeta(std::string_view zName, ObjectMeta& base, const std::source_location& sl=std::source_location::current());
     protected:
-        ~WidgetQInfo();
+        ~WidgetQMeta();
     };
     
     #define YQ_WIDGETQ_DECLARE_ABSTRACT(cls, base)          \
@@ -45,7 +45,7 @@ namespace yq::gluon {
     */
     class WidgetQ : public Object {
         YQ_OBJECT_FIXER(WidgetQFixer)
-        YQ_OBJECT_INFO(WidgetQInfo)
+        YQ_OBJECT_META(WidgetQMeta)
         YQ_OBJECT_DECLARE(WidgetQ, Object)
     public:
         static void init_meta();

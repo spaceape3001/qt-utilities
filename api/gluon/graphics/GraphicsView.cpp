@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "GraphicsView.hpp"
-#include "GraphicsViewInfoWriter.hpp"
+#include "GraphicsViewMetaWriter.hpp"
 
 #include <QContextMenuEvent>
 #include <QDragEnterEvent>
@@ -40,12 +40,12 @@ namespace {
 
 
 namespace yq::gluon {
-    GraphicsViewInfo::GraphicsViewInfo(std::string_view zName, WidgetQInfo& base, const std::source_location& sl) :
-        WidgetQInfo(zName, base, sl)
+    GraphicsViewMeta::GraphicsViewMeta(std::string_view zName, WidgetQMeta& base, const std::source_location& sl) :
+        WidgetQMeta(zName, base, sl)
     {
     }
     
-    GraphicsViewInfo::~GraphicsViewInfo()
+    GraphicsViewMeta::~GraphicsViewMeta()
     {
     }
 

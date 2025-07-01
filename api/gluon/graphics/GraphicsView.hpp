@@ -17,18 +17,18 @@ namespace yq::gluon {
     class GraphicsScene;
     class GraphicsTool;
     
-    class GraphicsViewInfo : public WidgetQInfo {
+    class GraphicsViewMeta : public WidgetQMeta {
     public:
         template <typename> class Writer;
-        GraphicsViewInfo(std::string_view zName, WidgetQInfo& base, const std::source_location& sl=std::source_location::current());
+        GraphicsViewMeta(std::string_view zName, WidgetQMeta& base, const std::source_location& sl=std::source_location::current());
     protected:
-        virtual ~GraphicsViewInfo();
+        virtual ~GraphicsViewMeta();
     };
     
     /*! \brief Enhanced GraphicsView
     */
     class GraphicsView : public QGraphicsView, public WidgetQ {
-        YQ_OBJECT_INFO(GraphicsViewInfo)
+        YQ_OBJECT_META(GraphicsViewMeta)
         YQ_WIDGETQ_DECLARE_ABSTRACT(GraphicsView, WidgetQ)
         Q_OBJECT
     public:

@@ -9,22 +9,22 @@
 
 namespace yq::gluon {
     template <typename C>
-    class DelegateInfo::Writer : public ObjectMeta::Writer<C> {
+    class DelegateMeta::Writer : public ObjectMeta::Writer<C> {
     public:
         
-        Writer(DelegateInfo* obj) : ObjectMeta::Writer<C>(obj) 
+        Writer(DelegateMeta* obj) : ObjectMeta::Writer<C>(obj) 
         {
             assert(obj);
         }
         
-        Writer(DelegateInfo& obj) : Writer(&obj)
+        Writer(DelegateMeta& obj) : Writer(&obj)
         {
         }
         
         template <typename T>
         Writer&     declare_type()
         {
-            DelegateInfo*   delInfo   = static_cast<DelegateInfo*>(Meta::Writer::m_meta);
+            DelegateMeta*   delInfo   = static_cast<DelegateMeta*>(Meta::Writer::m_meta);
             if constexpr (is_type_v<T>){
                 if(!delInfo->m_yqType){
                     delInfo->m_yqType   = &meta<T>();

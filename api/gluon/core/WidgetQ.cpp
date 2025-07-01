@@ -5,18 +5,18 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "WidgetQ.hpp"
-#include "WidgetQInfoWriter.hpp"
+#include "WidgetQMetaWriter.hpp"
 #include <QWidget>
 
 YQ_OBJECT_IMPLEMENT(yq::gluon::WidgetQ)
 
 namespace yq::gluon {
-    WidgetQInfo::WidgetQInfo(std::string_view zName, ObjectMeta& base, const std::source_location& sl) : 
+    WidgetQMeta::WidgetQMeta(std::string_view zName, ObjectMeta& base, const std::source_location& sl) : 
         ObjectMeta(zName, base, sl)
     {
     }
     
-    WidgetQInfo::~WidgetQInfo()
+    WidgetQMeta::~WidgetQMeta()
     {
     }
 

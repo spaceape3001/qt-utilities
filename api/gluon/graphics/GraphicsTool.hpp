@@ -30,16 +30,16 @@ namespace yq::gluon {
     class GraphicsScene;
     class GraphicsView;
     
-    class GraphicsToolInfo : public ObjectQInfo {
+    class GraphicsToolMeta : public ObjectQMeta {
     public:
         template <typename> class Writer;
-        GraphicsToolInfo(std::string_view zName, ObjectQInfo& base, const std::source_location& sl=std::source_location::current());
+        GraphicsToolMeta(std::string_view zName, ObjectQMeta& base, const std::source_location& sl=std::source_location::current());
     protected:
-        ~GraphicsToolInfo();
+        ~GraphicsToolMeta();
     };
 
     class GraphicsTool : public QObject, public ObjectQ, public UniqueID {
-        YQ_OBJECT_INFO(GraphicsToolInfo)
+        YQ_OBJECT_META(GraphicsToolMeta)
         YQ_OBJECTQ_DECLARE_ABSTRACT(GraphicsTool, ObjectQ)
         Q_OBJECT
     public:

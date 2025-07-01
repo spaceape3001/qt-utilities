@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "GraphicsLayer.hpp"
-#include "GraphicsLayerInfoWriter.hpp"
+#include "GraphicsLayerMetaWriter.hpp"
 
 #include <gluon/graphics/GraphicsScene.hpp>
 #include <QGraphicsItem>
@@ -14,12 +14,12 @@
 YQ_OBJECT_IMPLEMENT(yq::gluon::GraphicsLayer)
 
 namespace yq::gluon {
-    GraphicsLayerInfo::GraphicsLayerInfo(std::string_view zName, ObjectQInfo& base, const std::source_location& sl) :
-        ObjectQInfo(zName, base, sl)
+    GraphicsLayerMeta::GraphicsLayerMeta(std::string_view zName, ObjectQMeta& base, const std::source_location& sl) :
+        ObjectQMeta(zName, base, sl)
     {
     }
     
-    GraphicsLayerInfo::~GraphicsLayerInfo()
+    GraphicsLayerMeta::~GraphicsLayerMeta()
     {
     }
 

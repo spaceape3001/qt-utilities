@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <gluon/delegate/IntegerDelegate.hpp>
-#include <gluon/delegate/DelegateInfoWriter.hpp>
+#include <gluon/delegate/DelegateMetaWriter.hpp>
 #include <gluon/edit/SpinBox.hpp>
 
 namespace yq::gluon {

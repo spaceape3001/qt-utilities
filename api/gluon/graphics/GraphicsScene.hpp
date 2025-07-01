@@ -11,17 +11,17 @@
 #include <yq/core/Flags.hpp>
 
 namespace yq::gluon {
-    class GraphicsSceneInfo : public ObjectQInfo {
+    class GraphicsSceneMeta : public ObjectQMeta {
     public:
         template <typename> class Writer;
-        GraphicsSceneInfo(std::string_view zName, ObjectQInfo& base, const std::source_location& sl=std::source_location::current());
+        GraphicsSceneMeta(std::string_view zName, ObjectQMeta& base, const std::source_location& sl=std::source_location::current());
     protected:
-        ~GraphicsSceneInfo();
+        ~GraphicsSceneMeta();
     };
 
     //! More of a stub for now so common functionality can be added
     class GraphicsScene : public QGraphicsScene, public ObjectQ {
-        YQ_OBJECT_INFO(GraphicsSceneInfo)
+        YQ_OBJECT_META(GraphicsSceneMeta)
         YQ_OBJECTQ_DECLARE_ABSTRACT(GraphicsScene, ObjectQ)
         Q_OBJECT
     public:

@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <gluon/delegate/IconBarDelegate.hpp>
-#include <gluon/delegate/DelegateInfoWriter.hpp>
+#include <gluon/delegate/DelegateMetaWriter.hpp>
 //#include <QDebug>
 #include <QMouseEvent>
 #include <QPainter>

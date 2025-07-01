@@ -15,16 +15,16 @@ namespace yq::gluon {
 
     template <typename> class ObjectQFixer;
 
-    class ObjectQInfo : public ObjectMeta {
+    class ObjectQMeta : public ObjectMeta {
     public:
         template <typename> class Writer;
         
         using ObjectMeta::create;
         virtual ObjectQ*    create(QObject*) const = 0;
 
-        ObjectQInfo(std::string_view zName, ObjectMeta& base, const std::source_location& sl=std::source_location::current());
+        ObjectQMeta(std::string_view zName, ObjectMeta& base, const std::source_location& sl=std::source_location::current());
     protected:
-        ~ObjectQInfo();
+        ~ObjectQMeta();
     };
     
     #define YQ_OBJECTQ_DECLARE_ABSTRACT(cls, base)          \
@@ -45,7 +45,7 @@ namespace yq::gluon {
     */
     class ObjectQ : public Object {
         YQ_OBJECT_FIXER(ObjectQFixer)
-        YQ_OBJECT_INFO(ObjectQInfo)
+        YQ_OBJECT_META(ObjectQMeta)
         YQ_OBJECT_DECLARE(ObjectQ, Object)
     public:
         static void init_meta();

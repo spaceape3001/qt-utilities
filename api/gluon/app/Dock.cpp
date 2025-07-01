@@ -5,26 +5,26 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "Dock.hpp"
-#include "DockInfoWriter.hpp"
+#include "DockMetaWriter.hpp"
 #include <QCloseEvent>
 
 namespace yq::gluon {
     struct Dock::Repo {
-        MetaLookup<DockInfo>    docks;
+        MetaLookup<DockMeta>    docks;
     };
 
-    const std::vector<const DockInfo*>& DockInfo::all()
+    const std::vector<const DockMeta*>& DockMeta::all()
     {
         return Dock::repo().docks.all;
     }
 
-    DockInfo::DockInfo(std::string_view zName, ObjectMeta& pMeta, const std::source_location& sl) : 
+    DockMeta::DockMeta(std::string_view zName, ObjectMeta& pMeta, const std::source_location& sl) : 
         ObjectMeta(zName, pMeta, sl)
     {
         Dock::repo().docks << this;
     }
 
-    Object*     DockInfo::create() const 
+    Object*     DockMeta::create() const 
     {
         return create(nullptr);
     }
@@ -79,7 +79,7 @@ namespace yq::gluon {
 
     void Dock::startup()
     {
-        const DockInfo& di = metaInfo();
+        const DockMeta& di = metaInfo();
         const ActionInfo& ai  = di.action_info();
         m_action    = createAction(ai, this);
         m_action->setVisible(ai.checked);

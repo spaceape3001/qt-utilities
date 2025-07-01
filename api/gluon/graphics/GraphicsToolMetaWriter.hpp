@@ -6,26 +6,26 @@
 
 #pragma once
 
-#include <gluon/graphics/GraphicsScene.hpp>
-#include <gluon/core/ObjectQInfoWriter.hpp>
+#include <gluon/graphics/GraphicsTool.hpp>
+#include <gluon/core/ObjectQMetaWriter.hpp>
 
 namespace yq::gluon {
     
     /*! \brief Writer of trigger information
     */
     template <typename C>
-    class GraphicsSceneInfo::Writer : public ObjectQInfo::Writer<C> {
+    class GraphicsToolMeta::Writer : public ObjectQMeta::Writer<C> {
     public:
     
-        Writer(GraphicsSceneInfo* pInfo) : ObjectQInfo::Writer<C>(pInfo), m_meta(pInfo)
+        Writer(GraphicsToolMeta* pInfo) : ObjectQMeta::Writer<C>(pInfo), m_meta(pInfo)
         {
         }
         
-        Writer(GraphicsSceneInfo& pInfo) : Writer(&pInfo)
+        Writer(GraphicsToolMeta& pInfo) : Writer(&pInfo)
         {
         }
 
     private:
-        GraphicsSceneInfo* m_meta;
+        GraphicsToolMeta* m_meta;
     };
 }

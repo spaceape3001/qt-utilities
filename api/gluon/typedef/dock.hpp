@@ -10,7 +10,7 @@
 
 namespace yq::gluon {
     class Dock;
-    class DockInfo;
+    class DockMeta;
     template <class D>
     concept SomeDock        = std::derived_from<D,Dock>;
 }

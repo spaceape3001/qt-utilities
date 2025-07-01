@@ -15,12 +15,12 @@ YQ_OBJECT_IMPLEMENT(yq::gluon::GraphicsTool)
 
 namespace yq::gluon {
 
-    GraphicsToolInfo::GraphicsToolInfo(std::string_view zName, ObjectQInfo& base, const std::source_location& sl) :
-        ObjectQInfo(zName, base, sl)
+    GraphicsToolMeta::GraphicsToolMeta(std::string_view zName, ObjectQMeta& base, const std::source_location& sl) :
+        ObjectQMeta(zName, base, sl)
     {
     }
     
-    GraphicsToolInfo::~GraphicsToolInfo()
+    GraphicsToolMeta::~GraphicsToolMeta()
     {
     }
         

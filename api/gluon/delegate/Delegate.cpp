@@ -6,15 +6,15 @@
 
 #include <tbb/spin_rw_mutex.h>
 #include <gluon/delegate/Delegate.hpp>
-#include <gluon/delegate/DelegateInfoWriter.hpp>
+#include <gluon/delegate/DelegateMetaWriter.hpp>
 //#include "core/Map.hpp"
 //#include "core/Vector.hpp"
 
 namespace yq::gluon {
 
     struct DelegateRepo {
-        std::vector<const DelegateInfo*>            all;
-        std::unordered_map<int,const DelegateInfo*> byQtType;
+        std::vector<const DelegateMeta*>            all;
+        std::unordered_map<int,const DelegateMeta*> byQtType;
         tbb::spin_rw_mutex                          mutex;
     };
     
@@ -38,13 +38,13 @@ namespace yq::gluon {
 
     //  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-    std::vector<const DelegateInfo*>   DelegateInfo::all()
+    std::vector<const DelegateMeta*>   DelegateMeta::all()
     {
         LOCK
         return _r.all;
     }
 
-    const DelegateInfo*              DelegateInfo::byQtType(int t)
+    const DelegateMeta*              DelegateMeta::byQtType(int t)
     {
         LOCK
         auto i = _r.byQtType.find(t);
@@ -53,14 +53,14 @@ namespace yq::gluon {
         return nullptr;
     }
 
-    DelegateInfo::DelegateInfo(std::string_view name, ObjectMeta&par, const std::source_location& sl ) : 
+    DelegateMeta::DelegateMeta(std::string_view name, ObjectMeta&par, const std::source_location& sl ) : 
         ObjectMeta(name, par, sl)
     {
         WLOCK
         _r.all.push_back(this);
     }
     
-    void    DelegateInfo::registerQtMapping()
+    void    DelegateMeta::registerQtMapping()
     {
         if(m_qtType.isValid()){
             WLOCK
@@ -79,7 +79,7 @@ namespace yq::gluon {
     Delegate*    Delegate::make(int dataType, QObject* parent)
     {
     
-        const DelegateInfo* info    = nullptr;
+        const DelegateMeta* info    = nullptr;
         {
             LOCK
             auto i = _r.byQtType.find(dataType);

@@ -18,19 +18,19 @@
 
 namespace yq::gluon {
 
-    class DelegateInfo : public ObjectMeta {
+    class DelegateMeta : public ObjectMeta {
     public:
         template <typename C> class Writer;
         
         const TypeMeta*     dataType() const { return m_yqType; }
         QMetaType           metaType() const { return m_qtType; }
         
-        static std::vector<const DelegateInfo*>  all();
+        static std::vector<const DelegateMeta*>  all();
         
-        static const DelegateInfo*              byQtType(int);
+        static const DelegateMeta*              byQtType(int);
 
     protected:
-        DelegateInfo(std::string_view, ObjectMeta&, const std::source_location& sl = std::source_location::current());
+        DelegateMeta(std::string_view, ObjectMeta&, const std::source_location& sl = std::source_location::current());
         
     private:
         const TypeMeta*     m_yqType    = nullptr;
@@ -44,7 +44,7 @@ namespace yq::gluon {
     class Delegate : public QStyledItemDelegate, public Object{
         Q_OBJECT
         
-        YQ_OBJECT_INFO(DelegateInfo)
+        YQ_OBJECT_META(DelegateMeta)
         YQ_OBJECT_DECLARE(Delegate, Object)
         
     public:
@@ -107,7 +107,7 @@ namespace yq::gluon {
         virtual ~Delegate();
 
     private:
-        friend class DelegateInfo;
+        friend class DelegateMeta;
         
         struct Repo;
         static Repo&    repo();

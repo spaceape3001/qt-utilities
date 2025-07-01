@@ -20,11 +20,11 @@ namespace yq::gluon {
 
     template <typename Obj> class DockFixer;
 
-    class DockInfo : public ObjectMeta {
+    class DockMeta : public ObjectMeta {
     public:
         template <typename C> class Writer;
         
-        DockInfo(std::string_view, ObjectMeta&, const std::source_location& sl);
+        DockMeta(std::string_view, ObjectMeta&, const std::source_location& sl);
         
         const ActionInfo&   action_info() const { return m_action; }
         
@@ -34,7 +34,7 @@ namespace yq::gluon {
         Qt::DockWidgetArea  start_area() const { return m_startArea; }
         Qt::DockWidgetAreas allowed_areas() const { return m_allowedAreas; }
     
-        static const std::vector<const DockInfo*>& all();
+        static const std::vector<const DockMeta*>& all();
     
     protected:
 
@@ -55,7 +55,7 @@ namespace yq::gluon {
     */
     class Dock : public QDockWidget, public Object {
         Q_OBJECT
-        YQ_OBJECT_INFO(DockInfo)
+        YQ_OBJECT_META(DockMeta)
         YQ_OBJECT_FIXER(DockFixer)
         YQ_OBJECT_DECLARE(Dock, Object)
         template <typename C> friend class DockFixer;
@@ -80,7 +80,7 @@ namespace yq::gluon {
         void        triggered(bool);
 
     private:
-        friend class DockInfo;
+        friend class DockMeta;
         struct Repo;
         static Repo& repo();
 

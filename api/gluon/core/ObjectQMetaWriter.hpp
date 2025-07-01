@@ -6,32 +6,32 @@
 
 #pragma once
 
-#include <gluon/core/WidgetQ.hpp>
+#include <gluon/core/ObjectQ.hpp>
 #include <yq/meta/ObjectMetaWriter.hpp>
 
 namespace yq::gluon {
     /*! \brief Writer of trigger information
     */
     template <typename C>
-    class WidgetQInfo::Writer : public ObjectMeta::Writer<C> {
+    class ObjectQMeta::Writer : public ObjectMeta::Writer<C> {
     public:
     
-        Writer(WidgetQInfo* pInfo) : ObjectMeta::Writer<C>(pInfo), m_meta(pInfo)
+        Writer(ObjectQMeta* pInfo) : ObjectMeta::Writer<C>(pInfo), m_meta(pInfo)
         {
         }
         
-        Writer(WidgetQInfo& pInfo) : Writer(&pInfo)
+        Writer(ObjectQMeta& pInfo) : Writer(&pInfo)
         {
         }
 
     private:
-        WidgetQInfo* m_meta;
+        ObjectQMeta* m_meta;
     };
 
     template <typename C> 
-    class WidgetQFixer : public ObjectFixer<C> {
+    class ObjectQFixer : public ObjectFixer<C> {
     public:
-        WidgetQFixer(std::string_view szName, typename C::MyBase::MyInfo& myBase, std::source_location sl=std::source_location::current()) : 
+        ObjectQFixer(std::string_view szName, typename C::MyBase::MyInfo& myBase, std::source_location sl=std::source_location::current()) : 
             ObjectFixer<C>(szName, myBase, sl) 
         {
         }
@@ -45,7 +45,7 @@ namespace yq::gluon {
         }
 
         
-        virtual C* create(QWidget* parent) const override
+        virtual C* create(QObject* parent) const override
         {
             //  While the std::is_constructible_v<> test seemed nice, it unfortunately requires 
             //  PUBLIC constructors & destructors, which we do *NOT* want here.  Instead, we 

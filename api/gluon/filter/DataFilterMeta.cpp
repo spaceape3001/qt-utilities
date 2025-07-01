@@ -10,9 +10,9 @@
 
 namespace {
     struct Repo {
-        Vector<const DataFilterInfo*>           all;
-        Map<QString,const DataFilterInfo*,IgCase>      byName;
-        Map<int,Vector<const DataFilterInfo*>>  byType;
+        Vector<const DataFilterMeta*>           all;
+        Map<QString,const DataFilterMeta*,IgCase>      byName;
+        Map<int,Vector<const DataFilterMeta*>>  byType;
     };
     
     
@@ -23,7 +23,7 @@ namespace {
     }
 }
 
-DataFilterInfo::DataFilterInfo(const QString&name, int dataType) : 
+DataFilterMeta::DataFilterMeta(const QString&name, int dataType) : 
     m_name(name), m_dataType(dataType)
 {
     m_command = m_verb = m_symbol = name;
@@ -34,7 +34,7 @@ DataFilterInfo::DataFilterInfo(const QString&name, int dataType) :
     _r.byType[dataType] << this;
 }
 
-DataFilter::Ptr  DataFilterInfo::create(const Vector<QVariant>& args) const
+DataFilter::Ptr  DataFilterMeta::create(const Vector<QVariant>& args) const
 {
     if(args.size() < m_args.size())
         return DataFilter::Ptr();
@@ -46,49 +46,49 @@ DataFilter::Ptr  DataFilterInfo::create(const Vector<QVariant>& args) const
 }
 
 
-Vector<const DataFilterInfo*>&   DataFilterInfo::all()
+Vector<const DataFilterMeta*>&   DataFilterMeta::all()
 {
     return repo().all;
 }
 
-Vector<const DataFilterInfo*>    DataFilterInfo::lookupForType(int i)
+Vector<const DataFilterMeta*>    DataFilterMeta::lookupForType(int i)
 {
     return repo().byType.get(i);
 }
 
-const DataFilterInfo*            DataFilterInfo::lookup(const QString&k)
+const DataFilterMeta*            DataFilterMeta::lookup(const QString&k)
 {
     return repo().byName.get(k);
 }
 
 
 namespace data_filters {
-    AbstractDataFilterInfo::AbstractDataFilterInfo(const QString&n, int t) :
-        DataFilterInfo(n, t)
+    AbstractDataFilterMeta::AbstractDataFilterMeta(const QString&n, int t) :
+        DataFilterMeta(n, t)
     {
     }
     
-    void    AbstractDataFilterInfo::verb(const QString&v)
+    void    AbstractDataFilterMeta::verb(const QString&v)
     {
         m_verb      = v;
     }
     
-    void    AbstractDataFilterInfo::cmd(const QString&v)
+    void    AbstractDataFilterMeta::cmd(const QString&v)
     {
         m_command       = v;
     }
     
-    void    AbstractDataFilterInfo::symbol(const QString&v)
+    void    AbstractDataFilterMeta::symbol(const QString&v)
     {
         m_symbol    = v;
     }
     
-    void    AbstractDataFilterInfo::description(const QString&v)
+    void    AbstractDataFilterMeta::description(const QString&v)
     {
         m_description   = v;
     }
 
-    void    AbstractDataFilterInfo::arg(const QString&n, int t)
+    void    AbstractDataFilterMeta::arg(const QString&n, int t)
     {
         Arg arg;
         arg.name    = n;

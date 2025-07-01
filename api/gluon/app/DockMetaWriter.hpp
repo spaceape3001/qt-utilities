@@ -11,13 +11,13 @@
 
 namespace yq::gluon {
     template <typename C>
-    class DockInfo::Writer : public ObjectMeta::Writer<C> {
+    class DockMeta::Writer : public ObjectMeta::Writer<C> {
     public:
-        Writer(DockInfo* dInfo) : ObjectMeta::Writer<C>(dInfo), m_meta(dInfo)
+        Writer(DockMeta* dInfo) : ObjectMeta::Writer<C>(dInfo), m_meta(dInfo)
         {
         }
         
-        Writer(DockInfo& dInfo) : Writer(&dInfo)
+        Writer(DockMeta& dInfo) : Writer(&dInfo)
         {
         }
 
@@ -71,7 +71,7 @@ namespace yq::gluon {
         }
 
     private:
-        DockInfo*    m_meta;
+        DockMeta*    m_meta;
     };
 
     template <typename Obj> 
