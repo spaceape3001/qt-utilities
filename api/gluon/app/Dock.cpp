@@ -31,7 +31,7 @@ namespace yq::gluon {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    void Dock::init_info()
+    void Dock::init_meta()
     {
         auto w = writer<Dock>();
         w.description("Dock");

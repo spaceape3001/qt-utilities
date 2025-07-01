@@ -41,7 +41,7 @@ namespace yq::gluon {
         GraphicsScene(qreal x, qreal y, qreal width, qreal height, QObject *parent = nullptr);
         ~GraphicsScene();
         
-        static void init_info();
+        static void init_meta();
         
         Flags<AutoDraw> autoDraw() const;
         bool            autoDraw(AutoDraw) const;

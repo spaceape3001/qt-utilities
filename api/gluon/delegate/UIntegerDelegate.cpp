@@ -80,7 +80,7 @@ namespace yq::gluon {
         return v;
     }
 
-    void UIntegerDelegate::init_info()
+    void UIntegerDelegate::init_meta()
     {
         auto w = writer<UIntegerDelegate>();
         w.description("Unsigned integer delegate");

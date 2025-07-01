@@ -51,7 +51,7 @@ namespace yq::gluon {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    void GraphicsView::init_info()
+    void GraphicsView::init_meta()
     {
         auto w = writer<GraphicsView>();
         w.description("Graphics View");

@@ -40,6 +40,6 @@ namespace yq::gluon {
         //! Destructor
         virtual ~ColorComboBoxDelegate();
         
-        static void init_info();
+        static void init_meta();
     };
 }

@@ -48,7 +48,7 @@ namespace yq::gluon {
         YQ_OBJECT_INFO(ObjectQInfo)
         YQ_OBJECT_DECLARE(ObjectQ, Object)
     public:
-        static void init_info();
+        static void init_meta();
         static constexpr const bool kAbstract   = true;
         
         QObject*            qObject();

@@ -79,7 +79,7 @@ namespace yq::gluon {
         return v;
     }
 
-    void IntegerDelegate::init_info()
+    void IntegerDelegate::init_meta()
     {
         auto w = writer<IntegerDelegate>();
         w.description("Integer delegate");

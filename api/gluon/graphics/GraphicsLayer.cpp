@@ -25,7 +25,7 @@ namespace yq::gluon {
 
     ///////////////////////////////////////////////////////////////////////////
 
-    void GraphicsLayer::init_info()
+    void GraphicsLayer::init_meta()
     {
         auto w = writer<GraphicsLayer>();
         w.description("Graphics Layer");

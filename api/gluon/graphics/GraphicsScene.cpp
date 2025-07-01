@@ -33,7 +33,7 @@ namespace yq::gluon {
     
     thread_local bool    GraphicsScene::s_printing = false;
 
-    void GraphicsScene::init_info()
+    void GraphicsScene::init_meta()
     {
         auto w = writer<GraphicsScene>();
         w.description("Graphics Scene");

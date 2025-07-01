@@ -20,7 +20,7 @@ namespace yq::gluon {
     {
     }
 
-    void WidgetQ::init_info()
+    void WidgetQ::init_meta()
     {
         auto w = writer<WidgetQ>();
         w.description("QWidget Wrapper");

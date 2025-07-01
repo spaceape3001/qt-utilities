@@ -44,7 +44,7 @@ namespace yq::gluon {
         //! Display text for value
         virtual QString 	displayText(const QVariant &value, const QLocale &locale) const override;    
 
-        static void init_info();
+        static void init_meta();
 
     private:
         const EnumDef*      m_enum = nullptr;

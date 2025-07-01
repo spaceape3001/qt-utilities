@@ -44,7 +44,7 @@ namespace yq::gluon {
         connect(editor, SIGNAL(dirPathChanged(const QString&)), other, slot);
     }
 
-    void DirBoxDelegate::init_info()
+    void DirBoxDelegate::init_meta()
     {
         auto w = writer<DirBoxDelegate>();
         w.description("Delegate that's a directory box");

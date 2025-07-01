@@ -75,7 +75,7 @@ namespace yq::gluon {
             //return Delegate::paint(painter, option, var);
     //}
 
-    void GenericEnumComboBoxDelegate::init_info()
+    void GenericEnumComboBoxDelegate::init_meta()
     {
         auto w = writer<GenericEnumComboBoxDelegate>();
         w.description("Enumeration combo box");

@@ -68,7 +68,7 @@ namespace yq::gluon {
         }
     }
     
-    void Delegate::init_info()
+    void Delegate::init_meta()
     {
         auto w = writer<Delegate>();
         w.description("Abstract Delgate");

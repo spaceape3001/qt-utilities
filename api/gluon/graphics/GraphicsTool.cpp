@@ -26,7 +26,7 @@ namespace yq::gluon {
         
     ///////////////////////////////////////////////////////////////////////////
 
-    void GraphicsTool::init_info()
+    void GraphicsTool::init_meta()
     {
         auto w = writer<GraphicsTool>();
         w.description("Graphics Tool");

@@ -54,7 +54,7 @@ namespace yq::gluon {
         return d.toString(Qt::ISODate);
     }
 
-    void NullableDateDelegate::init_info()
+    void NullableDateDelegate::init_meta()
     {
         auto w = writer<NullableDateDelegate>();
         w.description("Nullable Date Delegate");

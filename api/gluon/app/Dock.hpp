@@ -63,7 +63,7 @@ namespace yq::gluon {
     
         QAction*    action() const { return m_action; }
         
-        static void init_info();
+        static void init_meta();
     
     protected:
         Dock(QWidget*parent=nullptr);

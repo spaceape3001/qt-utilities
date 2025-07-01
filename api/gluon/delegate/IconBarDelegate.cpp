@@ -129,7 +129,7 @@ namespace yq::gluon {
         return m_size;
     }
 
-    void IconBarDelegate::init_info()
+    void IconBarDelegate::init_meta()
     {
         auto w = writer<IconBarDelegate>();
         w.description("Panel of icons");

@@ -45,7 +45,7 @@ namespace yq::gluon {
         //! Connects the edited signal
         virtual void        connectEditedSignal(QWidget*, QObject*, const char*) const override;
 
-        static void init_info();
+        static void init_meta();
     };
 
 }

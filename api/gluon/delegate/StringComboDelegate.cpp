@@ -58,7 +58,7 @@ namespace yq::gluon {
         m_suggest.sort(Qt::CaseInsensitive);
     }
 
-    void StringComboDelegate::init_info()
+    void StringComboDelegate::init_meta()
     {
         auto w = writer<StringComboDelegate>();
         w.description("String Combo Delegate");

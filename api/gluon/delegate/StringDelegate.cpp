@@ -51,7 +51,7 @@ namespace yq::gluon {
         connect(editor, SIGNAL(textEdited(const QString&)), other, slot);
     }
 
-    void StringDelegate::init_info()
+    void StringDelegate::init_meta()
     {
         auto w = writer<StringDelegate>();
         w.description("String Delegate");

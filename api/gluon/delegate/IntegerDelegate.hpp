@@ -56,7 +56,7 @@ namespace yq::gluon {
         //! TRUE if zero value results in NULL variant
         bool                zeroNull() const { return m_zeroNull; }
 
-        static void init_info();
+        static void init_meta();
         
     public slots:
     

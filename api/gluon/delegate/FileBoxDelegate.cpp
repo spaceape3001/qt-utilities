@@ -44,7 +44,7 @@ namespace yq::gluon {
         connect(editor, SIGNAL(fileChanged(const QString&)), other, slot);
     }
 
-    void FileBoxDelegate::init_info()
+    void FileBoxDelegate::init_meta()
     {
         auto w = writer<FileBoxDelegate>();
         w.description("File Box delegate");

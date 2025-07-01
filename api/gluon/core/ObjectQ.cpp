@@ -20,7 +20,7 @@ namespace yq::gluon {
     {
     }
 
-    void ObjectQ::init_info()
+    void ObjectQ::init_meta()
     {
         auto w = writer<ObjectQ>();
         w.description("QObject Wrapper");

@@ -100,7 +100,7 @@ namespace yq::gluon {
         virtual bool 	    editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;
         virtual bool 	    helpEvent(QHelpEvent *event, QAbstractItemView *view, const QStyleOptionViewItem &option, const QModelIndex &index) override;
         
-        static void init_info();
+        static void init_meta();
 
     protected:
         Delegate(QObject* parent=nullptr);

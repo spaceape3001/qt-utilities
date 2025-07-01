@@ -44,7 +44,7 @@ namespace yq::gluon {
         Q_OBJECT
     public:
         
-        static void init_info();
+        static void init_meta();
         
         virtual QCursor cursor() const;
         virtual QIcon   icon() const;

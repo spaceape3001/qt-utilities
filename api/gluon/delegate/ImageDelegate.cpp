@@ -49,7 +49,7 @@ namespace yq::gluon {
         }
     }
 
-    void ImageDelegate::init_info()
+    void ImageDelegate::init_meta()
     {
         auto w = writer<ImageDelegate>();
         w.description("Image delegate");

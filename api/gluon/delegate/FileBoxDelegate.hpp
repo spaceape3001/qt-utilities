@@ -46,7 +46,7 @@ namespace yq::gluon {
         //  TODO: File Dialog Title
         //  TODO: Consistent Directory location
 
-        static void init_info();
+        static void init_meta();
     };
 }
 

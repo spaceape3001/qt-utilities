@@ -56,7 +56,7 @@ namespace yq::gluon {
         connect(editor, SIGNAL(colorSelected(const QColor&)), other, slot);
     }
 
-    void ColorDelegate::init_info()
+    void ColorDelegate::init_meta()
     {
         auto w = writer<ColorDelegate>();
         w.description("Color Delegate");

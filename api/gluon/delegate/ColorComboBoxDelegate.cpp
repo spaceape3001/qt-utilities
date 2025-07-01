@@ -56,7 +56,7 @@ namespace yq::gluon {
         connect(editor, SIGNAL(currentIndexChanged(int)), other, slot);
     }
     
-    void ColorComboBoxDelegate::init_info()
+    void ColorComboBoxDelegate::init_meta()
     {
         auto w = writer<ColorComboBoxDelegate>();
         w.declare_type<QColor>();

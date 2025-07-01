@@ -34,7 +34,7 @@ namespace yq::gluon {
         //! Size hint for the cell
         virtual QSize       sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const override;
 
-        static void init_info();
+        static void init_meta();
     };
 
 }

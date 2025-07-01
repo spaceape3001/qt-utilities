@@ -41,7 +41,7 @@ namespace yq::gluon {
         //! Connects the given the slot to the editor's edited signal
         virtual void        connectEditedSignal(QWidget*, QObject*, const char*) const;
 
-        static void init_info();
+        static void init_meta();
     };
 
 }

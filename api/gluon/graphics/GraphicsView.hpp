@@ -49,7 +49,7 @@ namespace yq::gluon {
         static constexpr const unsigned kDOUBLE = 8;    // eight steps to double
         static constexpr const double   kROTATE = 2.5;
         
-        static void init_info();
+        static void init_meta();
     
         //! Constructor
         GraphicsView(GraphicsScene*, QWidget*parent=nullptr);

@@ -65,7 +65,7 @@ namespace yq::gluon {
         //! Returns *OUR* visibility (which ignores parent)
         GraphicsVisibility              visibility() const { return m_visibility; }
         
-        static void init_info();
+        static void init_meta();
         
         void        add_item(uint64_t, QGraphicsItem*);
         void        add_items(uint64_t, std::span<QGraphicsItem*>);
