@@ -77,7 +77,7 @@ namespace yq::gluon {
     template <typename Obj> 
     class DockFixer : public ObjectFixer<Obj> {
     public:
-        DockFixer(std::string_view szName, typename Obj::MyBase::MyInfo& myBase, std::source_location sl=std::source_location::current()) : 
+        DockFixer(std::string_view szName, typename Obj::MyBase::MyMeta& myBase, std::source_location sl=std::source_location::current()) : 
             ObjectFixer<Obj>(szName, myBase, sl) 
         {
         }

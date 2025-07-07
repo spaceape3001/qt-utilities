@@ -31,7 +31,7 @@ namespace yq::gluon {
     template <typename C> 
     class WidgetQFixer : public ObjectFixer<C> {
     public:
-        WidgetQFixer(std::string_view szName, typename C::MyBase::MyInfo& myBase, std::source_location sl=std::source_location::current()) : 
+        WidgetQFixer(std::string_view szName, typename C::MyBase::MyMeta& myBase, std::source_location sl=std::source_location::current()) : 
             ObjectFixer<C>(szName, myBase, sl) 
         {
         }
