@@ -60,6 +60,8 @@ namespace yq::gluon {
             }
         }
     };
+    
+    #define YQ_OBJECTQ_IMPLEMENT(...) YQ_OBJECT_IMPLEMENT(__VA_ARGS__)
 }
 
 

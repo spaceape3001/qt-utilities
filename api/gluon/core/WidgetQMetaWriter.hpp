@@ -9,6 +9,8 @@
 #include <gluon/core/WidgetQ.hpp>
 #include <yq/meta/ObjectMetaWriter.hpp>
 
+#define YQ_WIDGETQ_IMPLEMENT(...) YQ_OBJECT_IMPLEMENT(__VA_ARGS__)
+
 namespace yq::gluon {
     /*! \brief Writer of trigger information
     */
@@ -61,5 +63,6 @@ namespace yq::gluon {
         }
     };
 }
+
 
 

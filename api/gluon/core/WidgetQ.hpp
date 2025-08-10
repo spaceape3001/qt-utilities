@@ -33,7 +33,7 @@ namespace yq::gluon {
         
     #define YQ_WIDGETQ_DECLARE(cls, base)                   \
         YQ_OBJECT_DECLARE(cls, base)                        \
-        friend class ::yq::gluon::WidgetQFixer<cls>         \
+        friend class ::yq::gluon::WidgetQFixer<cls>;        \
         static constexpr const bool kAbstract   = false;
     
     /*! \brief Wrapper for QWidget based meta to leverage

@@ -33,7 +33,7 @@ namespace yq::gluon {
         
     #define YQ_OBJECTQ_DECLARE(cls, base)                   \
         YQ_OBJECT_DECLARE(cls, base)                        \
-        friend class ::yq::gluon::ObjectQFixer<cls>         \
+        friend class ::yq::gluon::ObjectQFixer<cls>;        \
         static constexpr const bool kAbstract   = false;
     
     /*! \brief Wrapper for QObject based meta to leverage

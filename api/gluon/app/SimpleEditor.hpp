@@ -15,7 +15,7 @@ namespace yq::gluon {
 
     /*! \brief Simple Editor
     
-        This implements a simple main window as an edtor.
+        This implements a simple main window as an editor.
     */
     class SimpleEditor : public UndoMainWindow
     {
