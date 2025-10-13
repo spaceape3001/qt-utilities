@@ -40,6 +40,8 @@ namespace yq::gluon {
         Q_OBJECT
     public:
 
+        class Action;
+
         /*! \brief Returns the main window that owns said widget
         
             \param[in]  w   Widget to query
@@ -87,8 +89,6 @@ namespace yq::gluon {
         MainWindow();
         virtual ~MainWindow();
 
-        class Action;
-
         const Vector<QString>&  actionKeys() const { return m_actionKeys; }
 
         void                    activateTabs();
@@ -130,7 +130,7 @@ namespace yq::gluon {
         QMenu*                  makeMenu(const QString&, const QString&, const QStringList&, bool fAddToMenuBar=true);
         QMenu*                  makeMenu(const QString&, const QString&, bool fAddToMenuBar=true);
 
-        virtual MainWindow*        newMain() { return nullptr; }
+        virtual MainWindow*     newMain() { return nullptr; }
 
         virtual bool            okayToClose() { return true; }
         

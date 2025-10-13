@@ -8,6 +8,7 @@ project(yq_gluon)
 
 find_package(Qt6 REQUIRED Core Gui Widgets )
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
 add_library(${PROJECT_NAME} SHARED 
     app/Application.hpp
@@ -183,6 +184,8 @@ add_library(${PROJECT_NAME} SHARED
     widget/WidgetTabBar.cpp
     widget/WidgetTabWidget.hpp
     widget/WidgetTabWidget.cpp
+    
+    ${QT_DIR}/res/yqStdResources.qrc
 )    
 
 target_include_directories(${PROJECT_NAME} 

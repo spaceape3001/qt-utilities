@@ -7,6 +7,7 @@
 #pragma once
 
 #include <yq/core/Object.hpp>
+#include <yq/trait/no_hidden_warning.hpp>
 
 class QWidget;
 

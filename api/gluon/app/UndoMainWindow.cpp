@@ -14,8 +14,8 @@ namespace yq::gluon {
     {
         m_undo      = new QUndoStack(this);
         
-        QAction * undo = addAction("undo", tr("Undo")).shortcut(tr("Ctrl+Z")).connect(m_undo, &QUndoStack::undo);
-        QAction * redo = addAction("redo", tr("Redo")).shortcut(tr("Ctrl+Shift+Z")).connect(m_undo, &QUndoStack::redo);
+        QAction * undo = addAction("undo", tr("Undo")).shortcut(tr("Ctrl+Z")).icon(":icon/edit/undo.svg").connect(m_undo, &QUndoStack::undo);
+        QAction * redo = addAction("redo", tr("Redo")).shortcut(tr("Ctrl+Shift+Z")).icon(":icon/edit/redo.svg").connect(m_undo, &QUndoStack::redo);
         connect(m_undo, &QUndoStack::canRedoChanged, redo, &QAction::setEnabled);
         connect(m_undo, &QUndoStack::canUndoChanged, undo, &QAction::setEnabled);
         

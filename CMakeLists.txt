@@ -14,5 +14,8 @@ endif()
 include(local.cmake OPTIONAL)
 include(configure.cmake)
 include(yq-toolbox/standard.cmake)
+
+qt_data(data)
+
 YQRepo()
 

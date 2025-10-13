@@ -1,0 +1,55 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+
+    <!-- These are to be commonly used icons/resources, worth the extra binary size -->
+
+    <file alias="icon/cancel.svg">openIcon/actions/edit-delete-4.svg</file>
+
+    <file alias="icon/edit/clear.svg">openIcon/actions/edit-clear-4.svg</file>
+    <file alias="icon/edit/copy.svg">openIcon/actions/edit-copy-6.svg</file>
+    <file alias="icon/edit/cut.svg">openIcon/actions/edit-cut-4.svg</file>
+    <file alias="icon/edit/delete.svg">openIcon/actions/edit-delete-2.svg</file>
+    <file alias="icon/edit/find.svg">openIcon/actions/edit-find-3.svg</file>
+    <file alias="icon/edit/paste.svg">openIcon/actions/edit-paste-3.svg</file>
+    <file alias="icon/edit/redo.svg">openIcon/actions/edit-redo-3.svg</file>
+    <file alias="icon/edit/undo.svg">openIcon/actions/edit-undo-3.svg</file>
+    
+    <file alias="icon/file/exit.svg">openIcon/actions/application-exit-2.svg</file>
+    <file alias="icon/file/new.svg">openIcon/actions/document-new-6.svg</file>
+    <file alias="icon/file/open.svg">openIcon/actions/document-open-5.svg</file>
+    <file alias="icon/file/print.svg">openIcon/actions/document-print-2.svg</file>
+    <file alias="icon/file/save.svg">openIcon/actions/document-save-5.svg</file>
+
+    <file alias="icon/go/bottom.svg">openIcon/actions/go-bottom-4.svg</file>
+    <file alias="icon/go/down.svg">openIcon/actions/go-down-5.svg</file>
+    <file alias="icon/go/first.svg">openIcon/actions/go-first-3.svg</file>
+    <file alias="icon/go/home.svg">openIcon/actions/go-home-5.svg</file>
+    <file alias="icon/go/last.svg">openIcon/actions/go-last-3.svg</file>
+    <file alias="icon/go/next.svg">openIcon/actions/go-next-5.svg</file>
+    <file alias="icon/go/previous.svg">openIcon/actions/go-previous-5.svg</file>
+    <file alias="icon/go/top.svg">openIcon/actions/go-top-4.svg</file>
+    <file alias="icon/go/up.svg">openIcon/actions/go-up-5.svg</file>
+    
+    <file alias="icon/list/add.svg">openIcon/actions/list-add-4.svg</file>
+    <file alias="icon/list/remove.svg">openIcon/actions/list-remove-4.svg</file>
+    
+    <file alias="icon/nav/down.svg">openIcon/actions/arrow-down-3.svg</file>
+    <file alias="icon/nav/downDouble.svg">openIcon/actions/arrow-down-double-3.svg</file>
+    <file alias="icon/nav/left.svg">openIcon/actions/arrow-left-3.svg</file>
+    <file alias="icon/nav/leftDouble.svg">openIcon/actions/arrow-left-double-3.svg</file>
+    <file alias="icon/nav/right.svg">openIcon/actions/arrow-right-3.svg</file>
+    <file alias="icon/nav/rightDouble.svg">openIcon/actions/arrow-right-double-3.svg</file>
+    <file alias="icon/nav/up.svg">openIcon/actions/arrow-up-3.svg</file>
+    <file alias="icon/nav/upDouble.svg">openIcon/actions/arrow-up-double-3.svg</file>
+    
+    <file alias="icon/process/stop.svg">openIcon/actions/process-stop-4.svg</file>
+
+    <file alias="icon/view/fullscreen.svg">openIcon/actions/view-fullscreen-4.svg</file>
+    <file alias="icon/view/refresh.svg">openIcon/actions/view-refresh-7.svg</file>
+    <file alias="icon/view/zoomIn.svg">openIcon/actions/zoom-in-3.svg</file>
+    <file alias="icon/view/zoomOut.svg">openIcon/actions/zoom-out-3.svg</file>
+
+    
+</qresource>
+</RCC>
+
