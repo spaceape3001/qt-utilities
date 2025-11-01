@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/edit/CheckBox.hpp>
+#include <yq/gluon/edit/CheckBox.hpp>
 
 namespace yq::gluon {
     CheckBox::CheckBox(QWidget* parent) : QCheckBox(parent)

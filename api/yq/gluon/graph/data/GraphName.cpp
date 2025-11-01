@@ -4,8 +4,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/graph/preamble.hpp>
-#include <gluon/core/Utilities.hpp>
+#include <yq/gluon/graph/preamble.hpp>
+#include <yq/gluon/core/Utilities.hpp>
 #include "GraphName.hpp"
 
 namespace yq::gluon {

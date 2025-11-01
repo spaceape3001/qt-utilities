@@ -4,9 +4,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/delegate/ColorComboBoxDelegate.hpp>
-#include <gluon/delegate/DelegateMetaWriter.hpp>
-#include <gluon/edit/ColorComboBox.hpp>
+#include <yq/gluon/delegate/ColorComboBoxDelegate.hpp>
+#include <yq/gluon/delegate/DelegateMetaWriter.hpp>
+#include <yq/gluon/edit/ColorComboBox.hpp>
 #include <QPainter>
 
 namespace yq::gluon {

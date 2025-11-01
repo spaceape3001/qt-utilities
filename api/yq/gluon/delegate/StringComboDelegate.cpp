@@ -4,10 +4,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/delegate/StringComboDelegate.hpp>
-#include <gluon/delegate/DelegateMetaWriter.hpp>
-#include <gluon/edit/ComboBox.hpp>
-#include <gluon/core/Utilities.hpp>
+#include <yq/gluon/delegate/StringComboDelegate.hpp>
+#include <yq/gluon/delegate/DelegateMetaWriter.hpp>
+#include <yq/gluon/edit/ComboBox.hpp>
+#include <yq/gluon/core/Utilities.hpp>
 
 namespace yq::gluon {
     StringComboDelegate::StringComboDelegate(QObject* parent) : Delegate(parent), m_freeEdit(true)

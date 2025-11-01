@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <gluon/preamble.hpp>
-#include <gluon/undo/UndoBase.hpp>
+#include <yq/gluon/preamble.hpp>
+#include <yq/gluon/undo/UndoBase.hpp>
 #include <QWidget>
 
 namespace yq::gluon {

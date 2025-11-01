@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <gluon/graph/preamble.hpp>
+#include <yq/gluon/graph/preamble.hpp>
 #include <QStringList>
 
 namespace yq::gluon {

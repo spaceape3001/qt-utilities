@@ -4,9 +4,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/edit/NullableDateEdit.hpp>
-#include <gluon/edit/CheckBox.hpp>
-#include <gluon/edit/DateEdit.hpp>
+#include <yq/gluon/edit/NullableDateEdit.hpp>
+#include <yq/gluon/edit/CheckBox.hpp>
+#include <yq/gluon/edit/DateEdit.hpp>
 
 #include <QHBoxLayout>
 

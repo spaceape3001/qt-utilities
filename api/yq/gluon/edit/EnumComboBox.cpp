@@ -4,8 +4,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/edit/EnumComboBox.hpp>
-#include <gluon/core/Utilities.hpp>
+#include <yq/gluon/edit/EnumComboBox.hpp>
+#include <yq/gluon/core/Utilities.hpp>
 #include <cassert>
 
 namespace yq::gluon {

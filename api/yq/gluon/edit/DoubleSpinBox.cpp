@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/edit/DoubleSpinBox.hpp>
+#include <yq/gluon/edit/DoubleSpinBox.hpp>
 
 namespace yq::gluon {
     DoubleSpinBox::DoubleSpinBox(QWidget*parent) : QDoubleSpinBox(parent)

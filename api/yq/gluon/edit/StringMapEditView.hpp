@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <gluon/edit/StringMapEdit.hpp>
+#include <yq/gluon/edit/StringMapEdit.hpp>
 #include <QTableView>
 
 namespace yq::gluon {

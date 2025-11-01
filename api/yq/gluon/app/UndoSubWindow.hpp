@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <gluon/app/SubWindow.hpp>
-#include <gluon/undo/UndoCallback.hpp>
+#include <yq/gluon/app/SubWindow.hpp>
+#include <yq/gluon/undo/UndoCallback.hpp>
 
 class QUndoCommand;
 class QUndoStack;

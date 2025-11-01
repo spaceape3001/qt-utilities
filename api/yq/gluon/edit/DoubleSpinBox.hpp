@@ -7,7 +7,7 @@
 #pragma once
 
 #include <QDoubleSpinBox>
-#include <gluon/undo/UndoBase.hpp>
+#include <yq/gluon/undo/UndoBase.hpp>
 
 namespace yq::gluon {
 

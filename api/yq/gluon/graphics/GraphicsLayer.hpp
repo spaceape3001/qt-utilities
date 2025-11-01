@@ -10,10 +10,10 @@
 #include <map>
 #include <span>
 
-#include <gluon/graphics/GraphicsVisibility.hpp>
-#include <gluon/core/ObjectQ.hpp>
+#include <yq/gluon/graphics/GraphicsVisibility.hpp>
+#include <yq/gluon/core/ObjectQ.hpp>
 #include <yq/core/UniqueID.hpp>
-#include <gluon/keywords.hpp>
+#include <yq/gluon/keywords.hpp>
 
 class QGraphicsItem;
 class QPainter;

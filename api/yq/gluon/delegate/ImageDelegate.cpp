@@ -4,8 +4,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/delegate/ImageDelegate.hpp>
-#include <gluon/delegate/DelegateMetaWriter.hpp>
+#include <yq/gluon/delegate/ImageDelegate.hpp>
+#include <yq/gluon/delegate/DelegateMetaWriter.hpp>
 #include <QPainter>
 
 namespace yq::gluon {

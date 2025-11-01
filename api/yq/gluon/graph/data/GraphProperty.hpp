@@ -7,7 +7,7 @@
 #pragma once
 
 #include <yq/graph/Graph.hpp>
-#include <gluon/graph/data/GraphName.hpp>
+#include <yq/gluon/graph/data/GraphName.hpp>
 #include <QVariant>
 
 namespace yq::gluon {

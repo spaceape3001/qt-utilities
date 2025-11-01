@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <gluon/core/WidgetQ.hpp>
+#include <yq/gluon/core/WidgetQ.hpp>
 #include <yq/meta/ObjectMetaWriter.hpp>
 
 #define YQ_WIDGETQ_IMPLEMENT(...) YQ_OBJECT_IMPLEMENT(__VA_ARGS__)

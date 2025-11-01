@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/core/RefQ.hpp>
+#include <yq/gluon/core/RefQ.hpp>
 #include <QObject>
 
 namespace yq::gluon {

@@ -8,7 +8,7 @@
 
 #include <QWidget>
 #include <optional>
-#include <gluon/undo/UndoBase.hpp>
+#include <yq/gluon/undo/UndoBase.hpp>
 
 class QToolButton;
 

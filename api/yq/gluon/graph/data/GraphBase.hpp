@@ -7,8 +7,8 @@
 #pragma once
 
 #include <yq/graph/Graph.hpp>
-#include <gluon/graph/data/GraphName.hpp>
-#include <gluon/graph/data/GraphProperty.hpp>
+#include <yq/gluon/graph/data/GraphName.hpp>
+#include <yq/gluon/graph/data/GraphProperty.hpp>
 #include <QList>
 
 namespace yq::gluon {

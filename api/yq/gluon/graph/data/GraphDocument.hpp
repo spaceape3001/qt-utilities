@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <gluon/graph/data/GraphBase.hpp>
-#include <gluon/graph/data/GraphGraph.hpp>
+#include <yq/gluon/graph/data/GraphBase.hpp>
+#include <yq/gluon/graph/data/GraphGraph.hpp>
 
 namespace yq::gluon {
     class GraphDocument : public GraphBase {

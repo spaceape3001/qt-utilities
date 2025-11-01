@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <gluon/graph/data/GraphPinned.hpp>
+#include <yq/gluon/graph/data/GraphPinned.hpp>
 
 namespace yq::gluon {
     class GraphNode : public GraphPinned {

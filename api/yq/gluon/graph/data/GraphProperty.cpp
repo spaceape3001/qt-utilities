@@ -6,7 +6,7 @@
 
 #include "GraphBase.hpp"
 #include "GraphProperty.hpp"
-#include <gluon/preamble.hpp>
+#include <yq/gluon/preamble.hpp>
 
 namespace yq::gluon {
     GraphProperty::GraphProperty(GraphBase*parent) : GraphName(parent)

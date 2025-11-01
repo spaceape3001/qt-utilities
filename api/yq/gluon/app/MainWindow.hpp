@@ -14,7 +14,7 @@
 #include <yq/container/Map.hpp>
 #include <yq/container/Set.hpp>
 #include <yq/container/Vector.hpp>
-#include <gluon/core/IgCaseQ.hpp>
+#include <yq/gluon/core/IgCaseQ.hpp>
 
 class QMenu;
 

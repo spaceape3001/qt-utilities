@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/app/SubWindow.hpp>
+#include <yq/gluon/app/SubWindow.hpp>
 #include <yq/core/ThreadId.hpp>
 #include <QTimer>
 #include <QVBoxLayout>

@@ -4,8 +4,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/edit/DirBox.hpp>
-#include <gluon/edit/LineEdit.hpp>
+#include <yq/gluon/edit/DirBox.hpp>
+#include <yq/gluon/edit/LineEdit.hpp>
 
 #include <QFileDialog>
 #include <QHBoxLayout>

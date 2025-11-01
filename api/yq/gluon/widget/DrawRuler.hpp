@@ -10,7 +10,7 @@
 #include <QColor>
 #include <QtGlobal>
 #include <yq/core/Ref.hpp>
-#include <gluon/preamble.hpp>
+#include <yq/gluon/preamble.hpp>
 
 namespace yq::gluon {
 

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <gluon/core/ObjectQ.hpp>
+#include <yq/gluon/core/ObjectQ.hpp>
 #include <yq/meta/ObjectMetaWriter.hpp>
 
 namespace yq::gluon {

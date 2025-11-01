@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/core/IgCaseQ.hpp>
+#include <yq/gluon/core/IgCaseQ.hpp>
 
 #include <QByteArray>
 #include <QString>

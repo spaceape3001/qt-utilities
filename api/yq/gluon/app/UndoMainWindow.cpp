@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "UndoMainWindow.hpp"
-#include <gluon/undo/UndoBase.hpp>
+#include <yq/gluon/undo/UndoBase.hpp>
 #include <QMetaMethod>
 #include <QUndoStack>
 

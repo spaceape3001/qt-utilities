@@ -4,9 +4,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/edit/StringSetCheck.hpp>
-#include <gluon/edit/CheckBox.hpp>
-#include <gluon/layout/FlowLayout.hpp>
+#include <yq/gluon/edit/StringSetCheck.hpp>
+#include <yq/gluon/edit/CheckBox.hpp>
+#include <yq/gluon/layout/FlowLayout.hpp>
 #include <yq/container/Set.hpp>
 #include <yq/container/Vector.hpp>
 

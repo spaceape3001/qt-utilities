@@ -6,7 +6,7 @@
 
 #include "GraphicsScene.hpp"
 #include "GraphicsSceneMetaWriter.hpp"
-#include <gluon/graphics/GraphicsLayer.hpp>
+#include <yq/gluon/graphics/GraphicsLayer.hpp>
 
 #include <QGraphicsItem>
 #include <QPainter>

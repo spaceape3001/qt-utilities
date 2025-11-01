@@ -4,10 +4,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/delegate/EnumComboBoxDelegate.hpp>
-#include <gluon/delegate/DelegateMetaWriter.hpp>
-#include <gluon/edit/EnumComboBox.hpp>
-#include <gluon/core/Utilities.hpp>
+#include <yq/gluon/delegate/EnumComboBoxDelegate.hpp>
+#include <yq/gluon/delegate/DelegateMetaWriter.hpp>
+#include <yq/gluon/edit/EnumComboBox.hpp>
+#include <yq/gluon/core/Utilities.hpp>
 
 namespace yq::gluon {
     GenericEnumComboBoxDelegate::GenericEnumComboBoxDelegate(const yq::EnumDef*def, QMetaType type, QObject *parent) : 

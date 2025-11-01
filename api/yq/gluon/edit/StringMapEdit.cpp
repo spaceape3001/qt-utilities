@@ -8,8 +8,8 @@
 #include "StringMapEditModel.hpp"
 #include "StringMapEditView.hpp"
 
-#include <gluon/core/IgCaseQ.hpp>
-#include <gluon/core/Utilities.hpp>
+#include <yq/gluon/core/IgCaseQ.hpp>
+#include <yq/gluon/core/Utilities.hpp>
 #include <yq/container/Vector.hpp>
 #include <yq/container/Map.hpp>
 

@@ -39,7 +39,7 @@
      **
      ****************************************************************************/
 
-#include <gluon/layout/FlowLayout.hpp>
+#include <yq/gluon/layout/FlowLayout.hpp>
 
 #include <QWidgetItem>
 #include <QLayoutItem>

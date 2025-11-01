@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <gluon/graph/data/GraphBase.hpp>
+#include <yq/gluon/graph/data/GraphBase.hpp>
 
 namespace yq::gluon {
     class GraphPin : public GraphBase {

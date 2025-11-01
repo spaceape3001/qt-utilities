@@ -8,7 +8,7 @@
 
 #include <QAbstractTableModel>
 #include <yq/trait/indices.hpp>
-#include <gluon/keywords.hpp>
+#include <yq/gluon/keywords.hpp>
 #include <variant>
 #include <yq/core/Compare.hpp>
 

@@ -4,9 +4,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/delegate/IntegerDelegate.hpp>
-#include <gluon/delegate/DelegateMetaWriter.hpp>
-#include <gluon/edit/SpinBox.hpp>
+#include <yq/gluon/delegate/IntegerDelegate.hpp>
+#include <yq/gluon/delegate/DelegateMetaWriter.hpp>
+#include <yq/gluon/edit/SpinBox.hpp>
 
 namespace yq::gluon {
     IntegerDelegate::IntegerDelegate(QObject* parent) : Delegate(parent)

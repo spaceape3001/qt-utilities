@@ -5,8 +5,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <yq/core/ThreadId.hpp>
-#include <gluon/core/Utilities.hpp>
-#include <gluon/core/Logging.hpp>
+#include <yq/gluon/core/Utilities.hpp>
+#include <yq/gluon/core/Logging.hpp>
 
 #include <QDate>
 #include <QDateTime>

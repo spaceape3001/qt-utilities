@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/edit/SpinBox.hpp>
+#include <yq/gluon/edit/SpinBox.hpp>
 
 namespace yq::gluon {
     SpinBox::SpinBox(QWidget*parent) : QSpinBox(parent)

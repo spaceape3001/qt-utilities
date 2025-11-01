@@ -4,9 +4,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/delegate/FileBoxDelegate.hpp>
-#include <gluon/delegate/DelegateMetaWriter.hpp>
-#include <gluon/edit/FileBox.hpp>
+#include <yq/gluon/delegate/FileBoxDelegate.hpp>
+#include <yq/gluon/delegate/DelegateMetaWriter.hpp>
+#include <yq/gluon/edit/FileBox.hpp>
 
 namespace yq::gluon {
     FileBoxDelegate::FileBoxDelegate(QObject*parent) : Delegate(parent)

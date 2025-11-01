@@ -190,7 +190,7 @@ add_library(${PROJECT_NAME} SHARED
 
 target_include_directories(${PROJECT_NAME} 
     PUBLIC
-        ${CMAKE_CURRENT_LIST_DIR}/..
+        ${GLUON_API_DIR}
 )
 
 target_compile_definitions(${PROJECT_NAME}

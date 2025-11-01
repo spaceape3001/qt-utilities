@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <gluon/delegate/Delegate.hpp>
+#include <yq/gluon/delegate/Delegate.hpp>
 #include <yq/container/Vector.hpp>
 
 namespace yq::gluon {

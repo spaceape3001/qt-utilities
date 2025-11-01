@@ -9,7 +9,7 @@
 #include <QObject>
 #include <QColor>
 #include <vector>
-#include <gluon/core/RefQ.hpp>
+#include <yq/gluon/core/RefQ.hpp>
 
 namespace yq::gluon {
 

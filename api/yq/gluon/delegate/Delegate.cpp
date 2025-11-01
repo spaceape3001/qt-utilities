@@ -5,8 +5,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <tbb/spin_rw_mutex.h>
-#include <gluon/delegate/Delegate.hpp>
-#include <gluon/delegate/DelegateMetaWriter.hpp>
+#include <yq/gluon/delegate/Delegate.hpp>
+#include <yq/gluon/delegate/DelegateMetaWriter.hpp>
 //#include "core/Map.hpp"
 //#include "core/Vector.hpp"
 

@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/validator/XmlIdentifierValidator.hpp>
+#include <yq/gluon/validator/XmlIdentifierValidator.hpp>
 
 namespace yq::gluon {
     XmlIdentifierValidator::XmlIdentifierValidator(QObject*parent) : QValidator(parent)

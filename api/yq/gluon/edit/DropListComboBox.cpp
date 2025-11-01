@@ -4,9 +4,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/edit/DropListComboBox.hpp>
-#include <gluon/core/IgCaseQ.hpp>
-#include <gluon/core/Utilities.hpp>
+#include <yq/gluon/edit/DropListComboBox.hpp>
+#include <yq/gluon/core/IgCaseQ.hpp>
+#include <yq/gluon/core/Utilities.hpp>
 #include <yq/container/Set.hpp>
 
 #include <QAbstractItemView>

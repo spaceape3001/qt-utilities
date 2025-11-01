@@ -7,11 +7,11 @@
 #include "MainWindow.hpp"
 
 #include <yq/core/ThreadId.hpp>
-#include <gluon/app/Dock.hpp>
-#include <gluon/app/SubWindow.hpp>
-#include <gluon/core/Utilities.hpp>
-#include <gluon/widget/WidgetTabBar.hpp>
-#include <gluon/widget/WidgetTabWidget.hpp>
+#include <yq/gluon/app/Dock.hpp>
+#include <yq/gluon/app/SubWindow.hpp>
+#include <yq/gluon/core/Utilities.hpp>
+#include <yq/gluon/widget/WidgetTabBar.hpp>
+#include <yq/gluon/widget/WidgetTabWidget.hpp>
 
 #include <QCloseEvent>
 #include <QDockWidget>

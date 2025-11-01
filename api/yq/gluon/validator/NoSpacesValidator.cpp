@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/validator/NoSpacesValidator.hpp>
+#include <yq/gluon/validator/NoSpacesValidator.hpp>
 
 namespace yq::gluon {
     NoSpacesValidator::NoSpacesValidator(QObject*parent) : QValidator(parent)

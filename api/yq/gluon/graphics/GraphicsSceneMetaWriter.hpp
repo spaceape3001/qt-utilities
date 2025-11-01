@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <gluon/graphics/GraphicsScene.hpp>
-#include <gluon/core/ObjectQMetaWriter.hpp>
+#include <yq/gluon/graphics/GraphicsScene.hpp>
+#include <yq/gluon/core/ObjectQMetaWriter.hpp>
 
 namespace yq::gluon {
     

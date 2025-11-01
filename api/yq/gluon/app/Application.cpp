@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "Application.hpp"
-#include <gluon/core/Logging.hpp>
+#include <yq/gluon/core/Logging.hpp>
 
 namespace yq::gluon {
     namespace {

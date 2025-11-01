@@ -11,7 +11,7 @@
 #include <QPen>
 
 #include <yq/core/Flags.hpp>
-#include <gluon/core/WidgetQ.hpp>
+#include <yq/gluon/core/WidgetQ.hpp>
 
 namespace yq::gluon {
     class GraphicsScene;

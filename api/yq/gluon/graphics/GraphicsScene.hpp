@@ -7,7 +7,7 @@
 #pragma once
 
 #include <QGraphicsScene>
-#include <gluon/core/ObjectQ.hpp>
+#include <yq/gluon/core/ObjectQ.hpp>
 #include <yq/core/Flags.hpp>
 
 namespace yq::gluon {

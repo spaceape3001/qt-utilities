@@ -10,7 +10,7 @@
 #include <QIcon>
 #include <QKeySequence>
 #include <yq/core/Object.hpp>
-#include <gluon/core/Action.hpp>
+#include <yq/gluon/core/Action.hpp>
 
 class QAction;
 

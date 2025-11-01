@@ -4,8 +4,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/edit/FileBox.hpp>
-#include <gluon/edit/LineEdit.hpp>
+#include <yq/gluon/edit/FileBox.hpp>
+#include <yq/gluon/edit/LineEdit.hpp>
 
 #include <QFileDialog>
 #include <QHBoxLayout>

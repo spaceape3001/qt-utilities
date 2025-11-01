@@ -6,8 +6,8 @@
 
 #include "GraphEdge.hpp"
 #include "GraphSocket.hpp"
-#include <gluon/preamble.hpp>
-#include <gluon/core/Utilities.hpp>
+#include <yq/gluon/preamble.hpp>
+#include <yq/gluon/core/Utilities.hpp>
 
 namespace yq::gluon {
     GraphEdge::GraphEdge(QObject* parent) : GraphBase(parent)

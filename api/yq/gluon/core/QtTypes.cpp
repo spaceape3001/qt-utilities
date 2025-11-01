@@ -5,8 +5,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <tbb/spin_rw_mutex.h>
-#include <gluon/preamble.hpp>
-#include <gluon/core/QtTypes.hpp>
+#include <yq/gluon/preamble.hpp>
+#include <yq/gluon/core/QtTypes.hpp>
 #include <QMetaType>
 #include <QVariant>
 #include <yq/core/Any.hpp>

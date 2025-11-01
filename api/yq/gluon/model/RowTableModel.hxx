@@ -6,11 +6,11 @@
 
 #pragma once
 
-#include <gluon/model/RowTableModel.hpp>
-#include <gluon/model/ColumnModel.hpp>
+#include <yq/gluon/model/RowTableModel.hpp>
+#include <yq/gluon/model/ColumnModel.hpp>
 #include <yq/algorithm/DiffEngine.hpp>
-#include <gluon/core/Utilities.hpp>
-#include <gluon/delegate/Delegate.hpp>
+#include <yq/gluon/core/Utilities.hpp>
+#include <yq/gluon/delegate/Delegate.hpp>
 
 namespace yq::gluon {
     template <typename T, typename ... P>

@@ -4,9 +4,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/delegate/NullableDateDelegate.hpp>
-#include <gluon/delegate/DelegateMetaWriter.hpp>
-#include <gluon/edit/NullableDateEdit.hpp>
+#include <yq/gluon/delegate/NullableDateDelegate.hpp>
+#include <yq/gluon/delegate/DelegateMetaWriter.hpp>
+#include <yq/gluon/edit/NullableDateEdit.hpp>
 
 #include <QDate>
 

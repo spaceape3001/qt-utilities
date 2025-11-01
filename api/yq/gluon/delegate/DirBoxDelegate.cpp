@@ -4,9 +4,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/delegate/DirBoxDelegate.hpp>
-#include <gluon/delegate/DelegateMetaWriter.hpp>
-#include <gluon/edit/DirBox.hpp>
+#include <yq/gluon/delegate/DirBoxDelegate.hpp>
+#include <yq/gluon/delegate/DelegateMetaWriter.hpp>
+#include <yq/gluon/edit/DirBox.hpp>
 
 namespace yq::gluon {
     DirBoxDelegate::DirBoxDelegate(QObject*parent) : Delegate(parent)

@@ -4,9 +4,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/delegate/NullableDateTimeDelegate.hpp>
-#include <gluon/edit/NullableDateTimeEdit.hpp>
-#include <gluon/delegate/DelegateMetaWriter.hpp>
+#include <yq/gluon/delegate/NullableDateTimeDelegate.hpp>
+#include <yq/gluon/edit/NullableDateTimeEdit.hpp>
+#include <yq/gluon/delegate/DelegateMetaWriter.hpp>
 #include <QDateTime>
 
 namespace yq::gluon {

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <gluon/edit/ComboBox.hpp>
+#include <yq/gluon/edit/ComboBox.hpp>
 
 class QColor;
 

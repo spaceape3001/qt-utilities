@@ -7,7 +7,7 @@
 #include "GraphicsLayer.hpp"
 #include "GraphicsLayerMetaWriter.hpp"
 
-#include <gluon/graphics/GraphicsScene.hpp>
+#include <yq/gluon/graphics/GraphicsScene.hpp>
 #include <QGraphicsItem>
 #include <QStyleOptionGraphicsItem>
 

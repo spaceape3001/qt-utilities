@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <gluon/core/Logging.hpp>
+#include <yq/gluon/core/Logging.hpp>
 
 #define gluonAlert                    yAlert("gluon")
 #define gluonCritical                 yCritical("gluon")

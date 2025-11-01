@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/edit/ComboBox.hpp>
+#include <yq/gluon/edit/ComboBox.hpp>
 
 namespace yq::gluon {
     ComboBox::ComboBox(QWidget* parent) : QComboBox(parent)

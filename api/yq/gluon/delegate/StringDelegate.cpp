@@ -4,10 +4,10 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/delegate/StringDelegate.hpp>
-#include <gluon/delegate/DelegateMetaWriter.hpp>
-#include <gluon/core/Utilities.hpp>
-#include <gluon/edit/LineEdit.hpp>
+#include <yq/gluon/delegate/StringDelegate.hpp>
+#include <yq/gluon/delegate/DelegateMetaWriter.hpp>
+#include <yq/gluon/core/Utilities.hpp>
+#include <yq/gluon/edit/LineEdit.hpp>
 
 namespace yq::gluon {
     StringDelegate::StringDelegate(QObject*parent) : StringDelegate(nullptr, parent)

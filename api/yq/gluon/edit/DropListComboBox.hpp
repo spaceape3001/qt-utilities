@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <gluon/preamble.hpp>
-#include <gluon/edit/ComboBox.hpp>
+#include <yq/gluon/preamble.hpp>
+#include <yq/gluon/edit/ComboBox.hpp>
 #include <yq/container/Vector.hpp>
 
 class QStandardItem;

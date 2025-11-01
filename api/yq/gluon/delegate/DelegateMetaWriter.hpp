@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/delegate/Delegate.hpp>
+#include <yq/gluon/delegate/Delegate.hpp>
 #include <yq/meta/ObjectMetaWriter.hpp>
 
 namespace yq::gluon {

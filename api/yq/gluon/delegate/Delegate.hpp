@@ -12,8 +12,8 @@
 #include <yq/core/DelayInit.hpp>
 #include <yq/core/Object.hpp>
 #include <source_location>
-#include <gluon/preamble.hpp>
-#include <gluon/core/RefQ.hpp>
+#include <yq/gluon/preamble.hpp>
+#include <yq/gluon/core/RefQ.hpp>
 #include <QMetaType>
 
 namespace yq::gluon {

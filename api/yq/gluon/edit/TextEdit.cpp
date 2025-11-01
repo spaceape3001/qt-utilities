@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/edit/TextEdit.hpp>
+#include <yq/gluon/edit/TextEdit.hpp>
 
 namespace yq::gluon {
     TextEdit::TextEdit(QWidget*parent) : QTextEdit(parent)

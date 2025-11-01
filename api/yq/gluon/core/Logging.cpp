@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/core/Logging.hpp>
+#include <yq/gluon/core/Logging.hpp>
 
 #include <QByteArray>
 #include <QDate>

@@ -22,9 +22,9 @@
 #include <QScreen>
 #include <QWheelEvent>
 
-#include <gluon/logging.hpp>
-#include <gluon/graphics/GraphicsScene.hpp>
-#include <gluon/graphics/GraphicsTool.hpp>
+#include <yq/gluon/logging.hpp>
+#include <yq/gluon/graphics/GraphicsScene.hpp>
+#include <yq/gluon/graphics/GraphicsTool.hpp>
 
 YQ_OBJECT_IMPLEMENT(yq::gluon::GraphicsView)
 

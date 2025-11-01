@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <gluon/preamble.hpp>
+#include <yq/gluon/preamble.hpp>
 #include <yq/core/Compare.hpp>
 #include <QString>
 #include <QList>

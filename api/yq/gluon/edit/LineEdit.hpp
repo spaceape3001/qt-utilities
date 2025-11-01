@@ -7,7 +7,7 @@
 #pragma once
 
 #include <QLineEdit>
-#include <gluon/undo/UndoBase.hpp>
+#include <yq/gluon/undo/UndoBase.hpp>
 #include <optional>
 
 namespace yq::gluon {

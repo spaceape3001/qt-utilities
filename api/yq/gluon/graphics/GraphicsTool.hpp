@@ -8,7 +8,7 @@
 
 #include <QObject>
 #include <yq/core/UniqueID.hpp>
-#include <gluon/core/ObjectQ.hpp>
+#include <yq/gluon/core/ObjectQ.hpp>
 
 class QIcon;
 class QCursor;

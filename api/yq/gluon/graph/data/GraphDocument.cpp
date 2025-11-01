@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/graph/data/GraphDocument.hpp>
+#include <yq/gluon/graph/data/GraphDocument.hpp>
 
 namespace yq::gluon {
     GraphDocument::GraphDocument(QObject* parent) : GraphBase(parent)

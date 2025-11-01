@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/edit/ColorComboBox.hpp>
+#include <yq/gluon/edit/ColorComboBox.hpp>
 
 namespace yq::gluon {
     ColorComboBox::ColorComboBox(QWidget* parent) : ComboBox(parent)

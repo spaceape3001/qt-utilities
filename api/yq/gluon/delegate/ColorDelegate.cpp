@@ -4,8 +4,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/delegate/ColorDelegate.hpp>
-#include <gluon/delegate/DelegateMetaWriter.hpp>
+#include <yq/gluon/delegate/ColorDelegate.hpp>
+#include <yq/gluon/delegate/DelegateMetaWriter.hpp>
 #include <QColorDialog>
 #include <QPainter>
 

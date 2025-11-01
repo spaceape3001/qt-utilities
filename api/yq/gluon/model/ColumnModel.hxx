@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <gluon/model/ColumnModel.hpp>
+#include <yq/gluon/model/ColumnModel.hpp>
 #include <yq/text/IgCase.hpp>
 #include <map>
 

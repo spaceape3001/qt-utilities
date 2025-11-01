@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <gluon/model/GridTickModel.hpp>
-#include <gluon/preamble.hpp>
+#include <yq/gluon/model/GridTickModel.hpp>
+#include <yq/gluon/preamble.hpp>
 #include <yq/container/Map.hpp>
 
 namespace yq::gluon {

@@ -4,7 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <gluon/edit/ColorChip.hpp>
+#include <yq/gluon/edit/ColorChip.hpp>
 #include <QColorDialog>
 
 #include <QPainter>
