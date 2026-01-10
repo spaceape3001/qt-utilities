@@ -14,7 +14,7 @@ namespace yq::gluon {
 
     /*! \brief Basic Reference Counted class
     */
-    class RefQ {
+    class RefQ : public Refable {
     public:
     
         //! Tests for uniqueness
