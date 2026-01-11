@@ -134,6 +134,9 @@ namespace yq::gluon {
 
         virtual bool            okayToClose() { return true; }
         
+        //! Notification that we *ARE* closing
+        virtual void            closing() {}
+        
 
         virtual void            reconnect(QWidget*);
         //  EVENTS

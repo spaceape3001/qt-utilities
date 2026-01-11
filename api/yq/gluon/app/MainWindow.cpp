@@ -240,10 +240,12 @@ namespace yq::gluon {
 
     void   MainWindow::closeEvent(QCloseEvent*evt)
     {
-        if(okayToClose())
+        if(okayToClose()){
             evt -> accept();
-        else
+            closing();
+        } else {
             evt -> ignore();
+        }
     }
 
 
