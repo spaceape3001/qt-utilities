@@ -9,6 +9,8 @@
 #include <QGraphicsScene>
 #include <yq/core/Flags.hpp>
 
+namespace yq { class ObjectMeta; }
+
 namespace yq::gluon {
   
     //! More of a stub for now so common functionality can be added
@@ -30,8 +32,10 @@ namespace yq::gluon {
         GraphicsScene(const QRectF &sceneRect, QObject *parent = nullptr);
         GraphicsScene(qreal x, qreal y, qreal width, qreal height, QObject *parent = nullptr);
         ~GraphicsScene();
-        
-        static void init_meta();
+
+        virtual const ObjectMeta*   my_meta() const { return nullptr; }
+
+        // IF We need meta, it'll be done otherwise.... (maybe virtuals here...)
         
         Flags<AutoDraw> autoDraw() const;
         bool            autoDraw(AutoDraw) const;

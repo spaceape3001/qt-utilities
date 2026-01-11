@@ -11,7 +11,8 @@
 #include <QPen>
 
 #include <yq/core/Flags.hpp>
-#include <yq/gluon/core/WidgetQ.hpp>
+
+namespace yq { class ObjectMeta; }
 
 namespace yq::gluon {
     class GraphicsScene;
@@ -38,6 +39,9 @@ namespace yq::gluon {
         //! Steps to double zoom
         static constexpr const unsigned kDOUBLE = 8;    // eight steps to double
         static constexpr const double   kROTATE = 2.5;
+
+        //! Once needed, use this....
+        virtual const ObjectMeta*   my_meta() const { return nullptr; }
     
         //! Constructor
         GraphicsView(GraphicsScene*, QWidget*parent=nullptr);
