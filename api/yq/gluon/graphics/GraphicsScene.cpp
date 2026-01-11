@@ -5,7 +5,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "GraphicsScene.hpp"
-#include "GraphicsSceneMetaWriter.hpp"
 #include <yq/gluon/graphics/GraphicsLayer.hpp>
 
 #include <QGraphicsItem>
@@ -16,28 +15,10 @@
 #include <yq/shape/Size2.hpp>
 #include <yq/shape/AxBox2.hxx>
 
-YQ_OBJECT_IMPLEMENT(yq::gluon::GraphicsScene)
-
 namespace yq::gluon {
-
-    GraphicsSceneMeta::GraphicsSceneMeta(std::string_view zName, ObjectQMeta& base, const std::source_location& sl) :
-        ObjectQMeta(zName, base, sl)
-    {
-    }
-    
-    GraphicsSceneMeta::~GraphicsSceneMeta()
-    {
-    }
-    
     ///////////////////////////////////////////////////////////////////////////
     
     thread_local bool    GraphicsScene::s_printing = false;
-
-    void GraphicsScene::init_meta()
-    {
-        auto w = writer<GraphicsScene>();
-        w.description("Graphics Scene");
-    }
 
     bool GraphicsScene::isPrinting()
     {

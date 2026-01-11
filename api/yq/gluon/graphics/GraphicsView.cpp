@@ -5,7 +5,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "GraphicsView.hpp"
-#include "GraphicsViewMetaWriter.hpp"
 
 #include <QContextMenuEvent>
 #include <QDragEnterEvent>
@@ -26,8 +25,6 @@
 #include <yq/gluon/graphics/GraphicsScene.hpp>
 #include <yq/gluon/graphics/GraphicsTool.hpp>
 
-YQ_OBJECT_IMPLEMENT(yq::gluon::GraphicsView)
-
 namespace {
     int     firstNonZero(const QPoint&p)
     {
@@ -40,23 +37,6 @@ namespace {
 
 
 namespace yq::gluon {
-    GraphicsViewMeta::GraphicsViewMeta(std::string_view zName, WidgetQMeta& base, const std::source_location& sl) :
-        WidgetQMeta(zName, base, sl)
-    {
-    }
-    
-    GraphicsViewMeta::~GraphicsViewMeta()
-    {
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-
-    void GraphicsView::init_meta()
-    {
-        auto w = writer<GraphicsView>();
-        w.description("Graphics View");
-    }
-
     GraphicsView::GraphicsView(GraphicsScene*scene, QWidget*parent) : QGraphicsView(scene, parent), m_scene(scene)
     {
         assert(scene);

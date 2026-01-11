@@ -17,19 +17,9 @@ namespace yq::gluon {
     class GraphicsScene;
     class GraphicsTool;
     
-    class GraphicsViewMeta : public WidgetQMeta {
-    public:
-        template <typename> class Writer;
-        GraphicsViewMeta(std::string_view zName, WidgetQMeta& base, const std::source_location& sl=std::source_location::current());
-    protected:
-        virtual ~GraphicsViewMeta();
-    };
-    
     /*! \brief Enhanced GraphicsView
     */
-    class GraphicsView : public QGraphicsView, public WidgetQ {
-        YQ_OBJECT_META(GraphicsViewMeta)
-        YQ_WIDGETQ_DECLARE_ABSTRACT(GraphicsView, WidgetQ)
+    class GraphicsView : public QGraphicsView {
         Q_OBJECT
     public:
     
@@ -48,8 +38,6 @@ namespace yq::gluon {
         //! Steps to double zoom
         static constexpr const unsigned kDOUBLE = 8;    // eight steps to double
         static constexpr const double   kROTATE = 2.5;
-        
-        static void init_meta();
     
         //! Constructor
         GraphicsView(GraphicsScene*, QWidget*parent=nullptr);
