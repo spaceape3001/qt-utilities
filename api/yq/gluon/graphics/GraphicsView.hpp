@@ -71,6 +71,11 @@ namespace yq::gluon {
 
         void            thWheelRotate(QWheelEvent*);
         void            thWheelZoom(QWheelEvent*);
+        
+        using QGraphicsView::setBackgroundBrush;
+        
+        GraphicsScene*          scene()  { return m_scene; }
+        const GraphicsScene*    scene() const { return m_scene; }
 
     public slots:
         //! Adjusts the zoom to fit the scene

@@ -37,7 +37,8 @@ namespace {
 
 
 namespace yq::gluon {
-    GraphicsView::GraphicsView(GraphicsScene*scene, QWidget*parent) : QGraphicsView(scene, parent), m_scene(scene)
+    GraphicsView::GraphicsView(GraphicsScene*scene, QWidget*parent) : 
+        QGraphicsView(scene, parent), m_scene(scene)
     {
         assert(scene);
         setMouseTracking(true);

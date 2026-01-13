@@ -137,6 +137,8 @@ add_library(${PROJECT_NAME} SHARED
     graph/data/GraphSocket.hpp
     graph/data/GraphSocket.cpp
 
+    graphics/GraphicsCanvas.hpp
+    graphics/GraphicsCanvas.cpp
     graphics/GraphicsLayer.hpp
     graphics/GraphicsLayer.cpp
     graphics/GraphicsScene.hpp
