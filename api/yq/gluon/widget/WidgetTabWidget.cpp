@@ -82,9 +82,9 @@ namespace yq::gluon {
     void    WidgetTabWidget::addWidget(QWidget* w)
     {
         int i = m_tabs -> addTab(w);
-        m_tabs -> setCurrentIndex(i);
         m_stack -> addWidget(w);
         m_stack -> setCurrentWidget(w);
+        m_tabs -> setCurrentIndex(i);
         w->setAttribute(Qt::WA_DeleteOnClose, true);
         currentChanged();
     }

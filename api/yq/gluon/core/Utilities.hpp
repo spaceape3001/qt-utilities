@@ -33,6 +33,11 @@ namespace yq::gluon {
 
     std::vector<const QObject*>   qobjectLineage(const QObject*, bool fIncSelf=false);
     
+    inline QString  qString(std::string_view sv)
+    {
+        return QString::fromUtf8(sv.data(), sv.size());
+    }
+
     QStringList         qStringList(std::span<const std::string>);
     QStringList         qStringList(std::span<const std::string_view>);
     

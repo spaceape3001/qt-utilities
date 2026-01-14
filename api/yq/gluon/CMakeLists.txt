@@ -180,6 +180,8 @@ add_library(${PROJECT_NAME} SHARED
     widget/DrawRuler.cpp
     widget/FormWidget.hpp
     widget/FormWidget.cpp
+    widget/PaletteWidget.hpp
+    widget/PaletteWidget.cpp
     widget/ScrollBar.hpp
     widget/ScrollBar.cpp
     widget/WidgetTabBar.hpp

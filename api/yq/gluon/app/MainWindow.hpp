@@ -198,7 +198,7 @@ namespace yq::gluon {
         Action(const Action&) = delete;
         Action& operator=(const Action&) = delete;
         
-        MainWindow*        m_win;
+        MainWindow*     m_win;
         QAction*        m_action;
         QString         m_command;
         bool            m_connected;
