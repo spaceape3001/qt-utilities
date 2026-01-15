@@ -22,7 +22,7 @@ namespace yq::gluon {
         if(itr != m_panes.end())
             return *(itr->second);
         
-        Pane*p  = new Pane;
+        Pane*p  = new Pane(this);
         m_panes[cat]    = p;
         
         if(ico.isNull()){
@@ -31,6 +31,11 @@ namespace yq::gluon {
             p->m_index  = addItem(p, ico, cat);
         }
         return *p;
+    }
+
+    PaletteWidget::Item*   PaletteWidget::createItem(const QString& s)
+    {
+        return new Item(s);
     }
 
 
@@ -42,19 +47,30 @@ namespace yq::gluon {
     {
     }
 
-    PaletteWidget::Pane::Pane(QWidget*parent)
+    PaletteWidget::Pane::Pane(PaletteWidget* pw, QWidget*parent) : QListWidget(parent), m_widget(pw)
     {
+        setSupportedDragActions(Qt::CopyAction);
     }
     
     PaletteWidget::Pane::~Pane()
     {
     }
 
-    PaletteWidget::Item&   PaletteWidget::Pane::addItem(const QString&txt)
+    PaletteWidget::Item*   PaletteWidget::Pane::addItem(Item*it)
     {
-        Item*   it  = new Item(txt);
-        QListWidget::addItem(it);
-        return *it;
+        if(it)
+            QListWidget::addItem(it);
+        return it;
+    }
+
+    PaletteWidget::Item*   PaletteWidget::Pane::addItem(const QString&txt)
+    {
+        return addItem( m_widget->createItem(txt) );
+    }
+
+    QMimeData *	PaletteWidget::Pane::mimeData(const QList<QListWidgetItem *> &items) const
+    {
+        return m_widget -> mimeData(items);
     }
 }
 

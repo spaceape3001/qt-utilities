@@ -12,9 +12,15 @@
 #include <QList>
 #include <yq/trait/always_false.hpp>
 #include <span>
+#include <yq/typedef/rgba.hpp>
+#include <yq/typedef/rgb.hpp>
+#include <yq/typedef/size2.hpp>
 
 class QIcon;
 class QObject;
+class QColor;
+class QSize;
+class QSizeF;
 
 namespace log4cpp { class CategoryStream; }
 
@@ -28,12 +34,30 @@ namespace yq::gluon {
     
     Compare     compare_igCase(const QVariant&, const QVariant&);
 
-    bool    is_similar(const QString&, const QString&);
-    bool    is_similar(const QByteArray&, const QByteArray&);
+    /*!
+        Gets an icon from a filename.  Any %1 notation will be replaced by 
+        common icon sizes and tested.
+        
+        \note Qt restriction requires this to run on the MAIN THREAD.  Any
+        other thread will simply return an empty icon
+    */
+    QIcon       fetchIcon(const QString&);
+
+    bool        is_similar(const QString&, const QString&);
+    bool        is_similar(const QByteArray&, const QByteArray&);
+
+    QColor          qColor(const RGBA4F&);
+    QColor          qColor(const RGB3F&);
+    QColor          qColor(const RGB3U8&);
+    QColor          qColor(const RGBA4U8&);
+
 
     std::vector<const QObject*>   qobjectLineage(const QObject*, bool fIncSelf=false);
     
-    inline QString  qString(std::string_view sv)
+    QSizeF          qSize(const Size2D&);
+    QSizeF          qSize(const Size2F&);
+    
+    inline QString      qString(std::string_view sv)
     {
         return QString::fromUtf8(sv.data(), sv.size());
     }
@@ -43,14 +67,6 @@ namespace yq::gluon {
     
     std::vector<std::string>    yStringVector(const QStringList&);
 
-    /*!
-        Gets an icon from a filename.  Any %1 notation will be replaced by 
-        common icon sizes and tested.
-        
-        \note Qt restriction requires this to run on the MAIN THREAD.  Any
-        other thread will simply return an empty icon
-    */
-    QIcon       fetchIcon(const QString&);
 
     /*! Joins a collection into a separator (no separator)
     

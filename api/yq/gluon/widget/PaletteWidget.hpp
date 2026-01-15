@@ -25,6 +25,9 @@ namespace yq::gluon {
 
     signals:
         
+    protected:
+        virtual Item*       createItem(const QString&);
+        virtual QMimeData*  mimeData(const QList<QListWidgetItem*>&) const { return nullptr; }
     private:
         std::map<QString, Pane*, IgCaseQ>   m_panes;
     };
@@ -41,16 +44,20 @@ namespace yq::gluon {
         Q_OBJECT
     public:
     
-        Pane(QWidget*parent=nullptr);
+        Pane(PaletteWidget*, QWidget*parent=nullptr);
         ~Pane();
     
-        Item&   addItem(const QString&);
-        
+        Item*   addItem(const QString&);
+        Item*   addItem(Item*);
+    
+    protected:
+        virtual QMimeData *	mimeData(const QList<QListWidgetItem *> &items) const;        
     private:
         void 	addItems(const QStringList &) = delete;
 
         friend class PaletteWidget;
-        int         m_index = 0;
+        PaletteWidget*  const   m_widget;
+        int                     m_index = 0;
     };
 
 }

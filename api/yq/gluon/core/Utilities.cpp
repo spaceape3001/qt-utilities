@@ -4,10 +4,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <yq/color/RGBA.hpp>
 #include <yq/core/ThreadId.hpp>
 #include <yq/gluon/core/Utilities.hpp>
 #include <yq/gluon/core/Logging.hpp>
+#include <yq/shape/Size2.hpp>
 
+#include <QColor>
 #include <QDate>
 #include <QDateTime>
 #include <QDirIterator>
@@ -194,6 +197,30 @@ namespace yq::gluon {
         log << "Found " << n << " items.";
     }
 
+    QColor          qColor(const RGBA4F&v)
+    {
+        QColor ret;
+        ret.setRgbF(v.red, v.green, v.blue, v.alpha);
+        return ret;
+    }
+
+    QColor          qColor(const RGB3F&v)
+    {
+        QColor ret;
+        ret.setRgbF(v.red, v.green, v.blue);
+        return ret;
+    }
+
+    QColor          qColor(const RGB3U8&v)
+    {
+        return QColor((int) v.red, (int) v.green, (int) v.blue);
+    }
+    
+    QColor          qColor(const RGBA4U8&v)
+    {
+        return QColor((int) v.red, (int) v.green, (int) v.blue, (int) v.alpha);
+    }
+
     std::vector<const QObject*>   qobjectLineage(const QObject* obj, bool fIncSelf)
     {
         std::vector<const QObject*>   ret;
@@ -204,6 +231,16 @@ namespace yq::gluon {
                 ret.push_back(p);
         }
         return std::vector<const QObject*>(ret.rbegin(), ret.rend());
+    }
+
+    QSizeF          qSize(const Size2D& v)
+    {
+        return QSize(v.x, v.y);
+    }
+    
+    QSizeF          qSize(const Size2F& v)
+    {
+        return QSize(v.x, v.y);
     }
 
 }
