@@ -1,0 +1,15 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  YOUR QUILL
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+class QString;
+class QByteArray;
+
+namespace yq {
+    bool            is_similar(const QString&, const QString&);
+    bool            is_similar(const QByteArray&, const QByteArray&);
+}

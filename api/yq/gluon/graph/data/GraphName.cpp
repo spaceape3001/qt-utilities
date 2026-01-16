@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <yq/gluon/graph/preamble.hpp>
-#include <yq/gluon/core/Utilities.hpp>
+#include <yq/gluon/core/ustring.hpp>
 #include "GraphName.hpp"
 
 namespace yq::gluon {
@@ -46,10 +46,10 @@ namespace yq::gluon {
     
     void    GraphName::saveTo(g::TND&v) const
     {
-        v.name          = m_name.toStdString();
-        v.type          = m_type.toStdString();
-        v.description   = m_description.toStdString();
-        v.notes         = m_notes.toStdString();
+        v.name          = sString(m_name);
+        v.type          = sString(m_type);
+        v.description   = sString(m_description);
+        v.notes         = sString(m_notes);
         v.options       = m_options;
     }
 

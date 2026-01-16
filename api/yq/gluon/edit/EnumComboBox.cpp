@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <yq/gluon/edit/EnumComboBox.hpp>
-#include <yq/gluon/core/Utilities.hpp>
+#include <yq/gluon/core/ustring.hpp>
 #include <cassert>
 
 namespace yq::gluon {

@@ -11,6 +11,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 add_library(${PROJECT_NAME} SHARED 
+
     app/Application.hpp
     app/Application.cpp
     app/Dock.hpp
@@ -31,7 +32,7 @@ add_library(${PROJECT_NAME} SHARED
     core/FileName.hpp
     core/FileName.cpp
     core/IgCaseQ.hpp
-    core/IgCaseQ.cpp
+    #core/IgCaseQ.cpp
     core/Logging.hpp
     core/Logging.cpp
     core/ObjectQ.cpp
@@ -40,8 +41,8 @@ add_library(${PROJECT_NAME} SHARED
     core/RefQ.hpp
     core/RefQ.cpp
     core/Utilities.hpp
-    core/Utilities.cpp
     core/WidgetQ.cpp
+    core/utility.cpp
 
     delegate/ColorComboBoxDelegate.hpp
     delegate/ColorComboBoxDelegate.cpp

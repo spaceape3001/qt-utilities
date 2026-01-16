@@ -9,7 +9,7 @@
 #include <QByteArray>
 #include <QString>
 
-namespace yq::gluon {
+namespace yq {
     bool    IgCaseQ::operator()(const QString&a, const QString&b) const
     {
         return QString::compare(a,b,Qt::CaseInsensitive) < 0;

@@ -4,23 +4,17 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <yq/color/RGBA.hpp>
-#include <yq/core/ThreadId.hpp>
-#include <yq/gluon/core/Utilities.hpp>
-#include <yq/gluon/core/Logging.hpp>
-#include <yq/shape/Size2.hpp>
-
-#include <QColor>
+#include "ucompare.hpp"
+#include <QByteArray>
 #include <QDate>
 #include <QDateTime>
-#include <QDirIterator>
-#include <QFileInfo>
-#include <QIcon>
-#include <QObject>
+#include <QString>
 #include <QTime>
 #include <QUuid>
+#include <QUrl>
+#include <QVariant>
 
-namespace yq::gluon {
+namespace yq {
 
     Compare     compare(const QByteArray&a, const QByteArray&b)
     {
@@ -72,6 +66,8 @@ namespace yq::gluon {
                 return compare(a.toTime(), b.toTime());
             case QMetaType::QUuid:
                 return compare(a.value<QUuid>(), b.value<QUuid>());
+            case QMetaType::QUrl:
+                return compare(a.toUrl(), b.toUrl());
             default:
                 break;
             }
@@ -146,101 +142,4 @@ namespace yq::gluon {
 
         return finalCompare(a,b,true);
     }
-
-
-    QIcon                fetchIcon(const QString&file)
-    {
-        if(is_main_thread()){
-            if(QFile::exists(file)) // straight up... return if fine
-                return QIcon(file);
-        
-            static const char *sizes[] = { "16", "016", "24", "024", "32", "032", "48",
-                                           "048", "64", "064", "96", "096", "128", 
-                                           "144", "192", "256" };
-            QIcon   res;
-            for(const char* z : sizes){
-                QString name    = file.arg(z);
-                if(QFileInfo(name).exists())
-                    res.addFile(name);
-            }
-            
-            return res;
-        } else
-            return QIcon();
-    }
-
-
-    bool    is_similar(const QString&a, const QString&b)
-    {
-        return QString::compare(a,b,Qt::CaseInsensitive) == 0;
-    }
-    
-    bool    is_similar(const QByteArray&a, const QByteArray&b)
-    {
-        return a.compare(b,Qt::CaseInsensitive) == 0;
-    }
-    
-    void    logAllResources()
-    {
-        logAllResources(qtInfo);
-    }
-    
-    void    logAllResources(log4cpp::CategoryStream&&log)
-    {
-        log << "All Registered Qt Resources:\n";
-        size_t n    = 0;
-        QDirIterator it(":", QDirIterator::Subdirectories);
-        while (it.hasNext()){
-            log << "+ " << it.next() << '\n';
-            ++n;
-        }
-        log << "Found " << n << " items.";
-    }
-
-    QColor          qColor(const RGBA4F&v)
-    {
-        QColor ret;
-        ret.setRgbF(v.red, v.green, v.blue, v.alpha);
-        return ret;
-    }
-
-    QColor          qColor(const RGB3F&v)
-    {
-        QColor ret;
-        ret.setRgbF(v.red, v.green, v.blue);
-        return ret;
-    }
-
-    QColor          qColor(const RGB3U8&v)
-    {
-        return QColor((int) v.red, (int) v.green, (int) v.blue);
-    }
-    
-    QColor          qColor(const RGBA4U8&v)
-    {
-        return QColor((int) v.red, (int) v.green, (int) v.blue, (int) v.alpha);
-    }
-
-    std::vector<const QObject*>   qobjectLineage(const QObject* obj, bool fIncSelf)
-    {
-        std::vector<const QObject*>   ret;
-        if(obj){
-            if(fIncSelf)
-                ret.push_back(obj);
-            for(QObject*p   = obj->parent(); p; p=p->parent())
-                ret.push_back(p);
-        }
-        return std::vector<const QObject*>(ret.rbegin(), ret.rend());
-    }
-
-    QSizeF          qSize(const Size2D& v)
-    {
-        return QSize(v.x, v.y);
-    }
-    
-    QSizeF          qSize(const Size2F& v)
-    {
-        return QSize(v.x, v.y);
-    }
-
 }

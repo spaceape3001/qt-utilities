@@ -7,6 +7,7 @@
 #include <tbb/spin_rw_mutex.h>
 #include <yq/gluon/preamble.hpp>
 #include <yq/gluon/core/QtTypes.hpp>
+#include <yq/gluon/core/ustring.hpp>
 #include <QMetaType>
 #include <QVariant>
 #include <yq/core/Any.hpp>
@@ -103,13 +104,6 @@ namespace yq::gluon {
         return s.toStdString();
     }
 
-    QString     qString(std::string_view sv)
-    {
-        if(sv.empty())
-            return QString();
-        return QString::fromUtf8(sv.data(), sv.size());
-    }
-    
     QString     qFilePath(const std::filesystem::path&fp)
     {
         std::string s   = fp.string();

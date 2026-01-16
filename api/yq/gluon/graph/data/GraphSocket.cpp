@@ -6,7 +6,8 @@
 
 #include "GraphSocket.hpp"
 #include <yq/gluon/preamble.hpp>
-#include <yq/gluon/core/Utilities.hpp>
+#include <yq/gluon/core/ustring.hpp>
+#include <yq/gluon/core/QtTypes.hpp>
 
 namespace yq::gluon {
     GraphSocket::GraphSocket(QObject*parent) : QObject(parent)

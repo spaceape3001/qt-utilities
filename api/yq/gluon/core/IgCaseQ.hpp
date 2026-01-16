@@ -11,7 +11,7 @@
 class QString;
 class QByteArray;
 
-namespace yq::gluon {
+namespace yq {
 
     //! String Comparison to ignore case
     //!

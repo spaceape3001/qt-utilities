@@ -9,7 +9,7 @@
 #include <yq/gluon/model/RowTableModel.hpp>
 #include <yq/gluon/model/ColumnModel.hpp>
 #include <yq/algorithm/DiffEngine.hpp>
-#include <yq/gluon/core/Utilities.hpp>
+#include <yq/gluon/core/ucompare.hpp>
 #include <yq/gluon/delegate/Delegate.hpp>
 
 namespace yq::gluon {
@@ -298,7 +298,7 @@ namespace yq::gluon {
             auto sorter = [&](const T& a, const T& b) -> bool {
                 QVariant    va  = col->model.sorter(a, m_params);
                 QVariant    vb  = col->model.sorter(b, m_params);
-                Compare cmp = del ? del->compare(va, vb) : yq::gluon::compare(va, vb);
+                Compare cmp = del ? del->compare(va, vb) : yq::compare(va, vb);
                 return (order == Qt::AscendingOrder) ? (cmp == Compare::LESSER) : (cmp == Compare::GREATER);
             };
             std::stable_sort(m_rows.begin(), m_rows.end(), sorter);
