@@ -17,6 +17,7 @@
 #include <QPoint>
 #include <QPointF>
 #include <QRect>
+#include <QRectF>
 #include <QSize>
 #include <QUrl>
 #include <QWidget>
@@ -54,6 +55,11 @@ log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QPointF&v)
 
 
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QRect&v)
+{
+    return cs << "{" << v.width() << " x " << v.height() << " @ " << v.x() << ", " << v.y() << "}";
+}
+
+log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QRectF&v)
 {
     return cs << "{" << v.width() << " x " << v.height() << " @ " << v.x() << ", " << v.y() << "}";
 }

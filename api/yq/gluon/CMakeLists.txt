@@ -144,6 +144,8 @@ add_library(${PROJECT_NAME} SHARED
     graphics/GraphicsLayer.cpp
     graphics/GraphicsScene.hpp
     graphics/GraphicsScene.cpp
+    graphics/GraphicsSymbolItem.hpp
+    graphics/GraphicsSymbolItem.cpp
     graphics/GraphicsView.hpp
     graphics/GraphicsView.cpp
     graphics/GraphicsVisibility.cpp
@@ -208,6 +210,7 @@ target_compile_definitions(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
         yq_core
+        yq_symbol
         Qt6::Core
         Qt6::Gui
         Qt6::Widgets
