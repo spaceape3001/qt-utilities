@@ -22,14 +22,24 @@ namespace yq::gluon {
         struct Pane;
         
         Pane&   category(const QString&, const QIcon& ico={});
+        
+        bool    dragEnabled() const { return m_dragEnabled; }
+        
+    public slots:
+        void    setDragEnabled(bool);
+
+    private slots:
+        void    itemPressed(QListWidgetItem*);
 
     signals:
         
     protected:
         virtual Item*       createItem(const QString&);
-        virtual QMimeData*  mimeData(const QList<QListWidgetItem*>&) const { return nullptr; }
+        virtual QMimeData*  mimeData(const Item*) const { return nullptr; }
     private:
         std::map<QString, Pane*, IgCaseQ>   m_panes;
+        QListView::ViewMode                 m_viewMode      = QListView::ListMode;
+        bool                                m_dragEnabled   = false;
     };
 
     class PaletteWidget::Item : public QListWidgetItem {
@@ -49,9 +59,9 @@ namespace yq::gluon {
     
         Item*   addItem(const QString&);
         Item*   addItem(Item*);
-    
+        
     protected:
-        virtual QMimeData *	mimeData(const QList<QListWidgetItem *> &items) const;        
+    
     private:
         void 	addItems(const QStringList &) = delete;
 

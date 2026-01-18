@@ -6,6 +6,8 @@
 
 #include "PaletteWidget.hpp"
 #include <yq/core/Any.hpp>
+#include <QMimeData>
+#include <QDrag>
 
 namespace yq::gluon {
     PaletteWidget::PaletteWidget(QWidget*parent) : QToolBox(parent)
@@ -23,6 +25,8 @@ namespace yq::gluon {
             return *(itr->second);
         
         Pane*p  = new Pane(this);
+        connect(p, &QListWidget::itemPressed, this, &PaletteWidget::itemPressed);
+        
         m_panes[cat]    = p;
         
         if(ico.isNull()){
@@ -38,6 +42,32 @@ namespace yq::gluon {
         return new Item(s);
     }
 
+    void    PaletteWidget::itemPressed(QListWidgetItem* qwi)
+    {
+        if(!m_dragEnabled)
+            return;
+
+        Item* it = dynamic_cast<Item*>(qwi);
+        if(!it)
+            return;
+
+        QMimeData*  data    = mimeData(it);
+        if(!data)
+            return;
+                
+        QDrag*  drag    = new QDrag(this);
+        drag -> setMimeData(data);
+        drag -> setPixmap(it->icon().pixmap(QSize(64,64)));
+        drag -> exec();
+        drag -> deleteLater();
+    }
+
+    void    PaletteWidget::setDragEnabled(bool v)
+    {
+        m_dragEnabled   = v;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     PaletteWidget::Item::Item(const QString& txt) : QListWidgetItem(txt)
     {
@@ -47,9 +77,12 @@ namespace yq::gluon {
     {
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     PaletteWidget::Pane::Pane(PaletteWidget* pw, QWidget*parent) : QListWidget(parent), m_widget(pw)
     {
         setSupportedDragActions(Qt::CopyAction);
+        setViewMode(pw->m_viewMode);
     }
     
     PaletteWidget::Pane::~Pane()
@@ -66,11 +99,6 @@ namespace yq::gluon {
     PaletteWidget::Item*   PaletteWidget::Pane::addItem(const QString&txt)
     {
         return addItem( m_widget->createItem(txt) );
-    }
-
-    QMimeData *	PaletteWidget::Pane::mimeData(const QList<QListWidgetItem *> &items) const
-    {
-        return m_widget -> mimeData(items);
     }
 }
 

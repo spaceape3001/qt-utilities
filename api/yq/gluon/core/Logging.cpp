@@ -14,6 +14,8 @@
 #include <QLayoutItem>
 #include <QMetaObject>
 #include <QObject>
+#include <QPoint>
+#include <QPointF>
 #include <QRect>
 #include <QSize>
 #include <QUrl>
@@ -39,6 +41,17 @@ log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QDir& v)
 {
     return cs << v.absolutePath();
 }
+
+log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QPoint&v)
+{
+    return cs << "{" << v.x() << "," << v.y() << "}";
+}
+
+log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QPointF&v)
+{
+    return cs << "{" << v.x() << "," << v.y() << "}";
+}
+
 
 log4cpp::CategoryStream& operator<<(log4cpp::CategoryStream&cs, const QRect&v)
 {
