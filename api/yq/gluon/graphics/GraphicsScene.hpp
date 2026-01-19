@@ -60,6 +60,8 @@ namespace yq::gluon {
         void            drawForeground(QPainter*, const QRectF&rect={}) override;
         void            drawSceneRect(QPainter*, const QRectF&rect={});
 
+        void            makeCheckerboardBackgroundBrush();
+
     private:
         static thread_local bool    s_printing;
 

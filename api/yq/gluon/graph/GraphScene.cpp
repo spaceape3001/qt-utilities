@@ -12,6 +12,7 @@ namespace yq::gluon {
 
     GraphScene::GraphScene(QObject*parent) : GraphicsScene(parent)
     {
+        //makeCheckerboardBackgroundBrush();    // not working well
     }
     
     GraphScene::~GraphScene()

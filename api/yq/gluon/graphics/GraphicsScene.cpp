@@ -79,8 +79,13 @@ namespace yq::gluon {
 
     void    GraphicsScene::drawBackground(QPainter *painter, const QRectF &rect) 
     {
-        if(!s_printing)
+        if(!s_printing){
+            painter->save();
+            painter->resetTransform();
+            painter->drawTiledPixmap(rect, backgroundBrush().texture());
             QGraphicsScene::drawBackground(painter, rect);
+            painter->restore();
+        }
         if(m_autoDraw(AutoDraw_SceneRect))
             drawSceneRect(painter, rect);
         for(QObject* obj : children()){
@@ -155,6 +160,19 @@ namespace yq::gluon {
                 painter->drawLine(in.hi.x, in.lo.y, in.hi.x, in.hi.y);
         }
         painter->restore();
+    }
+
+    void    GraphicsScene::makeCheckerboardBackgroundBrush()
+    {
+        // Prepare background check-board pattern
+        QPixmap tilePixmap(64, 64);
+        tilePixmap.fill(Qt::white);
+        QPainter tilePainter(&tilePixmap);
+        QColor color(220, 220, 220);
+        tilePainter.fillRect(0, 0, 32, 32, color);
+        tilePainter.fillRect(32, 32, 32, 32, color);
+        tilePainter.end();
+        setBackgroundBrush(QBrush(tilePixmap));
     }
 
     void    GraphicsScene::print(QPainter* painter, const QRectF& rect)
