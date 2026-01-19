@@ -114,13 +114,15 @@ add_library(${PROJECT_NAME} SHARED
 
     filter/filter.cpp
 
-    graph/GraphModel.hpp
-    graph/GraphModel.cpp
-    
     graph/GNodeNewMimeData.hpp
     graph/GNodeNewMimeData.cpp
     graph/GNodePalette.hpp
     graph/GNodePalette.cpp
+    graph/GraphScene.hpp
+    graph/GraphScene.hxx
+    graph/GraphScene.cpp
+    graph/GraphView.hpp
+    graph/GraphView.cpp
 
     graph/data/GraphBase.hpp
     graph/data/GraphBase.cpp

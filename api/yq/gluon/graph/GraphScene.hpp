@@ -6,25 +6,36 @@
 
 #pragma once
 
-#include <0/graph/Graph.hpp>
-#include <QGraphicsScene>
+#include <yq/gluon/graphics/GraphicsScene.hpp>
+#include <yq/typedef/g_node_template.hpp>
+#include <yq/typedef/symbol.hpp>
 
 namespace yq::gluon {
-    
-    class GraphNodeItem;
-    class GraphEdgeItem;
-
-    class GraphScene : public QGraphicsScene {
+    class GraphScene : public GraphicsScene {
         Q_OBJECT
     public:
+        struct Item;
+        struct Node;
     
-        GraphScene(GraphModel*, QObject*parent=nullptr);
+        GraphScene(QObject*parent=nullptr);
         ~GraphScene();
 
-        GraphNodeItem*  createNode(const QString& type, const QPointF& centerPt);
-        GraphEdgeItem*  createEdge(const QString& type, GraphNodeItem*, const QString&, GraphNodeItem*, const QString&);
+        Node*    add(const GNodeTemplateCPtr&, const QPointF&);
+        //one for the document too
 
-    private:
-        GraphModel*     m_model = nullptr;
+        // TODO
+        //bool            set(const XGDocument&);
+        //XGDocumentPtr   get() const;
+
+        /*
+            I *was* assuming retaining the document... better to 
+            push it into items and pull it back.  Load/Export sort 
+            of thing.
+        */
+        
+        //struct Edge;
+        //struct Line;
+        //struct Text;
+
     };
 }
