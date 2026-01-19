@@ -116,6 +116,11 @@ add_library(${PROJECT_NAME} SHARED
 
     graph/GraphModel.hpp
     graph/GraphModel.cpp
+    
+    graph/GNodeNewMimeData.hpp
+    graph/GNodeNewMimeData.cpp
+    graph/GNodePalette.hpp
+    graph/GNodePalette.cpp
 
     graph/data/GraphBase.hpp
     graph/data/GraphBase.cpp
@@ -210,6 +215,7 @@ target_compile_definitions(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
         yq_core
+        yq_graph
         yq_symbol
         Qt6::Core
         Qt6::Gui

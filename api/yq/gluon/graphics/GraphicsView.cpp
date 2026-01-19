@@ -4,6 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <yq/gluon/logging.hpp>
 #include "GraphicsView.hpp"
 
 #include <QContextMenuEvent>
@@ -21,7 +22,6 @@
 #include <QScreen>
 #include <QWheelEvent>
 
-#include <yq/gluon/logging.hpp>
 #include <yq/gluon/graphics/GraphicsScene.hpp>
 #include <yq/gluon/graphics/GraphicsTool.hpp>
 

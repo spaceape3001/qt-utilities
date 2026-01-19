@@ -4,12 +4,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "uobject.ipp"
+#include <yq/gluon/logging.hpp>
 
 #include "ucolor.ipp"
 #include "ucompare.ipp"
 #include "uicon.ipp"
 #include "ulog.ipp"
 #include "umatch.ipp"
+#include "uobject.ipp"
 #include "IgCaseQ.ipp"
 

@@ -9,6 +9,8 @@
 class QIcon;
 class QString;
 
+#include <string_view>
+
 namespace yq::gluon {
 
     /*!
@@ -19,4 +21,8 @@ namespace yq::gluon {
         other thread will simply return an empty icon
     */
     QIcon           fetchIcon(const QString&);
+}
+
+namespace yq {
+    QIcon           qIcon(std::string_view);
 }

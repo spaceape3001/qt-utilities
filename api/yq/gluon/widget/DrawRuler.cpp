@@ -4,6 +4,8 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <yq/gluon/logging.hpp>
+
 #include <yq/gluon/widget/DrawRuler.hpp>
 #include <yq/gluon/model/GridTickModel.hpp>
 
@@ -18,7 +20,6 @@
 #include <QScreen>
 
 #include <yq/container/Map.hpp>
-#include <yq/gluon/logging.hpp>
 
 namespace yq::gluon {
 
