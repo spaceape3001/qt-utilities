@@ -42,19 +42,19 @@ namespace yq::gluon {
             
         Item*   ret = nullptr;
             
-        if(GNode gn = (GNode) gb){
-            ret = add_node(gn);
-        } else if(GText gt = (GText) gb){
-            ret = add_text(gt);
-        } else if(GEdge ge = (GEdge) gb){
+        if(GEdge ge = (GEdge) gb)
             ret = add_edge(ge);
-        } else if(GLine gl = (GLine) gb){
+        if(GLine gl = (GLine) gb)
             ret = add_line(gl);
-        } else if(GPort gp = (GPort) gb){
+        if(GNode gn = (GNode) gb)
+            ret = add_node(gn);
+        if(GPort gp = (GPort) gb)
             ret = add_port(gp);
-        } else if(GShape gs = (GShape) gs){
+        if(GShape gs = (GShape) gs)
             ret = add_shape(gs);
-        } 
+        if(GText gt = (GText) gb)
+            ret = add_text(gt);
+
         if(ret){
             if(QGraphicsItem* it = ret->qItem()){ [[likely]]
                 addItem(it);

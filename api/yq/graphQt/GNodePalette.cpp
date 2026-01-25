@@ -18,7 +18,17 @@ namespace yq::gluon {
         {
             static QIcon    s_regular  = qIcon("yq/icon/rectangle.svg");
             setFlags(Qt::ItemIsDragEnabled | Qt::ItemIsEnabled);
-            setIcon(s_regular);
+            
+            QIcon       ico;
+            
+            std::string_view    iS      = v->icon(0);
+            if(!iS.empty())
+                ico = qIcon(iS);
+
+            if(!ico.isNull()){
+                setIcon(ico);
+            } else 
+                setIcon(s_regular);
             
             // icons, colors...?
         }
