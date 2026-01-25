@@ -114,47 +114,12 @@ add_library(${PROJECT_NAME} SHARED
 
     filter/filter.cpp
 
-    graph/GNodeNewMimeData.hpp
-    graph/GNodeNewMimeData.cpp
-    graph/GNodePalette.hpp
-    graph/GNodePalette.cpp
-    graph/GraphCanvas.hpp
-    graph/GraphCanvas.cpp
-    graph/GraphScene.hpp
-    graph/GraphScene.hxx
-    graph/GraphScene.cpp
-    graph/GraphView.hpp
-    graph/GraphView.cpp
-
-    #graph/data/GraphBase.hpp
-    #graph/data/GraphBase.cpp
-    #graph/data/GraphDocument.hpp
-    #graph/data/GraphDocument.cpp
-    #graph/data/GraphEdge.hpp
-    #graph/data/GraphEdge.cpp
-    #graph/data/GraphGraph.hpp
-    #graph/data/GraphGraph.cpp
-    #graph/data/GraphName.hpp
-    #graph/data/GraphName.cpp
-    #graph/data/GraphNode.hpp
-    #graph/data/GraphNode.cpp
-    #graph/data/GraphPin.hpp
-    #graph/data/GraphPin.cpp
-    #graph/data/GraphPinned.hpp
-    #graph/data/GraphPinned.cpp
-    #graph/data/GraphProperty.hpp
-    #graph/data/GraphProperty.cpp
-    #graph/data/GraphSocket.hpp
-    #graph/data/GraphSocket.cpp
-
     graphics/GraphicsCanvas.hpp
     graphics/GraphicsCanvas.cpp
     graphics/GraphicsLayer.hpp
     graphics/GraphicsLayer.cpp
     graphics/GraphicsScene.hpp
     graphics/GraphicsScene.cpp
-    graphics/GraphicsSymbolItem.hpp
-    graphics/GraphicsSymbolItem.cpp
     graphics/GraphicsView.hpp
     graphics/GraphicsView.cpp
     graphics/GraphicsVisibility.cpp
@@ -219,8 +184,7 @@ target_compile_definitions(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
         yq_core
-        yq_graph
-        yq_symbol
+        yq_resource
         Qt6::Core
         Qt6::Gui
         Qt6::Widgets

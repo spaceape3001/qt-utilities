@@ -10,10 +10,10 @@
 #include <yq/typedef/symbol.hpp>
 
 namespace yq::gluon {
-    class GraphicsSymbolItem : public QGraphicsItemGroup {
+    class SymbolGraphicsItem : public QGraphicsItemGroup {
     public:
-        GraphicsSymbolItem(QGraphicsItem*parent=nullptr);
-        virtual ~GraphicsSymbolItem();
+        SymbolGraphicsItem(QGraphicsItem*parent=nullptr);
+        virtual ~SymbolGraphicsItem();
         
         void    build(const Symbol&, float size=64.f);
     };

@@ -5,4 +5,6 @@
 ################################################################################
 
 add_subdirectory(gluon)
+add_subdirectory(symbolQt)
+add_subdirectory(graphQt)
 

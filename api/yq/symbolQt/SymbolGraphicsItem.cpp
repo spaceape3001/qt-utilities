@@ -6,7 +6,7 @@
 
 #include <yq/gluon/logging.hpp>
 
-#include "GraphicsSymbolItem.hpp"
+#include "SymbolGraphicsItem.hpp"
 #include <yq/gluon/core/Logging.hpp>
 #include <yq/symbol/Pin.hpp>
 #include <yq/symbol/Shape.hpp>
@@ -20,11 +20,11 @@
 #include <yq/shape/Oval2.hxx>
 
 namespace yq::gluon {
-    GraphicsSymbolItem::GraphicsSymbolItem(QGraphicsItem*parent) : QGraphicsItemGroup(parent)
+    SymbolGraphicsItem::SymbolGraphicsItem(QGraphicsItem*parent) : QGraphicsItemGroup(parent)
     {
     }
     
-    GraphicsSymbolItem::~GraphicsSymbolItem()
+    SymbolGraphicsItem::~SymbolGraphicsItem()
     {
     }
 
@@ -33,7 +33,7 @@ namespace yq::gluon {
         return QRectF(bx.lo.x, bx.lo.y, bx.width(), bx.height());
     }
 
-    void    GraphicsSymbolItem::build(const Symbol&sym, float size)
+    void    SymbolGraphicsItem::build(const Symbol&sym, float size)
     {
         for(auto& sh : sym.shape){
             QGraphicsItem*  gi = nullptr;

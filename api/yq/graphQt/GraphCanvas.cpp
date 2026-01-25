@@ -5,13 +5,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "GraphCanvas.hpp"
+#include "GraphScene.hpp"
+#include "GraphView.hpp"
 
 #include <yq/text/match.hpp>
 #include <yq/graph/GDocument.hpp>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <yq/gluon/graph/GraphScene.hpp>
-#include <yq/gluon/graph/GraphView.hpp>
 
 
 namespace yq::gluon {
