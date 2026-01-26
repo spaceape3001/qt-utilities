@@ -9,4 +9,9 @@
 #include <yq/keywords.hpp>
 
 namespace yq::gluon {
+    struct separator_k {};
+    struct tool_k {};
+    
+    static constexpr const separator_k      SEPARATOR;
+    static constexpr const tool_k           TOOL;
 }

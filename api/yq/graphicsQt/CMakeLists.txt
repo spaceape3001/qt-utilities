@@ -19,6 +19,8 @@ add_library(${PROJECT_NAME} SHARED
     GraphicsScene.cpp
     GraphicsTool.hpp
     GraphicsTool.cpp
+    GraphicsToolBar.hpp
+    GraphicsToolBar.cpp
     GraphicsView.hpp
     GraphicsView.cpp
     GraphicsVisibility.cpp

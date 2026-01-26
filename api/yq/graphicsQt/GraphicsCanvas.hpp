@@ -34,12 +34,14 @@ namespace yq::gluon {
         GraphicsView*           view() { return m_view; }
         const GraphicsView*     view() const { return m_view; }
         
+        uint64_t    currentTool() const;
+        
         
     signals:
-        void        toolChanged(quint64);
+        void        toolChanged(uint64_t);
         
     public slots:
-        void        setActiveTool(quint64);
+        void        setTool(uint64_t);
 
     private:
         GraphicsScene* const    m_scene;

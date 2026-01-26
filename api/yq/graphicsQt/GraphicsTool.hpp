@@ -34,8 +34,14 @@ namespace yq::gluon {
     public:
         template <typename> class Writer;
         GraphicsToolMeta(std::string_view zName, ObjectQMeta& base, const std::source_location& sl=std::source_location::current());
+        
+        static const GraphicsToolMeta* find(std::string_view);
+        
     protected:
         ~GraphicsToolMeta();
+    private:
+        struct Repo;
+        static Repo& repo();
     };
 
     class GraphicsTool : public QObject, public ObjectQ, public UniqueID {

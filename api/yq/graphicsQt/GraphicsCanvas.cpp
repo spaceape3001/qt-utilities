@@ -39,7 +39,32 @@ namespace yq::gluon {
         m_tools.clear();
     }
 
-    void    GraphicsCanvas::setActiveTool(quint64 qu)
+    uint64_t    GraphicsCanvas::currentTool() const
+    {
+        GraphicsTool*   gt  = m_view->tool();
+        if(!gt)
+            return 0;
+        return gt->metaInfo().id();
+    }
+
+    void    GraphicsCanvas::setBackgroundBrush(QBrush v)
+    {
+        m_scene -> setBackgroundBrush(v);
+    }
+
+    void    GraphicsCanvas::setEdgePen(QPen v)
+    {
+        m_scene -> autoDrawEnable(gluon::GraphicsScene::AutoDraw_SceneRect);
+        m_scene -> setSceneRectPen(v);
+    }
+    
+    void    GraphicsCanvas::setPaperBrush(QBrush v)
+    {
+        m_scene -> autoDrawEnable(gluon::GraphicsScene::AutoDraw_SceneRect);
+        m_scene -> setSceneRectBrush(v);
+    }
+
+    void    GraphicsCanvas::setTool(uint64_t qu)
     {
         GraphicsTool*   gt  = nullptr;
         if(auto itr = m_tools.find(qu); itr != m_tools.end()){
@@ -61,22 +86,6 @@ namespace yq::gluon {
         }
     }
     
-    void    GraphicsCanvas::setEdgePen(QPen v)
-    {
-        m_scene -> autoDrawEnable(gluon::GraphicsScene::AutoDraw_SceneRect);
-        m_scene -> setSceneRectPen(v);
-    }
-    
-    void    GraphicsCanvas::setPaperBrush(QBrush v)
-    {
-        m_scene -> autoDrawEnable(gluon::GraphicsScene::AutoDraw_SceneRect);
-        m_scene -> setSceneRectBrush(v);
-    }
-    
-    void    GraphicsCanvas::setBackgroundBrush(QBrush v)
-    {
-        m_scene -> setBackgroundBrush(v);
-    }
 }
 
 #include "moc_GraphicsCanvas.cpp"

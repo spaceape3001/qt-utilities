@@ -14,10 +14,25 @@
 YQ_OBJECT_IMPLEMENT(yq::gluon::GraphicsTool)
 
 namespace yq::gluon {
+    struct GraphicsToolMeta::Repo {
+        MetaLookup<GraphicsToolMeta> all;
+    };
+    
+    GraphicsToolMeta::Repo& GraphicsToolMeta::repo()
+    {
+        static Repo s_repo;
+        return s_repo;
+    }
+
+    const GraphicsToolMeta* GraphicsToolMeta::find(std::string_view k)
+    {
+        return repo().all.find(k);
+    }
 
     GraphicsToolMeta::GraphicsToolMeta(std::string_view zName, ObjectQMeta& base, const std::source_location& sl) :
         ObjectQMeta(zName, base, sl)
     {
+        repo().all << this;
     }
     
     GraphicsToolMeta::~GraphicsToolMeta()
