@@ -6,6 +6,8 @@
 
 #include <yq/gluon/logging.hpp>
 #include "GraphicsView.hpp"
+#include "GraphicsScene.hpp"
+#include "GraphicsTool.hpp"
 
 #include <QContextMenuEvent>
 #include <QDragEnterEvent>
@@ -22,8 +24,6 @@
 #include <QScreen>
 #include <QWheelEvent>
 
-#include <yq/gluon/graphics/GraphicsScene.hpp>
-#include <yq/gluon/graphics/GraphicsTool.hpp>
 
 namespace {
     int     firstNonZero(const QPoint&p)

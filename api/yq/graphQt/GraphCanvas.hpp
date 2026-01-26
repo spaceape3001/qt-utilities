@@ -7,7 +7,7 @@
 #pragma once
 
 #include <yq/core/Ref.hpp>
-#include <yq/gluon/graphics/GraphicsCanvas.hpp>
+#include <yq/graphicsQt/GraphicsCanvas.hpp>
 #include <yq/net/Url.hpp>
 #include <yq/typedef/g_document.hpp>
 #include <yq/typedef/g_meta_graph.hpp>

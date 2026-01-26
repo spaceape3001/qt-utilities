@@ -10,8 +10,8 @@
 #include <map>
 #include <span>
 
-#include <yq/gluon/graphics/GraphicsVisibility.hpp>
 #include <yq/gluon/core/ObjectQ.hpp>
+#include <yq/graphicsQt/GraphicsVisibility.hpp>
 #include <yq/core/UniqueID.hpp>
 #include <yq/gluon/keywords.hpp>
 

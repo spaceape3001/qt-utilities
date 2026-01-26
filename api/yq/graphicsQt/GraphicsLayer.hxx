@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <yq/gluon/graphics/GraphicsLayer.hpp>
+#include <yq/graphicsQt/GraphicsLayer.hpp>
 #include <type_traits>
 
 namespace yq::gluon {

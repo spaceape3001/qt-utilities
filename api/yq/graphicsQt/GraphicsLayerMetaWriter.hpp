@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <yq/gluon/graphics/GraphicsLayer.hpp>
+#include <yq/graphicsQt/GraphicsLayer.hpp>
 #include <yq/gluon/core/ObjectQMetaWriter.hpp>
 
 namespace yq::gluon {

@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <yq/gluon/graphics/GraphicsScene.hpp>
+#include <yq/graph/GGraph.hpp>
+#include <yq/graphicsQt/GraphicsScene.hpp>
 #include <yq/typedef/g_node_template.hpp>
 #include <yq/typedef/symbol.hpp>
-#include <yq/graph/GGraph.hpp>
 
 namespace yq::gluon {
     class GraphScene : public GraphicsScene {

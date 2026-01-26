@@ -114,18 +114,6 @@ add_library(${PROJECT_NAME} SHARED
 
     filter/filter.cpp
 
-    graphics/GraphicsCanvas.hpp
-    graphics/GraphicsCanvas.cpp
-    graphics/GraphicsLayer.hpp
-    graphics/GraphicsLayer.cpp
-    graphics/GraphicsScene.hpp
-    graphics/GraphicsScene.cpp
-    graphics/GraphicsTool.hpp
-    graphics/GraphicsTool.cpp
-    graphics/GraphicsView.hpp
-    graphics/GraphicsView.cpp
-    graphics/GraphicsVisibility.cpp
-
     io/ZipFile.cpp
     io/ZipReader.hpp
     io/ZipWriter.hpp

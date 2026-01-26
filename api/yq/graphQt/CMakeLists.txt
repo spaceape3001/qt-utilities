@@ -28,6 +28,7 @@ target_link_libraries(${PROJECT_NAME}
     PUBLIC
         yq_gluon
         yq_graph
+        yq_graphicsQt
         yq_symbol
         yq_symbolQt
 )

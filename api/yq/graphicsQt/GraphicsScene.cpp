@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "GraphicsScene.hpp"
-#include <yq/gluon/graphics/GraphicsLayer.hpp>
+#include <yq/graphicsQt/GraphicsLayer.hpp>
 
 #include <QGraphicsItem>
 #include <QPainter>

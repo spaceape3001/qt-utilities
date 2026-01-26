@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <yq/gluon/graphics/GraphicsView.hpp>
+#include <yq/graphicsQt/GraphicsView.hpp>
 
 namespace yq::gluon {
     class GraphScene;
