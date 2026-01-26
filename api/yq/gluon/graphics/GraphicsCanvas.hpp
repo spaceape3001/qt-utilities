@@ -7,10 +7,13 @@
 #pragma once
 
 #include <yq/gluon/app/SubWindow.hpp>
+#include <yq/typedef/meta_id.hpp>
 
 namespace yq::gluon {
     class GraphicsScene;
     class GraphicsView;
+    class GraphicsTool;
+    class GraphicsToolMeta;
     
     class GraphicsCanvas : public SubWindow {
         Q_OBJECT
@@ -30,9 +33,18 @@ namespace yq::gluon {
         
         GraphicsView*           view() { return m_view; }
         const GraphicsView*     view() const { return m_view; }
+        
+        
+    signals:
+        void        toolChanged(quint64);
+        
+    public slots:
+        void        setActiveTool(quint64);
 
     private:
         GraphicsScene* const    m_scene;
         GraphicsView* const     m_view;
+        
+        std::map<meta_id_t, GraphicsTool*>   m_tools;
     };
 }

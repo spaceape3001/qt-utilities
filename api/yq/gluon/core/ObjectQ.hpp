@@ -54,9 +54,9 @@ namespace yq::gluon {
         
         QObject*            qObject();
         const QObject*      qObject() const;
-        
+        virtual ~ObjectQ();
+
     protected:
         ObjectQ();
-        virtual ~ObjectQ();
     };
 }

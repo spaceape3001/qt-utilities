@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "GraphicsTool.hpp"
-#include "GraphicsToolWriter.hpp"
+#include "GraphicsToolMetaWriter.hpp"
 #include "GraphicsScene.hpp"
 #include "GraphicsView.hpp"
 #include <QCursor>
@@ -59,7 +59,7 @@ namespace yq::gluon {
     {
         if(!m_view) 
             return nullptr;
-        return const_cast<GraphicsView*>(m_view->scene());
+        return const_cast<GraphicsView*>(m_view)->scene();
     }
     
     GraphicsView*   GraphicsTool::view() const

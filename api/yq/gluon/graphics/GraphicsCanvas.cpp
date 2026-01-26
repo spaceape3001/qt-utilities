@@ -6,6 +6,7 @@
 
 #include "GraphicsCanvas.hpp"
 #include "GraphicsScene.hpp"
+#include "GraphicsTool.hpp"
 #include "GraphicsView.hpp"
 #include <QVBoxLayout>
 
@@ -35,6 +36,29 @@ namespace yq::gluon {
     
     GraphicsCanvas::~GraphicsCanvas()
     {
+        m_tools.clear();
+    }
+
+    void    GraphicsCanvas::setActiveTool(quint64 qu)
+    {
+        GraphicsTool*   gt  = nullptr;
+        if(auto itr = m_tools.find(qu); itr != m_tools.end()){
+            gt  = itr->second;
+        } else {
+            if(const GraphicsToolMeta* gtm = dynamic_cast<const GraphicsToolMeta*>(Meta::lookup((meta_id_t) qu))){
+                if(ObjectQ* obj  = gtm -> create(this)){
+                    if(gt = dynamic_cast<GraphicsTool*>(obj); !gt){
+                        delete obj;
+                    }
+                }
+            }
+            m_tools[qu] = gt;
+        }
+        
+        if(gt && (gt != m_view->tool())){
+            m_view -> setTool(gt);
+            emit toolChanged((quint64) gt->metaInfo().id());
+        }
     }
     
     void    GraphicsCanvas::setEdgePen(QPen v)

@@ -120,6 +120,8 @@ add_library(${PROJECT_NAME} SHARED
     graphics/GraphicsLayer.cpp
     graphics/GraphicsScene.hpp
     graphics/GraphicsScene.cpp
+    graphics/GraphicsTool.hpp
+    graphics/GraphicsTool.cpp
     graphics/GraphicsView.hpp
     graphics/GraphicsView.cpp
     graphics/GraphicsVisibility.cpp
