@@ -21,5 +21,6 @@ target_link_libraries(${PROJECT_NAME}
         yq_symbol
 )
 
+yq_qtlib(${PROJECT_NAME})
 LinkTest(${PROJECT_NAME})
 

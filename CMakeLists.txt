@@ -15,6 +15,7 @@ include(local.cmake OPTIONAL)
 include(configure.cmake)
 include(yq-toolbox/standard.cmake)
 
+yq_data(data)
 qt_data(data)
 
 YQRepo()
