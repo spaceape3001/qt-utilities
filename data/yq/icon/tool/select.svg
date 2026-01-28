@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<svg width="64" height="64">
+    <polygon points="8,0 56,48 28,38" stroke="none" fill="lime" />
+    <polygon points="8,63 8,0 28,38" stroke="none" fill="green" />
+    <polygon points="8,63 8,0 56,48 28,38" stroke="black" fill="none" />
+</svg>

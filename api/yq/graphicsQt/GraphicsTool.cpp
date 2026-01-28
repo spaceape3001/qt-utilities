@@ -47,7 +47,7 @@ namespace yq::gluon {
         w.description("Graphics Tool");
     }
         
-    GraphicsTool::GraphicsTool()
+    GraphicsTool::GraphicsTool(QObject*parent) : QObject(parent)
     {
     }
     

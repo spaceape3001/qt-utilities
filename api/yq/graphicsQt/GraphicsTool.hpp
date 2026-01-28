@@ -68,7 +68,7 @@ namespace yq::gluon {
         void            iconChanged(const QIcon&);
         
     protected:
-        GraphicsTool();
+        GraphicsTool(QObject*parent=nullptr);
         ~GraphicsTool();
         
         friend class GraphicsView;

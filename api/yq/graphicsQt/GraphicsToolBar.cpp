@@ -32,6 +32,8 @@ namespace yq::gluon {
         QToolButton*   tb  = new QToolButton;
         tb -> setText(qString(gtm.label()));
         tb -> setIcon(qIcon(gtm.icon(0)));
+        
+        connect(tb, &QToolButton::clicked, m_mapper, &UInt64SignalMapper::map);
         m_mapper -> setMapping(tb, gtm.id());
         m_buttons[gtm.id()] = tb;
         
