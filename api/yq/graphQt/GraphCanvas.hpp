@@ -7,6 +7,7 @@
 #pragma once
 
 #include <yq/core/Ref.hpp>
+#include <yq/graph/GGraph.hpp>
 #include <yq/graphicsQt/GraphicsCanvas.hpp>
 #include <yq/net/Url.hpp>
 #include <yq/typedef/g_document.hpp>
@@ -36,10 +37,12 @@ namespace yq::gluon {
         std::filesystem::path   filepath() const;
         QString                 filename() const;
         
-        GDocumentPtr            get() const;
-        void                    set(const GDocument&);
+        GGraph                  get() const;
+        void                    set(GGraph, const Url& u={});
         
-        const Url& url() const { return m_url; }
+        GDocumentPtr            document() const;
+        
+        const Url&              url() const { return m_url; }
         
 
     public slots:
@@ -49,6 +52,7 @@ namespace yq::gluon {
     private:
         const unsigned          m_number;
         Url                     m_url;
+        GGraph                  m_graph;
         GraphScene*             m_scene     = nullptr;
         GraphView*              m_view      = nullptr;
     };

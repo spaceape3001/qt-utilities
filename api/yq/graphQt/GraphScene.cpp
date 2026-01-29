@@ -4,10 +4,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <yq/gluon/logging.hpp>
+
 #include "GraphScene.hpp"
 #include "GraphScene.hxx"
 
 #include <yq/gluon/core/upoint.hpp>
+#include <yq/gluon/core/uvector.hpp>
 #include <yq/graph/GDocument.hpp>
 #include <yq/symbol/Symbol.hpp>
 
@@ -102,7 +105,10 @@ namespace yq::gluon {
     {
         if(!gnt)    
             return nullptr;
-        Node*   n   = new Node(gnt, pt);
+            
+        GNode   node    = m_graph.node(CREATE, *gnt);
+        node.position(SET, yVector(pt));
+        Node*   n   = new Node(node);
         addItem(n);
         return n;
     }
@@ -139,23 +145,22 @@ namespace yq::gluon {
     //////////////////////////////////////////////////////////////////////////////
 
 
-    //  Node(const Node&);  // pending/TODO
-    GraphScene::Node::Node(const GNodeTemplateCPtr& gnt, const QPointF& pt)
-    {
-        m_template  = gnt;
-        //m_data      = // TODO
-        //m_data.position     = { (float) pt.x(), (float) pt.y() };
-        //m_data.size         = { 100.f, 50.f };  // hack
-        _init();
-        setPos(pt);
-    }
-    
-    //Node(const GNodeTemplateCPtr&, const GNodeData&);   // TODO
-    //Node(const GNodeData&);   // TODO
+    ////  Node(const Node&);  // pending/TODO
+    //GraphScene::Node::Node(const GNodeTemplateCPtr& gnt, const QPointF& pt)
+    //{
+        //m_template  = gnt;
+        ////m_data      = // TODO
+        ////m_data.position     = { (float) pt.x(), (float) pt.y() };
+        ////m_data.size         = { 100.f, 50.f };  // hack
+        //_init();
+        //setPos(pt);
+    //}
     
     GraphScene::Node::Node(GNode gn) : m_data(gn)
     {
-        m_template  = GNodeTemplate::IO::load(gn.node_template());
+        m_template  = GNodeTemplate::IO::load(gn.type());
+        _init();
+        setPos(qPoint(m_data.position()));
     }
     
     GraphScene::Node::~Node()
@@ -180,17 +185,23 @@ namespace yq::gluon {
         return Symbol::IO::load("pp:yq/symbol/basic.sym#circle");
     }
 
-    void    GraphScene::Node::setPosition(const Vector2F& pt)
+    void    GraphScene::Node::setPosition(const Vector2D& pt)
     {
-        //  set it on the node
+        m_data.position(SET, pt);
         setPos(qPoint(pt));
     }
     
     void    GraphScene::Node::setPosition(const QPointF& pt)
     {
-        //  set it on the node
+        m_data.position(SET, yVector(pt));
         setPos(pt);
     }
+
+    QPointF  GraphScene::Node::getPosition() const 
+    {
+        return qPoint(m_data.position());
+    }
+    
 }
 
 #include "moc_GraphScene.cpp"

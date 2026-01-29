@@ -17,8 +17,8 @@
 namespace yq::gluon {
     static std::atomic<unsigned>    gCanvasNum{1};
 
-    GraphCanvas::GraphCanvas(QWidget*parent) : 
-        GraphicsCanvas(new GraphView(new GraphScene), parent), 
+    GraphCanvas::GraphCanvas(QWidget*parent) :
+        GraphicsCanvas(new GraphView(new GraphScene()), parent),
         m_number(gCanvasNum++)
     {
         m_view      = (GraphView*) GraphicsCanvas::view();
@@ -34,19 +34,12 @@ namespace yq::gluon {
     void        GraphCanvas::clear()
     {
         m_scene -> clear();
-        m_url   = {};
+        m_graph = {};
     }
 
-    GDocumentPtr           GraphCanvas::get() const
+    GDocumentPtr  GraphCanvas::document() const
     {
-        return {};
-        //return m_scene -> get();
-    }
-    
-    void                    GraphCanvas::set(const GDocument& doc)
-    {
-        //m_scene -> set(doc);
-        //m_url       = doc.url();
+        return const_cast<GraphCanvas*>(this)->m_graph.document();
     }
 
     std::filesystem::path   GraphCanvas::dirpath() const
@@ -61,13 +54,15 @@ namespace yq::gluon {
 
     std::filesystem::path GraphCanvas::filepath() const
     {
-        if(!is_similar(m_url.scheme, "file"))
+        Url u   = url();
+    
+        if(!is_similar(u.scheme, "file"))
             return {};
-        if(!m_url.fragment.empty())
+        if(!u.fragment.empty())
             return {};
-        if(!m_url.query.empty())
+        if(!u.query.empty())
             return {};
-        return m_url.path;
+        return u.path;
     }
 
     QString GraphCanvas::filename() const
@@ -75,9 +70,29 @@ namespace yq::gluon {
         return QString::fromStdString(filepath().string());
     }
 
+    GGraph      GraphCanvas::get() const
+    {
+        return m_graph;
+    }
+
+    void                    GraphCanvas::set(GGraph gg, const Url& u)
+    {
+        m_scene -> set(gg);
+        m_graph     = gg;
+        
+        if(!u.empty()){
+            m_url   = u;
+        } else if(auto doc    = m_graph.document()){
+            m_url   = doc->url();
+        } else
+            m_url   = {};
+        
+        updateTitle();
+    }
+
     void    GraphCanvas::updateTitle()
     {
-        std::string s = to_string(m_url);
+        std::string s = to_string(url());
         if(s.empty()){
             setWindowTitle(tr("Unnamed:%1").arg(m_number));
         } else {

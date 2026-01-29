@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <yq/graphQt/GraphScene.hpp>
-#include <yq/symbolQt/SymbolGraphicsItem.hpp>
+
+#include <yq/gluon/interface/PositionInterface.hpp>
 
 #include <yq/graph/GEdge.hpp>
 #include <yq/graph/GLine.hpp>
@@ -16,7 +16,9 @@
 #include <yq/graph/GPort.hpp>
 #include <yq/graph/GShape.hpp>
 #include <yq/graph/GText.hpp>
+#include <yq/graphQt/GraphScene.hpp>
 
+#include <yq/symbolQt/SymbolGraphicsItem.hpp>
 #include <yq/typedef/vector2.hpp>
 
 #include <QGraphicsItemGroup>
@@ -44,13 +46,12 @@ namespace yq::gluon {
         virtual ~Line(){}
     };
 
-    struct GraphScene::Node : public SymbolGraphicsItem, public Item  {
+    struct GraphScene::Node : public SymbolGraphicsItem, public Item, public PositionInterface {
         GNodeTemplateCPtr       m_template;
         GNode                   m_data;
         float                   m_size      = 64.;
         
         //  Node(const Node&);  // pending/TODO
-        Node(const GNodeTemplateCPtr&, const QPointF&);
         Node(GNode);
         //Node(const GNodeTemplateCPtr&, const GNodeData&);   // TODO
         //Node(const GNodeData&);   // TODO
@@ -60,8 +61,10 @@ namespace yq::gluon {
 
         SymbolCPtr  _symbol() const;
         
-        void    setPosition(const Vector2F&);
+        void    setPosition(const Vector2D&);
         void    setPosition(const QPointF&);
+        
+        virtual QPointF  getPosition() const override;
 
 
         virtual QGraphicsItem*          qItem() override { return this; }
