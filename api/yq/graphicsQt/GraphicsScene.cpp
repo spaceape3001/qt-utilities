@@ -44,12 +44,6 @@ namespace yq::gluon {
     {
     }
 
-
-    Flags<GraphicsScene::AutoDraw> GraphicsScene::autoDraw() const
-    {   
-        return m_autoDraw;
-    }
-
     bool    GraphicsScene::autoDraw(AutoDraw ad) const
     {
         return m_autoDraw(ad);
@@ -66,6 +60,22 @@ namespace yq::gluon {
         m_autoDraw.set(ad);
         invalidate();
     }
+
+    bool    GraphicsScene::feature(Feature f) const
+    {
+        return m_features(f);
+    }
+    
+    void    GraphicsScene::featureEnable(Feature f)
+    {
+        m_features.set(f);
+    }
+    
+    void    GraphicsScene::featureDisable(Feature f)
+    {
+        m_features.clear(f);
+    }
+    
 
     void    GraphicsScene::draw(QPainter* painter, const QRectF& rect)
     {

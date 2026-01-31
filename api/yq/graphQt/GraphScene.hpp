@@ -48,6 +48,7 @@ namespace yq::gluon {
         //struct Line;
         //struct Text;
         
+        
     public slots:
         void    clear();    // name shadow is deliberate
         
@@ -62,5 +63,7 @@ namespace yq::gluon {
         Line*       add_line(GLine);
         Shape*      add_shape(GShape);
         Text*       add_text(GText);
+        
+        void    _update_connected(GNode);
     };
 }

@@ -25,6 +25,7 @@ namespace yq::gluon {
         m_scene     = (GraphScene*) GraphicsCanvas::scene();
         m_scene -> setParent(this);
         m_scene -> setSceneRect(QRectF(0,0,2048,2048));
+        featureEnable(Feature::SelectEffect);
     }
     
     GraphCanvas::~GraphCanvas()

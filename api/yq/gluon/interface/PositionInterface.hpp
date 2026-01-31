@@ -15,7 +15,7 @@
 namespace yq::gluon {
     struct PositionInterface {
         virtual ~PositionInterface(){}
-        virtual QPointF  getPosition() const = 0;
-        virtual void	 setPosition(const QPointF&) {}
+        virtual QPointF  position() const = 0;
+        virtual void	 position(set_k, const QPointF&) {}
     };
 }

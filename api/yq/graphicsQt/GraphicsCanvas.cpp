@@ -8,7 +8,10 @@
 #include "GraphicsScene.hpp"
 #include "GraphicsTool.hpp"
 #include "GraphicsView.hpp"
+#include <yq/gluon/interface/SelectedInterface.hpp>
 #include <QVBoxLayout>
+#include <QGraphicsItem>
+#include <QGraphicsColorizeEffect>
 
 namespace yq::gluon {
     GraphicsCanvas::GraphicsCanvas(QWidget*parent) : GraphicsCanvas(new GraphicsScene, parent)
@@ -47,6 +50,93 @@ namespace yq::gluon {
         return gt->metaInfo().id();
     }
 
+    bool    GraphicsCanvas::feature(Feature f) const
+    {
+        return m_features(f);
+    }
+    
+    void    GraphicsCanvas::featureEnable(Feature f)
+    {
+        m_features.set(f);
+        m_scene->invalidate();
+    }
+    
+    void    GraphicsCanvas::featureDisable(Feature f)
+    {
+        m_features.clear(f);
+        m_scene->invalidate();
+    }
+
+    bool    GraphicsCanvas::hasSelectEffect() const
+    {
+        return feature(Feature::SelectEffect);
+    }
+
+    void    GraphicsCanvas::select(QGraphicsItem*qi)
+    {
+        if(!qi)
+            return ;
+        qi -> setSelected(true);
+        if(SelectedInterface* si = dynamic_cast<SelectedInterface*>(qi))
+            si -> selected(SET, true);
+        if(hasSelectEffect()){
+            if(QGraphicsEffect* qe = selectEffect(qi))
+                qi -> setGraphicsEffect(qe);
+        }
+    }
+
+    void    GraphicsCanvas::deselect(QGraphicsItem*qi)
+    {
+        if(!qi)
+            return ;
+        qi -> setSelected(false);
+        if(SelectedInterface* si = dynamic_cast<SelectedInterface*>(qi))
+            si -> selected(SET, false);
+        if(hasSelectEffect())
+            qi -> setGraphicsEffect(nullptr);
+    }
+
+    void    GraphicsCanvas::selectAll()
+    {
+        auto qItems  = m_scene -> items();
+        for(QGraphicsItem* gi : qItems){
+            if(!gi)
+                continue;
+            select(gi);
+        }
+    }
+
+    QGraphicsEffect*    GraphicsCanvas::selectEffect(QGraphicsItem*)
+    {
+        QGraphicsColorizeEffect *ret    = new QGraphicsColorizeEffect;
+        ret -> setColor(QColor(0,128,255));
+        ret -> setStrength(0.5);
+        return ret;
+    }
+
+    void    GraphicsCanvas::selectNone()
+    {
+        auto qItems  = m_scene -> items();
+        for(QGraphicsItem* gi : qItems){
+            if(!gi)
+                continue;
+            deselect(gi);
+        }
+    }
+
+    void    GraphicsCanvas::selectThis(QGraphicsItem* qi)
+    {
+        selectNone();
+        select(qi);
+    }
+    
+    void    GraphicsCanvas::selectThese(const std::vector<QGraphicsItem*>& itemList)
+    {
+        selectNone();
+        for(QGraphicsItem* it : itemList)
+            select(it);
+    }
+
     void    GraphicsCanvas::setBackgroundBrush(QBrush v)
     {
         m_scene -> setBackgroundBrush(v);
@@ -72,7 +162,10 @@ namespace yq::gluon {
         } else {
             if(const GraphicsToolMeta* gtm = dynamic_cast<const GraphicsToolMeta*>(Meta::lookup((meta_id_t) qu))){
                 if(ObjectQ* obj  = gtm -> create(this)){
-                    if(gt = dynamic_cast<GraphicsTool*>(obj); !gt){
+                    gt = dynamic_cast<GraphicsTool*>(obj);
+                    if(gt){
+                        gt -> m_canvas  = this;
+                    } else {
                         delete obj;
                     }
                 }

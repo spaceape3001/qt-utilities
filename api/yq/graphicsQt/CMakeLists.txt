@@ -25,6 +25,8 @@ add_library(${PROJECT_NAME} SHARED
     GraphicsView.cpp
     GraphicsVisibility.cpp
     
+    tool/GeneralTool.hpp
+    tool/GeneralTool.cpp
     tool/PanTool.hpp
     tool/PanTool.cpp
     tool/SelectTool.hpp

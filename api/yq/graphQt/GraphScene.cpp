@@ -33,6 +33,10 @@ namespace yq::gluon {
         clear();
     }
 
+    void    GraphScene::_update_connected(GNode)
+    {
+    }
+
     GraphScene::Item*   GraphScene::add(GBase gb)
     {
         if(!gb)
@@ -70,9 +74,9 @@ namespace yq::gluon {
     }
 
 
-    GraphScene::Node*       GraphScene::add_node(GNode)
+    GraphScene::Node*       GraphScene::add_node(GNode n)
     {
-        return nullptr;
+        return new Node(n);
     }
     
     GraphScene::Edge*       GraphScene::add_edge(GEdge)
@@ -108,9 +112,7 @@ namespace yq::gluon {
             
         GNode   node    = m_graph.node(CREATE, *gnt);
         node.position(SET, yVector(pt));
-        Node*   n   = new Node(node);
-        addItem(n);
-        return n;
+        return static_cast<Node*>(add(node));
     }
     
     void    GraphScene::clear()
@@ -185,19 +187,21 @@ namespace yq::gluon {
         return Symbol::IO::load("pp:yq/symbol/basic.sym#circle");
     }
 
-    void    GraphScene::Node::setPosition(const Vector2D& pt)
+    void    GraphScene::Node::position(set_k, const Vector2D& pt)
     {
         m_data.position(SET, pt);
         setPos(qPoint(pt));
+        
+        if(GraphScene* sc = dynamic_cast<GraphScene*>(scene()))
+            sc -> _update_connected(m_data);
     }
     
-    void    GraphScene::Node::setPosition(const QPointF& pt)
+    void    GraphScene::Node::position(set_k, const QPointF& pt)
     {
-        m_data.position(SET, yVector(pt));
-        setPos(pt);
+        position(SET, yVector(pt));
     }
 
-    QPointF  GraphScene::Node::getPosition() const 
+    QPointF  GraphScene::Node::position() const 
     {
         return qPoint(m_data.position());
     }

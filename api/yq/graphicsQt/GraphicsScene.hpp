@@ -23,6 +23,10 @@ namespace yq::gluon {
             USER            //! Use this for extending....
         };
         
+        enum class Feature : uint8_t {
+            SelectEffect
+        };
+        
         static constexpr const AutoDraw     AutoDraw_SceneRect              = AutoDraw::SceneRect;
     
         //! Test for printing to paper... (might be useful during rendering)
@@ -37,7 +41,7 @@ namespace yq::gluon {
 
         // IF We need meta, it'll be done otherwise.... (maybe virtuals here...)
         
-        Flags<AutoDraw> autoDraw() const;
+        Flags<AutoDraw> autoDraw() const { return m_autoDraw; }
         bool            autoDraw(AutoDraw) const;
 
         void            autoDrawEnable(AutoDraw);
@@ -46,6 +50,11 @@ namespace yq::gluon {
         //  Generic draw
         void            draw(QPainter*, const QRectF& rect={});
         
+        bool            feature(Feature) const;
+        void            featureEnable(Feature);
+        void            featureDisable(Feature);
+        Flags<Feature>  features() const { return m_features; }
+
         QPen            sceneRectPen() const;
         QBrush          sceneRectBrush() const;
 
@@ -55,17 +64,19 @@ namespace yq::gluon {
         void            print(QPainter*, const QRectF& rect={});
 
     protected:
-        void            drawBackground(QPainter*, const QRectF&rect={}) override;
-        void            drawItems(QPainter*, const QRectF&rect={});
-        void            drawForeground(QPainter*, const QRectF&rect={}) override;
-        void            drawSceneRect(QPainter*, const QRectF&rect={});
+        void                drawBackground(QPainter*, const QRectF&rect={}) override;
+        void                drawItems(QPainter*, const QRectF&rect={});
+        void                drawForeground(QPainter*, const QRectF&rect={}) override;
+        void                drawSceneRect(QPainter*, const QRectF&rect={});
 
-        void            makeCheckerboardBackgroundBrush();
+        void                makeCheckerboardBackgroundBrush();
+
 
     private:
         static thread_local bool    s_printing;
 
         Flags<AutoDraw>         m_autoDraw;
+        Flags<Feature>          m_features;
         QBrush                  m_sceneRectBrush;
         QPen                    m_sceneRectPen;
 

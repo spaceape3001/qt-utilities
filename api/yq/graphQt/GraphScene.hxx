@@ -61,10 +61,10 @@ namespace yq::gluon {
 
         SymbolCPtr  _symbol() const;
         
-        void    setPosition(const Vector2D&);
-        void    setPosition(const QPointF&);
+        void            position(set_k, const Vector2D&);
+        void            position(set_k, const QPointF&) override;
         
-        virtual QPointF  getPosition() const override;
+        virtual QPointF  position() const override;
 
 
         virtual QGraphicsItem*          qItem() override { return this; }

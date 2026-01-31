@@ -1,0 +1,15 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  YOUR QUILL
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+namespace yq::gluon {
+    struct ZOrderInterface {
+        virtual ~ZOrderInterface(){}
+        virtual double   z_order() const = 0;
+        virtual void	 zorder(set_k, double) {}
+    };
+}

@@ -1,0 +1,15 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  YOUR QUILL
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#pragma once
+
+namespace yq::gluon {
+    struct SelectedInterface {
+        virtual ~SelectedInterface(){}
+        virtual bool     selected() const = 0;
+        virtual void	 selected(set_k, bool) {}
+    };
+}

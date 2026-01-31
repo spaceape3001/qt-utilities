@@ -20,6 +20,17 @@
 #include <yq/shape/Oval2.hxx>
 
 namespace yq::gluon {
+
+    struct SGIBase {
+        virtual ~SGIBase(){}
+    };
+    
+    template <typename T>
+    struct SGIAdapter : public T, public SGIBase {
+        template <typename ... Arg>
+        SGIAdapter(Arg... args) : T(args...) {}
+    };
+
     SymbolGraphicsItem::SymbolGraphicsItem(QGraphicsItem*parent) : QGraphicsItemGroup(parent)
     {
     }
@@ -38,13 +49,13 @@ namespace yq::gluon {
         for(auto& sh : sym.shape){
             QGraphicsItem*  gi = nullptr;
             if(const auto* p = std::get_if<AxBox2F>(&sh.primitive)){
-                gi  = new QGraphicsRectItem(qRectF(size * *p));
+                gi  = new SGIAdapter<QGraphicsRectItem>(qRectF(size * *p));
             }
             if(const auto* p = std::get_if<Circle2F>(&sh.primitive)){
-                gi  = new QGraphicsEllipseItem(qRectF(size * p->bounds()));
+                gi  = new SGIAdapter<QGraphicsEllipseItem>(qRectF(size * p->bounds()));
             }
             if(const auto* p = std::get_if<Oval2F>(&sh.primitive)){
-                gi  = new QGraphicsEllipseItem(qRectF(size * p->bounds()));
+                gi  = new SGIAdapter<QGraphicsEllipseItem>(qRectF(size * p->bounds()));
             }
             if(gi){
                 addToGroup(gi);

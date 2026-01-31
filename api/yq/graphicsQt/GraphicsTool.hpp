@@ -29,6 +29,7 @@ class QWheelEvent;
 namespace yq::gluon {
     class GraphicsScene;
     class GraphicsView;
+    class GraphicsCanvas;
     
     class GraphicsToolMeta : public ObjectQMeta {
     public:
@@ -109,6 +110,9 @@ namespace yq::gluon {
         virtual void    wheelEvent(QWheelEvent*){}
         
     private:
-        GraphicsView*   m_view  = nullptr;
+        friend class GraphicsCanvas;
+        
+        GraphicsCanvas* m_canvas    = nullptr;
+        GraphicsView*   m_view      = nullptr;
     };
 }
