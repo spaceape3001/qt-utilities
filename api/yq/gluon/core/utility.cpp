@@ -12,5 +12,6 @@
 #include "ulog.ipp"
 #include "umatch.ipp"
 #include "uobject.ipp"
+#include "urect.ipp"
 #include "IgCaseQ.ipp"
 
