@@ -56,6 +56,7 @@ namespace yq::gluon {
         GGraph                  m_graph;
         std::map<gid_t, Item*>  m_items;
         std::vector<Item*>      m_notQt;
+        float                   m_symSize   = 32.;
         
         Node*       add_node(GNode);
         Edge*       add_edge(GEdge);

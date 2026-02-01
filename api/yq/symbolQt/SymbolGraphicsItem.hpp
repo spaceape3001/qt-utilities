@@ -12,6 +12,7 @@
 namespace yq::gluon {
     class SGIText;
     
+    
     class SymbolGraphicsItem : public QGraphicsItemGroup {
     public:
         SymbolGraphicsItem(QGraphicsItem*parent=nullptr);

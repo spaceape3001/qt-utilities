@@ -117,6 +117,8 @@ add_library(${PROJECT_NAME} SHARED
     io/ZipFile.cpp
     io/ZipReader.hpp
     io/ZipWriter.hpp
+    
+    interface/PositionInterface.cpp
 
     layout/FlowLayout.cpp
     layout/FlowLayout.hpp

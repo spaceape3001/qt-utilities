@@ -10,12 +10,14 @@
 // (Figure if the handler's needed, the Qt class's already 
 // being included.)
 
+#include <yq/keywords.hpp>
 #include <QPointF>  
 
 namespace yq::gluon {
     struct PositionInterface {
         virtual ~PositionInterface(){}
         virtual QPointF  position() const = 0;
+        virtual void     position(move_k, const QPointF&);
         virtual void	 position(set_k, const QPointF&) {}
     };
 }

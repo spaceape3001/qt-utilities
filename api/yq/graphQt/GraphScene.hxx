@@ -49,17 +49,18 @@ namespace yq::gluon {
     struct GraphScene::Node : public SymbolGraphicsItem, public Item, public PositionInterface {
         GNodeTemplateCPtr       m_template;
         GNode                   m_data;
-        float                   m_size      = 64.;
         
         //  Node(const Node&);  // pending/TODO
-        Node(GNode);
+        Node(GraphScene&, GNode);
         //Node(const GNodeTemplateCPtr&, const GNodeData&);   // TODO
         //Node(const GNodeData&);   // TODO
         
-        void    _init();
+        void    _init(GraphScene&);
         virtual ~Node();
 
         SymbolCPtr  _symbol() const;
+        
+        using PositionInterface::position;
         
         void            position(set_k, const Vector2D&);
         void            position(set_k, const QPointF&) override;

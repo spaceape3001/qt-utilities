@@ -76,7 +76,7 @@ namespace yq::gluon {
 
     GraphScene::Node*       GraphScene::add_node(GNode n)
     {
-        return new Node(n);
+        return new Node(*this, n);
     }
     
     GraphScene::Edge*       GraphScene::add_edge(GEdge)
@@ -158,10 +158,10 @@ namespace yq::gluon {
         //setPos(pt);
     //}
     
-    GraphScene::Node::Node(GNode gn) : m_data(gn)
+    GraphScene::Node::Node(GraphScene& gs, GNode gn) : m_data(gn)
     {
         m_template  = GNodeTemplate::IO::load(gn.type());
-        _init();
+        _init(gs);
         setPos(qPoint(m_data.position()));
     }
     
@@ -169,14 +169,14 @@ namespace yq::gluon {
     {
     }
     
-    void    GraphScene::Node::_init()
+    void    GraphScene::Node::_init(GraphScene&gs)
     {
         SymbolCPtr  sym = _symbol();
         if(!sym)
             return ;
             
         //clear();
-        build(*sym, m_size);
+        build(*sym, gs.m_symSize);
     }
 
     SymbolCPtr  GraphScene::Node::_symbol() const

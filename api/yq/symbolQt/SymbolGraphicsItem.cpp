@@ -119,6 +119,8 @@ namespace yq::gluon {
     {
         using namespace yq::symbol;
         
+        size *= sym.scale;
+        
         auto makeFont = [&](const font_style_t& sty) -> QFont {
             return QFont();
         };
@@ -247,11 +249,33 @@ namespace yq::gluon {
             pd.flow         = pb.flow;
 
             // be configurable (later)
-            PinShape    ps  = ( pb.shape != PinShape::Default ) ? pb.shape : PinShape::Circle;
+            PinShape    ps  = pb.shape;
+            if(ps == PinShape::Default){
+                switch(pb.flow){
+                case PinFlow::Bi:
+                    ps      = PinShape::Circle;
+                    break;
+                case PinFlow::In:
+                case PinFlow::Out:
+                    ps      = PinShape::Triangle;
+                    break;
+                case PinFlow::NC:
+                    ps      = PinShape::None;
+                    break;
+                }
+            } 
+            
             Vector2F    hfz = size * (Vector2F) pb.size;
             Vector2F    hpt = size * pt;
             pd.bounds       = AxBox2F(SORT, hpt - hfz, hpt + hfz);
             
+            auto proj   = [&](const Vector2F& v) -> Vector2F
+            {
+                if(v == ZERO)
+                    return hpt;
+                return hpt + hfz.emul(v);
+            };
+
             if(ps == PinShape::None)    // legal, no marked pin
                 return nullptr;
 
@@ -264,10 +288,27 @@ namespace yq::gluon {
             case PinShape::Diamond:
                 {
                     QPolygonF   poly;
-                    poly << QPoint( pd.bounds.lo.x, hpt.y );
-                    poly << QPoint( hpt.x, pd.bounds.hi.y );
-                    poly << QPoint( pd.bounds.hi.x, hpt.y );
-                    poly << QPoint( hpt.x, pd.bounds.lo.y );
+                    poly << QPointF( pd.bounds.lo.x, hpt.y );
+                    poly << QPointF( hpt.x, pd.bounds.hi.y );
+                    poly << QPointF( pd.bounds.hi.x, hpt.y );
+                    poly << QPointF( hpt.x, pd.bounds.lo.y );
+                    return new QGraphicsPolygonItem(poly);
+                }
+                break;
+            case PinShape::Triangle:
+                {
+                    QPolygonF   poly;
+                    if(pb.flow == PinFlow::In){
+                        poly << qPoint(proj({  pb.direction.x, -pb.direction.y}));
+                        poly << qPoint(proj({  pb.direction.y,  pb.direction.x+pb.direction.y}));
+                        poly << qPoint(proj({ -pb.direction.y,  pb.direction.x+pb.direction.y}));
+                    } else {
+                        poly << qPoint(proj({  pb.direction.x,  pb.direction.y}));
+                        poly << qPoint(proj({  pb.direction.y, -pb.direction.x-pb.direction.y}));
+                        poly << qPoint(proj({ -pb.direction.y, -pb.direction.x-pb.direction.y}));
+                    }
+                    
+                    
                     return new QGraphicsPolygonItem(poly);
                 }
                 break;
