@@ -61,6 +61,7 @@ namespace yq::gluon {
 
         void    selectThis(QGraphicsItem*);
         void    selectThese(const std::vector<QGraphicsItem*>&);
+        void    selectThese(const QList<QGraphicsItem*>&);
 
         
     protected:

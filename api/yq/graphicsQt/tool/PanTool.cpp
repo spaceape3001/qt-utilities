@@ -4,10 +4,14 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <yq/gluon/logging.hpp>
 #include "PanTool.hpp"
 #include <yq/graphicsQt/GraphicsToolMetaWriter.hpp>
+#include <yq/graphicsQt/GraphicsView.hpp>
+#include <QMouseEvent>
+#include <QWheelEvent>
 
-YQ_OBJECT_IMPLEMENT(yq::gluon::PanTool)
+YQ_OBJECTQ_IMPLEMENT(yq::gluon::PanTool)
 
 namespace yq::gluon {
     PanTool::PanTool(QObject* parent) : GraphicsTool(parent)
@@ -18,6 +22,52 @@ namespace yq::gluon {
     {
     }
     
+    void    PanTool::deactivating() 
+    {
+        m_inDrag    = false;
+    }
+
+    void    PanTool::mouseMoveEvent(QMouseEvent* evt) 
+    {
+        GraphicsView*   gv  = view();
+        if(!gv)
+            return ;
+        if(!m_inDrag)
+            return ;
+        
+        QPointF     del  = gv -> mapToScene(evt -> position()) - m_start;
+        QTransform  t   = m_transform;
+        t.translate(del.x(), del.y());
+        gv -> setTransform(t);
+        evt -> accept();
+    }
+    
+    void    PanTool::mousePressEvent(QMouseEvent* evt)
+    {
+        GraphicsView*   gv  = view();
+        if(!gv)
+            return ;
+
+        m_inDrag    = true;
+        m_start     = gv -> mapToScene(evt -> position());
+        m_transform = gv -> transform();
+        evt -> accept();
+    }
+    
+    void    PanTool::mouseReleaseEvent(QMouseEvent*evt) 
+    {
+        deactivating();
+        evt -> accept();
+    }
+
+    void    PanTool::wheelEvent(QWheelEvent*evt) 
+    {
+        if(m_inDrag){
+            evt -> ignore();
+        } else
+            GraphicsTool::wheelEvent(evt);
+    }
+
     void PanTool::init_meta()
     {
         auto w = writer<PanTool>();

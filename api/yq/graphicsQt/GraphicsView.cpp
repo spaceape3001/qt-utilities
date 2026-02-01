@@ -43,6 +43,7 @@ namespace yq::gluon {
         assert(scene);
         setMouseTracking(true);
         setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        setTransformationAnchor(NoAnchor);
     }
     
     GraphicsView::~GraphicsView()
@@ -89,6 +90,18 @@ namespace yq::gluon {
         }
         QGraphicsView::dragMoveEvent(evt);
     }
+
+    void 	GraphicsView::drawBackground(QPainter *painter, const QRectF &rect) 
+    {
+        QGraphicsView::drawBackground(painter, rect);
+    }
+    
+    void 	GraphicsView::drawForeground(QPainter *painter, const QRectF &rect) 
+    {
+        QGraphicsView::drawForeground(painter, rect);
+        if(m_tool)
+            m_tool -> drawToolLayer(painter, rect);
+    }
     
     void 	GraphicsView::dropEvent(QDropEvent*evt) 
     {
@@ -125,6 +138,16 @@ namespace yq::gluon {
         m_features.set(v);
     }
 
+    bool            GraphicsView::featureMouseWheelRotate() const
+    {
+        return m_features[Feature::MouseWheelRotate];
+    }
+    
+    bool            GraphicsView::featureMouseWheelZoom() const
+    {
+        return m_features[Feature::MouseWheelZoom];
+    }
+
     Flags<GraphicsView::Feature> GraphicsView::features() const
     {
         return m_features;
@@ -158,7 +181,22 @@ namespace yq::gluon {
         }
         return QGraphicsView::focusOutEvent(evt);
     }
+
+    void    GraphicsView::invalidateForeground()
+    {
+        m_scene->invalidate(QRectF(), QGraphicsScene::ForegroundLayer);
+    }
     
+    bool    GraphicsView::isWheelRotate(QWheelEvent*evt) const
+    {
+        return featureMouseWheelRotate() && (evt->modifiers() == m_mouseWheelRotateModifiers);
+    }
+    
+    bool    GraphicsView::isWheelZoom(QWheelEvent*evt) const
+    {
+        return featureMouseWheelZoom() && (evt->modifiers() == m_mouseWheelZoomModifiers);
+    }
+
     void 	GraphicsView::keyPressEvent(QKeyEvent*evt) 
     {
         if(m_tool){
@@ -187,6 +225,11 @@ namespace yq::gluon {
                 return;
         }
         return QGraphicsView::leaveEvent(evt);
+    }
+
+    QPointF GraphicsView::mapToScene(const QPointF&pt) const
+    {
+        return QGraphicsView::mapToScene(pt.toPoint());
     }
 
     void    GraphicsView::mouseDoubleClickEvent(QMouseEvent* evt)
@@ -320,6 +363,12 @@ namespace yq::gluon {
     GraphicsTool*   GraphicsView::tool() const
     {
         return const_cast<GraphicsTool*>(m_tool);
+    }
+
+    void    GraphicsView::translateBy(const QPointF&amt)
+    {
+    gluonInfo << "GraphicsView::translateBy(" << amt << ")";
+        translate(amt.x(), amt.y());
     }
 
     bool    GraphicsView::viewportEvent(QEvent*evt) 

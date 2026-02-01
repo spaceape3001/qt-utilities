@@ -60,6 +60,11 @@ namespace yq::gluon {
         return static_cast<bool>(m_view);
     }
 
+    GraphicsCanvas* GraphicsTool::canvas() const
+    {
+        return const_cast<GraphicsCanvas*>(m_canvas);
+    }
+
     QCursor GraphicsTool::cursor() const
     {
         return QCursor();
@@ -77,6 +82,26 @@ namespace yq::gluon {
         return const_cast<GraphicsView*>(m_view)->scene();
     }
     
+    void GraphicsTool::update()
+    {
+        if(m_view)
+            m_view -> update();
+    }
+
+    void GraphicsTool::invalidateToolLayer()
+    {
+        if(m_view)
+            m_view -> invalidateForeground();
+    }
+
+    void    GraphicsTool::wheelEvent(QWheelEvent*evt)
+    {
+        if(m_view->isWheelRotate(evt))
+            m_view -> thWheelRotate(evt);
+        if(m_view->isWheelZoom(evt))
+            m_view -> thWheelZoom(evt);
+    }
+
     GraphicsView*   GraphicsTool::view() const
     {
         return const_cast<GraphicsView*>(m_view);

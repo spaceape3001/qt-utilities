@@ -10,7 +10,6 @@
 #include <yq/core/UniqueID.hpp>
 #include <yq/gluon/core/ObjectQ.hpp>
 
-class QIcon;
 class QCursor;
 class QContextMenuEvent;
 class QDragEnterEvent;
@@ -20,8 +19,11 @@ class QDropEvent;
 class QEnterEvent;
 class QEvent;
 class QFocusEvent;
+class QIcon;
 class QKeyEvent;
+class QPainter;
 class QResizeEvent;
+class QSinglePointEvent;
 class QTabletEvent;
 class QMouseEvent;
 class QWheelEvent;
@@ -56,6 +58,8 @@ namespace yq::gluon {
         virtual QCursor cursor() const;
         virtual QIcon   icon() const;
         
+        GraphicsCanvas* canvas() const;
+        
         //! Current scene (if active)
         GraphicsScene*  scene() const;
         
@@ -87,6 +91,8 @@ namespace yq::gluon {
         virtual void 	dragMoveEvent(QDragMoveEvent*){}
         virtual void 	dropEvent(QDropEvent*){}
         
+        virtual void    drawToolLayer(QPainter*, const QRectF&){}
+        
         virtual void    enterEvent(QEnterEvent*){}
         
         virtual void 	focusInEvent(QFocusEvent*){}
@@ -107,7 +113,11 @@ namespace yq::gluon {
         
         //! Called if there's a wheel event (and activate)
         //! ACCEPT the event to stop further processing
-        virtual void    wheelEvent(QWheelEvent*){}
+        //! Default is to do zoom/rotate
+        virtual void    wheelEvent(QWheelEvent*);
+        
+        void update();
+        void invalidateToolLayer();
         
     private:
         friend class GraphicsCanvas;

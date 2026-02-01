@@ -54,6 +54,12 @@ namespace yq::gluon {
         void            featureEnable(Feature);
         void            featureDisable(Feature);
 
+        bool            featureMouseWheelRotate() const;
+        bool            featureMouseWheelZoom() const;
+
+        using QGraphicsView::mapToScene;
+        QPointF         mapToScene(const QPointF&) const;
+
         void            setMouseWheelZoomModifiers(Qt::KeyboardModifiers);
         void            setMouseWheelRotateModifiers(Qt::KeyboardModifiers);
         
@@ -65,9 +71,14 @@ namespace yq::gluon {
         double          zoomFactor() const;
         
         GraphicsTool*   tool() const;
-
+        
 
         // tool helpers....
+        
+        bool            isWheelRotate(QWheelEvent*) const;
+        bool            isWheelZoom(QWheelEvent*) const;
+        
+        void            invalidateForeground();
 
         void            thWheelRotate(QWheelEvent*);
         void            thWheelZoom(QWheelEvent*);
@@ -92,6 +103,8 @@ namespace yq::gluon {
         //! Sets the zoom factor
         void            setZoomFactor(double);
         
+        void            translateBy(const QPointF&);
+        
     signals:
         //! Advertises the current mouse position in the view
         void            mouseAt(double, double);
@@ -107,6 +120,8 @@ namespace yq::gluon {
         void 	        dragEnterEvent(QDragEnterEvent*) override;
         void 	        dragLeaveEvent(QDragLeaveEvent*) override;
         void 	        dragMoveEvent(QDragMoveEvent*) override;
+        void 	        drawBackground(QPainter*, const QRectF &) override;
+        void 	        drawForeground(QPainter*, const QRectF &) override;
         void 	        dropEvent(QDropEvent*) override;
         void 	        enterEvent(QEnterEvent*) override;
         void 	        focusInEvent(QFocusEvent*) override;
@@ -125,7 +140,6 @@ namespace yq::gluon {
         
 
     private:
-
         GraphicsScene* const    m_scene;
     
         Flags<Feature>          m_features;

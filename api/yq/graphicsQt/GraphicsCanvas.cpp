@@ -4,6 +4,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <yq/gluon/logging.hpp>
 #include "GraphicsCanvas.hpp"
 #include "GraphicsScene.hpp"
 #include "GraphicsTool.hpp"
@@ -137,6 +138,13 @@ namespace yq::gluon {
             select(it);
     }
 
+    void    GraphicsCanvas::selectThese(const QList<QGraphicsItem*>& itemList)
+    {
+        selectNone();
+        for(QGraphicsItem* it : itemList)
+            select(it);
+    }
+
     void    GraphicsCanvas::setBackgroundBrush(QBrush v)
     {
         m_scene -> setBackgroundBrush(v);
@@ -158,22 +166,31 @@ namespace yq::gluon {
     {
         GraphicsTool*   gt  = nullptr;
         if(auto itr = m_tools.find(qu); itr != m_tools.end()){
+gluonInfo << "GraphicsCanvas::setTool(" << qu << "): in cache";
             gt  = itr->second;
         } else {
             if(const GraphicsToolMeta* gtm = dynamic_cast<const GraphicsToolMeta*>(Meta::lookup((meta_id_t) qu))){
                 if(ObjectQ* obj  = gtm -> create(this)){
                     gt = dynamic_cast<GraphicsTool*>(obj);
                     if(gt){
+gluonInfo << "GraphicsCanvas::setTool(" << qu << "): created";
                         gt -> m_canvas  = this;
                     } else {
+gluonInfo << "GraphicsCanvas::setTool(" << qu << "): botched create";
                         delete obj;
                     }
                 }
+else
+gluonInfo << "GraphicsCanvas::setTool(" << qu << "): cannot create";
+
             }
+else
+gluonInfo << "GraphicsCanvas::setTool(" << qu << "): no such meta";
             m_tools[qu] = gt;
         }
         
         if(gt && (gt != m_view->tool())){
+gluonInfo << "GraphicsCanvas::setTool(" << qu << "): changing to it";
             m_view -> setTool(gt);
             emit toolChanged((quint64) gt->metaInfo().id());
         }
