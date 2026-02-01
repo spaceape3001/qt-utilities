@@ -66,8 +66,14 @@ namespace yq::gluon {
         //! Current view (if active)
         GraphicsView*   view() const;
         
-        std::pair<GraphicsScene*,GraphicsView*>                     scene_view() const;
+        std::pair<GraphicsScene*,GraphicsView*>                     sceneView() const;
         std::tuple<GraphicsScene*,GraphicsView*,GraphicsCanvas*>    context() const;
+
+        template <typename S, typename V> 
+        std::pair<S*,V*>            sceneViewAs() const;
+        
+        template <typename S, typename V, typename C>
+        std::tuple<S*,V*,C*>    contextAs() const;
         
         bool            active() const;
         

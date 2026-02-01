@@ -80,11 +80,11 @@ namespace yq::gluon {
             if(PositionInterface* pi = dynamic_cast<PositionInterface*>(qi)){
                 d.pIntf     = pi;
                 d.start     = pi -> position();
-            } else {
-                d.start     = qi -> pos();
+                m_items.push_back(d);
+            //} else {
+                //d.start     = qi -> pos();
             }
         
-            m_items.push_back(d);
         }
 
         m_inDrag    = true;

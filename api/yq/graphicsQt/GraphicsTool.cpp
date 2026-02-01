@@ -65,7 +65,7 @@ namespace yq::gluon {
         return const_cast<GraphicsCanvas*>(m_canvas);
     }
 
-    std::pair<GraphicsScene*,GraphicsView*>                     GraphicsTool::scene_view() const
+    std::pair<GraphicsScene*,GraphicsView*>                     GraphicsTool::sceneView() const
     {
         GraphicsView*   gv  = const_cast<GraphicsView*>(m_view);
         GraphicsScene*  sc  = gv ? gv->scene() : nullptr;

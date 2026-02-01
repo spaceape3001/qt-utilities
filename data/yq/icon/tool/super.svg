@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<svg width="64" height="64">
+    <!-- arrows -->
+    <polygon points="0,0 24,4 8,8 4,24" fill="lime" stroke="black" />
+    <polygon points="63,0 39,4 55,8 59,24" fill="lime" stroke="black" />
+    <polygon points="0,63 24,59 8,55 4,39" fill="lime" stroke="black" />
+    <polygon points="63,63 39,59 55,55 59,39" fill="lime" stroke="black" />
+
+    <polygon points="8,0 56,48 28,38" stroke="none" fill="lime" />
+    <polygon points="8,63 8,0 28,38" stroke="none" fill="green" />
+    <polygon points="8,63 8,0 56,48 28,38" stroke="black" fill="none" />
+</svg>

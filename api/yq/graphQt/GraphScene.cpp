@@ -79,19 +79,20 @@ namespace yq::gluon {
         return new Node(*this, n);
     }
     
-    GraphScene::Edge*       GraphScene::add_edge(GEdge)
+    GraphScene::Edge*       GraphScene::add_edge(GEdge ge)
     {
-        return nullptr;
+        return new Edge(*this, ge);
     }
     
     GraphScene::Port*       GraphScene::add_port(GPort)
     {
+        // might not be a qgraphicsitem....
         return nullptr;
     }
     
-    GraphScene::Line*       GraphScene::add_line(GLine)
+    GraphScene::Line*       GraphScene::add_line(GLine gl)
     {
-        return nullptr;
+        return new Line(*this, gl);
     }
     
     GraphScene::Shape*      GraphScene::add_shape(GShape)
@@ -140,9 +141,39 @@ namespace yq::gluon {
     }
 
     //////////////////////////////////////////////////////////////////////////////
+    GraphScene::Edge::Edge(GraphScene&gs, GEdge e) : Item(gs), m_data(e)
+    {
+        _init();
+    }
+    
+    GraphScene::Edge::~Edge()
+    {
+    }
+    
+    void GraphScene::Edge::_init()
+    {
+    }
 
-    GraphScene::Item::Item() = default;
+    //////////////////////////////////////////////////////////////////////////////
+
+    GraphScene::Item::Item(GraphScene& gs) : m_scene(gs)
+    {
+    }
     GraphScene::Item::~Item() = default;
+
+    //////////////////////////////////////////////////////////////////////////////
+
+    GraphScene::Line::Line(GraphScene& gs, GLine gl) : Item(gs), m_data(gl)
+    {
+    }
+    
+    GraphScene::Line::~Line()
+    {
+    }
+    
+    void GraphScene::Line::_init()
+    {
+    }
 
     //////////////////////////////////////////////////////////////////////////////
 
@@ -158,10 +189,10 @@ namespace yq::gluon {
         //setPos(pt);
     //}
     
-    GraphScene::Node::Node(GraphScene& gs, GNode gn) : m_data(gn)
+    GraphScene::Node::Node(GraphScene& gs, GNode gn) : Item(gs), m_data(gn)
     {
         m_template  = GNodeTemplate::IO::load(gn.type());
-        _init(gs);
+        _init();
         setPos(qPoint(m_data.position()));
     }
     
@@ -169,14 +200,14 @@ namespace yq::gluon {
     {
     }
     
-    void    GraphScene::Node::_init(GraphScene&gs)
+    void    GraphScene::Node::_init()
     {
         SymbolCPtr  sym = _symbol();
         if(!sym)
             return ;
             
         //clear();
-        build(*sym, gs.m_symSize);
+        build(*sym, m_scene.m_symSize);
     }
 
     SymbolCPtr  GraphScene::Node::_symbol() const

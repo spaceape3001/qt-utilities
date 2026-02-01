@@ -21,29 +21,40 @@
 #include <yq/symbolQt/SymbolGraphicsItem.hpp>
 #include <yq/typedef/vector2.hpp>
 
+#include <QGraphicsPathItem>
 #include <QGraphicsItemGroup>
+#include <QGraphicsTextItem>
 
 namespace yq::gluon {
     struct GraphScene::Item {
-        Item();
+        GraphScene& m_scene;
+        Item(GraphScene&);
         virtual ~Item();
         
         virtual QGraphicsItem*          qItem() { return nullptr; }
         virtual const QGraphicsItem*    qItem() const { return nullptr; }
     };
 
-    struct GraphScene::Edge : public Item {
-        GEdge       m_edge;
+    struct GraphScene::Edge : public QGraphicsPathItem, public Item {
+        GEdge       m_data;
         
-        Edge(GEdge);
-        virtual ~Edge(){}
+        void _init();
+        
+        Edge(GraphScene&, GEdge);
+        virtual ~Edge();
+        virtual QGraphicsItem*          qItem() override { return this; }
+        virtual const QGraphicsItem*    qItem() const override { return this; }
     };
 
-    struct GraphScene::Line : public Item {
+    struct GraphScene::Line : public QGraphicsPathItem, public Item {
         GLine       m_data;
         
-        Line(GLine);
-        virtual ~Line(){}
+        void _init();
+
+        Line(GraphScene&, GLine);
+        virtual ~Line();
+        virtual QGraphicsItem*          qItem() override { return this; }
+        virtual const QGraphicsItem*    qItem() const override { return this; }
     };
 
     struct GraphScene::Node : public SymbolGraphicsItem, public Item, public PositionInterface {
@@ -55,7 +66,7 @@ namespace yq::gluon {
         //Node(const GNodeTemplateCPtr&, const GNodeData&);   // TODO
         //Node(const GNodeData&);   // TODO
         
-        void    _init(GraphScene&);
+        void    _init();
         virtual ~Node();
 
         SymbolCPtr  _symbol() const;
@@ -86,11 +97,14 @@ namespace yq::gluon {
         virtual ~Shape(){}
     };
 
-    struct GraphScene::Text : public Item {
+    struct GraphScene::Text : public QGraphicsTextItem, public Item {
         GText       m_data;
         
         Text(GText);
         virtual ~Text(){}
+
+        virtual QGraphicsItem*          qItem() override { return this; }
+        virtual const QGraphicsItem*    qItem() const override { return this; }
     };
 
 
