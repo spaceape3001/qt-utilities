@@ -84,6 +84,8 @@ namespace yq::gluon {
             if(QGraphicsEffect* qe = selectEffect(qi))
                 qi -> setGraphicsEffect(qe);
         }
+        std::erase(m_selected, qi);
+        m_selected.push_back(qi);
     }
 
     void    GraphicsCanvas::deselect(QGraphicsItem*qi)
@@ -95,6 +97,7 @@ namespace yq::gluon {
             si -> selected(SET, false);
         if(hasSelectEffect())
             qi -> setGraphicsEffect(nullptr);
+        std::erase(m_selected, qi);
     }
 
     void    GraphicsCanvas::selectAll()
@@ -117,6 +120,7 @@ namespace yq::gluon {
 
     void    GraphicsCanvas::selectNone()
     {
+        m_selected.clear();
         auto qItems  = m_scene -> items();
         for(QGraphicsItem* gi : qItems){
             if(!gi)
@@ -166,31 +170,22 @@ namespace yq::gluon {
     {
         GraphicsTool*   gt  = nullptr;
         if(auto itr = m_tools.find(qu); itr != m_tools.end()){
-gluonInfo << "GraphicsCanvas::setTool(" << qu << "): in cache";
             gt  = itr->second;
         } else {
             if(const GraphicsToolMeta* gtm = dynamic_cast<const GraphicsToolMeta*>(Meta::lookup((meta_id_t) qu))){
                 if(ObjectQ* obj  = gtm -> create(this)){
                     gt = dynamic_cast<GraphicsTool*>(obj);
                     if(gt){
-gluonInfo << "GraphicsCanvas::setTool(" << qu << "): created";
                         gt -> m_canvas  = this;
                     } else {
-gluonInfo << "GraphicsCanvas::setTool(" << qu << "): botched create";
                         delete obj;
                     }
                 }
-else
-gluonInfo << "GraphicsCanvas::setTool(" << qu << "): cannot create";
-
             }
-else
-gluonInfo << "GraphicsCanvas::setTool(" << qu << "): no such meta";
             m_tools[qu] = gt;
         }
         
         if(gt && (gt != m_view->tool())){
-gluonInfo << "GraphicsCanvas::setTool(" << qu << "): changing to it";
             m_view -> setTool(gt);
             emit toolChanged((quint64) gt->metaInfo().id());
         }

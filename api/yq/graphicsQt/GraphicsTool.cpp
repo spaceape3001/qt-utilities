@@ -65,6 +65,21 @@ namespace yq::gluon {
         return const_cast<GraphicsCanvas*>(m_canvas);
     }
 
+    std::pair<GraphicsScene*,GraphicsView*>                     GraphicsTool::scene_view() const
+    {
+        GraphicsView*   gv  = const_cast<GraphicsView*>(m_view);
+        GraphicsScene*  sc  = gv ? gv->scene() : nullptr;
+        return { sc, gv };
+    }
+    
+    std::tuple<GraphicsScene*,GraphicsView*,GraphicsCanvas*>    GraphicsTool::context() const
+    {
+        GraphicsView*   gv  = const_cast<GraphicsView*>(m_view);
+        GraphicsScene*  sc  = gv ? gv->scene() : nullptr;
+        GraphicsCanvas* cvs = const_cast<GraphicsCanvas*>(m_canvas);
+        return { sc, gv, cvs };
+    }
+
     QCursor GraphicsTool::cursor() const
     {
         return QCursor();

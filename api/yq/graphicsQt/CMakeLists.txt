@@ -27,6 +27,8 @@ add_library(${PROJECT_NAME} SHARED
     
     tool/GeneralTool.hpp
     tool/GeneralTool.cpp
+    tool/MoveTool.hpp
+    tool/MoveTool.cpp
     tool/PanTool.hpp
     tool/PanTool.cpp
     tool/SelectTool.hpp

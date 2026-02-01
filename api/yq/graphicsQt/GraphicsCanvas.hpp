@@ -63,6 +63,7 @@ namespace yq::gluon {
         void    selectThese(const std::vector<QGraphicsItem*>&);
         void    selectThese(const QList<QGraphicsItem*>&);
 
+        auto&   selected() const { return m_selected; }
         
     protected:
         //! Selection effect
@@ -83,7 +84,8 @@ namespace yq::gluon {
         GraphicsView* const     m_view;
         Flags<Feature>          m_features;
         
-        std::map<meta_id_t, GraphicsTool*>   m_tools;
+        std::map<meta_id_t, GraphicsTool*>      m_tools;
+        std::vector<QGraphicsItem*>             m_selected;
         
     };
 }

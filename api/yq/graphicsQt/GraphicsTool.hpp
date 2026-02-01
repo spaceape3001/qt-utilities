@@ -66,6 +66,9 @@ namespace yq::gluon {
         //! Current view (if active)
         GraphicsView*   view() const;
         
+        std::pair<GraphicsScene*,GraphicsView*>                     scene_view() const;
+        std::tuple<GraphicsScene*,GraphicsView*,GraphicsCanvas*>    context() const;
+        
         bool            active() const;
         
     signals:
