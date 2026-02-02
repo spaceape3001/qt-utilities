@@ -1,0 +1,18 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  YOUR QUILL
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#include "GraphTextItem.hpp"
+
+namespace yq::gluon {
+    GraphTextItem::GraphTextItem(GraphScene& sc, GText gt) : GraphItem(sc), m_data(gt)
+    {
+        // INIT (todo...)
+    }
+    
+    GraphTextItem::~GraphTextItem()
+    {
+    }
+}

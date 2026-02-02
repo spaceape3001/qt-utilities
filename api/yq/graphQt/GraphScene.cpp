@@ -6,8 +6,13 @@
 
 #include <yq/gluon/logging.hpp>
 
+#include "GraphNodeItem.hpp"
+#include "GraphEdgeItem.hpp"
+#include "GraphLineItem.hpp"
+#include "GraphPortItem.hpp"
 #include "GraphScene.hpp"
-#include "GraphScene.hxx"
+#include "GraphShapeItem.hpp"
+#include "GraphTextItem.hpp"
 
 #include <yq/gluon/core/upoint.hpp>
 #include <yq/gluon/core/uvector.hpp>
@@ -33,11 +38,7 @@ namespace yq::gluon {
         clear();
     }
 
-    void    GraphScene::_update_connected(GNode)
-    {
-    }
-
-    GraphScene::Item*   GraphScene::add(GBase gb)
+    GraphItem*   GraphScene::add(GBase gb)
     {
         if(!gb)
             return nullptr;
@@ -47,20 +48,20 @@ namespace yq::gluon {
         if(m_items.contains(gb.id()))
             return nullptr;
             
-        Item*   ret = nullptr;
+        GraphItem*   ret = nullptr;
             
         if(GEdge ge = (GEdge) gb)
-            ret = add_edge(ge);
+            ret = new GraphEdgeItem(*this, ge);
         if(GLine gl = (GLine) gb)
-            ret = add_line(gl);
+            ret = new GraphLineItem(*this, gl);
         if(GNode gn = (GNode) gb)
-            ret = add_node(gn);
+            ret = new GraphNodeItem(*this, gn);
         if(GPort gp = (GPort) gb)
-            ret = add_port(gp);
+            ret = new GraphPortItem(*this, gp); 
         if(GShape gs = (GShape) gs)
-            ret = add_shape(gs);
+            ret = new GraphShapeItem(*this, gs);
         if(GText gt = (GText) gb)
-            ret = add_text(gt);
+            ret = new GraphTextItem(*this, gt);
 
         if(ret){
             if(QGraphicsItem* it = ret->qItem()){ [[likely]]
@@ -73,54 +74,21 @@ namespace yq::gluon {
         return ret;
     }
 
-
-    GraphScene::Node*       GraphScene::add_node(GNode n)
-    {
-        return new Node(*this, n);
-    }
-    
-    GraphScene::Edge*       GraphScene::add_edge(GEdge ge)
-    {
-        return new Edge(*this, ge);
-    }
-    
-    GraphScene::Port*       GraphScene::add_port(GPort)
-    {
-        // might not be a qgraphicsitem....
-        return nullptr;
-    }
-    
-    GraphScene::Line*       GraphScene::add_line(GLine gl)
-    {
-        return new Line(*this, gl);
-    }
-    
-    GraphScene::Shape*      GraphScene::add_shape(GShape)
-    {
-        return nullptr;
-    }
-    
-    GraphScene::Text*       GraphScene::add_text(GText)
-    {
-        return nullptr;
-    }
-    
-
-    GraphScene::Node*    GraphScene::add(const GNodeTemplateCPtr& gnt, const QPointF& pt)
+    GraphNodeItem*    GraphScene::add(const GNodeTemplateCPtr& gnt, const QPointF& pt)
     {
         if(!gnt)    
             return nullptr;
             
         GNode   node    = m_graph.node(CREATE, *gnt);
         node.position(SET, yVector(pt));
-        return static_cast<Node*>(add(node));
+        return static_cast<GraphNodeItem*>(add(node));
     }
     
     void    GraphScene::clear()
     {
         m_items.clear();
         GraphicsScene::clear();
-        for(Item* it : m_notQt)
+        for(GraphItem* it : m_notQt)
             delete it;
         m_notQt.clear();
     }
@@ -140,103 +108,21 @@ namespace yq::gluon {
             add(b);
     }
 
-    //////////////////////////////////////////////////////////////////////////////
-    GraphScene::Edge::Edge(GraphScene&gs, GEdge e) : Item(gs), m_data(e)
+    void    GraphScene::updateConnected(GNode)
     {
-        _init();
-    }
-    
-    GraphScene::Edge::~Edge()
-    {
-    }
-    
-    void GraphScene::Edge::_init()
-    {
+        // TODO
     }
 
-    //////////////////////////////////////////////////////////////////////////////
-
-    GraphScene::Item::Item(GraphScene& gs) : m_scene(gs)
-    {
-    }
-    GraphScene::Item::~Item() = default;
-
-    //////////////////////////////////////////////////////////////////////////////
-
-    GraphScene::Line::Line(GraphScene& gs, GLine gl) : Item(gs), m_data(gl)
-    {
-    }
-    
-    GraphScene::Line::~Line()
-    {
-    }
-    
-    void GraphScene::Line::_init()
-    {
-    }
-
-    //////////////////////////////////////////////////////////////////////////////
-
-
-    ////  Node(const Node&);  // pending/TODO
-    //GraphScene::Node::Node(const GNodeTemplateCPtr& gnt, const QPointF& pt)
-    //{
-        //m_template  = gnt;
-        ////m_data      = // TODO
-        ////m_data.position     = { (float) pt.x(), (float) pt.y() };
-        ////m_data.size         = { 100.f, 50.f };  // hack
-        //_init();
-        //setPos(pt);
-    //}
-    
-    GraphScene::Node::Node(GraphScene& gs, GNode gn) : Item(gs), m_data(gn)
-    {
-        m_template  = GNodeTemplate::IO::load(gn.type());
-        _init();
-        setPos(qPoint(m_data.position()));
-    }
-    
-    GraphScene::Node::~Node()
-    {
-    }
-    
-    void    GraphScene::Node::_init()
-    {
-        SymbolCPtr  sym = _symbol();
-        if(!sym)
-            return ;
-            
-        //clear();
-        build(*sym, m_scene.m_symSize);
-    }
-
-    SymbolCPtr  GraphScene::Node::_symbol() const
-    {
-        if(m_template && !m_template->symbol.empty()){
-            return Symbol::IO::load(m_template->symbol);
-        }
-        return Symbol::IO::load("pp:yq/symbol/basic.sym#circle");
-    }
-
-    void    GraphScene::Node::position(set_k, const Vector2D& pt)
-    {
-        m_data.position(SET, pt);
-        setPos(qPoint(pt));
-        
-        if(GraphScene* sc = dynamic_cast<GraphScene*>(scene()))
-            sc -> _update_connected(m_data);
-    }
-    
-    void    GraphScene::Node::position(set_k, const QPointF& pt)
-    {
-        position(SET, yVector(pt));
-    }
-
-    QPointF  GraphScene::Node::position() const 
-    {
-        return qPoint(m_data.position());
-    }
     
 }
 
+#include "GraphEdgeItem.ipp"
+#include "GraphItem.ipp"
+#include "GraphLineItem.ipp"
+#include "GraphNodeItem.ipp"
+#include "GraphPortItem.ipp"
+#include "GraphShapeItem.ipp"
+#include "GraphTextItem.ipp"
 #include "moc_GraphScene.cpp"
+#include "moc_GraphTextItem.cpp"
+

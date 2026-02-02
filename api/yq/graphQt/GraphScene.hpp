@@ -12,23 +12,18 @@
 #include <yq/typedef/symbol.hpp>
 
 namespace yq::gluon {
+    class GraphItem;
+    class GraphNodeItem;
+    
     class GraphScene : public GraphicsScene {
         Q_OBJECT
     public:
-        struct Item;
-        struct Node;
-        struct Shape;
-        struct Text;
-        struct Port;
-        struct Line;
-        struct Edge;
-    
         GraphScene(GGraph, QObject*parent=nullptr);
         GraphScene(QObject*parent=nullptr);
         ~GraphScene();
 
-        Node*   add(const GNodeTemplateCPtr&, const QPointF&);
-        Item*   add(GBase);
+        GraphNodeItem*   add(const GNodeTemplateCPtr&, const QPointF&);
+        GraphItem*   add(GBase);
         //one for the document too
         
         void        set(GGraph);
@@ -48,23 +43,18 @@ namespace yq::gluon {
         //struct Line;
         //struct Text;
         
+        float           symSize() const { return m_symSize; }
+        void            updateConnected(GNode);
+        
         
     public slots:
         void    clear();    // name shadow is deliberate
         
     private:
-        GGraph                  m_graph;
-        std::map<gid_t, Item*>  m_items;
-        std::vector<Item*>      m_notQt;
-        float                   m_symSize   = 32.;
+        GGraph                      m_graph;
+        std::map<gid_t, GraphItem*> m_items;
+        std::vector<GraphItem*>     m_notQt;
+        float                       m_symSize   = 32.;
         
-        Node*       add_node(GNode);
-        Edge*       add_edge(GEdge);
-        Port*       add_port(GPort);
-        Line*       add_line(GLine);
-        Shape*      add_shape(GShape);
-        Text*       add_text(GText);
-        
-        void    _update_connected(GNode);
     };
 }

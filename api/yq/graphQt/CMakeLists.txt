@@ -19,6 +19,7 @@ add_library(${PROJECT_NAME} SHARED
     GraphScene.hpp
     GraphScene.hxx
     GraphScene.cpp
+    GraphTextItem.hpp
     GraphView.hpp
     GraphView.cpp
 )

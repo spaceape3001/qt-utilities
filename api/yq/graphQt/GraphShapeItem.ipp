@@ -1,0 +1,18 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//  YOUR QUILL
+//
+////////////////////////////////////////////////////////////////////////////////
+
+#include "GraphShapeItem.hpp"
+
+namespace yq::gluon {
+    GraphShapeItem::GraphShapeItem(GraphScene&gs, GShape sh) : GraphItem(gs), m_data(sh)
+    {
+    }
+    
+    GraphShapeItem::~GraphShapeItem()
+    {
+    }
+}
+

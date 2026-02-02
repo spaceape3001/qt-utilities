@@ -4,7 +4,7 @@
 ##
 ################################################################################
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR}/bin/plugin/tools)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY  ${CMAKE_BINARY_DIR}/bin/plugin/gtools)
 
-add_subdirectory(stdtools)
+add_subdirectory(stdgtools)
 #add_subdirectory(graphtools)
