@@ -81,7 +81,12 @@ namespace yq::gluon {
             
         GNode   node    = m_graph.node(CREATE, *gnt);
         node.position(SET, yVector(pt));
-        return static_cast<GraphNodeItem*>(add(node));
+        
+        GraphNodeItem* gni  = static_cast<GraphNodeItem*>(add(node));
+        
+        //  And... the ports go here
+        
+        return gni;
     }
     
     void    GraphScene::clear()

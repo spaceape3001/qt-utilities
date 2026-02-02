@@ -7,6 +7,9 @@
 #include <yq/gluon/logging.hpp>
 
 #include "SymbolGraphicsItem.hpp"
+#include "SymbolGraphicsItem.hxx"
+#include "SGIBase.hpp"
+#include "SGIText.hpp"
 
 #include <yq/gluon/core/Logging.hpp>
 #include <yq/gluon/core/ucolor.hpp>
@@ -37,75 +40,6 @@
 #include <yq/vector/Vector2.hxx>
 
 namespace yq::gluon {
-
-    struct SymbolGraphicsItem::PinData {
-        QGraphicsItem*      item    = nullptr;
-        QPointF             point;
-        AxBox2F             bounds  = {};
-        symbol::PinFlow     flow;
-    };
-
-    struct SGIBase {
-        virtual ~SGIBase(){}
-        virtual void adjust(){}
-    };
-
-    template <typename T>
-    struct SGIAdapter : public T, public SGIBase {
-        using adapter_t = SGIAdapter;
-    
-        template <typename ... Arg>
-        SGIAdapter(Arg... args) : T(args...) {}
-    };
-    
-    struct SGIText : public SGIAdapter<QGraphicsSimpleTextItem> {
-        symbol::HAlign      hAlign;
-        symbol::VAlign      vAlign;
-        Vector2F            point;
-        
-        SGIText(const symbol::text_t& txt) : adapter_t( qString(txt.text)),
-            hAlign(txt.halign), vAlign(txt.valign), point(txt.position)
-        {
-        }
-    
-        void adjust() override
-        {
-            QRectF  bb  = boundingRect();
-            QPointF pp  = pos();
-            
-            double  x   = pp.x();
-            double  y   = pp.y();
-
-            double  w   = bb.width();
-            double  h   = bb.height();
-            
-            switch(hAlign){
-            case symbol::HAlign::Left:
-                x       = point.x;
-                break;
-            case symbol::HAlign::Center:
-                x       = point.x - 0.5 * w;
-                break;
-            case symbol::HAlign::Right:
-                x       = point.x - w;
-                break;
-            }
-
-            switch(vAlign){
-            case symbol::VAlign::Top:
-                y       = point.y;
-                break;
-            case symbol::VAlign::Middle:
-                y       = point.y - 0.5 * h;
-                break;
-            case symbol::VAlign::Bottom:
-                y       = point.y - h;
-                break;
-            }
-            
-            setPos(QPointF(x,y));
-        }
-    };
 
     SymbolGraphicsItem::SymbolGraphicsItem(QGraphicsItem*parent) : QGraphicsItemGroup(parent)
     {
@@ -233,8 +167,8 @@ namespace yq::gluon {
             if(const auto* p = std::get_if<image_t>(&sh.primitive)){
             }
             if(const auto* p = std::get_if<text_t>(&sh.primitive)){
-                SGIText*    sti = new SGIText(*p);
-                m_textByKey[sh.key]  = sti;
+                SGIText*    sti = new SGIText(*p, size);
+                //m_textByKey[sh.key]  = sti;
                 m_texts.push_back(sti);
                 gi = sti;
             }
@@ -244,14 +178,14 @@ namespace yq::gluon {
 
         m_symbox        = qRect(bb);
         
-        auto makePin    = [&](PinData& pd, const PinBase& pb, const Vector2F& pt) -> QGraphicsItem* {
+        auto makePin    = [&](PinData& pd, const Vector2F& pt) -> QGraphicsItem* {
             pd.point        = qPoint(size * pt);
-            pd.flow         = pb.flow;
+            pd.flow         = pd.pin.flow;
 
             // be configurable (later)
-            PinShape    ps  = pb.shape;
+            PinShape    ps  = pd.pin.shape;
             if(ps == PinShape::Default){
-                switch(pb.flow){
+                switch(pd.pin.flow){
                 case PinFlow::Bi:
                     ps      = PinShape::Circle;
                     break;
@@ -265,7 +199,7 @@ namespace yq::gluon {
                 }
             } 
             
-            Vector2F    hfz = size * (Vector2F) pb.size;
+            Vector2F    hfz = size * (Vector2F) pd.pin.size;
             Vector2F    hpt = size * pt;
             pd.bounds       = AxBox2F(SORT, hpt - hfz, hpt + hfz);
             
@@ -298,14 +232,14 @@ namespace yq::gluon {
             case PinShape::Triangle:
                 {
                     QPolygonF   poly;
-                    if(pb.flow == PinFlow::In){
-                        poly << qPoint(proj({  pb.direction.x, -pb.direction.y}));
-                        poly << qPoint(proj({  pb.direction.y,  pb.direction.x+pb.direction.y}));
-                        poly << qPoint(proj({ -pb.direction.y,  pb.direction.x+pb.direction.y}));
+                    if(pd.pin.flow == PinFlow::In){
+                        poly << qPoint(proj({  pd.pin.direction.x, -pd.pin.direction.y}));
+                        poly << qPoint(proj({  pd.pin.direction.y,  pd.pin.direction.x+pd.pin.direction.y}));
+                        poly << qPoint(proj({ -pd.pin.direction.y,  pd.pin.direction.x+pd.pin.direction.y}));
                     } else {
-                        poly << qPoint(proj({  pb.direction.x,  pb.direction.y}));
-                        poly << qPoint(proj({  pb.direction.y, -pb.direction.x-pb.direction.y}));
-                        poly << qPoint(proj({ -pb.direction.y, -pb.direction.x-pb.direction.y}));
+                        poly << qPoint(proj({  pd.pin.direction.x,  pd.pin.direction.y}));
+                        poly << qPoint(proj({  pd.pin.direction.y, -pd.pin.direction.x-pd.pin.direction.y}));
+                        poly << qPoint(proj({ -pd.pin.direction.y, -pd.pin.direction.x-pd.pin.direction.y}));
                     }
                     
                     
@@ -318,11 +252,11 @@ namespace yq::gluon {
         };
         
         for(auto& pi : sym.pin){
-            PinData&     pd = m_pins[pi.key];
-            pd.item     = makePin(pd, pi, pi.position);
+            PinData     pd{pi};
+            pd.item     = makePin(pd, pi.position);
             if(pd.item)
                 addMe(pd.item, pi.style);
-            //bb |= pd;
+            m_pins.push_back(pd);
         }
         #if 0
             // when we have these....
@@ -336,3 +270,5 @@ namespace yq::gluon {
         //  and metrics
     }
 }
+
+#include "SGIText.ipp"
