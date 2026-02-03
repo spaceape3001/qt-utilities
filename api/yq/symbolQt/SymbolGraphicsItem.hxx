@@ -16,6 +16,5 @@ namespace yq::gluon {
         QGraphicsItem*          item    = nullptr;
         QPointF                 point;
         AxBox2F                 bounds  = {};
-        symbol::PinFlow         flow;
     };
 }

@@ -7,7 +7,7 @@
 #include "GraphPortItem.hpp"
 
 namespace yq::gluon {
-    GraphPortItem::GraphPortItem(GraphScene& gs, GPort port) : GraphItem(gs), m_data(port)
+    GraphPortItem::GraphPortItem(GraphScene& gs, GPort port, QGraphicsItem*it) : GraphItem(gs), m_data(port), m_item(it)
     {
         // TODO... hookups
     }

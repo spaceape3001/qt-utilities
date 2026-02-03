@@ -13,6 +13,8 @@
 #include <yq/typedef/g_node_template.hpp>
 
 namespace yq::gluon {
+    class GraphPortItem;
+    
     class GraphNodeItem : public SymbolGraphicsItem, public GraphItem, public PositionInterface {
     public:
         //  Node(const Node&);  // pending/TODO
@@ -20,18 +22,18 @@ namespace yq::gluon {
         
         virtual ~GraphNodeItem();
 
-        void            position(set_k, const Vector2D&);
-        void            position(set_k, const QPointF&) override;
-        
-        virtual QPointF  position() const override;
-
+        void                            position(set_k, const Vector2D&);
+        void                            position(set_k, const QPointF&) override;
+        virtual QPointF                 position() const override;
 
         virtual QGraphicsItem*          qItem() override { return this; }
         virtual const QGraphicsItem*    qItem() const override { return this; }
-    
+        
     private:
-        GNodeTemplateCPtr       m_template;
-        GNode                   m_data;
+        friend class GraphScene;
+        GNodeTemplateCPtr           m_template;
+        GNode                       m_data;
+        std::vector<GraphPortItem*> m_ports;
         
         void    _init();
         SymbolCPtr  _symbol() const;

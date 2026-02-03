@@ -18,6 +18,7 @@
 #include <yq/gluon/core/uvector.hpp>
 #include <yq/graph/GDocument.hpp>
 #include <yq/symbol/Symbol.hpp>
+#include <yq/symbolQt/SymbolGraphicsItem.hxx>
 
 namespace yq::gluon {
 
@@ -46,7 +47,7 @@ namespace yq::gluon {
             return nullptr;
             
         if(m_items.contains(gb.id()))
-            return nullptr;
+            return m_items[gb.id()];
             
         GraphItem*   ret = nullptr;
             
@@ -55,16 +56,16 @@ namespace yq::gluon {
         if(GLine gl = (GLine) gb)
             ret = new GraphLineItem(*this, gl);
         if(GNode gn = (GNode) gb)
-            ret = new GraphNodeItem(*this, gn);
-        if(GPort gp = (GPort) gb)
-            ret = new GraphPortItem(*this, gp); 
+            ret = add_node(gn);
+        //if(GPort gp = (GPort) gb)
+            //ret = new GraphPortItem(*this, gp); 
         if(GShape gs = (GShape) gs)
             ret = new GraphShapeItem(*this, gs);
         if(GText gt = (GText) gb)
             ret = new GraphTextItem(*this, gt);
 
         if(ret){
-            if(QGraphicsItem* it = ret->qItem()){ [[likely]]
+            if(QGraphicsItem* it = dynamic_cast<QGraphicsItem*>(ret)){ 
                 addItem(it);
             } else {
                 m_notQt.push_back(ret);
@@ -81,11 +82,22 @@ namespace yq::gluon {
             
         GNode   node    = m_graph.node(CREATE, *gnt);
         node.position(SET, yVector(pt));
+        return static_cast<GraphNodeItem*>(add(node));
+    }
+
+    GraphNodeItem*      GraphScene::add_node(GNode node)
+    {
+        GraphNodeItem* gni  = new GraphNodeItem(*this, node);
+        std::vector<GPort>  ports   = node.ports();
+        auto&               pins    = gni -> pins();
         
-        GraphNodeItem* gni  = static_cast<GraphNodeItem*>(add(node));
-        
-        //  And... the ports go here
-        
+        // Create ports (if necessary)
+        for(size_t n = ports.size(); n<pins.size(); ++n)
+            ports.push_back(node.port(CREATE, pins[n].pin));
+        for(size_t n = 0; n<pins.size(); ++n){
+            GraphPortItem*  gpi = new GraphPortItem(*this, ports[n], pins[n].item);
+            gni -> m_ports.push_back(gpi);
+        }
         return gni;
     }
     

@@ -18,6 +18,8 @@ namespace yq::gluon {
         virtual ~SymbolGraphicsItem();
         
         void    build(const Symbol&, float size=64.f);
+
+        struct PinData;
         
         const auto&         pins() const { return m_pins; }
         const auto&         texts() const { return m_texts; }
@@ -25,7 +27,6 @@ namespace yq::gluon {
         
         // some data... (attachment points/text here)
     private:
-        struct PinData;
     
         std::vector<SGIText*>           m_texts;
         std::vector<PinData>            m_pins;

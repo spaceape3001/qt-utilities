@@ -51,6 +51,9 @@ namespace yq::gluon {
         void    clear();    // name shadow is deliberate
         
     private:
+    
+        GraphNodeItem*      add_node(GNode);
+    
         GGraph                      m_graph;
         std::map<gid_t, GraphItem*> m_items;
         std::vector<GraphItem*>     m_notQt;

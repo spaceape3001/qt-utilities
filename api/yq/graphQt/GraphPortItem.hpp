@@ -11,9 +11,15 @@
 
 namespace yq::gluon {
     class GraphPortItem : public GraphItem {
-        GPort       m_data;
     public:
-        GraphPortItem(GraphScene&, GPort);
+        GraphPortItem(GraphScene&, GPort, QGraphicsItem*it);
         ~GraphPortItem();
+
+        virtual QGraphicsItem*          qItem() { return m_item; }
+        virtual const QGraphicsItem*    qItem() const { return m_item; }
+
+    private:
+        GPort               m_data;
+        QGraphicsItem*      m_item = nullptr;
     };
 }

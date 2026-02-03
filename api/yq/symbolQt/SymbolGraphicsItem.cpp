@@ -180,7 +180,6 @@ namespace yq::gluon {
         
         auto makePin    = [&](PinData& pd, const Vector2F& pt) -> QGraphicsItem* {
             pd.point        = qPoint(size * pt);
-            pd.flow         = pd.pin.flow;
 
             // be configurable (later)
             PinShape    ps  = pd.pin.shape;
