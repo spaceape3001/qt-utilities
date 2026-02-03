@@ -9,13 +9,13 @@
 #include <yq/graphicsQt/GraphicsTool.hpp>
 
 namespace yq::gluon {
-    class SuperGraphTool : public GraphicsTool {
-        YQ_OBJECTQ_DECLARE(SuperGraphTool, GraphicsTool)
+    class GraphTextTool : public GraphicsTool {
+        YQ_OBJECTQ_DECLARE(GraphTextTool, GraphicsTool)
         Q_OBJECT
     public:
     
-        SuperGraphTool(QObject* parent=nullptr);
-        ~SuperGraphTool();
+        GraphTextTool(QObject* parent=nullptr);
+        ~GraphTextTool();
     
         static void init_meta();
     };
