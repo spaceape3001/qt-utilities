@@ -29,6 +29,7 @@ namespace yq::gluon {
         m_view -> featureEnable(gluon::GraphicsView::Feature_MouseWheelZoom);
         m_view -> featureEnable(gluon::GraphicsView::Feature_MouseWheelRotate);
         m_view -> setMouseWheelRotateModifiers(Qt::AltModifier);
+        m_view -> setMouseWheelZoomModifiers(Qt::ControlModifier);
 
         QVBoxLayout*    layout  = new QVBoxLayout;
         layout -> addWidget(m_view);
