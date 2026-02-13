@@ -34,11 +34,14 @@ namespace yq::gluon {
             return ;
         if(!m_inDrag)
             return ;
+
+        QTransform      t   = gv -> viewportTransform().inverted();
+            
+        QPointF     cur = t.map(evt -> position());
+        QPointF     del = cur - m_last;
+        m_last          = cur;
         
-        QPointF     del  = gv -> mapToScene(evt -> position()) - m_start;
-        QTransform  t   = m_transform;
-        t.translate(del.x(), del.y());
-        gv -> setTransform(t);
+        gv -> translate(del.x(), del.y());
         evt -> accept();
     }
     
@@ -49,8 +52,10 @@ namespace yq::gluon {
             return ;
 
         m_inDrag    = true;
-        m_start     = gv -> mapToScene(evt -> position());
-        m_transform = gv -> transform();
+        QTransform      t   = gv -> viewportTransform().inverted();
+
+
+        m_last      = t.map(evt -> position());
         evt -> accept();
     }
     

@@ -29,6 +29,12 @@ namespace yq::gluon {
         virtual QGraphicsItem*          qItem() override { return this; }
         virtual const QGraphicsItem*    qItem() const override { return this; }
         
+        auto ports() { return std::span(m_ports); }
+        auto ports() const { return std::span(m_ports); }
+        auto& data() { return m_data; }
+        const auto& data() const { return m_data; }
+        gid_t   id() const { return m_data.id(); }
+        
     private:
         friend class GraphScene;
         GNodeTemplateCPtr           m_template;

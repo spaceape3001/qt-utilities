@@ -100,6 +100,7 @@ namespace yq::gluon {
             if(SGIBase* sb = dynamic_cast<SGIBase*>(gi))
                 sb -> adjust();
 
+            gi->setParentItem(this);
             addToGroup(gi);
             
             //  others....

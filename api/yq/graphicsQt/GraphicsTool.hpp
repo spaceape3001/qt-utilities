@@ -90,11 +90,11 @@ namespace yq::gluon {
         //! Being activated as a tool (ie, being installed into the view)
         virtual void    activating(){}
         
-        //! Being deactivated as a tool (ie being removed from a view)
-        virtual void    deactivating(){}
-        
         virtual void    contextMenuEvent(QContextMenuEvent*){}
         
+        //! Being deactivated as a tool (ie being removed from a view)
+        virtual void    deactivating(){}
+
         virtual void 	dragEnterEvent(QDragEnterEvent*){}
         virtual void 	dragLeaveEvent(QDragLeaveEvent*){}
         virtual void 	dragMoveEvent(QDragMoveEvent*){}

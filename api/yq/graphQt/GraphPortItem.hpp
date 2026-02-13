@@ -18,6 +18,11 @@ namespace yq::gluon {
         virtual QGraphicsItem*          qItem() { return m_item; }
         virtual const QGraphicsItem*    qItem() const { return m_item; }
 
+        auto& data() { return m_data; }
+        const auto& data() const { return m_data; }
+        
+        gid_t   id() const { return m_data.id(); }
+
     private:
         GPort               m_data;
         QGraphicsItem*      m_item = nullptr;

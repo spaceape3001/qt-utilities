@@ -30,7 +30,6 @@ namespace yq::gluon {
         
     private:
         bool        m_inDrag    = false;
-        QPointF     m_start;
-        QTransform  m_transform;
+        QPointF     m_last;
     };
 }

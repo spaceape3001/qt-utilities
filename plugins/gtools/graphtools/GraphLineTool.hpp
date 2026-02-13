@@ -18,5 +18,7 @@ namespace yq::gluon {
         ~GraphLineTool();
     
         static void init_meta();
+        
+    private:
     };
 }

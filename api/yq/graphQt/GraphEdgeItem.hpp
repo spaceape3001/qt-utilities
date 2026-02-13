@@ -20,6 +20,10 @@ namespace yq::gluon {
         virtual QGraphicsItem*          qItem() override { return this; }
         virtual const QGraphicsItem*    qItem() const override { return this; }
 
+        auto& data() { return m_data; }
+        const auto& data() const { return m_data; }
+        gid_t   id() const { return m_data.id(); }
+
     private:
         GEdge       m_data;
         

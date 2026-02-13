@@ -229,7 +229,10 @@ namespace yq::gluon {
 
     QPointF GraphicsView::mapToScene(const QPointF&pt) const
     {
-        return QGraphicsView::mapToScene(pt.toPoint());
+        //QPointF 
+    
+        return viewportTransform().inverted().map(pt);
+        //return QGraphicsView::mapToScene(pt.toPoint());
     }
 
     void    GraphicsView::mouseDoubleClickEvent(QMouseEvent* evt)

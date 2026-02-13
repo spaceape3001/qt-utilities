@@ -19,6 +19,10 @@ namespace yq::gluon {
         //virtual QGraphicsItem*          qItem() { return nullptr; }
         //virtual const QGraphicsItem*    qItem() const { return nullptr; }
         
+        auto& data() { return m_data; }
+        const auto& data() const { return m_data; }
+        gid_t   id() const { return m_data.id(); }
+
     private:
         GShape      m_data;
     };
