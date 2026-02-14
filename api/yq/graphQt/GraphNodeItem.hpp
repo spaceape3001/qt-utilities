@@ -22,6 +22,7 @@ namespace yq::gluon {
         
         virtual ~GraphNodeItem();
 
+        void                            position(move_k, const QPointF&) override;
         void                            position(set_k, const Vector2D&);
         void                            position(set_k, const QPointF&) override;
         virtual QPointF                 position() const override;

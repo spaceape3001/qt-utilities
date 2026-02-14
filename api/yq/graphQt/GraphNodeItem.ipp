@@ -65,6 +65,11 @@ namespace yq::gluon {
         position(SET, yVector(pt));
     }
 
+    void     GraphNodeItem::position(move_k, const QPointF&del) 
+    {
+        position(SET, position() + del);
+    }
+
     QPointF  GraphNodeItem::position() const 
     {
         return qPoint(m_data.position());

@@ -36,6 +36,7 @@ namespace yq::gluon {
         connect(tb, &QToolButton::clicked, m_mapper, &UInt64SignalMapper::map);
         m_mapper -> setMapping(tb, gtm.id());
         m_buttons[gtm.id()] = tb;
+        m_tools.push_back(gtm.id());
         
         addWidget(tb);
     }

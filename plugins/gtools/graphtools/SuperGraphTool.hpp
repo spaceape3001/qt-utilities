@@ -8,6 +8,7 @@
 
 #include <yq/core/Flags.hpp>
 #include <yq/graphicsQt/GraphicsTool.hpp>
+#include <yq/graphQt/GraphPointCapture.hpp>
 
 #include <QPen>
 #include <QPoint>
@@ -18,6 +19,9 @@
 class QGraphicsItem;
 
 namespace yq::gluon {
+    class GraphScene;
+    class GraphView;
+    class GraphCanvas;
     class GraphItem;
 
     /*! \brief Super Graph Tool
@@ -38,7 +42,7 @@ namespace yq::gluon {
 
     protected:
     
-        void            cancel();
+        virtual void    activating() override;
         virtual void    deactivating() override;
         virtual void    drawToolLayer(QPainter*, const QRectF&) override;
         virtual void 	keyPressEvent(QKeyEvent*) override;
@@ -49,44 +53,92 @@ namespace yq::gluon {
         virtual void    mouseReleaseEvent(QMouseEvent*) override;
         virtual void    wheelEvent(QWheelEvent*) override;
 
-        void            startPress(QMouseEvent*);
-        void            moveNone(QMouseEvent*);
-        void            panMove(QMouseEvent*);
-        void            decruft();
-
     private:
+    
         enum class Mode {   // ie...state
             None,
-            Press,
-            Pan
+            Move,
+            Skip,
+            PressNothing,
+            PressNode,
+            PressPort,
+            PressLine,
+            PressEdge,
+            PressText,
+            PressShape,
+            Pan,
+            Select
         };
         
         enum class F {
             PinGood,
             PinBad,
-            SelectRect
+            InDrag,
+            ValidPress,
+            Transform,
+            Last,
+            SelectRect,
+            OutlineRect
         };
 
-        Mode                m_mode  = Mode::None;
-        Flags<F>            m_flags;
+        Mode                    m_mode      = Mode::None;
+        Flags<F>                m_flags     = {};
+        GraphCanvas*            m_canvas    = nullptr;
+        GraphScene*             m_scene     = nullptr;
+        GraphView*              m_view      = nullptr;
 
-        QRectF              m_pinRect;
-        QRectF              m_selectRect;
-        QPen                m_selectPen;
-        QPen                m_badPen;
+
+        //QRectF              m_selectRect;
+        //QPen                m_selectPen;
+
+        QPen                    m_badPen;
+        GraphPointCapture       m_capture;          //!< Capture at last mouse press
+        QPointF                 m_lastPosition;     //!< Last position (in screen/widget)
+        QPointF                 m_lastPoint;        //!< Last position (in scene coordinates)
+        QRectF                  m_outlineRect;
+        QRectF                  m_pinRect;          //!< Current pin rectangle
+        QRectF                  m_selectRect;
+        QTransform              m_transform;        //!< Last viewport transform (inverted)
         
         struct {
-            QPen                pen;
-            QRectF              rect;
-            bool                draw    = false;
+            QPen                pen, use;
+            //QRectF              rect;
+            //bool                draw    = false;
         }                   m_outline;
         
         struct {
-            QPointF         last;
-            QTransform      transform;
-        } m_pan;
+            QPen                good;
+            QPen                bad;
+            //QRectF              rect;
+        }   m_port;
         
         
-        bool        canWheel() const;
+        struct {    
+            QPen            pen;
+            //QRectF          rect;
+            //bool            draw    = false;
+        } m_select;
+        
+        void            _cancel();
+        bool            _check() const;
+        void            _decruft();
+        bool            _dragging(QSinglePointEvent*) const;
+        QPointF         _last(QSinglePointEvent*);
+        bool            _select(QGraphicsItem*);    // TRUE if this is a new selection
+        bool            _tselect(QGraphicsItem*);   // TRUE if we're now selected
+        void            _transform();
+        bool            _wheel() const;
+    
+    
+        void            noneMMove(QMouseEvent*);
+        void            noneMRelease(QMouseEvent*);
+        
+        void            panMMove(QMouseEvent*);
+        void            panMRelease(QMouseEvent*);
+        
+    
+        void            moveNone(QMouseEvent*);
+        void            nodeMove(QMouseEvent*);
+
     };
 }

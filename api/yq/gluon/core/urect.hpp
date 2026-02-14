@@ -9,6 +9,7 @@
 #include <yq/typedef/axbox2.hpp>
 #include <yq/typedef/rectangle2.hpp>
 
+class QPointF;
 class QRectF;
 
 namespace yq {
@@ -16,4 +17,5 @@ namespace yq {
     QRectF  qRect(const AxBox2F&);
     QRectF  qRect(const Rectangle2D&);
     QRectF  qRect(const Rectangle2F&);
+    QRectF  qRect(const QPointF&, const QPointF&);
 }

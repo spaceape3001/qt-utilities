@@ -29,6 +29,8 @@ namespace yq::gluon {
         template <typename>
         void    add(tool_k);
         
+        const auto& tools() const { return m_tools; }
+        
     public slots:
         void    setActive(uint64_t);
         
@@ -37,6 +39,7 @@ namespace yq::gluon {
         
     private:
         std::map<uint64_t, QToolButton*>    m_buttons;
+        std::vector<uint64_t>               m_tools;
         UInt64SignalMapper*                 m_mapper    = nullptr;
     };
 }

@@ -9,6 +9,7 @@
 #include <yq/gluon/core/upoint.hpp>
 #include <yq/shape/AxBox2.hpp>
 #include <yq/shape/Rectangle2.hpp>
+
 #include <QRectF>
 
 #include <yq/shape/AxBox2.hxx>
@@ -32,5 +33,12 @@ namespace yq {
     QRectF  qRect(const Rectangle2F&bx)
     {
         return QRectF(bx.position.x, bx.position.y, bx.size.x, bx.size.y);
+    }
+
+    QRectF  qRect(const QPointF&a, const QPointF&b)
+    {
+        auto [lx,hx]    = std::minmax({a.x(), b.x()});
+        auto [ly,hy]    = std::minmax({a.y(), b.y()});
+        return QRectF(lx,ly,hx-lx,hy-ly);
     }
 }

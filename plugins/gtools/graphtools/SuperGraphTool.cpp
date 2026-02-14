@@ -6,12 +6,19 @@
 
 #include <yq/gluon/logging.hpp>
 #include "SuperGraphTool.hpp"
+
+#include <yq/gluon/core/urect.hpp>
+#include <yq/gluon/interface/PositionInterface.hpp>
 #include <yq/graphQt/GraphCanvas.hpp>
 #include <yq/graphQt/GraphItem.hpp>
+#include <yq/graphQt/GraphEdgeItem.hpp>
+#include <yq/graphQt/GraphLineItem.hpp>
 #include <yq/graphQt/GraphNodeItem.hpp>
 #include <yq/graphQt/GraphPointCapture.hpp>
 #include <yq/graphQt/GraphPortItem.hpp>
 #include <yq/graphQt/GraphScene.hpp>
+#include <yq/graphQt/GraphShapeItem.hpp>
+#include <yq/graphQt/GraphTextItem.hpp>
 #include <yq/graphQt/GraphView.hpp>
 #include <yq/graphicsQt/GraphicsToolMetaWriter.hpp>
 #include <QKeyEvent>
@@ -30,13 +37,15 @@ YQ_OBJECTQ_IMPLEMENT(yq::gluon::SuperGraphTool)
     
     Click (ie press/release w/o movement nor modifiers)
     
-        
-
+    May need to add in "Control points" to the graph, 
+    basically waypoints?
 */
 
 
 namespace yq::gluon {
     static const GraphView::CaptureOptions  kGeneral{ .items=true, .nodes=true, .ports=true };
+    static const double                     kDragThreshhold = 3;
+    
     static QRectF   qBoundingRect(const QGraphicsItem& item)
     {
         return item.mapToScene(item.boundingRect()).boundingRect();
@@ -45,45 +54,115 @@ namespace yq::gluon {
 
     SuperGraphTool::SuperGraphTool(QObject* parent) : GraphicsTool(parent)
     {
-        m_selectPen.setWidth(2);
-        m_selectPen.setStyle(Qt::DashLine);
+        m_select.pen.setWidth(2);
+        m_select.pen.setStyle(Qt::DashLine);
         
         m_outline.pen.setWidth(1);
         m_outline.pen.setColor(Qt::blue);
         
         m_badPen.setWidth(2);
-        m_badPen.setColor(Qt::blue);
+        m_badPen.setColor(Qt::red);
+        
+        m_port.bad.setWidth(2);
+        m_port.bad.setColor(Qt::red);
+        
+        m_port.good.setWidth(1);
+        m_port.good.setColor(Qt::green);
     }
     
     SuperGraphTool::~SuperGraphTool()
     {
     }
+    
+    ////////////////////////////////
 
-    void    SuperGraphTool::cancel()
+    void    SuperGraphTool::_cancel()
     {
         m_mode  = Mode::None;
+        m_flags = {};
     }
 
-    bool    SuperGraphTool::canWheel() const
+    bool    SuperGraphTool::_check() const 
+    { 
+        return m_canvas && m_view && m_scene; 
+    }
+
+    void    SuperGraphTool::_decruft()
+    {
+        invalidateToolLayer();
+        m_flags -= F::SelectRect;
+        m_flags -= F::OutlineRect;
+    }
+
+    bool    SuperGraphTool::_dragging(QSinglePointEvent*evt) const
+    {
+        QPointF del = (evt->position() - m_lastPosition);
+        return fabs(del.x())+fabs(del.y()) >= kDragThreshhold;
+    }
+    
+    QPointF SuperGraphTool::_last(QSinglePointEvent*evt)
+    {
+        m_lastPosition  = evt->position();
+        QPointF pt      = m_transform.map(m_lastPosition);
+        QPointF ret     = m_flags(F::Last) ? (pt - m_lastPoint) : QPointF(0,0);
+        m_lastPoint     = pt;
+        m_flags |= F::Last;
+        return ret;
+    }
+
+    bool    SuperGraphTool::_select(QGraphicsItem*qi)
+    {
+        if(!qi)
+            return false;
+        bool ret    = !qi->isSelected();
+        m_canvas->selectThis(qi);
+        return ret;
+    }
+
+    bool    SuperGraphTool::_tselect(QGraphicsItem*qi)
+    {
+        if(!qi)
+            return false;
+        if(qi->isSelected()){
+            m_canvas -> deselect(qi);
+            return false;
+        } else {
+            m_canvas -> select(qi);
+            return true;
+        }
+    }
+
+    void    SuperGraphTool::_transform()
+    {
+        m_transform = m_view -> viewportTransform().inverted();
+        m_flags |= F::Transform;
+    }
+
+    bool    SuperGraphTool::_wheel() const
     {
         return true;
     }
     
-    void    SuperGraphTool::deactivating()
+    ////////////////////////////////
+
+
+    void    SuperGraphTool::activating()
     {
+        std::tie(m_scene, m_view, m_canvas) = contextAs<GraphScene,GraphView,GraphCanvas>();
     }
 
-    void    SuperGraphTool::decruft()
+
+    void    SuperGraphTool::deactivating()
     {
-        invalidateToolLayer();
-        m_outline.draw  = false;
+        m_view  = nullptr;
     }
+
 
     void    SuperGraphTool::drawToolLayer(QPainter* painter, const QRectF&) 
     {
         if(m_flags(F::SelectRect)){
             painter -> save();
-            painter -> setPen(m_selectPen);
+            painter -> setPen(m_select.pen);
             painter -> setBrush(Qt::NoBrush);
             painter -> drawRect(m_selectRect);
             painter -> restore();
@@ -99,29 +178,32 @@ namespace yq::gluon {
         
         if(m_flags(F::PinBad)){
             painter -> save();
-            painter -> setPen(m_badPen);
+            painter -> setPen(m_port.bad);
             painter -> setBrush(Qt::NoBrush);
             painter -> drawLine(m_pinRect.topLeft(), m_pinRect.bottomRight());
             painter -> drawLine(m_pinRect.bottomLeft(), m_pinRect.topRight());
             painter -> restore();
         }
         
-        if(m_outline.draw){
+        if(m_flags(F::OutlineRect)){
             painter -> save();
-            painter -> setPen(m_outline.pen);
+            if(m_outline.use != QPen()){
+                painter -> setPen(m_outline.use);
+            } else {
+                painter -> setPen(m_outline.pen);
+            }
             painter -> setBrush(Qt::NoBrush);
-            painter -> drawEllipse(m_outline.rect);
-            painter -> drawRect(m_outline.rect);
+            painter -> drawEllipse(m_outlineRect);
+            painter -> drawRect(m_outlineRect);
             painter -> restore();
         }
     }
-    
+
     void 	SuperGraphTool::keyPressEvent(QKeyEvent* evt)
     {
-        GraphView*  gv  = dynamic_cast<GraphView*>(view());
-        if(!gv)
+        if(!_check())
             return;
-            
+
         switch(m_mode){
         default:
             break;
@@ -130,8 +212,7 @@ namespace yq::gluon {
     
     void 	SuperGraphTool::keyReleaseEvent(QKeyEvent* evt)
     {
-        GraphView*  gv  = dynamic_cast<GraphView*>(view());
-        if(!gv)
+        if(!_check())
             return;
 
         switch(m_mode){
@@ -142,8 +223,7 @@ namespace yq::gluon {
     
     void    SuperGraphTool::mouseDoubleClickEvent(QMouseEvent* evt)
     {
-        GraphView*  gv  = dynamic_cast<GraphView*>(view());
-        if(!gv)
+        if(!_check())
             return;
 
         switch(m_mode){
@@ -154,125 +234,241 @@ namespace yq::gluon {
     
     void    SuperGraphTool::mouseMoveEvent(QMouseEvent* evt)
     {
-        GraphView*  gv  = dynamic_cast<GraphView*>(view());
-        if(!gv)
+        if(!_check())
             return;
 
-        //m_current   = gv->capture(evt, kGeneral);
         switch(m_mode){
         case Mode::None:
-            moveNone(evt);
+            _decruft();
+            if(GraphPointCapture cap = m_view->capture(evt, kGeneral); cap.qItem){
+                m_outlineRect       = qBoundingRect(*cap.qItem);
+                m_flags |= F::OutlineRect;
+                if(cap.port){
+                    m_outline.use   = m_port.good;
+                } else {
+                    m_outline.use   = QPen{};
+                }
+            }
+            break;
+        case Mode::Move:
+            {
+                QPointF del = _last(evt);
+                for(auto q : m_canvas->selected()){
+                    if(PositionInterface* ph = dynamic_cast<PositionInterface*>(q))
+                        ph->position(MOVE, del);
+                }
+            }
+            break;
+        case Mode::Skip:
             break;
         case Mode::Pan:
-            panMove(evt);
+            m_view->translateBy(_last(evt));
+            break;
+        case Mode::PressNothing:
+            if(_dragging(evt))
+                m_mode          = Mode::Select;
+            break;
+        case Mode::PressNode:
+            if(_dragging(evt)){
+                _select(m_capture.node);
+                m_mode  = Mode::Move;
+            }
+            break;
+        case Mode::PressPort:
+            if(_dragging(evt)){
+                // create edge
+            }
+            break;
+        case Mode::PressEdge:
+            if(_dragging(evt)){
+                //  add point
+            }
+        case Mode::PressText:
+            if(_dragging(evt)){
+                _select(m_capture.text->qItem());
+                m_mode  = Mode::Move;
+            }
+            break;
+        case Mode::PressLine:
+            if(_dragging(evt)){
+                //  add waypoint
+            }
+            break;
+        case Mode::PressShape:
+            if(_dragging(evt)){
+                _select(m_capture.shape->qItem());
+                m_mode  = Mode::Move;
+            }
+            break;
+        case Mode::Select:
+            _decruft();
+            _last(evt);
+            m_selectRect    = qRect(m_lastPoint, m_capture.point);
+            m_flags        |= F::SelectRect;
             break;
         default:
             break;
         }
-        
-        //m_last      = m_current;
     }
     
     void    SuperGraphTool::mousePressEvent(QMouseEvent* evt)
     {
-        GraphView*  gv  = dynamic_cast<GraphView*>(view());
-        if(!gv)
+        if(!_check())
             return;
+        evt -> accept();
 
-        //m_current = m_start = gv -> capture(evt, kGeneral);
-        switch(m_mode){
-        case Mode::None:
-            startPress(evt);
-            break;
-        default:
-            break;
+        _decruft();
+        
+        if(evt->button() == Qt::RightButton){
+            _cancel();
+            m_canvas -> selectNone();
+            m_mode  = Mode::Skip;
+            return;
         }
         
-        //m_last              = m_current;
+        _transform();
+        _last(evt);
+
+        m_capture  = m_view -> capture(evt, kGeneral);
+        
+        if(m_capture.edge){
+            switch(evt->modifiers()){
+            case Qt::NoModifier:
+                if(_select(m_capture.edge->qItem())){
+                    m_mode  = Mode::PressEdge;
+                } else
+                    m_mode  = Mode::Move;
+                break;
+            case Qt::ControlModifier:
+                if(_tselect(m_capture.edge->qItem())){
+                    m_mode  = Mode::Move;
+                } else
+                    m_mode  = Mode::Skip;
+                break;
+            default:
+                break;
+            }
+        } else if(m_capture.port){
+            switch(evt->modifiers()){
+            case Qt::NoModifier:
+                m_mode  = Mode::PressPort;
+                break;
+            default:
+                break;
+            }
+        } else if(m_capture.node){
+            switch(evt->modifiers()){
+            case Qt::NoModifier:
+                if(_select(m_capture.node)){
+                    m_mode  = Mode::PressNode;
+                } else {
+                    m_mode  = Mode::Move;
+                }
+                break;
+            case Qt::ControlModifier:
+                if(_tselect(m_capture.node)){
+                    m_mode  = Mode::Move;
+                } else {
+                    m_mode  = Mode::Skip;
+                }
+                break;
+            default:
+                break;
+            }
+        } else if(m_capture.text){
+            switch(evt->modifiers()){
+            case Qt::NoModifier:
+                if(_select(m_capture.text->qItem())){
+                    m_mode  = Mode::PressText;
+                } else {
+                    m_mode  = Mode::Move;
+                }
+                break;
+            case Qt::ControlModifier:
+                if(_tselect(m_capture.text->qItem())){
+                    m_mode  = Mode::Move;
+                } else {
+                    m_mode  = Mode::Skip;
+                }
+                break;
+            default:
+                break;
+            }
+        } else if(m_capture.line){
+            switch(evt->modifiers()){
+            case Qt::NoModifier:
+                if(_select(m_capture.line->qItem())){
+                    m_mode  = Mode::PressLine;
+                } else {
+                    m_mode  = Mode::Move;
+                }
+                break;
+            case Qt::ControlModifier:
+                if(_tselect(m_capture.line->qItem())){
+                    m_mode  = Mode::Move;
+                } else {
+                    m_mode  = Mode::Skip;
+                }
+                break;
+            default:
+                break;
+            }
+        } else if(m_capture.shape){
+            switch(evt->modifiers()){
+            case Qt::NoModifier:
+                if(_select(m_capture.shape->qItem())){
+                    m_mode  = Mode::PressShape;
+                } else {
+                    m_mode  = Mode::Move;
+                }
+                break;
+            case Qt::ControlModifier:
+                if(_tselect(m_capture.shape->qItem())){
+                    m_mode  = Mode::Move;
+                } else {
+                    m_mode  = Mode::Skip;
+                }
+                break;
+            default:
+                break;
+            }
+        } else {
+            switch(evt->modifiers()){
+            case Qt::NoModifier:
+                m_mode  = Mode::PressNothing;
+                break;
+            case Qt::ControlModifier:
+                m_mode  = Mode::Pan;
+                break;
+            default:
+                break;
+            }
+        }
     }
     
     void    SuperGraphTool::mouseReleaseEvent(QMouseEvent* evt)
     {
-        GraphView*  gv  = dynamic_cast<GraphView*>(view());
-        if(!gv)
+        if(!_check())
             return;
-            
-        //m_current       = gv->capture(evt, kGeneral);
-        
+
         switch(m_mode){
+        case Mode::Select:
+            m_canvas -> selectThese(m_scene->items(m_selectRect));
+            break;
         default:    
             break;
         }
         
         // will likely refine (later)
-        cancel();
-        decruft();
-        
-        //m_last          = m_current;
-    }
-    
-    
-    void    SuperGraphTool::moveNone(QMouseEvent*evt)
-    {
-        decruft();
-        
-        GraphView*  gv      = static_cast<GraphView*>(view());
-        GraphPointCapture       cap = gv -> capture(evt, kGeneral);
-        
-        if(cap.qItem){
-            m_outline.rect  = qBoundingRect(*cap.qItem);
-            m_outline.draw  = true;
-        }
-
-        #if 0
-        {
-            auto log = gluonInfo;
-            log << "SuperGraphTool::moveNone(" << evt->position() << ")\n";
-            //log << "  gid> " << cap.gid << "\n";
-            if(m_outline.draw)
-                log << "  outline> " << m_outline.rect << "\n";
-            if(cap.node)
-                log << "  node> " << cap.node->data().type() << "\n";
-            if(cap.port)
-                log << "  port> in=" << cap.port->data().is_input() << ", out=" << cap.port->data().is_output() << '\n';
-        }
-        #endif
-        
-        
-        evt -> accept();
+        _cancel();
+        _decruft();
+        evt->accept();
     }
 
-    void    SuperGraphTool::panMove(QMouseEvent*evt)
-    {
-        GraphView*  gv      = static_cast<GraphView*>(view());
-        QPointF     p2      = m_pan.transform.map(evt->position());
-        QPointF     del     = p2 - m_pan.last;
-        m_pan.last          = p2;
-        gv->translate(del.x(), del.y());
-        evt -> accept();
-    }
-
-    void    SuperGraphTool::startPress(QMouseEvent*evt)
-    {
-        switch(evt->modifiers()){
-        case Qt::NoModifier:
-            m_mode  = Mode::Press;
-            break;
-        case Qt::ControlModifier:
-            m_mode  = Mode::Pan;
-            m_pan.transform = static_cast<GraphView*>(view()) -> transform().inverted();
-            m_pan.last      = m_pan.transform.map(evt->position());
-            break;
-        default:
-            cancel();
-            break;
-        }
-        evt -> accept();
-    }
 
     void    SuperGraphTool::wheelEvent(QWheelEvent* evt)
     {
-        if(canWheel()){
+        if(_wheel()){
             GraphicsTool::wheelEvent(evt);
         } else {
             evt -> ignore();

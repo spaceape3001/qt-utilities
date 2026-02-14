@@ -86,6 +86,5 @@ namespace yq::gluon {
         
         std::map<meta_id_t, GraphicsTool*>      m_tools;
         std::vector<QGraphicsItem*>             m_selected;
-        
     };
 }
