@@ -53,6 +53,13 @@ namespace yq::gluon {
         return QString::fromStdString(dirpath().string());
     }
 
+    void                  GraphCanvas::doubleClick(GBase gb)
+    {
+        if(gb.document() != m_graph.document())
+            return ;
+        doubleClicked(gb.id());
+    }
+
     std::filesystem::path GraphCanvas::filepath() const
     {
         Url u   = url();
@@ -76,6 +83,13 @@ namespace yq::gluon {
         return m_graph;
     }
 
+    void    GraphCanvas::rightClick(GBase gb)
+    {
+        if(gb.document() != m_graph.document())
+            return ;
+        contextRequest(gb.id());
+    }
+    
     void                    GraphCanvas::set(GGraph gg, const Url& u)
     {
         m_scene -> set(gg);

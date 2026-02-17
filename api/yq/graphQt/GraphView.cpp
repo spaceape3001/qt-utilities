@@ -63,6 +63,16 @@ namespace yq::gluon {
     {
         return capture(WIDGET, pt, CaptureOptions());
     }
+
+    GraphPointCapture   GraphView::capture(const QPoint&pt) const
+    {
+        return capture(pt, CaptureOptions());
+    }
+    
+    GraphPointCapture   GraphView::capture(const QPoint& pt, const CaptureOptions& opts) const
+    {
+        return capture(WIDGET, pt.toPointF(), opts);
+    }
     
     std::string         captureStringFormat(const GraphView::CaptureOptions& opts)
     {

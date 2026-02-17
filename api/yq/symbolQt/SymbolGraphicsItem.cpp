@@ -269,6 +269,22 @@ namespace yq::gluon {
         
         //  and metrics
     }
+
+    void     SymbolGraphicsItem::setSymbol(SymbolCPtr sym)
+    {
+        m_symbol    = sym;
+    }
+
+    void     SymbolGraphicsItem::setSymSize(double v)
+    {
+        m_size          = v;
+    }
+
+    void     SymbolGraphicsItem::setTransform(SymTransform v)
+    {
+        m_transform     = v;
+        m_transformFN   = nullptr;
+    }
 }
 
 #include "SGIText.ipp"

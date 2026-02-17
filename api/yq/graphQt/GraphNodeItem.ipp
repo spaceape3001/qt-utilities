@@ -74,4 +74,10 @@ namespace yq::gluon {
     {
         return qPoint(m_data.position());
     }
+
+    void GraphNodeItem::update() 
+    {
+        setPos(qPoint(m_data.position()));
+        setVisible(!m_data.deleted());
+    }
 }

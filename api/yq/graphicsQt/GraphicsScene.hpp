@@ -12,6 +12,8 @@
 namespace yq { class ObjectMeta; }
 
 namespace yq::gluon {
+
+        // UNDO here....
   
     //! More of a stub for now so common functionality can be added
     class GraphicsScene : public QGraphicsScene {

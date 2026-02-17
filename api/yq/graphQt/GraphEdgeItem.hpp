@@ -24,6 +24,8 @@ namespace yq::gluon {
         const auto& data() const { return m_data; }
         gid_t   id() const { return m_data.id(); }
 
+        virtual bool is_edge() const override { return true; }
+
     private:
         GEdge       m_data;
         

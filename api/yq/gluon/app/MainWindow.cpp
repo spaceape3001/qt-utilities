@@ -206,24 +206,39 @@ namespace yq::gluon {
         return dw;
     }
 
+    void    MainWindow::addMenuItem(QMenu* m, const QString& c)
+    {
+        if(c == "--"){
+            m -> addSeparator();
+            return;
+        }
+        QMenu*      m2 = m_menus.get(c, nullptr);
+        if(m2){
+            m->addMenu(m2);
+            return;
+        }
+        QAction*    act = m_actions.get(c, nullptr);
+        if(act){
+            m->addAction(act);
+            return;
+        }
+    }
+
+
     void            MainWindow::addToMenu(QMenu* men, const QStringList& cmds)
     {
-        for(const QString& c : cmds){
-            if(c == "--"){
-                men -> addSeparator();
-                continue;
-            }
-            QMenu*      m2 = m_menus.get(c, nullptr);
-            if(m2){
-                men->addMenu(m2);
-                continue;
-            }
-            QAction*    act = m_actions.get(c, nullptr);
-            if(act){
-                men->addAction(act);
-                continue;
-            }
-        }
+        if(!men)    
+            return;
+        for(const QString& c : cmds)
+            addMenuItem(men, c);
+    }
+
+    void            MainWindow::addToMenu(QMenu* men, std::initializer_list<QString> cmds)
+    {
+        if(!men)    
+            return;
+        for(const QString& c : cmds)
+            addMenuItem(men, c);
     }
 
     void            MainWindow::addWindow(QWidget* w)

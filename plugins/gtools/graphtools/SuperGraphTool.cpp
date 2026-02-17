@@ -7,6 +7,8 @@
 #include <yq/gluon/logging.hpp>
 #include "SuperGraphTool.hpp"
 
+#include <yq/color/colors.hpp>
+#include <yq/gluon/core/ucolor.hpp>
 #include <yq/gluon/core/urect.hpp>
 #include <yq/gluon/interface/PositionInterface.hpp>
 #include <yq/graphQt/GraphCanvas.hpp>
@@ -54,20 +56,17 @@ namespace yq::gluon {
 
     SuperGraphTool::SuperGraphTool(QObject* parent) : GraphicsTool(parent)
     {
-        m_select.pen.setWidth(2);
-        m_select.pen.setStyle(Qt::DashLine);
+        m_selectPen.setWidth(2);
+        m_selectPen.setStyle(Qt::DashLine);
         
-        m_outline.pen.setWidth(1);
-        m_outline.pen.setColor(Qt::blue);
+        m_outlinePen.setWidth(1);
+        m_outlinePen.setColor(Qt::blue);
         
         m_badPen.setWidth(2);
         m_badPen.setColor(Qt::red);
         
-        m_port.bad.setWidth(2);
-        m_port.bad.setColor(Qt::red);
-        
-        m_port.good.setWidth(1);
-        m_port.good.setColor(Qt::green);
+        m_pinPen.setWidth(1);
+        m_pinPen.setColor(qColor(color::ForestGreen));
     }
     
     SuperGraphTool::~SuperGraphTool()
@@ -114,7 +113,7 @@ namespace yq::gluon {
     {
         if(!qi)
             return false;
-        bool ret    = !qi->isSelected();
+        bool ret    = qi->isSelected();
         m_canvas->selectThis(qi);
         return ret;
     }
@@ -151,6 +150,29 @@ namespace yq::gluon {
         std::tie(m_scene, m_view, m_canvas) = contextAs<GraphScene,GraphView,GraphCanvas>();
     }
 
+    void    SuperGraphTool::contextMenuEvent(QContextMenuEvent*evt) 
+    {
+        if(!_check())
+            return;
+
+        evt->accept();
+        auto cap    = m_view -> capture(evt->pos(), kGeneral);
+        if(cap.port){
+            m_canvas -> rightClick(cap.port->data());
+        } else if(cap.node){
+            m_canvas -> rightClick(cap.node->data());
+        } else if(cap.edge){
+            m_canvas -> rightClick(cap.edge->data());
+        } else if(cap.text){
+            m_canvas -> rightClick(cap.text->data());
+        } else if(cap.shape){
+            m_canvas -> rightClick(cap.shape->data());
+        } else if(cap.line){
+            m_canvas -> rightClick(cap.line->data());
+        } else {
+            m_canvas -> rightClick(m_canvas->get());
+        }
+    }
 
     void    SuperGraphTool::deactivating()
     {
@@ -162,7 +184,7 @@ namespace yq::gluon {
     {
         if(m_flags(F::SelectRect)){
             painter -> save();
-            painter -> setPen(m_select.pen);
+            painter -> setPen(m_selectPen);
             painter -> setBrush(Qt::NoBrush);
             painter -> drawRect(m_selectRect);
             painter -> restore();
@@ -170,7 +192,7 @@ namespace yq::gluon {
         
         if(m_flags(F::PinGood)){
             painter -> save();
-            painter -> setPen(m_outline.pen);
+            painter -> setPen(m_pinPen);
             painter -> setBrush(Qt::NoBrush);
             painter -> drawEllipse(m_pinRect);
             painter -> restore();
@@ -178,7 +200,7 @@ namespace yq::gluon {
         
         if(m_flags(F::PinBad)){
             painter -> save();
-            painter -> setPen(m_port.bad);
+            painter -> setPen(m_badPen);
             painter -> setBrush(Qt::NoBrush);
             painter -> drawLine(m_pinRect.topLeft(), m_pinRect.bottomRight());
             painter -> drawLine(m_pinRect.bottomLeft(), m_pinRect.topRight());
@@ -187,10 +209,10 @@ namespace yq::gluon {
         
         if(m_flags(F::OutlineRect)){
             painter -> save();
-            if(m_outline.use != QPen()){
-                painter -> setPen(m_outline.use);
+            if(m_outlineUse != QPen()){
+                painter -> setPen(m_outlineUse);
             } else {
-                painter -> setPen(m_outline.pen);
+                painter -> setPen(m_outlinePen);
             }
             painter -> setBrush(Qt::NoBrush);
             painter -> drawEllipse(m_outlineRect);
@@ -221,14 +243,26 @@ namespace yq::gluon {
         }
     }
     
+    //  context...
+    
     void    SuperGraphTool::mouseDoubleClickEvent(QMouseEvent* evt)
     {
         if(!_check())
             return;
 
-        switch(m_mode){
-        default:
-            break;
+        GraphPointCapture cap   = m_view->capture(evt, kGeneral);
+        if(cap.port){
+            m_canvas -> doubleClick(cap.port->data());
+        } else if(cap.node){
+            m_canvas  -> doubleClick(cap.node->data());
+        } else if(cap.edge){
+            m_canvas  -> doubleClick(cap.edge->data());
+        } else if(cap.text){
+            m_canvas  -> doubleClick(cap.text->data());
+        } else if(cap.shape){
+            m_canvas  -> doubleClick(cap.shape->data());
+        } else if(cap.line){
+            m_canvas  -> doubleClick(cap.line->data());
         }
     }
     
@@ -244,9 +278,9 @@ namespace yq::gluon {
                 m_outlineRect       = qBoundingRect(*cap.qItem);
                 m_flags |= F::OutlineRect;
                 if(cap.port){
-                    m_outline.use   = m_port.good;
+                    m_outlineUse   = m_pinPen;
                 } else {
-                    m_outline.use   = QPen{};
+                    m_outlineUse   = QPen{};
                 }
             }
             break;
@@ -379,9 +413,9 @@ namespace yq::gluon {
             switch(evt->modifiers()){
             case Qt::NoModifier:
                 if(_select(m_capture.text->qItem())){
-                    m_mode  = Mode::PressText;
-                } else {
                     m_mode  = Mode::Move;
+                } else {
+                    m_mode  = Mode::PressText;
                 }
                 break;
             case Qt::ControlModifier:
@@ -398,9 +432,9 @@ namespace yq::gluon {
             switch(evt->modifiers()){
             case Qt::NoModifier:
                 if(_select(m_capture.line->qItem())){
-                    m_mode  = Mode::PressLine;
-                } else {
                     m_mode  = Mode::Move;
+                } else {
+                    m_mode  = Mode::PressLine;
                 }
                 break;
             case Qt::ControlModifier:
@@ -417,9 +451,9 @@ namespace yq::gluon {
             switch(evt->modifiers()){
             case Qt::NoModifier:
                 if(_select(m_capture.shape->qItem())){
-                    m_mode  = Mode::PressShape;
-                } else {
                     m_mode  = Mode::Move;
+                } else {
+                    m_mode  = Mode::PressShape;
                 }
                 break;
             case Qt::ControlModifier:

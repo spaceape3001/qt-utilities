@@ -44,6 +44,12 @@ namespace yq::gluon {
         
         const Url&              url() const { return m_url; }
         
+        void                    doubleClick(GBase);
+        void                    rightClick(GBase);
+
+    signals:
+        void                    doubleClicked(uint64_t);
+        void                    contextRequest(uint64_t);
 
     public slots:
         void        updateTitle();

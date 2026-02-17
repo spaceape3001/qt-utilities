@@ -23,6 +23,7 @@ namespace yq::gluon {
         auto& data() { return m_data; }
         const auto& data() const { return m_data; }
         gid_t   id() const { return m_data.id(); }
+        virtual bool is_text() const override { return true; }
         
     private:
         GText       m_data;

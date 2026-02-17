@@ -6,6 +6,7 @@
 
 #include <yq/gluon/logging.hpp>
 
+#include "GraphConnector.ipp"
 #include "GraphNodeItem.hpp"
 #include "GraphEdgeItem.hpp"
 #include "GraphLineItem.hpp"
@@ -14,6 +15,7 @@
 #include "GraphShapeItem.hpp"
 #include "GraphTextItem.hpp"
 
+#include <yq/errors.hpp>
 #include <yq/gluon/core/upoint.hpp>
 #include <yq/gluon/core/uvector.hpp>
 #include <yq/graph/GDocument.hpp>
@@ -115,6 +117,55 @@ namespace yq::gluon {
         return m_graph;
     }
 
+    GraphItem*          GraphScene::item(gid_t g)
+    {
+        if(auto itr = m_items.find(g); itr != m_items.end())
+            return itr->second;
+        return nullptr;
+    }
+    
+    const GraphItem*    GraphScene::item(gid_t g) const
+    {
+        if(auto itr = m_items.find(g); itr != m_items.end())
+            return itr->second;
+        return nullptr;
+    }
+
+    QPainterPath    GraphScene::path_for(std::initializer_list<path_spec_t> ps) const
+    {
+        // Right now... it's simple
+        QPainterPath    pp;
+        bool            first = true;
+        for(const auto& p : ps){
+            qpointf_x   x   = point(p);
+            if(!x)
+                continue;
+            if(first){
+                pp.moveTo(*x);
+                first   = false;
+            } else {
+                pp.lineTo(*x);
+            }
+        }
+        return pp;
+    }
+
+    qpointf_x   GraphScene::point(const path_spec_t& ps) const
+    {
+        if(auto p = std::get_if<QPointF>(&ps)){
+            return *p;
+        } else if(auto p = std::get_if<gid_t>(&ps)){
+            const GraphItem* it     = item(*p);
+            if(!it)
+                return unexpected<"Bad/Invalid Graph ID">();
+            const QGraphicsItem* qi = it->qItem();
+            if(!qi)
+                return unexpected<"ID to non-item">();
+            return qi -> mapToScene(qi->pos());
+        }
+        return unexpected<"Unspecified path spec">();
+    }
+
     void        GraphScene::set(GGraph g)
     {
         if(!g)
@@ -125,8 +176,9 @@ namespace yq::gluon {
             add(b);
     }
 
-    void    GraphScene::updateConnected(GNode)
+    void    GraphScene::updateConnected(GNode gn)
     {
+        
         // TODO
     }
 

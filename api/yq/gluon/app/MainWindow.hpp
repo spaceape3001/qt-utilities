@@ -105,6 +105,7 @@ namespace yq::gluon {
                                     const QString& text
                                 );
         
+        void                    addToMenu(QMenu*, std::initializer_list<QString>);
         void                    addToMenu(QMenu*, const QStringList&);
 
         virtual void            closeEvent(QCloseEvent*) override;
@@ -160,6 +161,8 @@ namespace yq::gluon {
         WinInfo*                activeWinInfo() const;
         WinInfo*                tabWinInfo(int) const;
         QWidget*                tabWidget(int) const;
+
+        void    addMenuItem(QMenu* m, const QString&);
 
         Hash<QObject*,QString>          m_act2str;
         Map<QString,QAction*,IgCaseQ>   m_actions;

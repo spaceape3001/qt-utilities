@@ -24,7 +24,7 @@ namespace yq::gluon {
     {
     }
     
-    GraphicsCanvas::GraphicsCanvas(GraphicsView* sv, QWidget*parent) : SubWindow(parent), m_scene(sv->scene()), m_view(sv)
+    GraphicsCanvas::GraphicsCanvas(GraphicsView* sv, QWidget*parent) : UndoSubWindow(parent), m_scene(sv->scene()), m_view(sv)
     {
         m_view -> featureEnable(gluon::GraphicsView::Feature_MouseWheelZoom);
         m_view -> featureEnable(gluon::GraphicsView::Feature_MouseWheelRotate);
@@ -67,6 +67,11 @@ namespace yq::gluon {
     {
         m_features.clear(f);
         m_scene->invalidate();
+    }
+
+    void    GraphicsCanvas::focusMe()
+    {
+        m_view -> setFocus();
     }
 
     bool    GraphicsCanvas::hasSelectEffect() const

@@ -370,7 +370,6 @@ namespace yq::gluon {
 
     void    GraphicsView::translateBy(const QPointF&amt)
     {
-    gluonInfo << "GraphicsView::translateBy(" << amt << ")";
         translate(amt.x(), amt.y());
     }
 

@@ -7,7 +7,7 @@
 #pragma once
 
 #include <yq/core/Flags.hpp>
-#include <yq/gluon/app/SubWindow.hpp>
+#include <yq/gluon/app/UndoSubWindow.hpp>
 #include <yq/typedef/meta_id.hpp>
 
 class QGraphicsItem;
@@ -18,7 +18,7 @@ namespace yq::gluon {
     class GraphicsTool;
     class GraphicsToolMeta;
     
-    class GraphicsCanvas : public SubWindow {
+    class GraphicsCanvas : public UndoSubWindow {
         Q_OBJECT
     public:
 
@@ -72,6 +72,8 @@ namespace yq::gluon {
     public slots:
         void            selectAll();
         void            selectNone();
+        
+        void            focusMe();
         
     signals:
         void        toolChanged(uint64_t);

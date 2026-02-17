@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include <yq/gluon/typedef/qpoint.hpp>
 #include <yq/graph/GGraph.hpp>
 #include <yq/graph/GWaypoint.hpp>
 #include <yq/graphicsQt/GraphicsScene.hpp>
@@ -53,6 +54,12 @@ namespace yq::gluon {
         
         QPainterPath    path_for(std::initializer_list<path_spec_t>) const;
         
+        qpointf_x       point(const path_spec_t&) const;
+        
+        GraphItem*          item(gid_t);
+        const GraphItem*    item(gid_t) const;
+        
+        // update.... here or canvas.... should be pooled IMO
         
     public slots:
         void    clear();    // name shadow is deliberate

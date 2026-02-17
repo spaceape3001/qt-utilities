@@ -8,9 +8,10 @@
 
 #include <yq/graph/GPort.hpp>
 #include <yq/graphQt/GraphItem.hpp>
+#include <yq/graphQt/GraphConnector.hpp>
 
 namespace yq::gluon {
-    class GraphPortItem : public GraphItem {
+    class GraphPortItem : public GraphItem, public GraphConnector {
     public:
         GraphPortItem(GraphScene&, GPort, QGraphicsItem*it);
         ~GraphPortItem();
@@ -22,6 +23,7 @@ namespace yq::gluon {
         const auto& data() const { return m_data; }
         
         gid_t   id() const { return m_data.id(); }
+        virtual bool is_port() const override { return true; }
 
     private:
         GPort               m_data;

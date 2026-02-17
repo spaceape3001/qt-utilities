@@ -43,6 +43,7 @@ namespace yq::gluon {
     protected:
     
         virtual void    activating() override;
+        virtual void    contextMenuEvent(QContextMenuEvent*) override;
         virtual void    deactivating() override;
         virtual void    drawToolLayer(QPainter*, const QRectF&) override;
         virtual void 	keyPressEvent(QKeyEvent*) override;
@@ -87,49 +88,31 @@ namespace yq::gluon {
         GraphScene*             m_scene     = nullptr;
         GraphView*              m_view      = nullptr;
 
-
-        //QRectF              m_selectRect;
-        //QPen                m_selectPen;
-
         QPen                    m_badPen;
         GraphPointCapture       m_capture;          //!< Capture at last mouse press
         QPointF                 m_lastPosition;     //!< Last position (in screen/widget)
         QPointF                 m_lastPoint;        //!< Last position (in scene coordinates)
+        QPen                    m_outlinePen;
         QRectF                  m_outlineRect;
+        QPen                    m_outlineUse;
+        QPen                    m_pinPen;
         QRectF                  m_pinRect;          //!< Current pin rectangle
+        QPen                    m_selectPen;
         QRectF                  m_selectRect;
         QTransform              m_transform;        //!< Last viewport transform (inverted)
-        
-        struct {
-            QPen                pen, use;
-            //QRectF              rect;
-            //bool                draw    = false;
-        }                   m_outline;
-        
-        struct {
-            QPen                good;
-            QPen                bad;
-            //QRectF              rect;
-        }   m_port;
-        
-        
-        struct {    
-            QPen            pen;
-            //QRectF          rect;
-            //bool            draw    = false;
-        } m_select;
         
         void            _cancel();
         bool            _check() const;
         void            _decruft();
         bool            _dragging(QSinglePointEvent*) const;
         QPointF         _last(QSinglePointEvent*);
-        bool            _select(QGraphicsItem*);    // TRUE if this is a new selection
+        bool            _select(QGraphicsItem*);    // TRUE if already selected
         bool            _tselect(QGraphicsItem*);   // TRUE if we're now selected
         void            _transform();
         bool            _wheel() const;
     
     
+
         void            noneMMove(QMouseEvent*);
         void            noneMRelease(QMouseEvent*);
         
