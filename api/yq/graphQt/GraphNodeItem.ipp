@@ -7,6 +7,7 @@
 #include "GraphNodeItem.hpp"
 
 #include <yq/gluon/core/upoint.hpp>
+#include <yq/gluon/core/ustring.hpp>
 #include <yq/gluon/core/uvector.hpp>
 #include <yq/graph/GNodeTemplate.hpp>
 #include <yq/graphQt/GraphScene.hpp>
@@ -40,9 +41,14 @@ namespace yq::gluon {
         SymbolCPtr  sym = _symbol();
         if(!sym)
             return ;
-            
+        
+        SymbolGraphicsItemOptions   opts;
+        if(m_template && !m_template->label.empty())
+            opts.label  = qString(m_template -> label);
+        
+        opts.size       = m_scene.symSize();
         //clear();
-        build(*sym, m_scene.symSize());
+        build(*sym, opts);
     }
 
     SymbolCPtr  GraphNodeItem::_symbol() const

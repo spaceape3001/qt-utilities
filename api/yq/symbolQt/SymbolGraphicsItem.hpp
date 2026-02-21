@@ -16,12 +16,17 @@ namespace yq::gluon {
     
     using SymTransform = symbol::TransformMode;
     
+    struct SymbolGraphicsItemOptions {
+        QString         label;
+        float           size    = 64.f;
+    };
+    
     class SymbolGraphicsItem : public QGraphicsItemGroup {
     public:
         SymbolGraphicsItem(QGraphicsItem*parent=nullptr);
         virtual ~SymbolGraphicsItem();
         
-        void    build(const Symbol&, float size=64.f);
+        void    build(const Symbol&, const SymbolGraphicsItemOptions& options={});
 
         struct PinData;
         

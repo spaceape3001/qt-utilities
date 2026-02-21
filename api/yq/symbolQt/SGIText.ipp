@@ -9,8 +9,14 @@
 #include <yq/symbol/Shape.hpp>
 
 namespace yq::gluon {
-    SGIText::SGIText(const symbol::text_t& txt, float scale) : adapter_t( qString(txt.text)), m_text(txt), m_scale(scale)
+    SGIText::SGIText(const symbol::text_t& txt, const SGITextOptions& opts) : adapter_t(), 
+        m_text(txt), m_scale(opts.scale)
     {
+        if(opts.text.isEmpty()){
+            setText(qString(txt.text));
+        } else {
+            setText(opts.text);
+        }
     }
     
     SGIText::~SGIText() {}

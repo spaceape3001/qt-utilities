@@ -14,10 +14,15 @@ namespace yq::symbol {
 }
 
 namespace yq::gluon {
+    struct SGITextOptions {
+        float   scale = 1.;
+        QString text;       //!< Override
+    };
+    
     class SGIText : public SGIAdapter<QGraphicsSimpleTextItem> {
     public:
         
-        SGIText(const symbol::text_t& txt, float scale=1.);
+        SGIText(const symbol::text_t& txt, const SGITextOptions& opts={});
         ~SGIText();
         void adjust() override;
         

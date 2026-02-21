@@ -49,11 +49,11 @@ namespace yq::gluon {
     {
     }
 
-    void    SymbolGraphicsItem::build(const Symbol&sym, float size)
+    void    SymbolGraphicsItem::build(const Symbol&sym, const SymbolGraphicsItemOptions& options)
     {
         using namespace yq::symbol;
         
-        size *= sym.scale;
+        float size = options.size * sym.scale;
         
         auto makeFont = [&](const font_style_t& sty) -> QFont {
             return QFont();
@@ -168,7 +168,11 @@ namespace yq::gluon {
             if(const auto* p = std::get_if<image_t>(&sh.primitive)){
             }
             if(const auto* p = std::get_if<text_t>(&sh.primitive)){
-                SGIText*    sti = new SGIText(*p, size);
+                SGITextOptions topts{.scale = size};
+                if(p->type == symbol::TextType::Label)
+                    topts.text   = options.label;
+                
+                SGIText*    sti = new SGIText(*p, topts);
                 //m_textByKey[sh.key]  = sti;
                 m_texts.push_back(sti);
                 gi = sti;
