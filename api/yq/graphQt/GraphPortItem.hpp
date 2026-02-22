@@ -10,6 +10,7 @@
 #include <yq/graphQt/GraphItem.hpp>
 
 namespace yq::gluon {
+
     class GraphPortItem : public GraphItem {
     public:
         GraphPortItem(GraphScene&, GPort, QGraphicsItem*it);
@@ -23,6 +24,14 @@ namespace yq::gluon {
         
         gid_t   id() const { return m_data.id(); }
         virtual bool is_port() const override { return true; }
+        
+        virtual void    update() override;
+
+        struct DirtyOptions {
+            bool        edges   = false;
+        };
+        
+        void    dirty(const DirtyOptions&);
 
     private:
         GPort               m_data;

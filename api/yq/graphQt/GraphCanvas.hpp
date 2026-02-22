@@ -54,6 +54,7 @@ namespace yq::gluon {
     public slots:
         void        updateTitle();
         void        clear();
+        void        refresh();
         
     private:
         const unsigned          m_number;

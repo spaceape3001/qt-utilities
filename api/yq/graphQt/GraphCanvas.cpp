@@ -83,6 +83,11 @@ namespace yq::gluon {
         return m_graph;
     }
 
+    void    GraphCanvas::refresh()
+    {
+        m_scene -> updateAll();
+    }
+
     void    GraphCanvas::rightClick(GBase gb)
     {
         if(gb.document() != m_graph.document())

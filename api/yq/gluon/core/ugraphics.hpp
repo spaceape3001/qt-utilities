@@ -6,5 +6,11 @@
 
 #pragma once
 
+class QGraphicsItem;
+class QRectF;
+class QPointF;
+
 namespace yq {
+    QRectF  qBoundingRect(const QGraphicsItem&);
+    QPointF qCenterPoint(const QGraphicsItem&);
 }

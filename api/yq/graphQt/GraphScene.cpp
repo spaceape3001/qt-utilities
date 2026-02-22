@@ -15,6 +15,7 @@
 #include "GraphTextItem.hpp"
 
 #include <yq/errors.hpp>
+#include <yq/gluon/core/ugraphics.hpp>
 #include <yq/gluon/core/upoint.hpp>
 #include <yq/gluon/core/uvector.hpp>
 #include <yq/graph/GDocument.hpp>
@@ -49,7 +50,7 @@ namespace yq::gluon {
             const QGraphicsItem* qi = it->qItem();
             if(!qi)
                 return create_error<"ID to non-item">();
-            return _point(qi -> mapToScene(qi->pos()));
+            return _point(qCenterPoint(*qi));
         }
 
         std::error_code _waypoint(const GWaypoint& way)
@@ -232,6 +233,13 @@ namespace yq::gluon {
         invalidate();
     }
     
+    void    GraphScene::updateAll()
+    {
+        for(auto & itr : m_items)
+            if(itr.second)
+                itr.second -> update();
+        invalidate();
+    }
 }
 
 #include "GraphEdgeItem.ipp"

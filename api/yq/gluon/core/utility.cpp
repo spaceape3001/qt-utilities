@@ -6,6 +6,8 @@
 
 #include <yq/gluon/logging.hpp>
 
+#include "ugraphics.ipp"
+
 #include "ucolor.ipp"
 #include "ucompare.ipp"
 #include "uicon.ipp"

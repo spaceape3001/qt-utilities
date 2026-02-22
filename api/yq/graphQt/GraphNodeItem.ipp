@@ -63,7 +63,7 @@ namespace yq::gluon {
     {
         m_scene.dirty(m_data.id());
         if(opts.edges){
-            for(GEdge ge : m_data.edges({.ports=true}))
+            for(GEdge ge : m_data.edges({.ports=opts.ports}))
                 m_scene.dirty(ge.id());
         }
         if(opts.ports){

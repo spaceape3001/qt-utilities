@@ -9,6 +9,7 @@
 
 #include <yq/color/colors.hpp>
 #include <yq/gluon/core/ucolor.hpp>
+#include <yq/gluon/core/ugraphics.hpp>
 #include <yq/gluon/core/urect.hpp>
 #include <yq/gluon/interface/PositionInterface.hpp>
 #include <yq/graphQt/GraphCanvas.hpp>
@@ -47,11 +48,6 @@ YQ_OBJECTQ_IMPLEMENT(yq::gluon::SuperGraphTool)
 namespace yq::gluon {
     static const GraphView::CaptureOptions  kGeneral{ .items=true, .nodes=true, .ports=true };
     static const double                     kDragThreshhold = 3;
-    
-    static QRectF   qBoundingRect(const QGraphicsItem& item)
-    {
-        return item.mapToScene(item.boundingRect()).boundingRect();
-    }
 
 
     SuperGraphTool::SuperGraphTool(QObject* parent) : GraphicsTool(parent)

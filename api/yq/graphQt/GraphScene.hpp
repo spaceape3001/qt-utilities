@@ -68,6 +68,7 @@ namespace yq::gluon {
     public slots:
         void        clear();    // name shadow is deliberate
         void        update();   // name shadow is deliberate
+        void        updateAll();
         
     private:
     
