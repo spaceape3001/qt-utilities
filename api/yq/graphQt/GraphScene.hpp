@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <yq/container/Map.hpp>
+#include <yq/container/Set.hpp>
 #include <yq/gluon/typedef/qpoint.hpp>
 #include <yq/graph/GGraph.hpp>
 #include <yq/graph/GWaypoint.hpp>
@@ -27,7 +29,7 @@ namespace yq::gluon {
         ~GraphScene();
 
         GraphNodeItem*   add(const GNodeTemplateCPtr&, const QPointF&);
-        GraphItem*   add(GBase);
+        GraphItem*      add(GBase);
         //one for the document too
         
         void        set(GGraph);
@@ -50,26 +52,32 @@ namespace yq::gluon {
         float           symSize() const { return m_symSize; }
         void            updateConnected(GNode);
         
-        using path_spec_t   = std::variant<std::monostate, gid_t, QPointF>; // and more to come....
+        using wayspan_t      = std::span<const GWaypoint>;
         
-        QPainterPath    path_for(std::initializer_list<path_spec_t>) const;
+        using path_spec_t   = std::variant<std::monostate, gid_t, GWaypoint, wayspan_t, QPointF>; // and more to come....
         
-        qpointf_x       point(const path_spec_t&) const;
+        QPainterPath        path_for(std::initializer_list<path_spec_t>) const;
         
         GraphItem*          item(gid_t);
         const GraphItem*    item(gid_t) const;
         
         // update.... here or canvas.... should be pooled IMO
         
+        void                dirty(gid_t);
+        
     public slots:
-        void    clear();    // name shadow is deliberate
+        void        clear();    // name shadow is deliberate
+        void        update();   // name shadow is deliberate
         
     private:
     
+        struct PathBuilder;
+    
         GraphNodeItem*      add_node(GNode);
     
+        Set<gid_t>                  m_dirty;
         GGraph                      m_graph;
-        std::map<gid_t, GraphItem*> m_items;
+        Map<gid_t, GraphItem*>      m_items;
         std::vector<GraphItem*>     m_notQt;
         float                       m_symSize   = 32.;
         

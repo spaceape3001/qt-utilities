@@ -8,10 +8,9 @@
 
 #include <yq/graph/GPort.hpp>
 #include <yq/graphQt/GraphItem.hpp>
-#include <yq/graphQt/GraphConnector.hpp>
 
 namespace yq::gluon {
-    class GraphPortItem : public GraphItem, public GraphConnector {
+    class GraphPortItem : public GraphItem {
     public:
         GraphPortItem(GraphScene&, GPort, QGraphicsItem*it);
         ~GraphPortItem();

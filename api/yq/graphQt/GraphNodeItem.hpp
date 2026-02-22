@@ -9,7 +9,6 @@
 #include <yq/container/Vector.hpp>
 #include <yq/gluon/interface/PositionInterface.hpp>
 #include <yq/graph/GNode.hpp>
-#include <yq/graphQt/GraphConnector.hpp>
 #include <yq/graphQt/GraphItem.hpp>
 #include <yq/symbolQt/SymbolGraphicsItem.hpp>
 #include <yq/typedef/g_node_template.hpp>
@@ -17,7 +16,7 @@
 namespace yq::gluon {
     class GraphPortItem;
     
-    class GraphNodeItem : public SymbolGraphicsItem, public GraphItem, public GraphConnector, public PositionInterface {
+    class GraphNodeItem : public SymbolGraphicsItem, public GraphItem, public PositionInterface {
     public:
         //  Node(const Node&);  // pending/TODO
         GraphNodeItem(GraphScene&, GNode);
@@ -41,6 +40,13 @@ namespace yq::gluon {
         virtual bool is_node() const override { return true; }
     
         virtual void update() override;
+        
+        struct DirtyOptions {
+            bool    edges   = false;
+            bool    ports   = false;
+        };
+        
+        void    dirty(const DirtyOptions&);
 
     private:
         friend class GraphScene;

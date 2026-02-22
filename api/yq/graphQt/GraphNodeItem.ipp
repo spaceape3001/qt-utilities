@@ -59,11 +59,24 @@ namespace yq::gluon {
         return Symbol::IO::load("pp:yq/symbol/basic.sym#circle");
     }
 
+    void  GraphNodeItem::dirty(const DirtyOptions& opts)
+    {
+        m_scene.dirty(m_data.id());
+        if(opts.edges){
+            for(GEdge ge : m_data.edges({.ports=true}))
+                m_scene.dirty(ge.id());
+        }
+        if(opts.ports){
+            for(GPort gp : m_data.ports())
+                m_scene.dirty(gp.id());
+        }
+    }
+
     void    GraphNodeItem::position(set_k, const Vector2D& pt)
     {
         m_data.position(SET, pt);
         setPos(qPoint(pt));
-        m_scene.updateConnected(m_data);
+        dirty({.edges=true, .ports=true});
     }
     
     void    GraphNodeItem::position(set_k, const QPointF& pt)

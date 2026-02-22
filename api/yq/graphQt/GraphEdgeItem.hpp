@@ -26,6 +26,8 @@ namespace yq::gluon {
 
         virtual bool is_edge() const override { return true; }
 
+        virtual void update() override;
+
     private:
         GEdge       m_data;
         

@@ -67,6 +67,9 @@ namespace yq::gluon {
         
         m_pinPen.setWidth(1);
         m_pinPen.setColor(qColor(color::ForestGreen));
+        
+        m_linePen.setWidth(1);
+        m_linePen.setColor(Qt::blue);
     }
     
     SuperGraphTool::~SuperGraphTool()
@@ -78,6 +81,8 @@ namespace yq::gluon {
     void    SuperGraphTool::_cancel()
     {
         m_mode  = Mode::None;
+        
+        _decruft();
         m_flags = {};
     }
 
@@ -89,24 +94,29 @@ namespace yq::gluon {
     void    SuperGraphTool::_decruft()
     {
         invalidateToolLayer();
-        m_flags -= F::SelectRect;
-        m_flags -= F::OutlineRect;
+        
+        m_linePath  = QPainterPath();
+        m_flags    -= F::PinDraw;
+        m_flags    -= F::SelectRect;
+        m_flags    -= F::OutlineRect;
     }
 
     bool    SuperGraphTool::_dragging(QSinglePointEvent*evt) const
     {
-        QPointF del = (evt->position() - m_lastPosition);
+        QPointF del = (evt->position() - m_capture.position);
         return fabs(del.x())+fabs(del.y()) >= kDragThreshhold;
     }
     
     QPointF SuperGraphTool::_last(QSinglePointEvent*evt)
     {
-        m_lastPosition  = evt->position();
-        QPointF pt      = m_transform.map(m_lastPosition);
-        QPointF ret     = m_flags(F::Last) ? (pt - m_lastPoint) : QPointF(0,0);
-        m_lastPoint     = pt;
-        m_flags |= F::Last;
-        return ret;
+        QPointF         last    = m_last.point;
+        m_last          = m_view->capture(evt, kGeneral);
+        if(m_flags(F::Last)){
+            return m_last.point - last;
+        } else {
+            m_flags |= F::Last;
+            return QPointF(0.,0.);
+        }
     }
 
     bool    SuperGraphTool::_select(QGraphicsItem*qi)
@@ -148,6 +158,12 @@ namespace yq::gluon {
     void    SuperGraphTool::activating()
     {
         std::tie(m_scene, m_view, m_canvas) = contextAs<GraphScene,GraphView,GraphCanvas>();
+        if(m_canvas){
+            m_graph     = m_canvas -> get();
+        } else if(m_scene){
+            m_graph     = m_scene -> get();
+        } else
+            m_graph     = {};
     }
 
     void    SuperGraphTool::contextMenuEvent(QContextMenuEvent*evt) 
@@ -190,7 +206,7 @@ namespace yq::gluon {
             painter -> restore();
         }
         
-        if(m_flags(F::PinGood)){
+        if(m_flags(F::PinDraw) && m_flags(F::PinGood)){
             painter -> save();
             painter -> setPen(m_pinPen);
             painter -> setBrush(Qt::NoBrush);
@@ -198,7 +214,7 @@ namespace yq::gluon {
             painter -> restore();
         }
         
-        if(m_flags(F::PinBad)){
+        if(m_flags(F::PinDraw) && !m_flags(F::PinGood)){
             painter -> save();
             painter -> setPen(m_badPen);
             painter -> setBrush(Qt::NoBrush);
@@ -209,14 +225,18 @@ namespace yq::gluon {
         
         if(m_flags(F::OutlineRect)){
             painter -> save();
-            if(m_outlineUse != QPen()){
-                painter -> setPen(m_outlineUse);
-            } else {
-                painter -> setPen(m_outlinePen);
-            }
+            painter -> setPen(m_outlinePen);
             painter -> setBrush(Qt::NoBrush);
             painter -> drawEllipse(m_outlineRect);
             painter -> drawRect(m_outlineRect);
+            painter -> restore();
+        }
+        
+        if(!m_linePath.isEmpty()){
+            painter -> save();
+            painter -> setPen(m_linePen);
+            painter -> setBrush(Qt::NoBrush);
+            painter -> drawPath(m_linePath);
             painter -> restore();
         }
     }
@@ -272,15 +292,43 @@ namespace yq::gluon {
             return;
 
         switch(m_mode){
+        case Mode::DragNewEdge:
+            _decruft();
+            _last(evt);
+            m_linePath  = m_scene -> path_for({ m_capture.point, m_last.point });
+            if(m_last.port && (m_capture.port != m_last.port)){
+                m_flags     |= F::PinDraw;
+                m_pinRect       = qBoundingRect(*m_last.qItem);
+                
+                //  eventually bind to another routine
+                bool    gIn         = m_flags(F::WantInput) && m_last.port->data().is_input();
+                bool    gOut        = m_flags(F::WantOutput) && m_last.port->data().is_output();
+                bool    gConnected  = m_graph.connected(m_capture.port->data(), m_last.port->data());
+                
+                if((gIn || gOut) && !gConnected){
+                    m_flags    |= F::PinGood;
+                } else {
+                    m_flags    -= F::PinGood;
+                }
+            }
+            invalidateToolLayer();
+            break;
         case Mode::None:
             _decruft();
-            if(GraphPointCapture cap = m_view->capture(evt, kGeneral); cap.qItem){
-                m_outlineRect       = qBoundingRect(*cap.qItem);
-                m_flags |= F::OutlineRect;
-                if(cap.port){
-                    m_outlineUse   = m_pinPen;
+            _last(evt);
+           
+            if(m_last.qItem){
+                if(m_last.port){
+                    m_pinRect       = qBoundingRect(*m_last.qItem);
+                    m_flags        |= F::PinDraw;
+                    if(m_last.port->data().is_output()){
+                        m_flags    |= F::PinGood;
+                    } else {
+                        m_flags    -= F::PinGood;
+                    }
                 } else {
-                    m_outlineUse   = QPen{};
+                    m_outlineRect       = qBoundingRect(*m_last.qItem);
+                    m_flags         |= F::OutlineRect;
                 }
             }
             break;
@@ -291,6 +339,7 @@ namespace yq::gluon {
                     if(PositionInterface* ph = dynamic_cast<PositionInterface*>(q))
                         ph->position(MOVE, del);
                 }
+                m_scene -> update();
             }
             break;
         case Mode::Skip:
@@ -310,7 +359,11 @@ namespace yq::gluon {
             break;
         case Mode::PressPort:
             if(_dragging(evt)){
-                // create edge
+                m_mode  = Mode::DragNewEdge;
+                if(m_capture.port->data().is_input())
+                    m_flags |= F::WantOutput;
+                if(m_capture.port->data().is_output())
+                    m_flags |= F::WantInput;
             }
             break;
         case Mode::PressEdge:
@@ -337,7 +390,7 @@ namespace yq::gluon {
         case Mode::Select:
             _decruft();
             _last(evt);
-            m_selectRect    = qRect(m_lastPoint, m_capture.point);
+            m_selectRect    = qRect(m_last.point, m_capture.point);
             m_flags        |= F::SelectRect;
             break;
         default:
@@ -385,7 +438,8 @@ namespace yq::gluon {
         } else if(m_capture.port){
             switch(evt->modifiers()){
             case Qt::NoModifier:
-                m_mode  = Mode::PressPort;
+                m_mode   = Mode::PressPort;
+                m_flags -= F::PinGood;
                 break;
             default:
                 break;
@@ -486,6 +540,10 @@ namespace yq::gluon {
             return;
 
         switch(m_mode){
+        case Mode::DragNewEdge:
+            if(m_capture.port && m_last.port && m_flags(F::PinGood))
+                m_scene -> add( m_graph.connect(m_capture.port->data(), m_last.port->data()));
+            break;
         case Mode::Select:
             m_canvas -> selectThese(m_scene->items(m_selectRect));
             break;

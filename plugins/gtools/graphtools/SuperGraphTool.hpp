@@ -7,9 +7,11 @@
 #pragma once
 
 #include <yq/core/Flags.hpp>
+#include <yq/graph/GGraph.hpp>
 #include <yq/graphicsQt/GraphicsTool.hpp>
 #include <yq/graphQt/GraphPointCapture.hpp>
 
+#include <QPainterPath>
 #include <QPen>
 #include <QPoint>
 #include <QPointF>
@@ -68,18 +70,21 @@ namespace yq::gluon {
             PressText,
             PressShape,
             Pan,
-            Select
+            Select,
+            DragNewEdge
         };
         
         enum class F {
             PinGood,
-            PinBad,
             InDrag,
             ValidPress,
             Transform,
             Last,
+            PinDraw,
             SelectRect,
-            OutlineRect
+            OutlineRect,
+            WantInput,
+            WantOutput
         };
 
         Mode                    m_mode      = Mode::None;
@@ -87,14 +92,15 @@ namespace yq::gluon {
         GraphCanvas*            m_canvas    = nullptr;
         GraphScene*             m_scene     = nullptr;
         GraphView*              m_view      = nullptr;
+        GGraph                  m_graph;
 
         QPen                    m_badPen;
         GraphPointCapture       m_capture;          //!< Capture at last mouse press
-        QPointF                 m_lastPosition;     //!< Last position (in screen/widget)
-        QPointF                 m_lastPoint;        //!< Last position (in scene coordinates)
+        GraphPointCapture       m_last;             //!< Capture at last mouse press
+        QPen                    m_linePen;
+        QPainterPath            m_linePath;
         QPen                    m_outlinePen;
         QRectF                  m_outlineRect;
-        QPen                    m_outlineUse;
         QPen                    m_pinPen;
         QRectF                  m_pinRect;          //!< Current pin rectangle
         QPen                    m_selectPen;

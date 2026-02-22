@@ -6,7 +6,6 @@
 
 #include <yq/gluon/logging.hpp>
 
-#include "GraphConnector.ipp"
 #include "GraphNodeItem.hpp"
 #include "GraphEdgeItem.hpp"
 #include "GraphLineItem.hpp"
@@ -23,6 +22,78 @@
 #include <yq/symbolQt/SymbolGraphicsItem.hxx>
 
 namespace yq::gluon {
+    struct GraphScene::PathBuilder {
+        const GraphScene&   scene;
+        QPainterPath        path;
+        bool                moveNext    = true;
+        
+        PathBuilder(const GraphScene& sc) : scene(sc){}
+        ~PathBuilder(){};
+        
+        std::error_code _point(const QPointF& pt)
+        {
+            if(moveNext){
+                path.moveTo(pt);
+                moveNext    = false;
+            } else {
+                path.lineTo(pt);
+            }
+            return {};
+        }
+        
+        std::error_code _gid(gid_t id)
+        {
+            const GraphItem* it     = scene.item(id);
+            if(!it)
+                return create_error<"Bad/Invalid Graph ID">();
+            const QGraphicsItem* qi = it->qItem();
+            if(!qi)
+                return create_error<"ID to non-item">();
+            return _point(qi -> mapToScene(qi->pos()));
+        }
+
+        std::error_code _waypoint(const GWaypoint& way)
+        {
+            // right now...ignore direction
+            if(std::get_if<std::monostate>(&way.position)){
+                return {};
+            } else if(auto p = std::get_if<Vector2D>(&way.position)){
+                _point(qPoint(*p));
+                return {};
+            } else if(auto p = std::get_if<gid_t>(&way.position)){
+                return _gid(*p);
+            } else {
+                return errors::todo();
+            }
+        }
+        
+        std::error_code    add(const path_spec_t& ps)
+        {
+            if(auto p = std::get_if<QPointF>(&ps)){
+                return _point(*p);
+            } else if(auto p = std::get_if<gid_t>(&ps)){
+                return _gid(*p);
+            } else if(auto p = std::get_if<GWaypoint>(&ps)){
+                return _waypoint(*p);
+            } else if(auto p = std::get_if<wayspan_t>(&ps)){
+                for(auto& w : *p){
+                    if(auto ec = _waypoint(w); ec != std::error_code()) 
+                        return ec;
+                }
+                return {};
+            }
+
+            return create_error<"Unspecified path spec">();
+        }
+        
+        PathBuilder& operator<<(const path_spec_t& ps)
+        {
+            if(auto ec = add(ps); ec != std::error_code()){
+                gluonInfo  << "Unable to route ... " << ec.message();
+            }
+            return *this;
+        }
+    };
 
     GraphScene::GraphScene(GGraph gph, QObject*parent) : GraphicsScene(parent), m_graph(gph)
     {
@@ -99,6 +170,7 @@ namespace yq::gluon {
         for(size_t n = 0; n<pins.size(); ++n){
             GraphPortItem*  gpi = new GraphPortItem(*this, ports[n], pins[n].item);
             gni -> m_ports.push_back(gpi);
+            m_items[ports[n].id()]  = gpi;
         }
         return gni;
     }
@@ -112,6 +184,11 @@ namespace yq::gluon {
         m_notQt.clear();
     }
 
+    void        GraphScene::dirty(gid_t gid)
+    {
+        m_dirty << gid;
+    }
+
     GGraph      GraphScene::get() const
     {
         return m_graph;
@@ -119,51 +196,20 @@ namespace yq::gluon {
 
     GraphItem*          GraphScene::item(gid_t g)
     {
-        if(auto itr = m_items.find(g); itr != m_items.end())
-            return itr->second;
-        return nullptr;
+        return m_items.get(g, nullptr);
     }
     
     const GraphItem*    GraphScene::item(gid_t g) const
     {
-        if(auto itr = m_items.find(g); itr != m_items.end())
-            return itr->second;
-        return nullptr;
+        return m_items.get(g, nullptr);
     }
 
     QPainterPath    GraphScene::path_for(std::initializer_list<path_spec_t> ps) const
     {
-        // Right now... it's simple
-        QPainterPath    pp;
-        bool            first = true;
-        for(const auto& p : ps){
-            qpointf_x   x   = point(p);
-            if(!x)
-                continue;
-            if(first){
-                pp.moveTo(*x);
-                first   = false;
-            } else {
-                pp.lineTo(*x);
-            }
-        }
-        return pp;
-    }
-
-    qpointf_x   GraphScene::point(const path_spec_t& ps) const
-    {
-        if(auto p = std::get_if<QPointF>(&ps)){
-            return *p;
-        } else if(auto p = std::get_if<gid_t>(&ps)){
-            const GraphItem* it     = item(*p);
-            if(!it)
-                return unexpected<"Bad/Invalid Graph ID">();
-            const QGraphicsItem* qi = it->qItem();
-            if(!qi)
-                return unexpected<"ID to non-item">();
-            return qi -> mapToScene(qi->pos());
-        }
-        return unexpected<"Unspecified path spec">();
+        PathBuilder     pb(*this);
+        for(const auto& p : ps)
+            pb << p;
+        return pb.path;
     }
 
     void        GraphScene::set(GGraph g)
@@ -176,12 +222,15 @@ namespace yq::gluon {
             add(b);
     }
 
-    void    GraphScene::updateConnected(GNode gn)
+    void    GraphScene::update()
     {
-        
-        // TODO
+        for(gid_t g : m_dirty){
+            if(GraphItem*it  = m_items.get(g, nullptr))
+                it -> update();
+        }
+        m_dirty.clear();
+        invalidate();
     }
-
     
 }
 

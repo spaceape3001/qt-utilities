@@ -23,6 +23,7 @@ namespace yq::gluon {
         GraphScene& scene() { return m_scene; }
         const GraphScene& scene() const { return m_scene; }
 
+        //! Update/Refresh the graphics item from any model changes
         virtual void update(){}
         
         virtual bool is_edge() const { return false; }
