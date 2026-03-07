@@ -31,5 +31,6 @@ namespace yq::gluon {
             QPainterPath    pp  = m_scene.path_for({src.id(), ge->waypoints, tgt.id()});
             setPath(pp);
         }
+        setVisible(!m_data.deleted());
     }
 }

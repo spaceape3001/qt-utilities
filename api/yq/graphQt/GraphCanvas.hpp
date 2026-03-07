@@ -46,6 +46,11 @@ namespace yq::gluon {
         
         void                    doubleClick(GBase);
         void                    rightClick(GBase);
+        
+        std::vector<gid_t>      selectedIDs() const;
+        
+        void    hideAll(std::span<const gid_t>);
+        void    showAll(std::span<const gid_t>);
 
     signals:
         void                    doubleClicked(uint64_t);
@@ -55,6 +60,7 @@ namespace yq::gluon {
         void        updateTitle();
         void        clear();
         void        refresh();
+        void        deleteSelection();
         
     private:
         const unsigned          m_number;

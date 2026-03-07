@@ -36,7 +36,7 @@ namespace yq::gluon {
         auto ports() const { return std::span(m_ports); }
         auto& data() { return m_data; }
         const auto& data() const { return m_data; }
-        gid_t   id() const { return m_data.id(); }
+        gid_t   id() const override { return m_data.id(); }
         virtual bool is_node() const override { return true; }
     
         virtual void update() override;

@@ -58,6 +58,12 @@ namespace yq::gluon {
         //! Deselects a specific item, does not affect  other items
         void    deselect(QGraphicsItem*);
 
+        using UndoSubWindow::hide;
+
+        void    hide(QGraphicsItem*);
+
+        using UndoSubWindow::show;
+        void    show(QGraphicsItem*);
 
         void    selectThis(QGraphicsItem*);
         void    selectThese(const std::vector<QGraphicsItem*>&);

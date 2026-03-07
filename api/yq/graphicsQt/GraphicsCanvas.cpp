@@ -52,6 +52,19 @@ namespace yq::gluon {
         return gt->metaInfo().id();
     }
 
+    void    GraphicsCanvas::deselect(QGraphicsItem*qi)
+    {
+        if(!qi)
+            return ;
+        qi -> setSelected(false);
+        if(SelectedInterface* si = dynamic_cast<SelectedInterface*>(qi))
+            si -> selected(SET, false);
+        if(hasSelectEffect())
+            qi -> setGraphicsEffect(nullptr);
+        std::erase(m_selected, qi);
+    }
+
+
     bool    GraphicsCanvas::feature(Feature f) const
     {
         return m_features(f);
@@ -79,6 +92,20 @@ namespace yq::gluon {
         return feature(Feature::SelectEffect);
     }
 
+    void    GraphicsCanvas::hide(QGraphicsItem*qi)
+    {
+        if(!qi)
+            return;
+        qi -> setVisible(true);
+    }
+    
+    void    GraphicsCanvas::show(QGraphicsItem*qi)
+    {
+        if(!qi)
+            return;
+        qi -> setVisible(false);
+    }
+
     void    GraphicsCanvas::select(QGraphicsItem*qi)
     {
         if(!qi)
@@ -92,18 +119,6 @@ namespace yq::gluon {
         }
         std::erase(m_selected, qi);
         m_selected.push_back(qi);
-    }
-
-    void    GraphicsCanvas::deselect(QGraphicsItem*qi)
-    {
-        if(!qi)
-            return ;
-        qi -> setSelected(false);
-        if(SelectedInterface* si = dynamic_cast<SelectedInterface*>(qi))
-            si -> selected(SET, false);
-        if(hasSelectEffect())
-            qi -> setGraphicsEffect(nullptr);
-        std::erase(m_selected, qi);
     }
 
     void    GraphicsCanvas::selectAll()

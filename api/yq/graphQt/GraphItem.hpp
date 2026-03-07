@@ -23,6 +23,8 @@ namespace yq::gluon {
         GraphScene& scene() { return m_scene; }
         const GraphScene& scene() const { return m_scene; }
 
+        virtual gid_t                   id() const { return 0; }
+
         //! Update/Refresh the graphics item from any model changes
         virtual void update(){}
         

@@ -7,11 +7,14 @@
 #include "GraphCanvas.hpp"
 #include "GraphScene.hpp"
 #include "GraphView.hpp"
+#include "GraphItem.hpp"
 
+#include <yq/container/vector_utils.hpp>
 #include <yq/text/match.hpp>
 #include <yq/graph/GDocument.hpp>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QGraphicsItem>
 
 
 namespace yq::gluon {
@@ -36,6 +39,19 @@ namespace yq::gluon {
     {
         m_scene -> clear();
         m_graph = {};
+    }
+
+    void        GraphCanvas::deleteSelection()
+    {
+        std::vector<gid_t>  gids    = selectedIDs();
+        if(gids.empty())
+            return ;
+        if(!m_graph.document())
+            return;
+        
+        gids    = m_graph.document() -> affected(gids);
+        m_graph.document() -> erase(gids);
+        hideAll(gids);
     }
 
     GDocumentPtr  GraphCanvas::document() const
@@ -83,6 +99,19 @@ namespace yq::gluon {
         return m_graph;
     }
 
+    void    GraphCanvas::hideAll(std::span<const gid_t> gids)
+    {
+        if(!m_scene)
+            return;
+        for(gid_t g : gids){
+            GraphItem* gi = m_scene->item(g);
+            if(!gi)
+                continue;
+            hide(gi->qItem());
+        }
+        m_scene -> updateAll();
+    }
+
     void    GraphCanvas::refresh()
     {
         m_scene -> updateAll();
@@ -95,6 +124,21 @@ namespace yq::gluon {
         contextRequest(gb.id());
     }
     
+    std::vector<gid_t>           GraphCanvas::selectedIDs() const
+    {
+        std::set<gid_t>  ret;
+        for(const QGraphicsItem* qi : selected()){
+            const GraphItem* gi = dynamic_cast<const GraphItem*>(qi);
+            if(!gi)
+                continue;
+            gid_t   id  = gi->id();
+            if(!id)
+                continue;
+            ret.insert(id);
+        }
+        return make_vector(ret);
+    }
+
     void                    GraphCanvas::set(GGraph gg, const Url& u)
     {
         m_scene -> set(gg);
@@ -108,6 +152,19 @@ namespace yq::gluon {
             m_url   = {};
         
         updateTitle();
+    }
+
+    void    GraphCanvas::showAll(std::span<const gid_t> gids)
+    {
+        if(!m_scene)
+            return;
+        for(gid_t g : gids){
+            GraphItem* gi = m_scene->item(g);
+            if(!gi)
+                continue;
+            show(gi->qItem());
+        }
+        m_scene -> updateAll();
     }
 
     void    GraphCanvas::updateTitle()
