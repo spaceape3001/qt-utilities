@@ -86,7 +86,7 @@ namespace yq::gluon {
         void        threadSync_status(const QString&, unsigned int);
 
     protected:
-        MainWindow();
+        MainWindow(QWidget*parent=nullptr);
         virtual ~MainWindow();
 
         const Vector<QString>&  actionKeys() const { return m_actionKeys; }

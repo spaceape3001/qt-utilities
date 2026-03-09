@@ -15,10 +15,45 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QGraphicsItem>
-
+#include <QUndoCommand>
 
 namespace yq::gluon {
     static std::atomic<unsigned>    gCanvasNum{1};
+
+    ////////////////////////////////////////////////////////////////////////////
+
+    class GraphCanvas::UndoDelete : public QUndoCommand {
+    public:
+    
+        GraphCanvas&        canvas;
+        std::vector<gid_t>  data;
+    
+        UndoDelete(GraphCanvas& cvs, std::vector<gid_t>&& dat) : QUndoCommand("Delete"), canvas(cvs), data(std::move(dat))
+        {
+        }
+        
+        void undo() override
+        {
+            if(!canvas.m_scene)
+                return;
+            if(!canvas.m_graph.document())
+                return;
+            canvas.m_graph.document() -> unerase(data);
+            canvas.showAll(data);
+        }
+        
+        void redo() override
+        {
+            if(!canvas.m_scene)
+                return;
+            if(!canvas.m_graph.document())
+                return;
+            canvas.m_graph.document() -> erase(data);
+            canvas.hideAll(data);
+        }
+    };
+
+    ////////////////////////////////////////////////////////////////////////////
 
     GraphCanvas::GraphCanvas(QWidget*parent) :
         GraphicsCanvas(new GraphView(new GraphScene()), parent),
@@ -50,8 +85,7 @@ namespace yq::gluon {
             return;
         
         gids    = m_graph.document() -> affected(gids);
-        m_graph.document() -> erase(gids);
-        hideAll(gids);
+        pushUndo(new UndoDelete(*this, std::move(gids)));
     }
 
     GDocumentPtr  GraphCanvas::document() const
@@ -176,6 +210,7 @@ namespace yq::gluon {
             setWindowTitle(QString::fromStdString(s));
         }
     }
+
 }
 
 

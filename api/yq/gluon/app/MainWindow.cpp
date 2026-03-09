@@ -117,7 +117,7 @@ namespace yq::gluon {
 
     //  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-    MainWindow::MainWindow() : 
+    MainWindow::MainWindow(QWidget*parent) : QMainWindow(parent),
         m_autoEnableCmds(false), m_detachableTabs(false), m_tdi(nullptr)
     {
         is_main_thread();   // ensuring this is set correctly

@@ -68,6 +68,8 @@ namespace yq::gluon {
         GGraph                  m_graph;
         GraphScene*             m_scene     = nullptr;
         GraphView*              m_view      = nullptr;
+        
+        class UndoDelete;
     };
 
 }
