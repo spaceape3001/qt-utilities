@@ -6,13 +6,12 @@
 
 #pragma once
 
-#include <yq/core/Enum.hpp>
-#include <yq/core/Flag.hpp>
+#include <yq/core/Flags.hpp>
 #include <yq/meta/MetaBinder.hpp>
 #include <QMetaType>
 
 namespace yq::gluon {
-    YQ_ENUM(GraphicsVisibility, ,
+    enum class GraphicsVisibility : uint8_t {
         Auto,
         Inherit = Auto,
         Hidden,
@@ -21,9 +20,9 @@ namespace yq::gluon {
         Items,
         Interactive = Items,
         Foreground
-    );
+    };
     
-    using GraphicsVisibilityFlags  = Flag<GraphicsVisibility>;
+    using GraphicsVisibilityFlags  = Flags<GraphicsVisibility, uint8_t>;
 }
 
 YQ_TYPE_DECLARE(yq::gluon::GraphicsVisibility)
