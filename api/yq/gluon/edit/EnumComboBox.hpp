@@ -7,7 +7,7 @@
 #pragma once
 
 #include <yq/gluon/edit/ComboBox.hpp>
-#include <yq/core/Enum.hpp>
+#include <yq/core/Enumeration.hpp>
 #include <yq/container/Map.hpp>
 #include <optional>
 
@@ -27,13 +27,13 @@ namespace yq::gluon {
             \param[in] eDef         Enumeration Definition
             \param[in] parent   Parent widget
         */
-        GenericEnumComboBox(const EnumDef* eDef, QWidget*parent=nullptr);
+        GenericEnumComboBox(const EnumerationInfo& eDef, QWidget*parent=nullptr);
         
         //! Destructor
         virtual ~GenericEnumComboBox();
         
         //! Gets the enumeration value (generically)
-        Enum        enumValue() const;
+        //Enum        enumValue() const;
         
         //! Gets the enumeration value as an integer
         int         intValue() const;
@@ -42,10 +42,10 @@ namespace yq::gluon {
         bool        setIntValue(int);
         
         //! Sets the enumeration value as a generic enumeration
-        bool        setEnumValue(yq::Enum);
+        //bool        setEnumValue(yq::Enum);
         
     private:
-        const EnumDef* const    m_enum;
+        const EnumerationInfo&  m_enum;
         Map<int,int>            m_val2idx;
         Map<int,int>            m_idx2val;
     };
@@ -60,11 +60,12 @@ namespace yq::gluon {
         \tparam[E]  The enumeration
     */
     template <typename E>
+    requires std::is_enum_v<E>
     class EnumComboBox : public GenericEnumComboBox {
     public:
     
         //! Constructor
-        EnumComboBox(QWidget*parent=nullptr) : GenericEnumComboBox( E::staticEnumInfo(), parent) 
+        EnumComboBox(QWidget*parent=nullptr) : GenericEnumComboBox( info_of<E>(), parent) 
         {
         }
         
@@ -76,7 +77,7 @@ namespace yq::gluon {
         //! Sets the value
         void    setValue(E val)
         {
-            GenericEnumComboBox::setIntValue(val.value());
+            GenericEnumComboBox::setIntValue((int) val);
         }
         
         //! Gets the current value
@@ -86,7 +87,7 @@ namespace yq::gluon {
         }
         
         //! Sets the value as an optional with a default value
-        void    set(const std::optional<E>& val,const E& def=E())
+        void    set(const std::optional<E>& val, const E& def=E())
         {
             setValue(val?*val:def);
         }

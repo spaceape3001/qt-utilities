@@ -10,13 +10,11 @@
 
 namespace yq::gluon {
 
-    GenericEnumComboBox::GenericEnumComboBox(const yq::EnumDef*def, QWidget*parent) : ComboBox(parent), m_enum(def)
+    GenericEnumComboBox::GenericEnumComboBox(const EnumerationInfo& def, QWidget*parent) : ComboBox(parent), m_enum(def)
     {
-        assert(def);
-        
         int     i   = 0;
-        for(std::string_view k : m_enum -> all_keys()){
-            auto val        = m_enum -> value_of(k);
+        for(std::string_view k : m_enum.keys()){
+            auto val        = m_enum.value(k);
             if(!val)
                 continue;
                 
@@ -25,13 +23,14 @@ namespace yq::gluon {
             m_val2idx[*val]  = i;
             ++i;
         }
-        setIntValue(m_enum -> default_value());
+        setIntValue(m_enum.value(DEFAULT));
     }
 
     GenericEnumComboBox::~GenericEnumComboBox()
     {
     }
 
+/*
     yq::Enum    GenericEnumComboBox::enumValue() const
     {
         int     i   = currentIndex();
@@ -41,10 +40,11 @@ namespace yq::gluon {
         else
             return yq::Enum();
     }
+*/
 
     int     GenericEnumComboBox::intValue() const
     {
-        return m_idx2val.get(currentIndex(), m_enum -> default_value());
+        return m_idx2val.get(currentIndex(), m_enum.value(DEFAULT));
     }
 
 
@@ -58,12 +58,12 @@ namespace yq::gluon {
             return false;
     }
 
-    bool    GenericEnumComboBox::setEnumValue(yq::Enum e)
-    {
-        if(e.definition() != m_enum)
-            return false;
-        return setIntValue(e.value());
-    }
+    //bool    GenericEnumComboBox::setEnumValue(yq::Enum e)
+    //{
+        //if(e.definition() != m_enum)
+            //return false;
+        //return setIntValue(e.value());
+    //}
 }
 
 #include "moc_EnumComboBox.cpp"
